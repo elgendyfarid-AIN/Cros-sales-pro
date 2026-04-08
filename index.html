@@ -14,97 +14,127 @@
             --bg: #0b1120; --text: #f1f5f9; --primary: #10b981; --accent: #38bdf8;
             --card: #1e293b; --border: #334155; --warn: #451a1a; --zatouna: #1e293b;
         }
-        * { margin:0; padding:0; box-sizing:border-box; transition: 0.2s; }
-        body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding: 10px; }
+        * { margin:0; padding:0; box-sizing:border-box; transition: background 0.2s; }
+        body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding: 10px; min-height: 100vh; }
         body.en { font-family: 'Roboto', sans-serif; direction: ltr; }
-        .top-bar { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px; }
-        .search { flex: 1; padding: 12px; border: 2.5px solid var(--primary); border-radius: 10px; font-weight: bold; font-size: 16px; background: var(--bg); color: var(--text); }
-        .btn { background: var(--primary); color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 12px; }
-        .cat-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px; scrollbar-width: none; }
-        .cat-btn { background: var(--card); border: 1.5px solid var(--border); padding: 8px 15px; border-radius: 20px; white-space: nowrap; font-size: 13px; font-weight: 800; cursor: pointer; color: var(--text); }
-        .cat-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
-        .card { background: var(--card); border: 1.5px solid var(--border); padding: 12px 5px; border-radius: 10px; text-align: center; font-size: 13px; font-weight: 800; cursor: pointer; }
-        #dash { display: none; border: 3px solid var(--primary); border-radius: 15px; padding: 15px; background: var(--bg); position: relative; }
+        
+        /* Navigation */
+        .top-nav { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px; }
+        .controls { display: flex; gap: 5px; }
+        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 14px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 13px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .search { flex: 1; min-width: 150px; padding: 12px; border: 2.5px solid var(--primary); border-radius: 10px; font-weight: bold; font-size: 16px; background: var(--bg); color: var(--text); }
+        
+        /* Categories */
+        .cat-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 15px; scrollbar-width: none; border-bottom: 1px solid var(--border); }
+        .cat-btn { background: var(--card); border: 2px solid var(--border); padding: 10px 20px; border-radius: 25px; white-space: nowrap; font-size: 14px; font-weight: 900; cursor: pointer; color: var(--text); }
+        .cat-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); transform: scale(1.05); }
+
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 10px; }
+        .card { background: var(--card); border: 2px solid var(--border); padding: 15px 5px; border-radius: 12px; text-align: center; font-size: 14px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; min-height: 70px; }
+        .card:active { transform: scale(0.95); }
+
+        /* Dashboard View */
+        #dash { display: none; border: 3px solid var(--primary); border-radius: 15px; padding: 15px; background: var(--bg); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .dash-title { font-size: 22px; font-weight: 900; color: var(--primary); border-inline-start: 6px solid var(--primary); padding-inline-start: 10px; }
-        .supp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-        .pill { background: var(--bg); border: 2.5px solid var(--accent); color: var(--accent); padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 900; cursor: pointer; }
+        
+        .supp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 5px; background: var(--card); border-radius: 10px; }
+        .pill { background: var(--bg); border: 2.5px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 25px; font-size: 14px; font-weight: 900; cursor: pointer; }
         .pill.active { background: var(--accent); color: #fff; }
-        .info-box { background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 10px; display: none; }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .info-cell { font-size: 14px; border-bottom: 1px solid var(--border); padding: 5px 0; }
-        .info-cell b { color: var(--primary); display: block; font-size: 11px; }
+
+        /* Info Panel */
+        .info-box { background: var(--card); border: 1.5px solid var(--border); padding: 15px; border-radius: 10px; display: none; margin-top: 10px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .info-cell { font-size: 15px; border-bottom: 1.5px solid var(--border); padding-bottom: 5px; }
+        .info-cell b { color: var(--primary); display: block; font-size: 12px; margin-bottom: 2px; }
         .full { grid-column: span 2; }
-        .brands { color: var(--accent); font-weight: 900; background: rgba(0,102,204,0.1); padding: 8px; border-radius: 6px; border-inline-start: 4px solid var(--accent); }
-        .strip { padding: 10px; margin-top: 10px; border-radius: 8px; font-size: 14px; font-weight: bold; border-inline-start: 6px solid; }
-        .warn { background: var(--warn); border-color: #cc0000; }
-        .zat { background: var(--zatouna); border-color: var(--accent); font-style: italic; }
+        .brands { color: var(--accent); font-weight: 900; background: rgba(0,102,204,0.1); padding: 10px; border-radius: 8px; border-inline-start: 5px solid var(--accent); line-height: 1.5; margin-top: 5px; }
+
+        .strip { padding: 12px; margin-top: 12px; border-radius: 10px; font-size: 14px; font-weight: bold; border-inline-start: 7px solid; line-height: 1.4; }
+        .warn { background: var(--warn); border-color: #cc0000; color: #000; }
+        [data-theme="dark"] .warn { color: #f1f5f9; }
+        .zat { background: var(--zatouna); border-color: var(--accent); font-style: italic; color: #000; }
+        [data-theme="dark"] .zat { color: #f1f5f9; }
+        
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <button class="btn" onclick="toggleLang()" id="lBtn">English</button>
-        <button class="btn" onclick="toggleTheme()" id="tBtn">🌙 Dark</button>
-        <input type="text" id="srch" class="search" oninput="renderGrid()" placeholder="ابحث عن حالة...">
+
+    <div class="top-nav">
+        <div class="top-bar">
+            <div class="controls">
+                <button class="btn" onclick="toggleLang()" id="lBtn">English</button>
+                <button class="btn" onclick="toggleTheme()" id="tBtn">🌙 Dark</button>
+            </div>
+            <input type="text" id="srch" class="search" oninput="renderGrid()" placeholder="ابحث عن حالة...">
+        </div>
     </div>
+
     <div class="cat-bar" id="cats"></div>
     <div class="grid" id="grid"></div>
+
     <div id="dash">
         <div class="dash-head">
             <div class="dash-title" id="dTitle"></div>
-            <button onclick="goBack()" class="btn" style="background:#000">✖</button>
+            <button onclick="goBack()" class="btn" style="background:#000">✖ إغلاق</button>
         </div>
+        
+        <p style="font-weight:900; margin-bottom:10px; font-size:14px;" id="instr">اختر المكمل للتفاصيل:</p>
         <div class="supp-pills" id="dPills"></div>
+        
         <div id="dPanel" class="info-box">
             <div class="info-grid">
                 <div class="info-cell"><b class="l-act">المادة:</b> <span id="v-act"></span></div>
                 <div class="info-cell"><b class="l-dos">التركيز:</b> <span id="v-dos"></span></div>
                 <div class="info-cell"><b class="l-tim">التوقيت:</b> <span id="v-tim"></span></div>
-                <div class="info-cell"><b class="l-ben">الفائدة:</b> <span id="v-ben"></span></div>
-                <div class="info-cell full"><b class="l-bra">البراندات:</b> <div class="brands" id="v-bra"></div></div>
+                <div class="info-cell full"><b class="l-ben">الفائدة الطبية بالتفصيل:</b> <span id="v-ben"></span></div>
+                <div class="info-cell full"><b class="l-bra">أمثلة البراندات:</b> <div class="brands" id="v-bra"></div></div>
             </div>
         </div>
+
         <div class="strip warn" id="dWrn"></div>
         <div class="strip zat" id="dZat"></div>
     </div>
 
     <script>
-        let lang = 'ar', theme = 'light', cat = 'chr';
+        let lang = 'ar', theme = 'light', currentCat = 'chr';
+
         const UI = {
-            ar: { search: "ابحث عن حالة...", act: "المادة الفعالة:", dos: "التركيز (mg):", tim: "التوقيت:", ben: "الفائدة الطبية:", bra: "البراندات المقترحة:", chr: "مزمنة", otc: "OTC", spc: "حالات خاصة", skin: "بشرة", hair: "شعر", tips: "صحة عامة" },
-            en: { search: "Search...", act: "Active:", dos: "Dose:", tim: "Timing:", ben: "Benefit:", bra: "Brands:", chr: "Chronic", otc: "OTC", spc: "Special", skin: "Skin", hair: "Hair", tips: "Health Tips" }
+            ar: { search: "ابحث عن حالة...", act: "المادة الفعالة:", dos: "التركيز المقترح:", tim: "التوقيت الأمثل:", ben: "الفائدة الطبية:", bra: "خيارات البراندات:", chr: "مزمنة", otc: "OTC", spc: "حالات خاصة", skin: "بشرة", hair: "شعر", tips: "صحة عامة", instr: "اختر المكمل للتفاصيل:", close: "✖ إغلاق" },
+            en: { search: "Search...", act: "Active Ingredient:", dos: "Suggested Dose:", tim: "Best Timing:", ben: "Medical Benefit:", bra: "Brand Options:", chr: "Chronic", otc: "OTC", spc: "Special Cases", skin: "Skin Care", hair: "Hair Care", tips: "Health Tips", instr: "Select Supplement:", close: "✖ Close" }
         };
 
         const DATA = {
             chr: [
                 {
-                    id: "htn", name: {ar: "ضغط الدم", en: "Hypertension"},
-                    warn: {ar: "تجنب المسكنات NSAIDs وأدوية البرد التي ترفع الضغط.", en: "Avoid NSAIDs and cold meds with stimulants."},
-                    zat: {ar: "دواء الضغط هو حارس شرايينك، التزم به لتعيش بأمان.", en: "Compliance is the shield for your heart and arteries."},
+                    id: "htn", name: {ar: "الضغط المرتفع", en: "Hypertension"},
+                    warn: {ar: "تجنب المسكنات (NSAIDs) مثل الفولتارين، وأدوية البرد التي تحتوي على سودوفيدرين.", en: "Avoid NSAIDs (Ibuprofen/Voltarin) and Cold meds with Pseudoephedrine."},
+                    zat: {ar: "الضغط هو القاتل الصامت؛ الالتزام بالدواء يحمي قلبك وكليتك مدى الحياة.", en: "Hypertension is a silent killer; medication compliance saves organs."},
                     supps: [
-                        { t: {ar: "أوميجا 3", en: "Omega-3"}, a: {ar: "EPA/DHA", en: "EPA/DHA"}, d: {ar: "1000-2000 mg", en: "1000-2000 mg"}, tm: {ar: "وسط الغداء", en: "With main meal"}, b: {ar: "يحسن مرونة الشرايين ويخفض الدهون الثلاثية.", en: "Improves arterial elasticity and lowers triglycerides."}, br: "iRemedies iUltimate Omega | Avernus Omega-3 | Solgar | Now | Seven Seas" },
-                        { t: {ar: "مغنيسيوم", en: "Magnesium"}, a: {ar: "Magnesium Glycinate", en: "Magnesium Glycinate"}, d: {ar: "400 mg", en: "400 mg"}, tm: {ar: "قبل النوم", en: "At bedtime"}, b: {ar: "باسط طبيعي للأوعية الدموية ومنظم للنبض.", en: "Natural vasodilator and heart rhythm regulator."}, br: "iRemedies iMagnesium | Bio-Magnesium | Jamieson | Avernus" }
+                        { t: {ar: "أوميجا 3", en: "Omega-3"}, a: {ar: "EPA / DHA", en: "EPA / DHA"}, d: {ar: "1000 - 2000 mg", en: "1000 - 2000 mg"}, tm: {ar: "وسط وجبة دسمة", en: "With main meal"}, b: {ar: "تحسين مرونة جدران الأوعية الدموية وخفض الدهون الثلاثية والالتهابات.", en: "Improves arterial elasticity and lowers triglycerides/inflammation."}, br: "iRemedies iUltimate Omega | Avernus Omega-3 | Solgar Triple Strength | Seven Seas" },
+                        { t: {ar: "مغنيسيوم", en: "Magnesium"}, a: {ar: "Magnesium Glycinate", en: "Magnesium Glycinate"}, d: {ar: "400 mg", en: "400 mg"}, tm: {ar: "قبل النوم", en: "At bedtime"}, b: {ar: "باسط طبيعي للأوعية الدموية ومنظم لضربات القلب ويقلل التشنج العضلي.", en: "Natural vasodilator, heart rhythm regulator, and reduces muscle cramps."}, br: "iRemedies iMagnesium | Bio-Magnesium | Jamieson | Avernus Magnesium" },
+                        { t: {ar: "كيو 10", en: "CoQ10"}, a: {ar: "Coenzyme Q10", en: "Coenzyme Q10"}, d: {ar: "200 mg", en: "200 mg"}, tm: {ar: "بعد الأكل", en: "After food"}, b: {ar: "أساسي لإنتاج الطاقة في القلب، ويعوض نقص الستاتين (أدوية الكوليسترول).", en: "Essential for cardiac energy; compensates for Statin side effects."}, br: "iRemedies iCoQ10 | Avernus CoQ10 | Solgar | Biogenix" }
                     ]
                 },
                 {
-                    id: "dm2", name: {ar: "السكري 2", en: "Diabetes T2"},
-                    warn: {ar: "المكملات لا تغني عن دواء السكر، افحص التراكمي بانتظام.", en: "Supplements don't replace medication; check HbA1c regularly."},
-                    zat: {ar: "السكري صديق لمن يحترمه، والمكملات تحمي العين والكلى.", en: "Diabetes is a friend if respected; supplements protect organs."},
+                    id: "dm2", name: {ar: "السكري 2", en: "Diabetes Type 2"},
+                    warn: {ar: "المكملات لا تغني عن الأنسولين أو الحبوب؛ افحص السكر بانتظام.", en: "Supplements don't replace meds; monitor glucose regularly."},
+                    zat: {ar: "السكري يحترم من يحترمه؛ المكملات هي درعك ضد تلف الأعصاب والعين.", en: "Respect diabetes; supplements protect nerves and eyes from damage."},
                     supps: [
-                        { t: {ar: "B-Complex", en: "B-Complex"}, a: {ar: "B1, B6, B12", en: "B1, B6, B12"}, d: {ar: "100mg / 1000mcg", en: "100mg / 1000mcg"}, tm: {ar: "بعد الفطار", en: "After breakfast"}, b: {ar: "حماية الأعصاب من التلف السكري ومنع التنميل.", en: "Protects nerves from diabetic damage and tingling."}, br: "iRemedies iB-Complex | Neurobion | Avernus | Solgar" },
-                        { t: {ar: "ألفا ليبويك", en: "ALA"}, a: {ar: "Alpha Lipoic Acid", en: "Alpha Lipoic Acid"}, d: {ar: "600 mg", en: "600 mg"}, tm: {ar: "على معدة فارغة", en: "On empty stomach"}, b: {ar: "مضاد أكسدة خارق لعلاج التهاب الأعصاب.", en: "Potent antioxidant for nerve pain and repair."}, br: "ThioGamma | iRemedies ALA | Now Foods" }
+                        { t: {ar: "B-Complex", en: "B-Complex"}, a: {ar: "B1, B6, B12 (Active)", en: "B1, B6, B12 (Active)"}, d: {ar: "100mg / 1000mcg", en: "100mg / 1000mcg"}, tm: {ar: "بعد الفطار", en: "After breakfast"}, b: {ar: "حماية غمد الميالين للأعصاب من التلف السكري ومنع التنميل.", en: "Protects myelin sheath from diabetic damage and tingling."}, br: "iRemedies iB-Complex | Neurobion | Avernus B-Active | Quest" },
+                        { t: {ar: "ألفا ليبويك", en: "Alpha Lipoic Acid"}, a: {ar: "ALA", en: "ALA"}, d: {ar: "600 mg", en: "600 mg"}, tm: {ar: "على معدة فارغة", en: "On empty stomach"}, b: {ar: "أقوى مضاد أكسدة لعلاج التهاب الأعصاب الطرفية وتحسين حساسية الأنسولين.", en: "Potent antioxidant for nerve pain and insulin sensitivity."}, br: "ThioGamma | iRemedies ALA | Now Foods | Avernus ALA" }
                     ]
                 }
-                // سيتم إضافة باقي الـ 100 حالة هنا تِباعاً
             ],
             otc: [
                 {
-                    id: "acidity", name: {ar: "الحموضة", en: "Acidity"},
-                    warn: {ar: "لا تستخدم مضادات الحموضة لأكثر من أسبوعين بدون طبيب.", en: "Don't use antacids for >2 weeks without advice."},
-                    zat: {ar: "تجنب النوم مباشرة بعد الأكل بـ 3 ساعات.", en: "Avoid lying down for 3 hours after eating."},
+                    id: "flu", name: {ar: "نزلات البرد", en: "Common Flu"},
+                    warn: {ar: "لا تستخدم المضادات الحيوية للبرد الفيروسي؛ استشر الطبيب للحرارة العالية.", en: "Antibiotics don't cure viruses; consult MD for high fever."},
+                    zat: {ar: "الراحة التامة وشرب السوائل الدافئة تسرع الشفاء بنسبة 50%.", en: "Rest and warm fluids speed up recovery by 50%."},
                     supps: [
-                        { t: {ar: "بروبيوتيك", en: "Probiotics"}, a: {ar: "Multi-strain", en: "Multi-strain"}, d: {ar: "10 Billion CFU", en: "10 Billion CFU"}, tm: {ar: "قبل الفطار", en: "Before breakfast"}, b: {ar: "تحسين الهضم وتقليل الغازات المسببة للارتجاع.", en: "Improves digestion and reduces reflux gas."}, br: "iRemedies iProbiotics | Linex | Culturelle" }
+                        { t: {ar: "زنك + سي", en: "Zinc + Vit C"}, a: {ar: "Zinc & Vit C", en: "Zinc & Vit C"}, d: {ar: "50mg / 1000mg", en: "50mg / 1000mg"}, tm: {ar: "بعد وجبة خفيفة", en: "After light meal"}, b: {ar: "تقليل مدة الإصابة بالبرد وتقوية الخلايا المناعية.", en: "Shortens flu duration and boosts immune cells."}, br: "iRemedies iVitamin C + Zinc | Avernus C-Max | Sambucol" }
                     ]
                 }
             ],
@@ -126,6 +156,7 @@
 
         function updateUI() {
             document.getElementById('srch').placeholder = UI[lang].search;
+            document.getElementById('instr').innerText = UI[lang].instr;
             document.querySelectorAll('.l-act').forEach(e => e.innerText = UI[lang].act);
             document.querySelectorAll('.l-dos').forEach(e => e.innerText = UI[lang].dos);
             document.querySelectorAll('.l-tim').forEach(e => e.innerText = UI[lang].tim);
@@ -137,35 +168,41 @@
             const bar = document.getElementById('cats'); bar.innerHTML = '';
             ['chr', 'otc', 'spc', 'skin', 'hair', 'tips'].forEach(c => {
                 const b = document.createElement('div');
-                b.className = `cat-btn ${cat === c ? 'active' : ''}`;
+                b.className = `cat-btn ${currentCat === c ? 'active' : ''}`;
                 b.innerText = UI[lang][c];
-                b.onclick = () => { cat = c; renderCats(); renderGrid(); };
+                b.onclick = () => { currentCat = c; renderCats(); renderGrid(); };
                 bar.appendChild(b);
             });
         }
 
         function renderGrid() {
-            const grid = document.getElementById('grid'), term = document.getElementById('srch').value.toLowerCase();
+            const grid = document.getElementById('grid');
+            const term = document.getElementById('srch').value.toLowerCase();
             grid.innerHTML = '';
-            (DATA[cat] || []).filter(i => i.name[lang].toLowerCase().includes(term)).forEach(i => {
-                const c = document.createElement('div'); c.className = 'card';
-                c.innerText = i.name[lang]; c.onclick = () => openDash(i);
-                grid.appendChild(c);
+            
+            const list = DATA[currentCat] || [];
+            list.filter(item => item.name[lang].toLowerCase().includes(term)).forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerText = item.name[lang];
+                card.onclick = () => openDash(item);
+                grid.appendChild(card);
             });
         }
 
-        function openDash(i) {
+        function openDash(item) {
             document.getElementById('grid').classList.add('hidden');
             document.getElementById('cats').classList.add('hidden');
             document.getElementById('dash').style.display = 'block';
-            document.getElementById('dTitle').innerText = i.name[lang];
-            document.getElementById('dWrn').innerText = "⚠️ " + i.warn[lang];
-            document.getElementById('dZat').innerText = "🌟 " + i.zat[lang];
-            const pBox = document.getElementById('dPills'); pBox.innerHTML = '';
-            i.supps.forEach((s, idx) => {
+            document.getElementById('dTitle').innerText = item.name[lang];
+            document.getElementById('dWrn').innerText = "⚠️ " + item.warn[lang];
+            document.getElementById('dZat').innerText = "🌟 " + item.zat[lang];
+            
+            const pillBox = document.getElementById('dPills'); pillBox.innerHTML = '';
+            item.supps.forEach((s, idx) => {
                 const p = document.createElement('div'); p.className = 'pill';
                 p.innerText = s.t[lang]; p.onclick = () => showInfo(s, p);
-                pBox.appendChild(p);
+                pillBox.appendChild(p);
             });
             document.getElementById('dPanel').style.display = 'none';
         }
