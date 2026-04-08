@@ -3,57 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PharmaCross Pro 2026 | المرجع العالمي</title>
+    <title>P-Cross Pro 2026 | المرجع الصيدلاني الشامل</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Light Mode - وضع الشمس */
             --bg: #ffffff; --text: #000000; --primary: #1a5d43; --accent: #0056b3;
-            --card: #f4f4f4; --border: #bbbbbb; --warn: #fff0f0; --zatouna: #f0f7ff;
+            --card: #f2f2f2; --border: #222222; --warn: #ffebeb; --zatouna: #eef7ff;
         }
         [data-theme="dark"] {
             /* Dark Mode - الوضع الليلي */
             --bg: #0b1120; --text: #f1f5f9; --primary: #10b981; --accent: #38bdf8;
-            --card: #1e293b; --border: #334155; --warn: #451a1a; --zatouna: #1e293b;
+            --card: #1e293b; --border: #475569; --warn: #451a1a; --zatouna: #1e293b;
         }
-        * { margin:0; padding:0; box-sizing:border-box; transition: background 0.3s, color 0.3s; }
+        * { margin:0; padding:0; box-sizing:border-box; transition: background 0.2s; }
         body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding: 10px; min-height: 100vh; }
         body.en { font-family: 'Roboto', sans-serif; direction: ltr; }
         
         /* Navigation */
-        .top-nav { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 12px; }
-        .controls { display: flex; gap: 5px; }
-        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 14px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 13px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .search { flex: 1; min-width: 150px; padding: 12px; border: 2.5px solid var(--primary); border-radius: 10px; font-weight: 900; font-size: 16px; background: var(--bg); color: var(--text); }
+        .top-nav { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 4px solid var(--primary); padding-bottom: 12px; margin-bottom: 15px; align-items: center; }
+        .controls { display: flex; gap: 6px; }
+        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 15px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 13px; }
+        .search { flex: 1; min-width: 160px; padding: 12px; border: 3px solid var(--primary); border-radius: 10px; font-weight: 900; font-size: 16px; background: var(--bg); color: var(--text); }
         
         /* Category Bar */
-        .cat-bar { display: flex; gap: 8px; overflow-x: auto; padding: 5px 0 15px; margin-bottom: 10px; scrollbar-width: none; }
-        .cat-btn { background: var(--card); border: 2.2px solid var(--border); padding: 10px 20px; border-radius: 25px; white-space: nowrap; font-size: 14px; font-weight: 900; cursor: pointer; color: var(--text); }
+        .cat-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 10px; scrollbar-width: none; }
+        .cat-btn { background: var(--card); border: 2.5px solid var(--border); padding: 10px 22px; border-radius: 25px; white-space: nowrap; font-size: 14px; font-weight: 900; cursor: pointer; color: var(--text); }
         .cat-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); transform: scale(1.05); }
 
         /* Grid System */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 10px; }
-        .card { background: var(--card); border: 2px solid var(--border); padding: 15px 5px; border-radius: 12px; text-align: center; font-size: 14px; font-weight: 900; cursor: pointer; min-height: 75px; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+        .card { background: var(--card); border: 2.2px solid var(--border); padding: 15px 5px; border-radius: 12px; text-align: center; font-size: 14px; font-weight: 900; cursor: pointer; min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
         .card:active { transform: scale(0.95); }
 
-        /* Dashboard Panel */
-        #dash { display: none; border: 4px solid var(--primary); border-radius: 20px; padding: 18px; background: var(--bg); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-        .dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .dash-title { font-size: 24px; font-weight: 900; color: var(--primary); border-inline-start: 7px solid var(--primary); padding-inline-start: 12px; }
+        /* Dashboard */
+        #dash { display: none; border: 4px solid var(--primary); border-radius: 20px; padding: 18px; background: var(--bg); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .dash-title { font-size: 24px; font-weight: 900; color: var(--primary); border-inline-start: 8px solid var(--primary); padding-inline-start: 12px; }
         
-        .supp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 10px; background: var(--card); border-radius: 12px; }
+        .supp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 12px; background: var(--card); border-radius: 12px; }
         .pill { background: var(--bg); border: 2.5px solid var(--accent); color: var(--accent); padding: 8px 18px; border-radius: 25px; font-size: 14px; font-weight: 900; cursor: pointer; }
         .pill.active { background: var(--accent); color: #fff; }
 
-        /* Detail Panel */
-        .info-box { background: var(--card); border: 1.5px solid var(--border); padding: 15px; border-radius: 12px; display: none; margin-top: 10px; }
+        /* Info Panel */
+        .info-box { background: var(--card); border: 1.5px solid var(--border); padding: 18px; border-radius: 15px; display: none; margin-top: 10px; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .info-cell { font-size: 15px; border-bottom: 1.5px solid var(--border); padding-bottom: 6px; }
+        .info-cell { font-size: 15px; border-bottom: 1.5px solid var(--border); padding-bottom: 8px; }
         .info-cell b { color: var(--primary); display: block; font-size: 12px; font-weight: 900; margin-bottom: 4px; }
         .full { grid-column: span 2; }
-        .brands { color: var(--accent); font-weight: 900; background: rgba(0,102,204,0.1); padding: 12px; border-radius: 8px; border-inline-start: 6px solid var(--accent); line-height: 1.6; margin-top: 8px; font-size: 14px; }
+        .brands { color: var(--accent); font-weight: 900; background: rgba(0,102,204,0.1); padding: 12px; border-radius: 8px; border-inline-start: 7px solid var(--accent); line-height: 1.6; font-size: 15px; }
 
-        .strip { padding: 14px; margin-top: 15px; border-radius: 12px; font-size: 15px; font-weight: 900; border-inline-start: 8px solid; line-height: 1.5; }
+        .strip { padding: 14px; margin-top: 15px; border-radius: 12px; font-size: 15px; font-weight: 900; border-inline-start: 9px solid; line-height: 1.5; }
         .warn { background: var(--warn); border-color: #cc0000; color: #000; }
         [data-theme="dark"] .warn { color: #f1f5f9; }
         .zat { background: var(--zatouna); border-color: var(--accent); font-style: italic; color: #000; }
@@ -69,7 +69,7 @@
             <button class="btn" onclick="toggleLang()" id="lBtn">English</button>
             <button class="btn" onclick="toggleTheme()" id="tBtn">🌙 Dark</button>
         </div>
-        <input type="text" id="srch" class="search" oninput="renderGrid()" placeholder="ابحث عن حالة طبية...">
+        <input type="text" id="srch" class="search" oninput="renderGrid()" placeholder="ابحث عن حالة مرضية...">
     </div>
 
     <div class="cat-bar" id="cats"></div>
@@ -78,10 +78,10 @@
     <div id="dash">
         <div class="dash-head">
             <div class="dash-title" id="dTitle"></div>
-            <button onclick="goBack()" class="btn" style="background:#000; font-size: 15px;">✖ عودة</button>
+            <button onclick="goBack()" class="btn" style="background:#000; padding: 8px 20px;">✖ عودة</button>
         </div>
         
-        <p style="font-weight:900; margin-bottom:12px; font-size:15px; color: var(--accent);" id="instr">المكملات الموصى بها (اضغط للتفاصيل):</p>
+        <p style="font-weight:900; margin-bottom:12px; font-size:15px; color: var(--accent);" id="instr">اختر المكمل للتفاصيل العميقة:</p>
         <div class="supp-pills" id="dPills"></div>
         
         <div id="dPanel" class="info-box">
@@ -90,7 +90,7 @@
                 <div class="info-cell"><b class="l-dos">التركيز (mg):</b> <span id="v-dos"></span></div>
                 <div class="info-cell"><b class="l-tim">التوقيت الأمثل:</b> <span id="v-tim"></span></div>
                 <div class="info-cell full"><b class="l-ben">الفائدة الطبية العميقة:</b> <span id="v-ben"></span></div>
-                <div class="info-cell full"><b class="l-bra">خيارات البراندات المتوفرة:</b> <div class="brands" id="v-bra"></div></div>
+                <div class="info-cell full"><b class="l-bra">أمثلة البراندات:</b> <div class="brands" id="v-bra"></div></div>
             </div>
         </div>
 
@@ -102,63 +102,82 @@
         let lang = 'ar', theme = 'light', currentCat = 'chr';
 
         const UI = {
-            ar: { search: "ابحث عن حالة...", act: "المادة الفعالة:", dos: "التركيز (mg):", tim: "التوقيت الأمثل:", ben: "الفائدة الطبية:", bra: "خيارات البراندات:", chr: "مزمنة", otc: "OTC", spc: "حالات خاصة", skin: "بشرة", hair: "شعر", tips: "صحة عامة", instr: "المكملات الموصى بها (اضغط للتفاصيل):", back: "✖ عودة" },
-            en: { search: "Search conditions...", act: "Active Ingredient:", dos: "Suggested Dose (mg):", tim: "Best Timing:", ben: "Medical Benefit:", bra: "Brand Options:", chr: "Chronic", otc: "OTC", spc: "Special", skin: "Skin Care", hair: "Hair Care", tips: "General Tips", instr: "Recommended Supplements (Click for details):", back: "✖ Back" }
+            ar: { search: "ابحث عن حالة...", act: "المادة الفعالة:", dos: "التركيز (mg):", tim: "التوقيت الأمثل:", ben: "الفائدة الطبية العميقة:", bra: "البراندات المقترحة:", chr: "أمراض مزمنة", otc: "أدوية OTC", spc: "حالات خاصة", skin: "عناية بالبشرة", hair: "عناية بالشعر", tips: "نصائح عامة", instr: "اختر المكمل للتفاصيل العميقة:", back: "✖ عودة" },
+            en: { search: "Search...", act: "Active Ingredient:", dos: "Concentration (mg):", tim: "Best Timing:", ben: "Deep Medical Benefit:", bra: "Brand Options:", chr: "Chronic", otc: "OTC", spc: "Special", skin: "Skin Care", hair: "Hair Care", tips: "Health Tips", instr: "Select for Deep Details:", back: "✖ Back" }
         };
 
         const DATA = {
             chr: [
                 {
                     id: "htn", name: {ar: "ارتفاع ضغط الدم", en: "Hypertension"},
-                    warn: {ar: "تجنب المسكنات (NSAIDs) مثل الفولتارين والبروفين، وأدوية البرد التي تحتوي على سودوفيدرين (Pseudoephedrine).", en: "Avoid NSAIDs (Ibuprofen/Voltarin) and Cold meds with Pseudoephedrine."},
-                    zat: {ar: "الضغط هو القاتل الصامت؛ المكملات هنا ليست بديلاً للعلاج بل هي 'درع حماية' للشرايين والقلب.", en: "Hypertension is a silent killer; supplements are a shield for arteries, not a replacement for meds."},
+                    warn: {ar: "تجنب تماماً المسكنات (NSAIDs) وفوارات الصوديوم العالية وأدوية البرد التي تحتوي على سودوفيدرين.", en: "Strictly avoid NSAIDs (Ibuprofen) and cold meds with Pseudoephedrine."},
+                    zat: {ar: "الضغط هو القاتل الصامت؛ المكملات هنا 'تحمي' الشرايين من التصلب وليست بديلاً للدواء.", en: "Hypertension is a silent killer; supplements protect arteries, not replace meds."},
                     supps: [
-                        { t: {ar: "أوميجا 3", en: "Omega-3"}, a: {ar: "EPA (800mg) / DHA (600mg)", en: "EPA (800mg) / DHA (600mg)"}, d: {ar: "1400 - 2000 mg", en: "1400 - 2000 mg"}, tm: {ar: "وسط وجبة دسمة (الغداء)", en: "With a high-fat meal"}, b: {ar: "تحسين مرونة جدران الأوعية الدموية (Endothelial function)، خفض مستويات الدهون الثلاثية، وتقليل الالتهابات المزمنة في الشرايين.", en: "Improves endothelial function, lowers triglycerides, and reduces chronic vascular inflammation."}, br: "iRemedies iUltimate Omega | Avernus Omega-3 | Solgar Triple Strength | Seven Seas | Now Foods" },
-                        { t: {ar: "مغنيسيوم جلايسينات", en: "Magnesium Glycinate"}, a: {ar: "Magnesium Glycinate", en: "Magnesium Glycinate"}, d: {ar: "400 mg", en: "400 mg"}, tm: {ar: "قبل النوم بـ 30 دقيقة", en: "30 mins before bedtime"}, b: {ar: "يعمل كباسط طبيعي للعضلات الملساء في الشرايين، ينظم ضربات القلب، ويقلل من التوتر العضلي المصاحب لارتفاع الضغط.", en: "Acts as a natural vasodilator, regulates heart rhythm, and reduces muscle tension associated with high BP."}, br: "iRemedies iMagnesium | Bio-Magnesium (Pharma Nord) | Jamieson | Avernus Magnesium" },
-                        { t: {ar: "إنزيم كيو 10", en: "CoQ10"}, a: {ar: "Coenzyme Q10", en: "Coenzyme Q10"}, d: {ar: "200 mg", en: "200 mg"}, tm: {ar: "بعد الأكل مباشرة", en: "Directly after food"}, b: {ar: "أساسي جداً لمرضى الضغط الذين يستخدمون أدوية الكوليسترول (Statins) لحماية طاقة عضلة القلب ومنع آلام العضلات.", en: "Essential for patients on Statins to protect cardiac energy and prevent muscle pain."}, br: "iRemedies iCoQ10 | Avernus CoQ10 | Solgar | Biogenix" }
+                        { t: {ar: "أوميجا 3 (عالي التركيز)", en: "High-Potency Omega-3"}, a: {ar: "EPA (800mg) / DHA (600mg)", en: "EPA / DHA"}, d: {ar: "1400 - 2000 mg", en: "1400 - 2000 mg"}, tm: {ar: "وسط الوجبة الرئيسية", en: "With main meal"}, b: {ar: "تحسين مرونة جدران الشرايين (Endothelial function)، خفض مستويات الدهون الثلاثية، وتقليل الالتهاب الوعائي.", en: "Improves endothelial elasticity, lowers triglycerides, and reduces vascular inflammation."}, br: "iRemedies iUltimate Omega | Avernus Omega-3 | Solgar Triple Strength | Seven Seas" },
+                        { t: {ar: "مغنيسيوم جلايسينات", en: "Magnesium Glycinate"}, a: {ar: "Magnesium Glycinate", en: "Magnesium Glycinate"}, d: {ar: "400 mg", en: "400 mg"}, tm: {ar: "قبل النوم بـ 30 دقيقة", en: "30 mins before bedtime"}, b: {ar: "باسط طبيعي للعضلات الملساء في الشرايين، ينظم ضربات القلب، ويحسن جودة النوم المضربة بسبب أدوية الضغط.", en: "Natural vasodilator, regulates heart rhythm, and improves sleep quality."}, br: "iRemedies iMagnesium | Bio-Magnesium | Jamieson | Avernus" },
+                        { t: {ar: "إنزيم كيو 10", en: "CoQ10"}, a: {ar: "Coenzyme Q10 (Ubiquinone)", en: "Coenzyme Q10"}, d: {ar: "200 mg", en: "200 mg"}, tm: {ar: "بعد وجبة دسمة", en: "After a fatty meal"}, b: {ar: "ضروري لمرضى الضغط الذين يستخدمون أدوية 'ستاتين' للكوليسترول لمنع وهن العضلات ودعم طاقة القلب.", en: "Essential for patients on Statins to prevent muscle weakness and support cardiac energy."}, br: "iRemedies iCoQ10 | Avernus CoQ10 | Solgar | Biogenix" }
                     ]
                 },
                 {
                     id: "dm2", name: {ar: "السكري النوع الثاني", en: "Diabetes Type 2"},
-                    warn: {ar: "يجب فحص السكر التراكمي بانتظام؛ المكملات تساعد في حماية الأعصاب ولكنها لا تغني عن الميتفورمين أو الأنسولين.", en: "Monitor HbA1c; supplements aid nerve protection but don't replace Metformin or Insulin."},
-                    zat: {ar: "السكري يحترم من يحترمه؛ الاهتمام بمخزون الفيتامينات يحميك من 'تنميل الأطراف' وضعف النظر مستقبلاً.", en: "Respect diabetes; maintaining vitamin levels prevents future neuropathy and vision loss."},
+                    warn: {ar: "المكملات تحمي الأعصاب والكلى ولكنها لا تغني عن فحص السكر اليومي والالتزام بالجرعات الدوائية.", en: "Supplements protect nerves; they don't replace daily glucose monitoring."},
+                    zat: {ar: "السكري يحترم من يحترمه؛ الاهتمام بمخزون B12 يحميك من 'تنميل الأطراف' المزعج.", en: "Respect diabetes; maintaining B12 levels prevents annoying peripheral numbness."},
                     supps: [
-                        { t: {ar: "ب-كومبلكس", en: "B-Complex"}, a: {ar: "B1 (Benfotiamine) / B6 / B12 (Methylcobalamin)", en: "B1 / B6 / B12"}, d: {ar: "100mg / 1500mcg", en: "100mg / 1500mcg"}, tm: {ar: "بعد الإفطار", en: "After breakfast"}, b: {ar: "حماية غمد الميالين للأعصاب من التلف السكري (Diabetic Neuropathy) ومنع الوخز والتنميل في اليدين والقدمين.", en: "Protects myelin sheath from diabetic damage and prevents peripheral numbness/tingling."}, br: "iRemedies iB-Complex | Neurobion (P&G) | Avernus B-Active | Quest" },
-                        { t: {ar: "ألفا ليبويك", en: "Alpha Lipoic Acid"}, a: {ar: "ALA", en: "ALA"}, d: {ar: "600 mg", en: "600 mg"}, tm: {ar: "على معدة فارغة (قبل الأكل بساعة)", en: "Empty stomach (1hr before food)"}, b: {ar: "أقوى مضاد أكسدة لإصلاح التهاب الأعصاب الطرفية وتحسين حساسية مستقبلات الأنسولين في الخلايا.", en: "Potent antioxidant for nerve repair and enhancing insulin receptor sensitivity."}, br: "ThioGamma | iRemedies ALA | Now Foods | Avernus ALA" }
+                        { t: {ar: "ب-كومبلكس (نشط)", en: "Active B-Complex"}, a: {ar: "B1 (Benfotiamine) / B12 (Methyl)", en: "B1 / B6 / B12"}, d: {ar: "100mg / 1500mcg", en: "100mg / 1500mcg"}, tm: {ar: "بعد الإفطار", en: "After breakfast"}, b: {ar: "حماية غمد الميالين للأعصاب من التلف السكري ومنع 'وخز' اليدين والقدمين.", en: "Protects myelin sheath from diabetic damage and prevents hand/foot tingling."}, br: "iRemedies iB-Complex | Neurobion | Avernus B-Active | Quest" },
+                        { t: {ar: "ألفا ليبويك", en: "Alpha Lipoic Acid"}, a: {ar: "ALA", en: "ALA"}, d: {ar: "600 mg", en: "600 mg"}, tm: {ar: "على معدة فارغة", en: "On empty stomach"}, b: {ar: "أقوى مضاد أكسدة عالمي لإصلاح التهاب الأعصاب الطرفية وتحسين حساسية الأنسولين.", en: "Potent antioxidant for nerve repair and enhancing insulin sensitivity."}, br: "ThioGamma | iRemedies ALA | Now Foods | Avernus ALA" }
                     ]
                 }
             ],
             otc: [
                 {
-                    id: "flu", name: {ar: "نزلات البرد والإنفلونزا", en: "Common Cold & Flu"},
-                    warn: {ar: "لا تصرف مضادات حيوية للبرد الفيروسي؛ استشر الطبيب في حال استمرار الحرارة لأكثر من 3 أيام.", en: "Do not use antibiotics for viral colds; consult MD if fever persists for >3 days."},
-                    zat: {ar: "الراحة التامة والسوائل الدافئة تسرع الشفاء بنسبة 50%؛ الزنك يقلل مدة المرض لو أُخذ في أول 24 ساعة.", en: "Rest/Fluids speed recovery by 50%; Zinc shortens illness if taken within 24hrs."},
+                    id: "flu", name: {ar: "نزلات البرد الحادة", en: "Severe Cold & Flu"},
+                    warn: {ar: "لا تستخدم المضادات الحيوية للعدوى الفيروسية؛ الزنك يعمل فقط لو أُخذ في أول 24 ساعة.", en: "No antibiotics for viruses; Zinc works only if taken in first 24hrs."},
+                    zat: {ar: "الراحة التامة والسوائل الدافئة تسرع الشفاء بنسبة 50%؛ لا ترهق جسمك.", en: "Complete rest and warm fluids speed recovery by 50%."},
                     supps: [
-                        { t: {ar: "زنك + فيتامين سي", en: "Zinc + Vit C"}, a: {ar: "Zinc Citrate & Ascorbic Acid", en: "Zinc & Vit C"}, d: {ar: "50mg / 1000mg", en: "50mg / 1000mg"}, tm: {ar: "بعد وجبة خفيفة", en: "After a light meal"}, b: {ar: "تحفيز إنتاج الخلايا المناعية (T-cells) وتقليل قدرة الفيروس على التكاثر في الجهاز التنفسي العلوي.", en: "Stimulates T-cell production and inhibits viral replication in the upper respiratory tract."}, br: "iRemedies iVitamin C + Zinc | Avernus C-Max | Sambucol | Redoxon" }
+                        { t: {ar: "زنك + فيتامين سي", en: "Zinc + Vit C"}, a: {ar: "Zinc Citrate & Ascorbic Acid", en: "Zinc & Vit C"}, d: {ar: "50mg / 1000mg", en: "50mg / 1000mg"}, tm: {ar: "بعد وجبة خفيفة", en: "After a light meal"}, b: {ar: "تقليل مدة الإصابة بالبرد بنسبة 30% وتقوية الخلايا المناعية التائية.", en: "Shortens cold duration by 30% and boosts T-immune cells."}, br: "iRemedies iVitamin C + Zinc | Avernus C-Max | Sambucol | Redoxon" }
                     ]
                 }
             ],
             skin: [
                 {
-                    id: "acne", name: {ar: "حب الشباب والدهون", en: "Acne & Oily Skin"},
-                    warn: {ar: "تجنب المأكولات العالية السكر (High Glycemic Index)؛ المكملات تدعم العلاج الموضعي.", en: "Avoid high-sugar foods; supplements support topical treatments."},
-                    zat: {ar: "الزنك هو 'عدو' الحبوب؛ يقلل الالتهاب والدهون ويمنع تكون الآثار.", en: "Zinc is the enemy of acne; it reduces inflammation, sebum, and prevents scarring."},
+                    id: "acne", name: {ar: "حب الشباب الالتهابي", en: "Inflammatory Acne"},
+                    warn: {ar: "المكملات تدعم العلاج الموضعي؛ تجنب لمس الحبوب باليد لتفادي الندبات.", en: "Supplements support topicals; avoid touching acne to prevent scarring."},
+                    zat: {ar: "الزنك هو 'عدو' الحبوب الطبيعي؛ يقلل إفراز الدهون والالتهاب فوراً.", en: "Zinc is acne's natural enemy; it reduces sebum and inflammation fast."},
                     supps: [
-                        { t: {ar: "زنك جلوكونات", en: "Zinc Gluconate"}, a: {ar: "Zinc Gluconate", en: "Zinc Gluconate"}, d: {ar: "50 mg", en: "50 mg"}, tm: {ar: "على معدة فارغة (أو مع أكل لو تسبب بمغص)", en: "Empty stomach or with light food"}, b: {ar: "تنظيم إفراز الدهون في البشرة، تقليل البكتيريا المسببة للحبوب، وتسريع التئام الندبات.", en: "Regulates sebum production, reduces acne-causing bacteria, and speeds up scar healing."}, br: "iRemedies iZinc | Avernus Zinc | Solgar | Nature's Bounty" }
+                        { t: {ar: "زنك جلوكونات", en: "Zinc Gluconate"}, a: {ar: "Zinc Gluconate", en: "Zinc Gluconate"}, d: {ar: "50 mg", en: "50 mg"}, tm: {ar: "على معدة فارغة (أو مع أكل)", en: "Empty stomach or with food"}, b: {ar: "تنظيم إفراز الغدد الدهنية، تقليل البكتيريا المسببة للحبوب، وتسريع التئام الجلد.", en: "Regulates sebum, reduces acne bacteria, and speeds skin healing."}, br: "iRemedies iZinc | Avernus Zinc | Solgar | Nature's Bounty" }
                     ]
                 }
             ],
             hair: [
                 {
-                    id: "hairloss", name: {ar: "تساقط الشعر الوراثي/المزمن", en: "Chronic Hair Loss"},
-                    warn: {ar: "يجب فحص مخزون الحديد (Ferritin) والغدة الدرقية؛ التساقط قد يكون عرضاً لمرض داخلي.", en: "Check Ferritin and Thyroid levels; hair loss can be a symptom of internal issues."},
-                    zat: {ar: "الشعر يتغذى من الداخل؛ النتائج تظهر بعد 3 شهور من الالتزام بالمكملات.", en: "Hair is fed from within; results appear after 3 months of consistent supplementation."},
+                    id: "hairloss", name: {ar: "تساقط الشعر المزمن", en: "Chronic Hair Loss"},
+                    warn: {ar: "يجب فحص مخزون الحديد والغدة الدرقية؛ المكملات تحتاج 3 شهور للظهور.", en: "Check Ferritin and Thyroid; supplements need 3 months for results."},
+                    zat: {ar: "الشعر يتغذى من الداخل؛ الالتزام اليومي هو سر الكثافة.", en: "Hair is fed from within; daily consistency is the secret to density."},
                     supps: [
-                        { t: {ar: "بيوتين + زنك", en: "Biotin + Zinc"}, a: {ar: "Biotin 5000mcg / Zinc 15mg", en: "Biotin / Zinc"}, d: {ar: "5000 mcg", en: "5000 mcg"}, tm: {ar: "مع وجبة الإفطار", en: "With breakfast"}, b: {ar: "تقوية بروتين الكيراتين المكون للشعر، زيادة سمك الشعرة، ومنع تقصفها.", en: "Strengthens keratin protein, increases hair thickness, and prevents breakage."}, br: "iRemedies iBiotin | Avernus Hair-Vit | Perfectil | Priorin" }
+                        { t: {ar: "بيوتين + زنك", en: "Biotin + Zinc"}, a: {ar: "Biotin 5000mcg / Zinc 15mg", en: "Biotin / Zinc"}, d: {ar: "5000 mcg", en: "5000 mcg"}, tm: {ar: "مع الإفطار", en: "With breakfast"}, b: {ar: "تقوية بروتين الكيراتين، زيادة سمك الشعرة، ومنع التقصف من الجذور.", en: "Strengthens keratin, increases thickness, and prevents breakage."}, br: "iRemedies iBiotin | Avernus Hair-Vit | Perfectil | Priorin" }
                     ]
                 }
             ],
-            spc: [], tips: []
+            spc: [
+                 {
+                    id: "preg1", name: {ar: "الحامل (الشهور الأولى)", en: "Pregnancy (1st Trimester)"},
+                    warn: {ar: "يُمنع تناول فيتامين A بجرعات عالية؛ الالتزام بحمض الفوليك إلزامي.", en: "Avoid high-dose Vitamin A; Folic acid is mandatory."},
+                    zat: {ar: "حمض الفوليك يحمي الجهاز العصبي للجنين؛ لا تنسي حبتك اليومية.", en: "Folic acid protects the fetal nervous system; don't skip it."},
+                    supps: [
+                        { t: {ar: "حمض الفوليك", en: "Folic Acid"}, a: {ar: "Folic Acid / Methylfolate", en: "Folic Acid"}, d: {ar: "400 - 800 mcg", en: "400 - 800 mcg"}, tm: {ar: "مرة يومياً", en: "Once daily"}, b: {ar: "منع تشوهات الأنبوب العصبي للجنين ودعم انقسام الخلايا الصحي.", en: "Prevents neural tube defects and supports healthy cell division."}, br: "iRemedies iFolic | Avernus Folic | Solgar | Pregnacare" }
+                    ]
+                }
+            ],
+            tips: [
+                 {
+                    id: "sleep", name: {ar: "الأرق وصعوبة النوم", en: "Insomnia & Sleep Issues"},
+                    warn: {ar: "تجنب الكافيين بعد الساعة 4 عصراً؛ الميلاتونين ليس للإدمان بل لتعديل الساعة البيولوجية.", en: "Avoid caffeine after 4 PM; Melatonin resets the biological clock."},
+                    zat: {ar: "غرفة مظلمة وباردة مع الميلاتونين تضمن لك نوماً عميقاً.", en: "A dark, cool room with melatonin ensures deep sleep."},
+                    supps: [
+                        { t: {ar: "ميلاتونين", en: "Melatonin"}, a: {ar: "Melatonin", en: "Melatonin"}, d: {ar: "3 - 5 mg", en: "3 - 5 mg"}, tm: {ar: "قبل النوم بـ 30 دقيقة", en: "30 mins before sleep"}, b: {ar: "تقصير وقت الدخول في النوم وتحسين جودة النوم العميق (REM sleep).", en: "Shortens time to fall asleep and improves REM sleep quality."}, br: "iRemedies iSleep (Melatonin) | Avernus | Natrol | Jamieson" }
+                    ]
+                }
+            ]
         };
 
         function toggleLang() {
@@ -196,33 +215,28 @@
         }
 
         function renderGrid() {
-            const grid = document.getElementById('grid');
-            const term = document.getElementById('srch').value.toLowerCase();
+            const grid = document.getElementById('grid'), term = document.getElementById('srch').value.toLowerCase();
             grid.innerHTML = '';
-            
             const list = DATA[currentCat] || [];
-            list.filter(item => item.name[lang].toLowerCase().includes(term)).forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerText = item.name[lang];
-                card.onclick = () => openDash(item);
+            list.filter(i => i.name[lang].toLowerCase().includes(term)).forEach(i => {
+                const card = document.createElement('div'); card.className = 'card';
+                card.innerText = i.name[lang]; card.onclick = () => openDash(i);
                 grid.appendChild(card);
             });
         }
 
-        function openDash(item) {
+        function openDash(i) {
             document.getElementById('grid').classList.add('hidden');
             document.getElementById('cats').classList.add('hidden');
             document.getElementById('dash').style.display = 'block';
-            document.getElementById('dTitle').innerText = item.name[lang];
-            document.getElementById('dWrn').innerText = "⚠️ " + item.warn[lang];
-            document.getElementById('dZat').innerText = "🌟 " + item.zat[lang];
-            
-            const pillBox = document.getElementById('dPills'); pillBox.innerHTML = '';
-            item.supps.forEach((s, idx) => {
+            document.getElementById('dTitle').innerText = i.name[lang];
+            document.getElementById('dWrn').innerText = "⚠️ " + i.warn[lang];
+            document.getElementById('dZat').innerText = "🌟 " + i.zat[lang];
+            const pBox = document.getElementById('dPills'); pBox.innerHTML = '';
+            i.supps.forEach((s, idx) => {
                 const p = document.createElement('div'); p.className = 'pill';
                 p.innerText = s.t[lang]; p.onclick = () => showInfo(s, p);
-                pillBox.appendChild(p);
+                pBox.appendChild(p);
             });
             document.getElementById('dPanel').style.display = 'none';
         }
