@@ -1,243 +1,236 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="theme-color" content="#050f1a"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-title" content="Pharma Cross"/>
-<title>Pharma Cross Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{min-height:100vh;background:linear-gradient(135deg,#050f1a 0%,#0a1f2e 50%,#071520 100%);font-family:'Cairo',sans-serif;padding:16px 12px 60px;color:#d4e8e0}
-body.ar{direction:rtl}body.en{direction:ltr}
-.lang-bar{display:flex;justify-content:flex-end;margin-bottom:14px}
-body.ar .lang-bar{justify-content:flex-start}
-.lang-toggle{display:flex;background:rgba(0,0,0,0.4);border:1.5px solid #0f2a22;border-radius:20px;overflow:hidden}
-.lang-btn{padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:transparent;color:#4a7a68;transition:all .2s;font-family:inherit}
-.lang-btn.active{background:linear-gradient(135deg,#00c896,#00a8d4);color:#050f1a}
-.header{text-align:center;margin-bottom:18px}
-.badge{display:inline-block;background:linear-gradient(135deg,#00c896,#00a8d4);border-radius:14px;padding:6px 18px;font-size:11px;font-weight:700;color:#050f1a;letter-spacing:1.5px;margin-bottom:10px}
-h1{color:#fff;font-size:24px;font-weight:900;line-height:1.3}
-h1 span{color:#00c896}
-.subtitle{color:#5a8a7a;margin-top:6px;font-size:13px}
-.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;max-width:860px;margin-left:auto;margin-right:auto}
-.tab{padding:7px 14px;border-radius:18px;border:1.5px solid #1a3a2e;background:transparent;color:#4a7a68;font-weight:700;font-size:12px;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap}
-.tab.active{border-color:#00c896;background:rgba(0,200,150,.15);color:#00c896}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;max-width:860px;margin:0 auto 16px}
-.pill-wrap{display:flex;flex-direction:column;gap:4px}
-.pill{padding:10px 8px;border-radius:10px;border:1.5px solid #0f2a22;background:rgba(255,255,255,.02);color:#6a9a88;font-size:12px;cursor:pointer;text-align:center;transition:all .2s;line-height:1.4;font-family:inherit;font-weight:600;width:100%}
-.pill.active{border-color:#00c896;background:linear-gradient(135deg,rgba(0,200,150,.15),rgba(0,168,212,.08));color:#00e8b0;font-weight:700;border-bottom-left-radius:4px;border-bottom-right-radius:4px}
-.go-btn{display:none;padding:7px 6px;border-radius:8px;border:none;background:linear-gradient(135deg,#00c896,#00a8d4);color:#050f1a;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;width:100%;animation:popIn .2s ease}
-.go-btn.show{display:block}
-@keyframes popIn{from{opacity:0;transform:scaleY(0.7)}to{opacity:1;transform:scaleY(1)}}
-.custom-box{max-width:860px;margin:0 auto 14px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.03);border:1.5px solid #0f2a22;border-radius:12px;padding:9px 12px}
-.custom-box input{flex:1;background:transparent;border:none;outline:none;color:#c4ddd6;font-size:13px;font-family:inherit}
-.custom-go{padding:7px 14px;border-radius:8px;border:none;background:linear-gradient(135deg,#00c896,#00a8d4);color:#050f1a;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
-.result-wrap{max-width:860px;margin:0 auto;animation:fadeIn .4s ease}
-.result-title-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:0 4px;flex-wrap:wrap}
-.result-tag{background:linear-gradient(135deg,#00c896,#00a8d4);border-radius:10px;padding:6px 16px;color:#050f1a;font-weight:900;font-size:13px}
-.result-sub{color:#2a6a58;font-size:11px}
-.card{background:rgba(255,255,255,.03);border:1.5px solid #0f2a22;border-radius:14px;padding:14px 16px;margin-bottom:10px}
-.card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.card-title{font-weight:800;font-size:14px;color:#00c896}
-.card.warning .card-title{color:#f0a030}
-.card.danger .card-title{color:#e08080}
-.card.phrase .card-title{color:#c090f0}
-.card.smart .card-title{color:#50c8f0}
-.card.highlight{border-color:#00c896;background:rgba(0,200,150,.05)}
-.card.warning{border-color:#f0a030;background:rgba(240,160,48,.04)}
-.card.phrase{border-color:#a060e0;background:rgba(160,96,224,.05)}
-.card.smart{border-color:#00a8d4;background:rgba(0,168,212,.05)}
-.item{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:8px;align-items:flex-start}
-.item:last-child{border-bottom:none;padding-bottom:0}
-.dot{color:#00c896;font-size:10px;margin-top:5px;flex-shrink:0}
-.card.warning .dot{color:#f0a030}
-.card.phrase .dot{color:#c090f0}
-.card.smart .dot{color:#50c8f0}
-.iname{font-weight:700;color:#00e8b0;font-size:13px}
-.ireason{color:#8ab8a8;font-size:12px;margin-top:2px;line-height:1.6}
-.itext{color:#b4d8d0;font-size:13px;line-height:1.7}
-.phrase-text{font-size:14px;color:#d4c0f0;font-style:italic;line-height:1.7}
-.loader{max-width:860px;margin:0 auto;text-align:center;padding:28px;color:#00c896;font-size:14px}
-.error{max-width:860px;margin:0 auto;text-align:center;padding:18px;color:#ff8080;font-size:13px;background:rgba(255,80,80,0.05);border-radius:12px;line-height:1.8}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaCross Pro | المرجع الصيدلاني</title>
+    <style>
+        :root {
+            --bg-light: #ffffff;
+            --text-main: #1a1a1a;
+            --primary-green: #2a5a48;
+            --accent-blue: #0066cc;
+            --warning-orange: #e67e22;
+            --card-border: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 3px solid var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 26px; color: var(--primary-green); font-weight: 800; }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--primary-green);
+            border-radius: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            background: #eee;
+            padding: 10px 20px;
+            border-radius: 25px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .condition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .condition-pill {
+            background: #fff;
+            border: 2px solid var(--card-border);
+            padding: 15px 10px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* Card Full View */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .close-btn {
+            background: var(--primary-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            color: var(--primary-green);
+            border-bottom: 2px solid #eee;
+            margin: 20px 0 10px;
+            font-size: 20px;
+        }
+
+        .supp-item {
+            background: #f4fbf8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-right: 5px solid var(--primary-green);
+        }
+
+        .supp-item b { color: var(--accent-blue); }
+
+        .warning-box {
+            background: #fff5eb;
+            border: 2px solid var(--warning-orange);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .zatouna {
+            background: #eef2ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 5px solid var(--accent-blue);
+            font-style: italic;
+        }
+    </style>
 </head>
-<body class="ar">
+<body>
 
-<div class="lang-bar">
-  <div class="lang-toggle">
-    <button class="lang-btn active" id="btnAr" onclick="setLang('ar')">عربي</button>
-    <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
-  </div>
-</div>
+    <header>
+        <h1>المصاحب الصيدلاني الذكي 2026</h1>
+        <p>مرجع الـ Cross-Selling الصيدلاني الكامل (Offline)</p>
+    </header>
 
-<div class="header">
-  <div class="badge" id="badge">💊 الصيدلاني الاحترافي</div>
-  <h1>Cross-Selling<br><span id="title2">بمستوى الخبراء</span></h1>
-  <p class="subtitle" id="subtitle">اضغط على أي حالة للحصول على توصيات صيدلانية احترافية</p>
-</div>
+    <input type="text" class="search-box" id="search" placeholder="ابحث عن حالة طبية...">
 
-<div class="tabs" id="tabs"></div>
-<div class="grid" id="grid"></div>
+    <div class="category-tabs">
+        <div class="tab active" onclick="filterCat('chronic')">أمراض مزمنة</div>
+        <div class="tab" onclick="filterCat('otc')">OTC</div>
+        <div class="tab" onclick="filterCat('special')">حالات خاصة</div>
+    </div>
 
-<div class="custom-box">
-  <span style="color:#3a6a58;font-size:16px">✏️</span>
-  <input id="custom" type="text" onkeydown="if(event.key==='Enter')customGenerate()"/>
-  <button class="custom-go" onclick="customGenerate()">⚡</button>
-</div>
+    <div class="condition-grid" id="grid">
+        </div>
 
-<div id="output"></div>
+    <div id="modal" class="modal">
+        <button class="close-btn" onclick="closeModal()">⬅️ عودة للقائمة</button>
+        <div id="modalContent"></div>
+    </div>
 
-<script>
-let lang='ar', activeCat='', activePill='';
+    <script>
+        const DATA = [
+            {
+                id: "hypertension",
+                name: "ضغط الدم المرتفع",
+                cat: "chronic",
+                supps: [
+                    {
+                        name: "أوميجا 3 (Omega-3 Fish Oil)",
+                        active: "حمض الـ EPA وحمض الـ DHA",
+                        dose: "1000 - 2000 مجم يومياً",
+                        benefit: "يحسن مرونة الشرايين ويقلل الدهون الثلاثية المسببة للضغط.",
+                        timing: "وسط وجبة غنية بالدهون لزيادة الامتصاص.",
+                        brands: ["iRemedies iUltimate Omega", "Avernus Omega-3", "Seven Seas", "Solgar"]
+                    },
+                    {
+                        name: "مغنيسيوم (Magnesium)",
+                        active: "Magnesium Glycinate / Citrate",
+                        dose: "200 - 400 مجم يومياً",
+                        benefit: "باسط طبيعي للأوعية الدموية ومنظم لضربات القلب.",
+                        timing: "يُفضل قبل النوم لزيادة الاسترخاء.",
+                        brands: ["iRemedies iMagnesium Glycinate", "Bio-Magnesium", "Jamieson"]
+                    }
+                ],
+                devices: ["جهاز ضغط ديجيتال (Omron / Beurer)", "بدائل ملح الصوديوم (NoSalt)"],
+                warnings: "تجنب تماماً المسكنات (NSAIDs) مثل البروفين، وتجنب أدوية البرد التي تحتوي على سودوفيدرين.",
+                zatouna: "قل للمريض: ضغطك مضبوط بسبب التزامك بالدواء، فلا توقفه أبداً لأن الضغط (قاتل صامت) لا يعطي أعراضاً دائماً."
+            }
+            // سيتم إضافة الـ 90 حالة هنا بنفس هذا النمط
+        ];
 
-const T={
-  badge:{ar:'💊 الصيدلاني الاحترافي',en:'💊 Professional Pharmacist'},
-  title2:{ar:'بمستوى الخبراء',en:'Expert Level'},
-  subtitle:{ar:'اضغط على أي حالة للحصول على توصيات صيدلانية احترافية',en:'Tap any condition for expert pharmacy recommendations'},
-  customPH:{ar:'اكتب حالة مخصصة...',en:'Type a custom case...'},
-  goBtn:{ar:'⚡ حلّل',en:'⚡ Analyze'},
-  loader:{ar:'⏳ جاري التحليل الصيدلاني...',en:'⏳ Analyzing...'},
-  resultSub:{ar:'توصيات صيدلانية احترافية',en:'Professional Pharmacy Recommendations'},
-  c:{
-    ar:{s:'🎯 المكملات والمنتجات المصاحبة',h:'🌿 النصائح والعادات الصحية',w:'⚠️ تحذيرات وتفاعلات مهمة',p:'📋 جملة البيع الاحترافية',sm:'💡 فرصة ذكية إضافية'},
-    en:{s:'🎯 Recommended Supplements & Products',h:'🌿 Lifestyle & Health Tips',w:'⚠️ Important Warnings & Interactions',p:'📋 Professional Sales Phrase',sm:'💡 Smart Additional Opportunity'}
-  }
-};
+        function renderGrid(filter = 'chronic') {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            DATA.filter(item => item.cat === filter).forEach(item => {
+                grid.innerHTML += `<div class="condition-pill" onclick="openModal('${item.id}')">${item.name}</div>`;
+            });
+        }
 
-const CATS={
-  ar:{
-    "أمراض مزمنة":["ضغط الدم المرتفع","السكري النوع الثاني","خلل الدهون","قصور الغدة الدرقية","فرط نشاط الغدة الدرقية","الربو","الحساسية المزمنة","الحموضة المزمنة / GERD","القولون العصبي","الروماتويد","النقرس","الاكتئاب المزمن","القلق المزمن","الصرع","باركنسون","ألزهايمر","فشل كلوي مزمن","الكبد الدهني","أنيميا مزمنة","هشاشة العظام","السمنة المزمنة","الصداع النصفي","الجلوكوما"],
-    "OTC شائع":["مسكنات الألم (باراسيتامول)","مسكنات الألم (إيبوبروفين)","مضادات الحموضة","مضادات الهيستامين","مكملات الفيتامينات","أوميغا 3","بروبيوتيك","ملينات / إمساك","مضادات إسهال","قطرات عيون جافة","فيتامين د","كالسيوم + د","زنك / مناعة","كولاجين","مكملات رجيم","المغنيسيوم","فيتامين ب12","حديد","كيو 10"],
-    "حالات خاصة":["المرأة الحامل","المرضعة","كبار السن (65+)","الأطفال (0-5)","الأطفال (6-12)","المراهقون","رياضيون","مرضى ما بعد الجراحة","مرضى كيماوي","المسافرون","الصائمون","النساء في سن اليأس","مرضى المناعة الذاتية"],
-    "العناية بالبشرة":["حب الشباب (أكني)","البشرة الجافة","البشرة الدهنية","البشرة الحساسة","الإكزيما","الصدفية","التصبغات / البقع الداكنة","الشيخوخة المبكرة","التجاعيد","الهالات السوداء","حروق الشمس","التندبات والآثار","البشرة المختلطة","الوردية (Rosacea)","تشققات الجلد"],
-    "العناية بالشعر":["تساقط الشعر (الذكور)","تساقط الشعر (الإناث)","قشرة الشعر","الشعر الجاف والهش","الشعر الدهني","فروة الرأس الحساسة","الثعلبة (Alopecia)","الشعر بعد الولادة","تلف الشعر من الصبغات","بطء نمو الشعر","الشعر الرفيع"]
-  },
-  en:{
-    "Chronic Diseases":["Hypertension","Type 2 Diabetes","Dyslipidemia","Hypothyroidism","Hyperthyroidism","Asthma","Chronic Allergies","GERD / Acid Reflux","IBS","Rheumatoid Arthritis","Gout","Chronic Depression","Chronic Anxiety","Epilepsy","Parkinson's","Alzheimer's","Chronic Kidney Disease","Fatty Liver","Chronic Anemia","Osteoporosis","Chronic Obesity","Chronic Migraine","Glaucoma"],
-    "Common OTC":["Pain Relievers (Paracetamol)","Pain Relievers (Ibuprofen)","Antacids","Antihistamines","Vitamin Supplements","Omega-3","Probiotics","Laxatives","Anti-diarrheal","Dry Eye Drops","Vitamin D","Calcium + D","Zinc / Immunity","Collagen","Weight Loss Supplements","Magnesium","Vitamin B12","Iron","CoQ10"],
-    "Special Cases":["Pregnant Women","Breastfeeding","Elderly (65+)","Children (0-5)","Children (6-12)","Teenagers","Athletes","Post-Surgery","Chemotherapy Patients","Travelers","Fasting Patients","Menopausal Women","Autoimmune Patients"],
-    "Skin Care":["Acne","Dry Skin","Oily Skin","Sensitive Skin","Eczema","Psoriasis","Hyperpigmentation","Premature Aging","Wrinkles","Dark Circles","Sunburn","Scars","Combination Skin","Rosacea","Skin Cracks"],
-    "Hair Care":["Hair Loss (Male)","Hair Loss (Female)","Dandruff","Dry & Brittle Hair","Oily Hair","Sensitive Scalp","Alopecia","Postpartum Hair Loss","Color-damaged Hair","Slow Hair Growth","Thin Hair"]
-  }
-};
+        function openModal(id) {
+            const item = DATA.find(i => i.id === id);
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <h1 style="margin-bottom:20px">${item.name}</h1>
+                <div class="section-title">💊 المكملات الموصى بها</div>
+                ${item.supps.map(s => `
+                    <div class="supp-item">
+                        <p><b>المكمل:</b> ${s.name}</p>
+                        <p><b>المادة الفعالة:</b> ${s.active}</p>
+                        <p><b>التركيز:</b> ${s.dose}</p>
+                        <p><b>الفائدة:</b> ${s.benefit}</p>
+                        <p><b>التوقيت:</b> ${s.timing}</p>
+                        <p><b>خيارات متوفرة:</b> ${s.brands.join(' | ')}</p>
+                    </div>
+                `).join('')}
+                <div class="section-title">🩺 الأجهزة والعناية المرافقة</div>
+                <ul style="padding-right:20px">${item.devices.map(d => `<li>${d}</li>`).join('')}</ul>
+                <div class="warning-box">
+                    <b>⚠️ خط أحمر (تحذيرات):</b><br>${item.warnings}
+                </div>
+                <div class="zatouna">
+                    <b>🌟 نصيحة الصيدلي (الزتونة):</b><br>${item.zatouna}
+                </div>
+            `;
+            document.getElementById('modal').style.display = 'block';
+        }
 
-function getPrompt(q){
-  if(lang==='ar') return `أنت صيدلاني سريري خبير بخبرة 20 سنة في الصيدلة الإكلينيكية والـ OTC counseling. المريض أمامك يسأل عن أو اشترى: ${q}
-
-قدّم cross-selling صيدلاني احترافي حقيقي. ركّز على:
-- المكملات التي تُحسّن الحالة فعلاً مع الجرعة المناسبة والتوقيت (صباح/مساء/مع أكل)
-- نصائح lifestyle مبنية على evidence طبي حقيقي (غذاء، عادات، تجنبات)
-- تفاعلات دوائية وتحذيرات يجب أن يعرفها الصيدلاني
-- جملة بيع طبيعية تضيف قيمة وثقة
-
-أجب بـ JSON فقط بدون أي نص خارجه:
-{"supplements":[{"name":"اسم المنتج","reason":"السبب الطبي الدقيق + الجرعة + التوقيت"}],"habits":[{"tip":"نصيحة lifestyle أو غذائية مبنية على evidence"}],"warnings":[{"warn":"تحذير أو تفاعل دوائي حقيقي"}],"phrase":"جملة واحدة طبيعية للمريض","smart":"فرصة cross-selling ذكية غير متوقعة مع سببها"}`;
-
-  return `You are a clinical pharmacist with 20 years of OTC counseling experience. The patient is asking about or purchasing: ${q}
-
-Provide REAL professional pharmacy cross-selling. Focus on:
-- Supplements that genuinely improve outcomes, with specific dose and timing (morning/evening/with food)
-- Evidence-based lifestyle/dietary tips
-- Real drug interactions and warnings pharmacists must know
-- A natural sales phrase that adds value and builds trust
-
-Reply with JSON only, no text outside it:
-{"supplements":[{"name":"Product name","reason":"Precise medical reason + dose + timing"}],"habits":[{"tip":"Evidence-based lifestyle or dietary tip"}],"warnings":[{"warn":"Real drug interaction or pharmacist warning"}],"phrase":"One natural sentence to say to the patient","smart":"Unexpected smart cross-selling opportunity with reason"}`;
-}
-
-function setLang(l){
-  lang=l; document.body.className=l;
-  document.getElementById('btnAr').className='lang-btn'+(l==='ar'?' active':'');
-  document.getElementById('btnEn').className='lang-btn'+(l==='en'?' active':'');
-  document.getElementById('badge').textContent=T.badge[l];
-  document.getElementById('title2').textContent=T.title2[l];
-  document.getElementById('subtitle').textContent=T.subtitle[l];
-  document.getElementById('custom').placeholder=T.customPH[l];
-  document.getElementById('custom').style.direction=l==='ar'?'rtl':'ltr';
-  activeCat=''; activePill='';
-  document.getElementById('output').innerHTML='';
-  document.getElementById('custom').value='';
-  renderTabs(); renderGrid();
-  localStorage.setItem('pharma_lang',l);
-}
-
-function renderTabs(){
-  document.getElementById('tabs').innerHTML=Object.keys(CATS[lang]).map(cat=>
-    `<button class="tab${cat===activeCat?' active':''}" onclick="selectCat('${cat.replace(/'/g,"\\'")}')">${cat}</button>`
-  ).join('');
-}
-
-function renderGrid(){
-  if(!activeCat){document.getElementById('grid').innerHTML='';return;}
-  document.getElementById('grid').innerHTML=CATS[lang][activeCat].map(c=>{
-    const a=c===activePill, s=c.replace(/'/g,"\\'").replace(/"/g,'&quot;');
-    return `<div class="pill-wrap">
-      <button class="pill${a?' active':''}" onclick="selectPill('${s}')">${c}</button>
-      <button class="go-btn${a?' show':''}" onclick="generateFor('${s}')">${T.goBtn[lang]}</button>
-    </div>`;
-  }).join('');
-}
-
-function selectCat(cat){activeCat=cat;activePill='';renderTabs();renderGrid();}
-function selectPill(val){activePill=val;renderGrid();}
-function customGenerate(){const q=document.getElementById('custom').value.trim();if(q)generateFor(q);}
-
-async function generateFor(query){
-  document.getElementById('output').innerHTML=`<div class="loader">${T.loader[lang]}</div>`;
-  document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1500,
-        messages:[{role:'user',content:getPrompt(query)}]
-      })
-    });
-    const data=await res.json();
-    if(data.error) throw new Error(data.error.message);
-    const raw=data.content?.[0]?.text||'';
-    const clean=raw.replace(/```json|```/g,'').trim();
-    const j=JSON.parse(clean);
-    renderCards(query,j);
-  }catch(e){
-    document.getElementById('output').innerHTML=`<div class="error">❌ ${e.message}</div>`;
-  }
-}
-
-function renderCards(label,d){
-  const c=T.c[lang];
-  const supps=(d.supplements||[]).map(s=>`<div class="item"><div class="dot">◆</div><div><div class="iname">${s.name}</div><div class="ireason">${s.reason}</div></div></div>`).join('');
-  const habits=(d.habits||[]).map(h=>`<div class="item"><div class="dot">◆</div><div class="itext">${h.tip}</div></div>`).join('');
-  const warns=(d.warnings||[]).map(w=>`<div class="item"><div class="dot">◆</div><div class="itext">${w.warn}</div></div>`).join('');
-
-  document.getElementById('output').innerHTML=`
-    <div class="result-wrap">
-      <div class="result-title-bar">
-        <div class="result-tag">${label}</div>
-        <span class="result-sub">${T.resultSub[lang]}</span>
-      </div>
-      <div class="card highlight">
-        <div class="card-header"><span class="card-title">${c.s}</span></div>${supps}</div>
-      <div class="card">
-        <div class="card-header"><span class="card-title" style="color:#4ac896">${c.h}</span></div>${habits}</div>
-      <div class="card warning">
-        <div class="card-header"><span class="card-title">${c.w}</span></div>${warns}</div>
-      <div class="card phrase">
-        <div class="card-header"><span class="card-title">${c.p}</span></div>
-        <div class="phrase-text">"${d.phrase||''}"</div></div>
-      <div class="card smart">
-        <div class="card-header"><span class="card-title">${c.sm}</span></div>
-        <div class="item"><div class="dot">◆</div><div class="itext">${d.smart||''}</div></div></div>
-    </div>`;
-}
-
-window.onload=()=>setLang(localStorage.getItem('pharma_lang')||'ar');
-</script>
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+        
+        // التشغيل الأولي
+        renderGrid();
+    </script>
 </body>
 </html>
