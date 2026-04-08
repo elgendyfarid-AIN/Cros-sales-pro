@@ -2,231 +2,192 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P-Cross Pro 2026 | المرجع الصيدلاني</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>P-Cross Pro | المرجع الصيدلاني الشامل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a5d43; /* أخضر طبي داكن */
-            --accent: #0056b3; /* أزرق صيدلاني */
-            --bg: #ffffff;
-            --text-dark: #000000;
-            --warning: #cc0000;
-            --border-color: #bbbbbb;
+            --bg: #ffffff; --text: #000000; --primary: #1a5d43; --accent: #0056b3;
+            --card: #f4f4f4; --border: #bbbbbb; --warn: #fff0f0; --zatouna: #f0f7ff;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-
-        body { 
-            background: var(--bg); 
-            color: var(--text-dark); 
-            padding: 10px;
-            -webkit-font-smoothing: antialiased;
+        [data-theme="dark"] {
+            --bg: #0b1120; --text: #f1f5f9; --primary: #10b981; --accent: #38bdf8;
+            --card: #1e293b; --border: #334155; --warn: #451a1a; --zatouna: #1e293b;
         }
-
-        /* الهيدر المدمج */
-        .top-nav {
-            display: flex; align-items: center; gap: 10px;
-            padding-bottom: 10px; border-bottom: 3px solid var(--primary);
-            margin-bottom: 12px;
-        }
-        .brand-logo { font-weight: 900; color: var(--primary); font-size: 22px; }
-        .search-input {
-            flex: 1; padding: 12px; border: 2.5px solid var(--primary);
-            border-radius: 10px; font-weight: bold; font-size: 16px; background: #fdfdfd;
-        }
-
-        /* شبكة الأمراض */
-        .disease-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
-            gap: 8px; margin-bottom: 15px;
-        }
-        .disease-card {
-            background: #f4f4f4; border: 1.5px solid var(--border-color);
-            padding: 10px 5px; border-radius: 8px; text-align: center;
-            font-size: 13px; font-weight: 800; cursor: pointer;
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
-        }
-        .disease-card.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-        /* منطقة التفاصيل - Dashboard */
-        #details-dashboard {
-            display: none; border: 3px solid var(--primary); border-radius: 15px;
-            padding: 15px; background: #ffffff; animation: fadeIn 0.3s ease;
-        }
-
-        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .title-text { font-size: 22px; font-weight: 900; color: var(--primary); border-right: 5px solid var(--primary); padding-right: 10px; }
-        .close-btn { background: #000; color: #fff; border: none; padding: 6px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-
-        /* أزرار المكملات (Pills) */
-        .supp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-        .pill {
-            background: #fff; border: 2.5px solid var(--accent); color: var(--accent);
-            padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 900; cursor: pointer;
-        }
-        .pill.selected { background: var(--accent); color: white; }
-
-        /* لوحة البيانات التفصيلية */
-        .data-panel {
-            background: #f9f9f9; border: 1px solid var(--border-color);
-            padding: 15px; border-radius: 10px; display: none;
-        }
-        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .data-cell { font-size: 15px; border-bottom: 1px solid #ddd; padding: 5px 0; }
-        .data-cell b { color: var(--primary); display: block; font-size: 13px; margin-bottom: 2px; }
-        .full-row { grid-column: span 2; }
-
-        .brands-box { color: var(--accent); font-weight: 900; background: #eef2ff; padding: 8px; border-radius: 6px; margin-top: 5px; }
-
-        /* التنبيهات والزتونة */
-        .warning-strip {
-            background: #fff0f0; border-right: 5px solid var(--warning);
-            padding: 10px; margin-top: 15px; font-size: 14px; font-weight: bold; color: #333;
-        }
-        .zatouna-strip {
-            background: #f0f7ff; border-right: 5px solid var(--accent);
-            padding: 10px; margin-top: 8px; font-size: 14px; font-weight: 700; font-style: italic; color: #333;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .hidden { display: none; }
+        * { margin:0; padding:0; box-sizing:border-box; transition: 0.2s; }
+        body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding: 10px; }
+        body.en { font-family: 'Roboto', sans-serif; direction: ltr; }
+        .top-bar { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px; }
+        .search { flex: 1; padding: 12px; border: 2.5px solid var(--primary); border-radius: 10px; font-weight: bold; font-size: 16px; background: var(--bg); color: var(--text); }
+        .btn { background: var(--primary); color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 12px; }
+        .cat-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px; scrollbar-width: none; }
+        .cat-btn { background: var(--card); border: 1.5px solid var(--border); padding: 8px 15px; border-radius: 20px; white-space: nowrap; font-size: 13px; font-weight: 800; cursor: pointer; color: var(--text); }
+        .cat-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+        .card { background: var(--card); border: 1.5px solid var(--border); padding: 12px 5px; border-radius: 10px; text-align: center; font-size: 13px; font-weight: 800; cursor: pointer; }
+        #dash { display: none; border: 3px solid var(--primary); border-radius: 15px; padding: 15px; background: var(--bg); position: relative; }
+        .dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .dash-title { font-size: 22px; font-weight: 900; color: var(--primary); border-inline-start: 6px solid var(--primary); padding-inline-start: 10px; }
+        .supp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .pill { background: var(--bg); border: 2.5px solid var(--accent); color: var(--accent); padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 900; cursor: pointer; }
+        .pill.active { background: var(--accent); color: #fff; }
+        .info-box { background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 10px; display: none; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .info-cell { font-size: 14px; border-bottom: 1px solid var(--border); padding: 5px 0; }
+        .info-cell b { color: var(--primary); display: block; font-size: 11px; }
+        .full { grid-column: span 2; }
+        .brands { color: var(--accent); font-weight: 900; background: rgba(0,102,204,0.1); padding: 8px; border-radius: 6px; border-inline-start: 4px solid var(--accent); }
+        .strip { padding: 10px; margin-top: 10px; border-radius: 8px; font-size: 14px; font-weight: bold; border-inline-start: 6px solid; }
+        .warn { background: var(--warn); border-color: #cc0000; }
+        .zat { background: var(--zatouna); border-color: var(--accent); font-style: italic; }
     </style>
 </head>
 <body>
-
-    <div class="top-nav">
-        <div class="brand-logo">P-Cross</div>
-        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن حالة مرضية (مثلاً: سكري)...">
+    <div class="top-bar">
+        <button class="btn" onclick="toggleLang()" id="lBtn">English</button>
+        <button class="btn" onclick="toggleTheme()" id="tBtn">🌙 Dark</button>
+        <input type="text" id="srch" class="search" oninput="renderGrid()" placeholder="ابحث عن حالة...">
     </div>
-
-    <div class="disease-grid" id="mainGrid"></div>
-
-    <div id="details-dashboard">
-        <div class="header-row">
-            <div class="title-text" id="activeConditionName">اسم الحالة</div>
-            <button class="close-btn" onclick="goBack()">إغلاق ✖</button>
+    <div class="cat-bar" id="cats"></div>
+    <div class="grid" id="grid"></div>
+    <div id="dash">
+        <div class="dash-head">
+            <div class="dash-title" id="dTitle"></div>
+            <button onclick="goBack()" class="btn" style="background:#000">✖</button>
         </div>
-
-        <div class="supp-pills" id="pillContainer"></div>
-
-        <div id="dataPanel" class="data-panel">
-            <div class="data-grid">
-                <div class="data-cell"><b>المادة الفعالة:</b> <span id="cell-active"></span></div>
-                <div class="data-cell"><b>التركيز (mg):</b> <span id="cell-dose"></span></div>
-                <div class="data-cell"><b>التوقيت الأمثل:</b> <span id="cell-time"></span></div>
-                <div class="data-cell"><b>الفائدة الطبية بالتفصيل:</b> <span id="cell-benefit"></span></div>
-                <div class="data-cell full-row"><b>أمثلة الخيارات (Brands):</b> <div class="brands-box" id="cell-brands"></div></div>
+        <div class="supp-pills" id="dPills"></div>
+        <div id="dPanel" class="info-box">
+            <div class="info-grid">
+                <div class="info-cell"><b class="l-act">المادة:</b> <span id="v-act"></span></div>
+                <div class="info-cell"><b class="l-dos">التركيز:</b> <span id="v-dos"></span></div>
+                <div class="info-cell"><b class="l-tim">التوقيت:</b> <span id="v-tim"></span></div>
+                <div class="info-cell"><b class="l-ben">الفائدة:</b> <span id="v-ben"></span></div>
+                <div class="info-cell full"><b class="l-bra">البراندات:</b> <div class="brands" id="v-bra"></div></div>
             </div>
         </div>
-
-        <div class="warning-strip" id="activeWarn"></div>
-        <div class="zatouna-strip" id="activeZatouna"></div>
+        <div class="strip warn" id="dWrn"></div>
+        <div class="strip zat" id="dZat"></div>
     </div>
 
     <script>
-        // قاعدة البيانات الضخمة والمفصلة
-        const PHARMA_DATA = [
-            {
-                id: "htn",
-                name: "ضغط الدم",
-                warn: "تجنب المسكنات (NSAIDs) مثل Ibuprofen وفوارات الصوديوم وأدوية البرد التي تحتوي على Pseudoephedrine.",
-                zatouna: "دواء الضغط هو (حارس الشرايين)، أخبر المريض أن الالتزام يقي من الجلطات الصامتة.",
-                supps: [
-                    { t: "أوميجا 3", a: "EPA (800mg) / DHA (600mg)", d: "1400 - 2000 مجم يومياً", tm: "وسط الوجبة الرئيسية (الغداء)", b: "يقلل الدهون الثلاثية، يحسن مرونة جدران الأوعية الدموية، ويقلل الالتهابات الوعائية.", br: "iRemedies iUltimate Omega | Avernus Omega-3 | Seven Seas" },
-                    { t: "مغنيسيوم", a: "Magnesium Glycinate", d: "400 مجم يومياً", tm: "قبل النوم بـ 30 دقيقة", b: "يعمل كحاصر طبيعي لقنوات الكالسيوم مما يساعد في ارتخاء العضلات الملساء في الشرايين وخفض المقاومة الوعائية.", br: "iRemedies iMagnesium Glycinate | Bio-Magnesium" },
-                    { t: "كيو 10", a: "Coenzyme Q10", d: "100 - 200 مجم", tm: "بعد الأكل (وجبة دسمة)", b: "يدعم طاقة عضلة القلب (ATP) ويحمي من الآثار الجانبية لأدوية الكوليسترول (Statins) المصاحبة.", br: "iRemedies iCoQ10 | Avernus CoQ10" },
-                    { t: "مستخلص الثوم", a: "Garlic Extract (Allicin)", d: "1200 مجم", tm: "مرة واحدة يومياً", b: "يساعد في تحرير أكسيد النيتريك الذي يوسع الأوعية الدموية ويقلل تصلب الشرايين.", br: "iRemedies iGarlic (Odorless)" }
-                ]
-            },
-            {
-                id: "dm2",
-                name: "السكري 2",
-                warn: "يجب مراقبة قراءات السكر بانتظام، المكملات لا تغني عن الأنسولين أو الحبوب.",
-                zatouna: "السكري لا يؤلم في البداية، لكن المكملات تحمي العين والكلى والأعصاب من التلف المستقبلي.",
-                supps: [
-                    { t: "B-Complex", a: "B1, B6, B12 (Active Forms)", d: "100 مجم / 1000 mcg", tm: "بعد الفطار", b: "حماية الغمد المياليني للأعصاب من التلف الناتج عن ارتفاع السكر (Diabetic Neuropathy).", br: "iRemedies iB-Complex | Neurobion Forte" },
-                    { t: "ألفا ليبويك", a: "Alpha Lipoic Acid (ALA)", d: "600 مجم", tm: "على معدة فارغة (قبل الأكل بساعة)", b: "مضاد أكسدة قوي جداً يعيد بناء الأعصاب التالفة ويقلل من آلام وخدر الأطراف.", br: "ThioGamma | iRemedies ALA" },
-                    { t: "كروميوم", a: "Chromium Picolinate", d: "200 - 500 mcg", tm: "قبل الوجبات بـ 20 دقيقة", b: "يزيد من حساسية مستقبلات الأنسولين في الخلايا مما يساعد في ضبط سكر الدم التراكمي.", br: "iRemedies iChromium | Avernus" }
-                ]
-            },
-            {
-                id: "anemia",
-                name: "فقر الدم",
-                warn: "تجنب تناول الشاي أو القهوة أو الكالسيوم مع الحديد بفاصل ساعتين على الأقل.",
-                zatouna: "امتصاص الحديد يزداد مع فيتامين سي، أخبر المريض أن لون البراز سيتغير للأسود وهذا طبيعي.",
-                supps: [
-                    { t: "حديد", a: "Iron Bisglycinate (Gentle)", d: "25 - 50 مجم", tm: "قبل الأكل بساعة (أو مع فيتامين سي)", b: "رفع مخزون الفيريتين والهيموجلوبين في الدم دون التسبب في إمساك أو آلام معدة.", br: "iRemedies iIron | Avernus Gentle Iron" },
-                    { t: "فيتامين سي", a: "Vitamin C (Buffered)", d: "500 - 1000 مجم", tm: "مع حبة الحديد", b: "يحول الحديد من الصيغة غير القابلة للامتصاص إلى صيغة سهلة الامتصاص في الأمعاء.", br: "iRemedies iVitamin C | Avernus" }
-                ]
-            }
-        ];
+        let lang = 'ar', theme = 'light', cat = 'chr';
+        const UI = {
+            ar: { search: "ابحث عن حالة...", act: "المادة الفعالة:", dos: "التركيز (mg):", tim: "التوقيت:", ben: "الفائدة الطبية:", bra: "البراندات المقترحة:", chr: "مزمنة", otc: "OTC", spc: "حالات خاصة", skin: "بشرة", hair: "شعر", tips: "صحة عامة" },
+            en: { search: "Search...", act: "Active:", dos: "Dose:", tim: "Timing:", ben: "Benefit:", bra: "Brands:", chr: "Chronic", otc: "OTC", spc: "Special", skin: "Skin", hair: "Hair", tips: "Health Tips" }
+        };
 
-        function renderMainGrid() {
-            const grid = document.getElementById('mainGrid');
+        const DATA = {
+            chr: [
+                {
+                    id: "htn", name: {ar: "ضغط الدم", en: "Hypertension"},
+                    warn: {ar: "تجنب المسكنات NSAIDs وأدوية البرد التي ترفع الضغط.", en: "Avoid NSAIDs and cold meds with stimulants."},
+                    zat: {ar: "دواء الضغط هو حارس شرايينك، التزم به لتعيش بأمان.", en: "Compliance is the shield for your heart and arteries."},
+                    supps: [
+                        { t: {ar: "أوميجا 3", en: "Omega-3"}, a: {ar: "EPA/DHA", en: "EPA/DHA"}, d: {ar: "1000-2000 mg", en: "1000-2000 mg"}, tm: {ar: "وسط الغداء", en: "With main meal"}, b: {ar: "يحسن مرونة الشرايين ويخفض الدهون الثلاثية.", en: "Improves arterial elasticity and lowers triglycerides."}, br: "iRemedies iUltimate Omega | Avernus Omega-3 | Solgar | Now | Seven Seas" },
+                        { t: {ar: "مغنيسيوم", en: "Magnesium"}, a: {ar: "Magnesium Glycinate", en: "Magnesium Glycinate"}, d: {ar: "400 mg", en: "400 mg"}, tm: {ar: "قبل النوم", en: "At bedtime"}, b: {ar: "باسط طبيعي للأوعية الدموية ومنظم للنبض.", en: "Natural vasodilator and heart rhythm regulator."}, br: "iRemedies iMagnesium | Bio-Magnesium | Jamieson | Avernus" }
+                    ]
+                },
+                {
+                    id: "dm2", name: {ar: "السكري 2", en: "Diabetes T2"},
+                    warn: {ar: "المكملات لا تغني عن دواء السكر، افحص التراكمي بانتظام.", en: "Supplements don't replace medication; check HbA1c regularly."},
+                    zat: {ar: "السكري صديق لمن يحترمه، والمكملات تحمي العين والكلى.", en: "Diabetes is a friend if respected; supplements protect organs."},
+                    supps: [
+                        { t: {ar: "B-Complex", en: "B-Complex"}, a: {ar: "B1, B6, B12", en: "B1, B6, B12"}, d: {ar: "100mg / 1000mcg", en: "100mg / 1000mcg"}, tm: {ar: "بعد الفطار", en: "After breakfast"}, b: {ar: "حماية الأعصاب من التلف السكري ومنع التنميل.", en: "Protects nerves from diabetic damage and tingling."}, br: "iRemedies iB-Complex | Neurobion | Avernus | Solgar" },
+                        { t: {ar: "ألفا ليبويك", en: "ALA"}, a: {ar: "Alpha Lipoic Acid", en: "Alpha Lipoic Acid"}, d: {ar: "600 mg", en: "600 mg"}, tm: {ar: "على معدة فارغة", en: "On empty stomach"}, b: {ar: "مضاد أكسدة خارق لعلاج التهاب الأعصاب.", en: "Potent antioxidant for nerve pain and repair."}, br: "ThioGamma | iRemedies ALA | Now Foods" }
+                    ]
+                }
+                // سيتم إضافة باقي الـ 100 حالة هنا تِباعاً
+            ],
+            otc: [
+                {
+                    id: "acidity", name: {ar: "الحموضة", en: "Acidity"},
+                    warn: {ar: "لا تستخدم مضادات الحموضة لأكثر من أسبوعين بدون طبيب.", en: "Don't use antacids for >2 weeks without advice."},
+                    zat: {ar: "تجنب النوم مباشرة بعد الأكل بـ 3 ساعات.", en: "Avoid lying down for 3 hours after eating."},
+                    supps: [
+                        { t: {ar: "بروبيوتيك", en: "Probiotics"}, a: {ar: "Multi-strain", en: "Multi-strain"}, d: {ar: "10 Billion CFU", en: "10 Billion CFU"}, tm: {ar: "قبل الفطار", en: "Before breakfast"}, b: {ar: "تحسين الهضم وتقليل الغازات المسببة للارتجاع.", en: "Improves digestion and reduces reflux gas."}, br: "iRemedies iProbiotics | Linex | Culturelle" }
+                    ]
+                }
+            ],
+            spc: [], skin: [], hair: [], tips: []
+        };
+
+        function toggleLang() {
+            lang = lang === 'ar' ? 'en' : 'ar';
+            document.body.className = lang; document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('lBtn').innerText = lang === 'ar' ? 'English' : 'العربية';
+            updateUI(); renderCats(); renderGrid(); goBack();
+        }
+
+        function toggleTheme() {
+            theme = theme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            document.getElementById('tBtn').innerText = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+        }
+
+        function updateUI() {
+            document.getElementById('srch').placeholder = UI[lang].search;
+            document.querySelectorAll('.l-act').forEach(e => e.innerText = UI[lang].act);
+            document.querySelectorAll('.l-dos').forEach(e => e.innerText = UI[lang].dos);
+            document.querySelectorAll('.l-tim').forEach(e => e.innerText = UI[lang].tim);
+            document.querySelectorAll('.l-ben').forEach(e => e.innerText = UI[lang].ben);
+            document.querySelectorAll('.l-bra').forEach(e => e.innerText = UI[lang].bra);
+        }
+
+        function renderCats() {
+            const bar = document.getElementById('cats'); bar.innerHTML = '';
+            ['chr', 'otc', 'spc', 'skin', 'hair', 'tips'].forEach(c => {
+                const b = document.createElement('div');
+                b.className = `cat-btn ${cat === c ? 'active' : ''}`;
+                b.innerText = UI[lang][c];
+                b.onclick = () => { cat = c; renderCats(); renderGrid(); };
+                bar.appendChild(b);
+            });
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('grid'), term = document.getElementById('srch').value.toLowerCase();
             grid.innerHTML = '';
-            PHARMA_DATA.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'disease-card';
-                div.innerText = item.name;
-                div.onclick = () => showDashboard(item);
-                grid.appendChild(div);
+            (DATA[cat] || []).filter(i => i.name[lang].toLowerCase().includes(term)).forEach(i => {
+                const c = document.createElement('div'); c.className = 'card';
+                c.innerText = i.name[lang]; c.onclick = () => openDash(i);
+                grid.appendChild(c);
             });
         }
 
-        function showDashboard(item) {
-            document.getElementById('mainGrid').classList.add('hidden');
-            document.getElementById('details-dashboard').style.display = 'block';
-            document.getElementById('activeConditionName').innerText = item.name;
-            document.getElementById('activeWarn').innerText = "⚠️ " + item.warn;
-            document.getElementById('activeZatouna').innerText = "🌟 " + item.zatouna;
-
-            const pillContainer = document.getElementById('pillContainer');
-            pillContainer.innerHTML = '';
-            item.supps.forEach((s, index) => {
-                const pill = document.createElement('div');
-                pill.className = 'pill';
-                pill.innerText = s.t;
-                pill.onclick = () => fillDataPanel(s, pill);
-                pillContainer.appendChild(pill);
+        function openDash(i) {
+            document.getElementById('grid').classList.add('hidden');
+            document.getElementById('cats').classList.add('hidden');
+            document.getElementById('dash').style.display = 'block';
+            document.getElementById('dTitle').innerText = i.name[lang];
+            document.getElementById('dWrn').innerText = "⚠️ " + i.warn[lang];
+            document.getElementById('dZat').innerText = "🌟 " + i.zat[lang];
+            const pBox = document.getElementById('dPills'); pBox.innerHTML = '';
+            i.supps.forEach((s, idx) => {
+                const p = document.createElement('div'); p.className = 'pill';
+                p.innerText = s.t[lang]; p.onclick = () => showInfo(s, p);
+                pBox.appendChild(p);
             });
-            document.getElementById('dataPanel').style.display = 'none';
+            document.getElementById('dPanel').style.display = 'none';
         }
 
-        function fillDataPanel(supp, element) {
-            document.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
-            element.classList.add('selected');
-
-            document.getElementById('dataPanel').style.display = 'block';
-            document.getElementById('cell-active').innerText = supp.a;
-            document.getElementById('cell-dose').innerText = supp.d;
-            document.getElementById('cell-time').innerText = supp.tm;
-            document.getElementById('cell-benefit').innerText = supp.b;
-            document.getElementById('cell-brands').innerText = supp.br;
+        function showInfo(s, el) {
+            document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('dPanel').style.display = 'block';
+            document.getElementById('v-act').innerText = s.a[lang];
+            document.getElementById('v-dos').innerText = s.d[lang];
+            document.getElementById('v-tim').innerText = s.tm[lang];
+            document.getElementById('v-ben').innerText = s.b[lang];
+            document.getElementById('v-bra').innerText = s.br;
         }
 
         function goBack() {
-            document.getElementById('mainGrid').classList.remove('hidden');
-            document.getElementById('details-dashboard').style.display = 'none';
+            document.getElementById('grid').classList.remove('hidden');
+            document.getElementById('cats').classList.remove('hidden');
+            document.getElementById('dash').style.display = 'none';
         }
 
-        // تشغيل الشبكة عند التحميل
-        renderMainGrid();
-
-        // تفعيل البحث
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const term = e.target.value.toLowerCase();
-            const filtered = PHARMA_DATA.filter(item => item.name.toLowerCase().includes(term));
-            const grid = document.getElementById('mainGrid');
-            grid.innerHTML = '';
-            filtered.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'disease-card';
-                div.innerText = item.name;
-                div.onclick = () => showDashboard(item);
-                grid.appendChild(div);
-            });
-        });
+        window.onload = () => { renderCats(); renderGrid(); updateUI(); };
     </script>
 </body>
 </html>
