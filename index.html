@@ -3,170 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PharmaCross Pro 2026</title>
+    <title>PharmaCross Pro | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
+            --primary: #1a5d43;
+            --accent: #0056b3;
             --bg: #ffffff;
+            --light-bg: #f2f2f2;
             --text: #000000;
-            --primary: #1a5d43; /* أخضر صيدلاني داكن */
-            --accent: #0056b3; /* أزرق طبي */
-            --light-gray: #f8f9fa;
-            --border: #dddddd;
+            --border: #cccccc;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-bottom: 50px;
+        body { background: var(--bg); color: var(--text); padding: 10px; }
+
+        /* الهيدر والبحث في سطر واحد لتوفير المساحة */
+        .top-bar {
+            display: flex; align-items: center; gap: 10px;
+            padding-bottom: 10px; border-bottom: 2px solid var(--primary); margin-bottom: 10px;
         }
-
-        /* تنسيق العنوان الرئيسي - واضح جداً في الشمس */
-        .header {
-            background: var(--primary);
-            color: white;
-            padding: 25px 15px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .header h1 { font-size: 28px; font-weight: 800; }
-
-        .container { padding: 15px; max-width: 800px; margin: auto; }
-
-        /* البحث والقائمة */
         .search-box {
-            width: 100%; padding: 15px; margin: 20px 0;
-            border: 3px solid var(--primary); border-radius: 12px;
-            font-size: 18px; font-weight: bold; background: var(--light-gray);
+            flex: 1; padding: 10px; border: 2px solid var(--primary);
+            border-radius: 8px; font-weight: bold; font-size: 16px;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+        /* شبكة الحالات - صغيرة ومكثفة */
+        .condition-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 8px; margin-bottom: 15px;
+        }
+        .cond-btn {
+            background: var(--light-bg); border: 1.5px solid var(--border);
+            padding: 8px 4px; border-radius: 8px; text-align: center;
+            font-size: 13px; font-weight: 700; cursor: pointer;
+        }
+        .cond-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .item-btn {
-            background: white; border: 2px solid var(--border); padding: 20px 10px;
-            border-radius: 12px; text-align: center; font-weight: 800;
-            font-size: 16px; cursor: pointer; transition: 0.2s;
+        /* منطقة تفاصيل الحالة - Dashboard */
+        #details-area {
+            display: none; border: 2px solid var(--primary); border-radius: 12px;
+            padding: 12px; background: #fff;
         }
 
-        .item-btn:active { transform: scale(0.95); background: #eee; }
+        .cond-name { font-size: 20px; font-weight: 900; color: var(--primary); margin-bottom: 10px; }
 
-        /* نافذة الحالة */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; z-index: 1000; overflow-y: auto; padding: 15px;
+        /* رص المكملات بجانب بعضها */
+        .supp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+        .supp-tag {
+            background: #fff; border: 2px solid var(--accent); color: var(--accent);
+            padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: 800; cursor: pointer;
+        }
+        .supp-tag.selected { background: var(--accent); color: white; }
+
+        /* لوحة المعلومات - تظهر بمجرد الضغط على المكمل */
+        .info-panel {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            background: #fafafa; border: 1px solid #eee; padding: 10px; border-radius: 8px;
+        }
+        .info-item { font-size: 14px; border-bottom: 1px solid #ddd; padding: 4px 0; }
+        .info-item b { color: var(--primary); display: block; font-size: 12px; }
+
+        .full-width { grid-column: span 2; }
+
+        .warning-strip {
+            background: #ffeeee; border-right: 4px solid #cc0000;
+            padding: 8px; margin-top: 10px; font-size: 13px; font-weight: bold;
+        }
+        .zatouna-strip {
+            background: #eef7ff; border-right: 4px solid var(--accent);
+            padding: 8px; margin-top: 5px; font-size: 13px; font-style: italic;
         }
 
-        .back-btn {
-            background: var(--text); color: white; border: none; padding: 10px 20px;
-            border-radius: 8px; font-weight: bold; margin-bottom: 15px; cursor: pointer;
-        }
+        .brand-list { color: var(--accent); font-weight: 900; font-size: 14px; margin-top: 5px; }
 
-        .condition-title { color: var(--primary); font-size: 24px; font-weight: 800; margin-bottom: 20px; border-bottom: 4px solid var(--primary); display: inline-block; }
-
-        /* قائمة المكملات كأزرار بجانب بعضها */
-        .supp-nav {
-            display: flex; gap: 8px; overflow-x: auto; padding: 10px 0;
-            margin-bottom: 20px; border-bottom: 1px solid #eee;
-        }
-
-        .supp-pill {
-            background: var(--light-gray); border: 2px solid var(--primary);
-            padding: 8px 15px; border-radius: 20px; white-space: nowrap;
-            font-weight: bold; font-size: 14px; cursor: pointer; color: var(--primary);
-        }
-
-        .supp-pill.active { background: var(--primary); color: white; }
-
-        /* صندوق تفاصيل المكمل المفتوح */
-        .detail-card {
-            background: #fff; border: 2px solid var(--border);
-            padding: 20px; border-radius: 15px; margin-bottom: 25px;
-            display: none; animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .detail-card h3 { color: var(--accent); margin-bottom: 10px; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .detail-row { margin-bottom: 8px; font-size: 16px; }
-        .detail-row b { color: var(--primary); }
-
-        .warning-zone { background: #fff0f0; border: 2px solid #ff0000; padding: 15px; border-radius: 12px; margin-top: 20px; }
-        .zatouna-zone { background: #f0f7ff; border: 2px solid var(--accent); padding: 15px; border-radius: 12px; margin-top: 15px; font-style: italic; }
+        /* إخفاء القائمة عند فتح التفاصيل (اختياري) */
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>PharmaCross Pro</h1>
-        <p>مرجع الصيدلي الذكي (إصدار الإمارات 2026)</p>
+    <div class="top-bar">
+        <div style="font-weight: 900; color: var(--primary); font-size: 18px;">P-Cross</div>
+        <input type="text" id="search" class="search-box" placeholder="ابحث...">
     </div>
 
-    <div class="container">
-        <input type="text" id="search" class="search-box" placeholder="ابحث عن حالة مرضية...">
-        
-        <div class="grid" id="mainGrid">
-            </div>
-    </div>
+    <div class="condition-grid" id="mainGrid"></div>
 
-    <div id="modal" class="modal">
-        <div class="container">
-            <button class="back-btn" onclick="closeModal()">⬅️ القائمة الرئيسية</button>
-            <div id="modalContent"></div>
+    <div id="details-area">
+        <div style="display:flex; justify-content: space-between; align-items: center;">
+            <div class="cond-name" id="display-name">الحالة</div>
+            <button onclick="backToList()" style="padding: 5px 10px; border-radius: 5px; background: #000; color:#fff; border:none; font-size:12px">إغلاق ✖</button>
         </div>
+
+        <div class="supp-tags" id="suppList"></div>
+
+        <div id="infoBox" style="display: none;">
+            <div class="info-panel">
+                <div class="info-item"><b>المادة الفعالة:</b> <span id="val-active"></span></div>
+                <div class="info-item"><b>التركيز:</b> <span id="val-dose"></span></div>
+                <div class="info-item"><b>التوقيت:</b> <span id="val-time"></span></div>
+                <div class="info-item"><b>الفائدة:</b> <span id="val-benefit"></span></div>
+                <div class="info-item full-width"><b>خيارات البراندات:</b> <div class="brand-list" id="val-brands"></div></div>
+            </div>
+        </div>
+
+        <div class="warning-strip" id="val-warn"></div>
+        <div class="zatouna-strip" id="val-zatouna"></div>
     </div>
 
     <script>
-        // قاعدة البيانات المخزنة محلياً (مثال حالة الضغط بكل المكملات)
         const DATA = [
             {
                 id: "htn",
-                name: "ضغط الدم المرتفع",
-                warnings: "تجنب المسكنات (NSAIDs) وفوارات الصوديوم وأدوية البرد التي تحتوي على سودوفيدرين.",
-                zatouna: "قل للمريض: دواء الضغط هو حمايتك من (القاتل الصامت)، التزامك به يعني حياة آمنة لشرايينك وقلبك.",
-                supplements: [
-                    {
-                        title: "أوميجا 3",
-                        active: "EPA / DHA",
-                        dose: "1000 - 2000 مجم يومياً",
-                        benefit: "يحسن مرونة الشرايين ويخفض الدهون الثلاثية.",
-                        timing: "وسط أكبر وجبة (غداء عالي الدهون).",
-                        brands: "iRemedies iUltimate Omega | Avernus Omega-3 | Seven Seas | Solgar"
-                    },
-                    {
-                        title: "المغنيسيوم",
-                        active: "Magnesium Glycinate",
-                        dose: "200 - 400 مجم",
-                        benefit: "باسط طبيعي للأوعية الدموية ومنظم لضربات القلب.",
-                        timing: "قبل النوم مباشرة.",
-                        brands: "iRemedies iMagnesium Glycinate | Bio-Magnesium"
-                    },
-                    {
-                        title: "إنزيم كيو 10",
-                        active: "CoQ10",
-                        dose: "100 - 200 مجم",
-                        benefit: "ضروري لمرضى الضغط الذين يستخدمون أدوية الكوليسترول.",
-                        timing: "بعد وجبة دسمة.",
-                        brands: "iRemedies iCoQ10 | Avernus CoQ10"
-                    },
-                    {
-                        title: "مستخلص الثوم",
-                        active: "Garlic Extract (Allicin)",
-                        dose: "600 - 1200 مجم",
-                        benefit: "يقلل تصلب الشرايين ويحسن تدفق الدم.",
-                        timing: "مرة يومياً.",
-                        brands: "iRemedies iGarlic (بدون رائحة)"
-                    },
-                    {
-                        title: "فيتامين د3",
-                        active: "Vitamin D3",
-                        dose: "1000 - 5000 IU (حسب الفحص)",
-                        benefit: "يدعم صحة القلب والشرايين.",
-                        timing: "بعد وجبة غنية بالدهون.",
-                        brands: "Avernus Vitamin D3 | iRemedies D3"
-                    }
+                name: "ضغط الدم",
+                warn: "تجنب المسكنات (NSAIDs) وفوارات الصوديوم وأدوية البرد.",
+                zatouna: "دواء الضغط هو حمايتك من (القاتل الصامت)، لا تتوقف عنه أبداً.",
+                supps: [
+                    { t: "أوميجا 3", a: "EPA / DHA", d: "1-2 جم", b: "مرونة الشرايين", tm: "وسط الغداء", br: "iRemedies iUltimate Omega | Avernus Omega-3 | Seven Seas" },
+                    { t: "مغنيسيوم", a: "Glycinate", d: "400 مجم", b: "باسط للأوعية", tm: "قبل النوم", br: "iRemedies iMagnesium | Bio-Magnesium" },
+                    { t: "كيو 10", a: "CoQ10", d: "200 مجم", b: "طاقة عضلة القلب", tm: "بعد الأكل", br: "iRemedies iCoQ10 | Avernus CoQ10" },
+                    { t: "ثوم", a: "Allicin", d: "1200 مجم", b: "سيولة وتدفق الدم", tm: "مرة يومياً", br: "iRemedies iGarlic" }
+                ]
+            },
+            {
+                id: "dm2",
+                name: "السكري 2",
+                warn: "يجب فحص السكر بانتظام عند إضافة مكملات قوية.",
+                zatouna: "اهتمامك بصحة أعصابك وقدمك لا يقل أهمية عن تنظيم السكر.",
+                supps: [
+                    { t: "B-Complex", a: "B1, B6, B12", d: "حبة يومياً", b: "حماية الأعصاب", tm: "بعد الفطار", br: "iRemedies iB-Complex | Neurobion" },
+                    { t: "كروميوم", a: "Picolinate", d: "200 mcg", b: "تنظيم الأنسولين", tm: "قبل الأكل", br: "iRemedies iChromium | Avernus" },
+                    { t: "ألفا ليبويك", a: "ALA", d: "600 مجم", b: "التهاب الأعصاب", tm: "على معدة فارغة", br: "ThioGamma | iRemedies" }
                 ]
             }
         ];
@@ -175,59 +144,48 @@
             const grid = document.getElementById('mainGrid');
             DATA.forEach(item => {
                 const btn = document.createElement('div');
-                btn.className = 'item-btn';
+                btn.className = 'cond-btn';
                 btn.innerText = item.name;
-                btn.onclick = () => openCondition(item);
+                btn.onclick = () => openDetails(item);
                 grid.appendChild(btn);
             });
         }
 
-        function openCondition(item) {
-            const modal = document.getElementById('modal');
-            const content = document.getElementById('modalContent');
+        function openDetails(item) {
+            document.getElementById('mainGrid').classList.add('hidden');
+            document.getElementById('details-area').style.display = 'block';
+            document.getElementById('display-name').innerText = item.name;
+            document.getElementById('val-warn').innerText = "⚠️ " + item.warn;
+            document.getElementById('val-zatouna').innerText = "🌟 " + item.zatouna;
+
+            const suppList = document.getElementById('suppList');
+            suppList.innerHTML = '';
+            item.supps.forEach((s, idx) => {
+                const tag = document.createElement('div');
+                tag.className = 'supp-tag';
+                tag.innerText = s.t;
+                tag.onclick = () => showSuppInfo(s, tag);
+                suppList.appendChild(tag);
+            });
+            document.getElementById('infoBox').style.display = 'none';
+        }
+
+        function showSuppInfo(s, element) {
+            document.querySelectorAll('.supp-tag').forEach(t => t.classList.remove('selected'));
+            element.classList.add('selected');
             
-            let suppPills = item.supplements.map((s, idx) => 
-                `<div class="supp-pill" onclick="showSuppDetail(${idx}, '${item.id}')">${s.title}</div>`
-            ).join('');
-
-            content.innerHTML = `
-                <div class="condition-title">${item.name}</div>
-                <p style="font-weight:bold; margin-bottom:10px">اختر المكمل لعرض التفاصيل:</p>
-                <div class="supp-nav">${suppPills}</div>
-                <div id="suppDetailArea"></div>
-
-                <div class="warning-zone">
-                    <b>⚠️ خط أحمر (تحذيرات):</b><br>${item.warnings}
-                </div>
-                <div class="zatouna-zone">
-                    <b>🌟 نصيحة الصيدلي (الزتونة):</b><br>${item.zatouna}
-                </div>
-            `;
-            modal.style.display = 'block';
+            document.getElementById('infoBox').style.display = 'block';
+            document.getElementById('val-active').innerText = s.a;
+            document.getElementById('val-dose').innerText = s.d;
+            document.getElementById('val-time').innerText = s.tm;
+            document.getElementById('val-benefit').innerText = s.b;
+            document.getElementById('val-brands').innerText = s.br;
         }
 
-        function showSuppDetail(idx, conditionId) {
-            const item = DATA.find(c => c.id === conditionId);
-            const supp = item.supplements[idx];
-            const area = document.getElementById('suppDetailArea');
-
-            // تحديث الأزرار (Active state)
-            const pills = document.querySelectorAll('.supp-pill');
-            pills.forEach((p, i) => p.className = (i === idx) ? 'supp-pill active' : 'supp-pill');
-
-            area.innerHTML = `
-                <div class="detail-card" style="display:block">
-                    <h3>${supp.title}</h3>
-                    <div class="detail-row"><b>المادة الفعالة:</b> ${supp.active}</div>
-                    <div class="detail-row"><b>التركيز/الجرعة:</b> ${supp.dose}</div>
-                    <div class="detail-row"><b>الفائدة الطبية:</b> ${supp.benefit}</div>
-                    <div class="detail-row"><b>التوقيت الأمثل:</b> ${supp.timing}</div>
-                    <div class="detail-row"><b>أمثلة الخيارات:</b><br>${supp.brands}</div>
-                </div>
-            `;
+        function backToList() {
+            document.getElementById('mainGrid').classList.remove('hidden');
+            document.getElementById('details-area').style.display = 'none';
         }
-
-        function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
         init();
     </script>
