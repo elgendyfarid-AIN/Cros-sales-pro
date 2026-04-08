@@ -48,7 +48,7 @@ h1 span{color:#00c896}
 .line.head{padding:9px 12px;margin:6px 0 3px;background:rgba(0,200,150,.07);border-radius:8px;border-right:3px solid #00c896;font-weight:700;color:#00c896;font-size:14px}
 body.en .line.head{border-right:none;border-left:3px solid #00c896}
 .loader{max-width:860px;margin:0 auto;text-align:center;padding:28px;color:#00c896;font-size:14px}
-.error{max-width:860px;margin:0 auto;text-align:center;padding:18px;color:#ff8080;font-size:13px;background:rgba(255,80,80,0.05);border-radius:12px;line-height:1.7}
+.error{max-width:860px;margin:0 auto;text-align:center;padding:18px;color:#ff8080;font-size:13px;background:rgba(255,80,80,0.05);border-radius:12px;line-height:1.8}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
@@ -64,17 +64,17 @@ body.en .line.head{border-right:none;border-left:3px solid #00c896}
 <div class="header">
   <div class="badge" id="badge">🔬 أداة الصيدلاني الذكي</div>
   <h1>Cross-Selling<br><span id="title2">المصاحب الذكي</span></h1>
-  <p class="subtitle" id="subtitle">اضغط على أي حالة مباشرةً للحصول على التوصيات</p>
+  <p class="subtitle" id="subtitle">اضغط على أي حالة للحصول على التوصيات فوراً</p>
 </div>
 
 <div class="api-section">
   <div class="api-row">
     <span style="font-size:16px">🔑</span>
-    <span class="api-label">Gemini API Key:</span>
-    <input class="api-input" id="apiKey" type="password" placeholder="AIzaSy..." oninput="onKeyInput()"/>
+    <span class="api-label">Groq API Key:</span>
+    <input class="api-input" id="apiKey" type="password" placeholder="gsk_..." oninput="onKeyInput()"/>
     <span id="keyStatus" style="font-size:16px">⚪</span>
   </div>
-  <div class="api-hint" id="apiHint">🔒 محفوظ على جهازك فقط — لا يُرسل لأحد</div>
+  <div class="api-hint" id="apiHint">🔒 محفوظ على جهازك فقط — من console.groq.com</div>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -94,14 +94,14 @@ let lang='ar', activeCat='', activePill='';
 const T={
   badge:{ar:'🔬 أداة الصيدلاني الذكي',en:'🔬 Smart Pharmacist Tool'},
   title2:{ar:'المصاحب الذكي',en:'Smart Assistant'},
-  subtitle:{ar:'اضغط على أي حالة مباشرةً للحصول على التوصيات',en:'Tap any condition to get instant recommendations'},
-  apiHint:{ar:'🔒 محفوظ على جهازك فقط — لا يُرسل لأحد',en:'🔒 Saved on your device only — never sent anywhere'},
+  subtitle:{ar:'اضغط على أي حالة للحصول على التوصيات فوراً',en:'Tap any condition to get instant recommendations'},
+  apiHint:{ar:'🔒 محفوظ على جهازك فقط — من console.groq.com',en:'🔒 Saved on device only — get it from console.groq.com'},
   customPH:{ar:'أو اكتب حالة مخصصة...',en:'Or type a custom case...'},
   goBtn:{ar:'⚡ اعمل Cross-Selling',en:'⚡ Cross-Sell'},
   loader:{ar:'⏳ جاري التحليل...',en:'⏳ Analyzing...'},
   resultSub:{ar:'تحليل Cross-Selling',en:'Cross-Selling Analysis'},
-  noKey:{ar:'⚠️ أدخل الـ API Key الأول',en:'⚠️ Enter your API Key first'},
-  errSuffix:{ar:'تأكد من الـ API Key أو اعمل Key جديد من aistudio.google.com',en:'Check your API Key or create a new one at aistudio.google.com'},
+  noKey:{ar:'⚠️ أدخل الـ Groq API Key الأول',en:'⚠️ Enter your Groq API Key first'},
+  errSuffix:{ar:'اعمل Key جديد من console.groq.com',en:'Create a new key at console.groq.com'},
 };
 
 const CATS={
@@ -132,13 +132,13 @@ function getPrompt(q){
 **5. 💡 فرصة cross-selling إضافية ذكية**
 
 كن دقيقاً طبياً وموجزاً.`;
-  return `You are an expert pharmacist specialized in pharmacy counseling and professional cross-selling. Provide a comprehensive cross-selling report in English for this case: ${q}
+  return `You are an expert pharmacist specialized in pharmacy counseling and professional cross-selling. Provide a comprehensive cross-selling report in English for: ${q}
 
 Follow this exact order:
-**1. 🎯 Primary Cross-Selling Products** (3-5 products with a clear medical reason for each)
+**1. 🎯 Primary Cross-Selling Products** (3-5 products with clear medical reason)
 **2. ⚠️ Essential Patient Counseling Points** (top 3 points)
 **3. 💊 Important Interactions & Warnings**
-**4. 📋 Professional Sales Phrase** (one convincing sentence for the patient)
+**4. 📋 Professional Sales Phrase** (one convincing sentence)
 **5. 💡 Smart Additional Cross-Selling Opportunity**
 
 Be medically accurate and concise.`;
@@ -182,21 +182,24 @@ function renderGrid(){
 
 function selectCat(cat){activeCat=cat;activePill='';renderTabs();renderGrid();}
 function selectPill(val){activePill=val;renderGrid();}
+
 function onKeyInput(){
   const k=document.getElementById('apiKey').value.trim();
-  if(k.startsWith('AIza')&&k.length>20){
-    localStorage.setItem('gemini_pharma_key',k);
+  if(k.startsWith('gsk_')&&k.length>20){
+    localStorage.setItem('groq_pharma_key',k);
     document.getElementById('keyStatus').textContent='🟢';
   } else {
     document.getElementById('keyStatus').textContent='🔴';
   }
   updateCustomBtn();
 }
+
 function updateCustomBtn(){
   const q=document.getElementById('custom').value.trim();
   const k=document.getElementById('apiKey').value.trim();
-  document.getElementById('customGoBtn').disabled=!q||!(k.startsWith('AIza')&&k.length>20);
+  document.getElementById('customGoBtn').disabled=!q||!(k.startsWith('gsk_')&&k.length>20);
 }
+
 function customGenerate(){
   const q=document.getElementById('custom').value.trim();
   if(q) generateFor(q);
@@ -204,7 +207,7 @@ function customGenerate(){
 
 async function generateFor(query){
   const key=document.getElementById('apiKey').value.trim();
-  if(!key.startsWith('AIza')||key.length<20){
+  if(!key.startsWith('gsk_')||key.length<20){
     document.getElementById('output').innerHTML=`<div class="error">${T.noKey[lang]}</div>`;
     return;
   }
@@ -212,27 +215,23 @@ async function generateFor(query){
   document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
 
   try{
-    const res=await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${key}`,
-      {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          contents:[{
-            role:'user',
-            parts:[{text: getPrompt(query)}]
-          }],
-          generationConfig:{
-            temperature:0.7,
-            maxOutputTokens:1024
-          }
-        })
-      }
-    );
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer '+key
+      },
+      body:JSON.stringify({
+        model:'llama-3.3-70b-versatile',
+        messages:[{role:'user',content:getPrompt(query)}],
+        temperature:0.7,
+        max_tokens:1024
+      })
+    });
     const data=await res.json();
     if(data.error) throw new Error(data.error.message);
-    const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
-    if(!text) throw new Error('No response received');
+    const text=data.choices?.[0]?.message?.content||'';
+    if(!text) throw new Error('No response');
     renderResult(query,text);
   }catch(e){
     document.getElementById('output').innerHTML=
@@ -257,8 +256,11 @@ function renderResult(label,text){
 }
 
 window.onload=()=>{
-  const savedKey=localStorage.getItem('gemini_pharma_key');
-  if(savedKey){document.getElementById('apiKey').value=savedKey;document.getElementById('keyStatus').textContent='🟢';}
+  const savedKey=localStorage.getItem('groq_pharma_key');
+  if(savedKey){
+    document.getElementById('apiKey').value=savedKey;
+    document.getElementById('keyStatus').textContent='🟢';
+  }
   const savedLang=localStorage.getItem('pharma_lang')||'ar';
   setLang(savedLang);
 };
