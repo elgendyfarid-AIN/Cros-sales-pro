@@ -1,264 +1,1071 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>P-Cross Pro 2026 | المرجع الصيدلاني الشامل</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Light Mode - وضع الشمس */
-            --bg: #ffffff; --text: #000000; --primary: #1a5d43; --accent: #0056b3;
-            --card: #f2f2f2; --border: #222222; --warn: #ffebeb; --zatouna: #eef7ff;
-        }
-        [data-theme="dark"] {
-            /* Dark Mode - الوضع الليلي */
-            --bg: #0b1120; --text: #f1f5f9; --primary: #10b981; --accent: #38bdf8;
-            --card: #1e293b; --border: #475569; --warn: #451a1a; --zatouna: #1e293b;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; transition: background 0.2s; }
-        body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; padding: 10px; min-height: 100vh; }
-        body.en { font-family: 'Roboto', sans-serif; direction: ltr; }
-        
-        /* Navigation */
-        .top-nav { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 4px solid var(--primary); padding-bottom: 12px; margin-bottom: 15px; align-items: center; }
-        .controls { display: flex; gap: 6px; }
-        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 15px; border-radius: 8px; font-weight: 900; cursor: pointer; font-size: 13px; }
-        .search { flex: 1; min-width: 160px; padding: 12px; border: 3px solid var(--primary); border-radius: 10px; font-weight: 900; font-size: 16px; background: var(--bg); color: var(--text); }
-        
-        /* Category Bar */
-        .cat-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 10px; scrollbar-width: none; }
-        .cat-btn { background: var(--card); border: 2.5px solid var(--border); padding: 10px 22px; border-radius: 25px; white-space: nowrap; font-size: 14px; font-weight: 900; cursor: pointer; color: var(--text); }
-        .cat-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); transform: scale(1.05); }
-
-        /* Grid System */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
-        .card { background: var(--card); border: 2.2px solid var(--border); padding: 15px 5px; border-radius: 12px; text-align: center; font-size: 14px; font-weight: 900; cursor: pointer; min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
-        .card:active { transform: scale(0.95); }
-
-        /* Dashboard */
-        #dash { display: none; border: 4px solid var(--primary); border-radius: 20px; padding: 18px; background: var(--bg); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
-        .dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .dash-title { font-size: 24px; font-weight: 900; color: var(--primary); border-inline-start: 8px solid var(--primary); padding-inline-start: 12px; }
-        
-        .supp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 12px; background: var(--card); border-radius: 12px; }
-        .pill { background: var(--bg); border: 2.5px solid var(--accent); color: var(--accent); padding: 8px 18px; border-radius: 25px; font-size: 14px; font-weight: 900; cursor: pointer; }
-        .pill.active { background: var(--accent); color: #fff; }
-
-        /* Info Panel */
-        .info-box { background: var(--card); border: 1.5px solid var(--border); padding: 18px; border-radius: 15px; display: none; margin-top: 10px; }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .info-cell { font-size: 15px; border-bottom: 1.5px solid var(--border); padding-bottom: 8px; }
-        .info-cell b { color: var(--primary); display: block; font-size: 12px; font-weight: 900; margin-bottom: 4px; }
-        .full { grid-column: span 2; }
-        .brands { color: var(--accent); font-weight: 900; background: rgba(0,102,204,0.1); padding: 12px; border-radius: 8px; border-inline-start: 7px solid var(--accent); line-height: 1.6; font-size: 15px; }
-
-        .strip { padding: 14px; margin-top: 15px; border-radius: 12px; font-size: 15px; font-weight: 900; border-inline-start: 9px solid; line-height: 1.5; }
-        .warn { background: var(--warn); border-color: #cc0000; color: #000; }
-        [data-theme="dark"] .warn { color: #f1f5f9; }
-        .zat { background: var(--zatouna); border-color: var(--accent); font-style: italic; color: #000; }
-        [data-theme="dark"] .zat { color: #f1f5f9; }
-        
-        .hidden { display: none !important; }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Pharma Atlas Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+--bg:#f0f6ff;--bg2:#fff;--bg3:#e8f0fb;--bg4:#d0ddf5;
+--tx:#0d1b3e;--tx2:#2d4070;--tx3:#6b7fa8;
+--gr:#0a6e50;--grl:#d4f5ea;--grb:#7dd9b8;
+--bl:#1a4db8;--bll:#dde8ff;--blb:#93b4f0;
+--or:#b84a00;--orl:#fff3e0;--orb:#ffb74d;
+--pu:#6a1fcf;--pul:#f0e8ff;--pub:#c9a8f5;
+--tl:#006e82;--tll:#e0f7ff;--tlb:#7cd8f0;
+--rd:#c0281a;--sh:0 2px 12px rgba(10,30,80,.09);--r:14px}
+.dk{
+--bg:#0a0f1e;--bg2:#111827;--bg3:#1a2035;--bg4:#252f48;
+--tx:#e8f0ff;--tx2:#a8bcdc;--tx3:#6a7a9a;
+--gr:#00c896;--grl:rgba(0,200,150,.1);--grb:rgba(0,200,150,.35);
+--bl:#58a6ff;--bll:rgba(88,166,255,.1);--blb:rgba(88,166,255,.35);
+--or:#ffb347;--orl:rgba(255,179,71,.1);--orb:rgba(255,179,71,.35);
+--pu:#c084fc;--pul:rgba(192,132,252,.1);--pub:rgba(192,132,252,.35);
+--tl:#38d2ef;--tll:rgba(56,210,239,.1);--tlb:rgba(56,210,239,.35);
+--rd:#ff6b6b;--sh:0 2px 12px rgba(0,0,0,.3)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--tx);font-family:'Cairo',sans-serif;min-height:100vh;transition:background .25s,color .25s}
+body.ar{direction:rtl}body.en{direction:ltr}
+/* TOPBAR */
+.tb{background:var(--bg2);border-bottom:2px solid var(--grb);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:var(--sh)}
+.tbi{width:34px;height:34px;background:linear-gradient(135deg,var(--gr),var(--tl));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.tbn{font-size:14px;font-weight:900;color:var(--tx)}
+.tbs{font-size:10px;color:var(--tx3);font-weight:600}
+.tbr{display:flex;gap:7px;align-items:center}
+.lt{display:flex;border:1.5px solid var(--bg4);border-radius:9px;overflow:hidden}
+.lb{padding:5px 12px;font-size:11px;font-weight:700;border:none;background:transparent;color:var(--tx3);cursor:pointer;font-family:inherit}
+.lb.ac{background:var(--gr);color:#fff}
+.ib{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--bg4);background:var(--bg3);color:var(--tx2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;border:1.5px solid var(--bg4)}
+/* SEARCH */
+.sw{padding:12px 14px 0;max-width:900px;margin:0 auto}
+.sb{display:flex;align-items:center;gap:8px;background:var(--bg2);border:2px solid var(--bg4);border-radius:var(--r);padding:9px 13px;box-shadow:var(--sh);transition:border .2s}
+.sb:focus-within{border-color:var(--gr)}
+.sb input{flex:1;border:none;background:transparent;color:var(--tx);font-size:13px;font-family:inherit;outline:none}
+.sb input::placeholder{color:var(--tx3)}
+.sr{max-width:900px;margin:6px auto 0;background:var(--bg2);border:1.5px solid var(--bg4);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:none;position:relative;z-index:100}
+.sr.on{display:block}
+.si{padding:9px 14px;cursor:pointer;border-bottom:1px solid var(--bg3);font-size:13px;color:var(--tx2);display:flex;justify-content:space-between}
+.si:hover{background:var(--grl)}
+.scat{font-size:10px;color:var(--tx3);background:var(--bg3);padding:2px 6px;border-radius:5px}
+/* SECTION TABS */
+.stw{padding:12px 14px 0;max-width:900px;margin:0 auto;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+.stw::-webkit-scrollbar{display:none}
+.st{padding:7px 14px;border-radius:18px;border:1.5px solid var(--bg4);background:var(--bg2);color:var(--tx2);font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0;transition:all .2s}
+.st.ac{background:var(--gr);border-color:var(--gr);color:#fff}
+/* CONDITIONS GRID */
+.cw{padding:12px 14px;max-width:900px;margin:0 auto}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px}
+.cc{background:var(--bg2);border:1.5px solid var(--bg4);border-radius:var(--r);padding:12px 10px;cursor:pointer;text-align:center;box-shadow:var(--sh);transition:all .2s}
+.cc:hover,.cc.ac{border-color:var(--gr);background:var(--grl);transform:translateY(-1px)}
+.ci{font-size:22px;margin-bottom:5px}
+.cn{font-size:12px;font-weight:700;color:var(--tx);line-height:1.3}
+/* DETAIL */
+.dw{display:none;padding:0 14px 40px;max-width:900px;margin:0 auto;animation:su .3s ease}
+.dw.on{display:block}
+@keyframes su{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.bk{display:flex;align-items:center;gap:6px;color:var(--gr);font-size:13px;font-weight:700;cursor:pointer;padding:10px 0}
+.dh{background:var(--bg2);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh);border-right:4px solid var(--gr)}
+body.en .dh{border-right:none;border-left:4px solid var(--gr)}
+.dt{font-size:19px;font-weight:900}
+.ds{font-size:11px;color:var(--tx3);margin-top:3px}
+/* INFO CARDS */
+.ic{background:var(--bg2);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh);border:1.5px solid var(--bg4)}
+.ich{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1.5px solid var(--bg3)}
+.ichi{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.icht{font-size:13px;font-weight:800}
+.ic.gr{border-color:var(--grb)}.ic.gr .ichi{background:var(--grl);color:var(--gr)}.ic.gr .icht{color:var(--gr)}
+.ic.bl{border-color:var(--blb)}.ic.bl .ichi{background:var(--bll);color:var(--bl)}.ic.bl .icht{color:var(--bl)}
+.ic.or{border-color:var(--orb)}.ic.or .ichi{background:var(--orl);color:var(--or)}.ic.or .icht{color:var(--or)}
+.ic.tl{border-color:var(--tlb)}.ic.tl .ichi{background:var(--tll);color:var(--tl)}.ic.tl .icht{color:var(--tl)}
+.ic.pu{border-color:var(--pub)}.ic.pu .ichi{background:var(--pul);color:var(--pu)}.ic.pu .icht{color:var(--pu)}
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:6px 12px;background:var(--grl);border:1.5px solid var(--grb);border-radius:18px;font-size:12px;font-weight:700;color:var(--gr);cursor:pointer;font-family:inherit;transition:all .2s}
+.chip:hover{background:var(--gr);color:#fff;border-color:var(--gr)}
+.chip.ac{background:var(--gr);color:#fff;border-color:var(--gr)}
+/* SUPPLEMENT PANEL */
+.sdp{background:var(--grl);border:1.5px solid var(--grb);border-radius:12px;padding:13px;margin-top:8px;animation:fd .2s ease}
+@keyframes fd{from{opacity:0;transform:scaleY(.85)}to{opacity:1;transform:scaleY(1)}}
+.sdn{font-size:14px;font-weight:900;color:var(--gr);margin-bottom:8px}
+.sdg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.sdgi{background:var(--bg2);border-radius:8px;padding:7px 10px}
+.sdgl{font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:2px}
+.sdgv{font-size:12px;font-weight:700;color:var(--tx)}
+.sdf{font-size:12px;color:var(--tx2);line-height:1.75;background:var(--bg2);border-radius:8px;padding:8px 10px}
+.sdbr{font-size:11px;color:var(--bl);font-weight:700;margin-top:5px;line-height:1.6}
+/* TIPS & WARNS */
+.li{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--bg3);font-size:13px;color:var(--tx2);line-height:1.6}
+.li:last-child{border:none}
+.lid{width:7px;height:7px;border-radius:50%;background:var(--bl);flex-shrink:0;margin-top:5px}
+.wi{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--orb);font-size:13px;color:var(--tx2);line-height:1.6}
+.wi:last-child{border:none}
+.wic{font-size:14px;flex-shrink:0}
+.wis{color:var(--rd);font-weight:700}
+/* PHRASE & SMART */
+.ph{background:var(--tll);border-radius:10px;padding:12px;border-right:3px solid var(--tl);font-size:13px;color:var(--tx);line-height:1.7;font-style:italic;font-weight:600}
+body.en .ph{border-right:none;border-left:3px solid var(--tl)}
+.sm{background:var(--pul);border-radius:10px;padding:12px;border-right:3px solid var(--pu);font-size:13px;color:var(--tx);line-height:1.7}
+body.en .sm{border-right:none;border-left:3px solid var(--pu)}
+.empty{text-align:center;padding:50px;color:var(--tx3);grid-column:1/-1}
+.eicon{font-size:40px;margin-bottom:10px}
+</style>
 </head>
-<body>
+<body class="ar">
 
-    <div class="top-nav">
-        <div class="controls">
-            <button class="btn" onclick="toggleLang()" id="lBtn">English</button>
-            <button class="btn" onclick="toggleTheme()" id="tBtn">🌙 Dark</button>
-        </div>
-        <input type="text" id="srch" class="search" oninput="renderGrid()" placeholder="ابحث عن حالة مرضية...">
+<div class="tb">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="tbi">💊</div>
+    <div><div class="tbn" id="tbn">أطلس الصيدلاني</div><div class="tbs" id="tbs">مرجع Cross-Selling • BNF/USP/UAE</div></div>
+  </div>
+  <div class="tbr">
+    <div class="lt"><button class="lb ac" id="bAr" onclick="setL('ar')">ع</button><button class="lb" id="bEn" onclick="setL('en')">EN</button></div>
+    <button class="ib" onclick="toggleDk()" id="dkb">🌙</button>
+  </div>
+</div>
+
+<div class="sw">
+  <div class="sb">
+    <span style="color:var(--tx3);font-size:16px">🔍</span>
+    <input id="si" type="text" oninput="doSearch()"/>
+    <span style="cursor:pointer;color:var(--tx3);font-size:13px" onclick="clrS()">✕</span>
+  </div>
+  <div class="sr" id="sr"></div>
+</div>
+
+<div class="stw" id="stw"></div>
+<div class="cw"><div class="cg" id="cg"></div></div>
+<div class="dw" id="dw">
+  <div class="bk" id="bkb" onclick="goBack()"><span id="bkA">→</span> <span id="bkT">رجوع</span></div>
+  <div id="dc"></div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  PHARMA ATLAS PRO — BILINGUAL DATABASE
+//  Refs: BNF | USP | UAE Drug Guide
+//  Brands: iRemedies > Avernus > Now > Nature's Bounty > Solgar > Puritan's Pride
+// ════════════════════════════════════════════════
+
+const DB = {
+ar:{
+sections:[
+{id:"c",icon:"🫀",name:"أمراض مزمنة"},
+{id:"o",icon:"💊",name:"OTC شائع"},
+{id:"s",icon:"👶",name:"حالات خاصة"},
+{id:"sk",icon:"🧴",name:"العناية بالبشرة"},
+{id:"h",icon:"💆",name:"العناية بالشعر"},
+{id:"g",icon:"🌿",name:"الصحة العامة"}
+],
+L:{
+logo:"أطلس الصيدلاني",sub:"مرجع Cross-Selling • BNF/USP/UAE",
+search:"ابحث عن حالة طبية...",back:"رجوع",backA:"→",
+ref:"المراجع: BNF | USP | UAE Drug Guide",
+cs:"المكملات المصاحبة",tips:"نصائح صحية مبنية على الأدلة",
+warns:"تحذيرات وتفاعلات دوائية",phrase:"جملة البيع الاحترافية",smart:"فرصة ذكية إضافية",
+dose:"الجرعة",timing:"التوقيت",brands:"الماركات المقترحة",benefit:"الفائدة الطبية"
+},
+conditions:{
+c:[
+{id:"htn",icon:"❤️",name:"ضغط الدم المرتفع",
+supps:[
+{n:"ماغنيسيوم جليسينات",d:"400mg/يوم",t:"مساءً مع الأكل",b:"iRemedies Mag Glycinate 400mg | Avernus Magnesium | Now Magnesium Glycinate 400mg | Nature's Bounty Magnesium | Solgar Magnesium Citrate | Puritan's Pride Magnesium",f:"يُرخّي العضلات الملساء في الأوعية الدموية ويخفض الضغط الانبساطي. Meta-analysis 2016 (34 دراسة): خفض SBP بـ 2-3 mmHg. يُقلل النشاط العصبي الودّي في الأوعية."},
+{n:"CoQ10 يوبيكوينول",d:"100-200mg/يوم",t:"صباحاً مع وجبة دسمة",b:"iRemedies CoQ10 200mg | Avernus CoQ10 | Now Ubiquinol 100mg | Nature's Bounty CoQ10 | Solgar CoQ10 200mg | Puritan's Pride CoQ10",f:"يُحسّن وظيفة البطانة الوعائية عبر زيادة إنتاج أكسيد النيتريك (NO). دراسات تُظهر خفض SBP بـ 17 mmHg في المرضى غير المعالجين."},
+{n:"أوميغا 3 EPA+DHA",d:"2-4g/يوم",t:"مع الأكل — مقسمة",b:"Avernus Omega-3 TG 1000mg | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Fish Oil 1200mg | Solgar Triple Strength Omega-3 | Puritan's Pride Omega-3",f:"يُحسّن مرونة الأوعية الدموية ويُقلل TG. EPA أكثر فعالية من DHA لضغط الدم تحديداً. يُقلل Angiotensin II المُضيّق للأوعية."},
+{n:"فيتامين D3",d:"2000-4000 IU/يوم",t:"صباحاً مع وجبة",b:"iRemedies D3 4000IU | Avernus D3 | Now D3 5000IU | Nature's Bounty D3 2000IU | Solgar D3 | Puritan's Pride D3 5000IU",f:"يُثبّط نظام RAAS ويُخفض مستوى Renin. نقص D3 مستقلٌّ لارتفاع ضغط الدم. 70% من الإمارات ناقصون."},
+{n:"ثوم معمّر Aged Garlic",d:"600-1200mg/يوم",t:"مع الأكل",b:"Now Kyolic Garlic 600mg | Nature's Bounty Garlic | Solgar Garlic Oil | Puritan's Pride Garlic 1000mg",f:"مُثبّط ACE طبيعي يُوسّع الأوعية. دراسة Ried 2016: خفض SBP بـ 8-9 mmHg في ارتفاع الضغط المعزول."},
+{n:"L-أرجينين",d:"2-3g/يوم",t:"قبل الأكل بـ 30 دقيقة",b:"Now L-Arginine 1000mg | Nature's Bounty L-Arginine | Solgar L-Arginine 1000mg | Puritan's Pride L-Arginine",f:"سلف أكسيد النيتريك (NO) الذي يُوسّع الأوعية مباشرة عبر تنشيط إنزيم eNOS في البطانة الوعائية."}
+],
+tips:["DASH Diet: ≤2300mg صوديوم/يوم. خضار وفواكه وألبان قليلة الدسم وحبوب كاملة","تمرين هوائي 30 دقيقة × 5 أيام أسبوعياً: يخفض SBP بـ 4-9 mmHg","تقليل الوزن: كل 1kg ينقص → SBP ينخفض 1 mmHg","إدارة التوتر بالتنفس العميق والتأمل: يخفض SBP بـ 4-5 mmHg","نوم 7-8 ساعات منتظم: Sleep Apnea يرفع الضغط باستمرار"],
+warns:["!البوتاسيوم ممنوع مع ACEi/ARBs/Spironolactone: خطر Hyperkalemia المميتة","CoQ10 يخفض الضغط — راقب مع الأدوية الخافضة","!الثوم يُعزز مضادات التخثر: نزيف مع وارفارين","أوميغا 3 >3g مع مضادات التخثر: راقب النزيف"],
+phrase:"\"الماغنيسيوم والـ CoQ10 مع الدواء يُحسّنان الاستجابة ويحميان القلب — الفرق ملحوظ في قراءات البيت\"",
+smart:"جهاز قياس ضغط Omron للمنزل: White Coat Hypertension شائعة جداً وقياسات البيت أدق بكثير"},
+
+{id:"dm2",icon:"🩸",name:"السكري النوع الثاني",
+supps:[
+{n:"بربرين",d:"500mg × 3/يوم",t:"قبل الأكل الرئيسي بـ 15 دقيقة",b:"Now Berberine 500mg | Nature's Bounty Berberine | Solgar Berberine 400mg | Puritan's Pride Berberine",f:"ينشّط AMPK كالميتفورمين تماماً — يُخفض HbA1c بـ 1.5-2% في دراسات مُحكّمة. أقوى بديل طبيعي للسكري النوع الثاني."},
+{n:"حمض ألفا ليبويك ALA",d:"600mg/يوم",t:"صباحاً قبل الأكل",b:"iRemedies ALA 600mg | Now Alpha Lipoic Acid 600mg | Nature's Bounty ALA | Solgar ALA | Puritan's Pride ALA",f:"مضاد أكسدة يُحسّن حساسية الإنسولين ويُعالج Peripheral Neuropathy السكرية. مُعتمد كعلاج قياسي في ألمانيا."},
+{n:"كروم بيكولينات",d:"400-1000mcg/يوم",t:"مع الوجبة الرئيسية",b:"Now Chromium Picolinate 200mcg | Nature's Bounty Chromium | Solgar Chromium Picolinate | Puritan's Pride Chromium",f:"يُعزز ارتباط الإنسولين بمستقبلاته ويُقلل مقاومته. يُقلل الشوق للسكريات والكربوهيدرات المكررة."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً مع الأكل",b:"iRemedies Mag Glycinate | Avernus Magnesium | Now Magnesium Glycinate | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:">80% من مرضى السكري ناقصون في Mg. ضروري لـ 300+ إنزيم تشمل عمل الإنسولين وتخليق ATP."},
+{n:"فيتامين D3+K2",d:"D3: 4000IU + K2: 100mcg/يوم",t:"صباحاً مع وجبة دسمة",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3 | Solgar D3+K2 | Puritan's Pride D3",f:"نقص D3 يُضاعف خطر السكري. K2 يُوجّه الكالسيوم للعظام ويحمي الأوعية من التكلّس."},
+{n:"قرفة سيلانية Ceylon",d:"1-3g/يوم",t:"مع الوجبات",b:"Now Ceylon Cinnamon 600mg | Nature's Bounty Cinnamon | Puritan's Pride Cinnamon 1000mg",f:"تُقلّد الإنسولين جزئياً وتُحسّن حساسيته. Ceylon فقط وليس Cassia — آمنة بالجرعات الطبيعية."},
+{n:"بروبيوتيك",d:"10-50 Billion CFU/يوم",t:"صباحاً قبل الفطار",b:"iRemedies Probio | Now Probiotic-10 | Nature's Bounty Probiotic | Solgar Probi 20B | Puritan's Pride Probiotic",f:"الميكروبيوم يؤثر مباشرة على مقاومة الإنسولين. L. acidophilus وB. longum يُحسّنان HbA1c في الدراسات."}
+],
+tips:["Low GI Diet: أرز بني، شوفان، بقوليات (GI<55). تجنب الرز الأبيض والعصائر","مشي 15 دقيقة بعد كل وجبة: يخفض Post-meal Glucose بـ 22% (Diabetes Care 2022)","مراقبة FBS قبل الأكل وPPBS بعد ساعتين — احتفظ بسجل","نوم منتظم 7-8 ساعات: قلة النوم ترفع Cortisol وتزيد المقاومة","فحص القدمين يومياً: 15% من مرضى السكري يُصابون بقرحة"],
+warns:["!بربرين + ميتفورمين: نقص سكر حاد محتمل — راقب بدقة عند الجمع","ALA يُغيّر متطلبات الإنسولين: راقب عند البدء","قرفة Cassia (وليس Ceylon) تحتوي Coumarin يضر الكبد","!الكروم >1000mcg: مشاكل كلوية في المعرّضين"],
+phrase:"\"البربرين والـ ALA يُقاربان الدواء في خفض HbA1c مع حماية الأعصاب — مزيج مُثبت علمياً\"",
+smart:"شرائط قياس السكر للشهر كاملاً — من يشتري القليل يتوقف عن المتابعة ويتراجع"},
+
+{id:"chol",icon:"🫀",name:"خلل الدهون (كوليسترول)",
+supps:[
+{n:"أوميغا 3 عالي الجرعة",d:"3-4g/يوم",t:"مع الأكل — مقسمة",b:"Avernus Omega-3 TG 1000mg | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Omega-3 | Solgar Triple Strength | Puritan's Pride Omega-3",f:"يُخفض TG بـ 25-45% ومُعتمد FDA لـ TG >500. EPA يُحسّن HDL ويُقلل الالتهاب الوعائي."},
+{n:"خميرة الأرز الأحمر",d:"1200-2400mg/يوم",t:"مساءً (مثل الستاتينات)",b:"Now Red Yeast Rice 1200mg | Nature's Bounty Red Yeast Rice | Solgar Red Yeast Rice 600mg | Puritan's Pride Red Yeast Rice",f:"يحتوي Monacolin K مُطابق لـ Lovastatin — يُخفض LDL بـ 15-25%. يُستخدم دائماً مع CoQ10 لمنع نقصه."},
+{n:"بربرين",d:"500mg × 3/يوم",t:"قبل الأكل",b:"Now Berberine 500mg | Nature's Bounty Berberine | Solgar Berberine | Puritan's Pride Berberine",f:"يُحفّز LDL Receptors في الكبد — يُخفض LDL بـ 15-20% وTG بـ 25-30%. آلية مختلفة عن الستاتينات تماماً."},
+{n:"ستيرول نباتي Plant Sterols",d:"2g/يوم",t:"مع الوجبات الرئيسية",b:"Now Plant Sterols | Nature's Bounty Cardio Health | Solgar Phytosterol Complex | Puritan's Pride Plant Sterols",f:"يتنافس مع الكوليسترول على الامتصاص المعوي — يُخفض LDL بـ 10-15%. مُوصى به من ESC 2019."},
+{n:"CoQ10",d:"100-200mg/يوم",t:"صباحاً مع وجبة",b:"iRemedies CoQ10 200mg | Avernus CoQ10 | Now CoQ10 | Nature's Bounty CoQ10 | Solgar CoQ10 200mg | Puritan's Pride CoQ10",f:"ضروري مع Red Yeast Rice والستاتينات لمنع Myopathy. ينقص بشكل مُثبت مع هذه الأدوية."},
+{n:"سيليوم Psyllium",d:"10-15g/يوم",t:"قبل الأكل مع ماء وفير",b:"Now Psyllium Husk | Nature's Bounty Psyllium | Puritan's Pride Psyllium Husk",f:"ألياف ذائبة تُكوّن هلاماً يمتص الكوليسترول في الأمعاء. يُخفض LDL بـ 5-10% بشكل مُثبت."}
+],
+tips:["حمية Mediterranean: زيت زيتون بكر، أسماك دهنية 3×/أسبوع، مكسرات، بقوليات","تمرين هوائي 150 دقيقة/أسبوع: يرفع HDL بـ 5-10%","تجنب Trans fats في المقليات والمعجنات الصناعية","حفنة جوز يومياً: تُخفض LDL بـ 5%","تجنب السكر والنشويات المكررة: ترفع TG بشكل كبير"],
+warns:["!Red Yeast Rice + Statins: مضاعفة الجرعة فعلياً — خطر Rhabdomyolysis مميت","البربرين يُعزز مضادات التخثر: راجع INR مع وارفارين","Plant Sterols تُقلل فيتامينات ADEK: أضف Multi فيتامين","النياسين يرفع حمض اليوريك: احذر في مرضى النقرس"],
+phrase:"\"Red Yeast Rice مع CoQ10 للمريض الرافض للستاتين أو المتضرر منه — فعّال وآمن\"",
+smart:"TG مرتفع = أوميغا 3 بجرعة 3-4g وليس 1g الوقائية — الفرق ضخم في النتيجة"},
+
+{id:"hypo",icon:"🦋",name:"قصور الغدة الدرقية",
+supps:[
+{n:"سيلينيوم",d:"200mcg/يوم",t:"مع الغداء",b:"iRemedies Selenium 200mcg | Now Selenium 200mcg | Nature's Bounty Selenium | Solgar Selenium 200mcg | Puritan's Pride Selenium",f:"ضروري لتحويل T4→T3 الفعّال عبر إنزيم Deiodinase. يُقلل أجسام TPO المضادة في Hashimoto's. نقصه يُفاقم القصور."},
+{n:"زنك",d:"15-25mg/يوم",t:"مساءً مع الأكل",b:"iRemedies Zinc | Avernus Zinc | Now Zinc 50mg | Nature's Bounty Zinc | Solgar Zinc 22mg | Puritan's Pride Zinc",f:"مُشارك في تخليق T3/T4. نقصه يُقلل الهرمونات ويُضعف استجابة Levothyroxine."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 4000IU | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"80% من مرضى Hashimoto's ناقصون D3. يُعدّل المناعة ويُقلل أجسام TPO المضادة للغدة."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"يُحسّن استجابة الخلايا لـ T3. كثيرون ناقصون. يُخفف الإمساك الشائع مع قصور الدرقية."},
+{n:"فيتامين B12",d:"1000mcg/يوم (تحت اللسان)",t:"صباحاً قبل الأكل",b:"iRemedies B12 | Now Methyl B12 1000mcg | Nature's Bounty B12 | Solgar Methyl B12 | Puritan's Pride B12",f:"40% من مرضى قصور الدرقية ناقصون B12. يُسبب تعباً ووخزاً مشابهاً لأعراض القصور تماماً."},
+{n:"أشواجاندا KSM-66",d:"300-600mg/يوم",t:"مساءً",b:"Now Ashwagandha KSM-66 | Nature's Bounty Ashwagandha | Solgar Ashwagandha | Puritan's Pride Ashwagandha",f:"Thyroid Research 2017: خفضت TSH ورفعت T3/T4 بشكل ملحوظ. تُقلل Cortisol المُثبّط لوظيفة الغدة."}
+],
+tips:["Levothyroxine على معدة فارغة ساعة قبل الفطار — القهوة والألبان تُقلل امتصاصه","فصل 4 ساعات بين الدواء والحديد/الكالسيوم/الماغنيسيوم","Gluten-free في Hashimoto's قد يُقلل الأجسام المضادة TPO","تجنب بروكلي/قرنبيط/ملوخية خام: طهيها يُبطّل تأثير Goitrogens","فحص TSH كل 6 أشهر بانتظام"],
+warns:["!اليود بكميات كبيرة ممنوع في Hashimoto's: يُفاقم الهجوم المناعي","السيلينيوم >400mcg يومياً: ساماً — لا تتجاوز 200mcg","الأشواجاندا قد ترفع T4: راقب TSH مع Levothyroxine"],
+phrase:"\"السيلينيوم والزنك يُحوّلان الدواء لصورته الفعّالة — بدونهما يبقى التعب رغم الجرعة الصحيحة\"",
+smart:"D3 وB12 وSe معاً تكشف سبب عدم التحسن رغم الدواء — استثمار تشخيصي ممتاز"},
+
+{id:"asthma",icon:"🫁",name:"الربو والحساسية التنفسية",
+supps:[
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"مُوسّع شُعبي طبيعي — يُثبّط إفراز Histamine ويُرخّي عضلات الشعب الهوائية. IV Mg يُستخدم في طوارئ النوبات."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 4000IU | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"نقص D3 يُضاعف نوبات الربو 3 مرات. يُعدّل استجابة Th2 التحسسية المسببة للربو."},
+{n:"كيرسيتين Quercetin",d:"500-1000mg/يوم",t:"مع الأكل",b:"Now Quercetin 500mg | Nature's Bounty Quercetin | Solgar Quercetin 500mg | Puritan's Pride Quercetin",f:"مُثبّط Mast Cell طبيعي — يُقلل إفراز Histamine والـ Leukotrienes بشكل مباشر ومُثبت."},
+{n:"أوميغا 3",d:"2-3g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُوازن نسبة Omega-6:3 — يُقلل إنتاج Leukotrienes المُسبّبة لتقلص الشعب الهوائية."},
+{n:"فيتامين C",d:"1000-2000mg/يوم",t:"صباحاً مع الأكل",b:"iRemedies Vit C 1000mg | Now Vitamin C-1000 | Nature's Bounty C-1000 | Solgar Ester-C | Puritan's Pride C-1000",f:"مضاد أكسدة يُقلل تقلص الشعب التمريني (EIB) ويُخفض Histamine في المجرى التنفسي."},
+{n:"بروبيوتيك",d:"20-50B CFU",t:"صباحاً",b:"iRemedies Probio | Now Probiotic | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"محور الأمعاء-الرئة: تحسين الميكروبيوم يُقلل استجابة Th2 التحسسية ويُقلل نوبات الربو."}
+],
+tips:["الابتعاد عن المحفزات: عث الغبار، عفن، وبر حيوانات، دخان السجائر","تقليل رطوبة المنزل <50%: العفن محفّز رئيسي","غسيل أغطية السرير بالماء الساخن (60°C) أسبوعياً","التنفس الأنفي: يُرطّب الهواء ويُقلل نوبات الربو التمريني","علاج GERD إن وُجد: الارتداد الحمضي محفّز خفي للنوبات الليلية"],
+warns:["!Aspirin وNSAIDs في Aspirin-exacerbated Asthma: نوبة شديدة مميتة","بعض المكملات العشبية تحتوي Sulfites: تُحفّز الربو","فيتامين C >2g قد يُسبب حصوات أوكسالات في المعرّضين"],
+phrase:"\"Mg وD3 يومياً يُقلل النوبات ويُقلل الاعتماد على المُوسّعات — فرق محسوس في 8 أسابيع\"",
+smart:"Peak Flow Meter منزلي: يُحذّر قبل النوبة بساعات — معظم المرضى لا يعرفون وجوده"},
+
+{id:"gerd",icon:"🔥",name:"الحموضة المزمنة GERD",
+supps:[
+{n:"DGL ليكوريس (بدون جليسريزين)",d:"380mg × 3/يوم",t:"قبل الأكل بـ 20 دقيقة (مضغ)",b:"Now DGL Licorice | Nature's Bounty Licorice | Solgar DGL Licorice | Puritan's Pride DGL",f:"يُحفّز إنتاج المخاط الواقي للمعدة دون رفع ضغط الدم. الجليسريزين مُزال لذلك آمن للاستخدام المزمن."},
+{n:"بروبيوتيك",d:"10-20B CFU",t:"صباحاً قبل الأكل",b:"iRemedies Probio | Now Probiotic | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"يُقلل H.pylori المرتبط بـ GERD. L. reuteri فعّال تحديداً في تقليل ارتداد الحمض."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"يُرخّي عضلة LES لتعمل بشكل صحيح. ينقص بشكل موثّق مع استخدام PPI المزمن."},
+{n:"إنزيمات هاضمة",d:"1-2 كبسولة مع كل وجبة",t:"مع بداية الوجبة",b:"Now Super Enzymes | Nature's Bounty Digestive Enzymes | Solgar Digestive Enzymes | Puritan's Pride Enzymes",f:"تُحسّن الهضم الكامل وتُقلل Bloating والضغط على LES المسبب للارتداد."},
+{n:"زنجبيل",d:"500mg × مرتين/يوم",t:"مع الأكل",b:"Now Ginger Root 550mg | Nature's Bounty Ginger | Solgar Ginger Root 550mg | Puritan's Pride Ginger",f:"يُسرّع إفراغ المعدة ويُقلل Nausea. مفيد خاصة في GERD مع بطء الإفراغ المعدي."}
+],
+tips:["وجبات صغيرة 5-6 يومياً بدل 3 كبيرة — تُقلل الضغط على LES","لا نوم قبل 3 ساعات من الأكل","رفع رأس السرير 15-20cm — يمنع الارتداد الليلي","تجنب: قهوة، شوكولاتة، نعناع، طماطم، بصل، مقليات","خسارة الوزن: 5kg تُقلل الأعراض بشكل ملحوظ"],
+warns:["!PPI المزمن يُسبب نقص Mg/B12/Ca/Zn: أضف مكملاً دائماً","DGL الليكوريس العادي (بالجليسريزين) يرفع ضغط الدم: استخدم DGL فقط","الزنجبيل يُعزز أثر مضادات التخثر: احذر"],
+phrase:"\"DGL + الإنزيمات الهاضمة يُعيدان الهضم الطبيعي دون الاعتماد الدائم على PPI\"",
+smart:"مرضى PPI منذ سنوات = نقص B12 وMg وCa موثّق — ذكّرهم وأضف مكملاً"},
+
+{id:"ibs",icon:"🫃",name:"القولون العصبي IBS",
+supps:[
+{n:"بروبيوتيك (L.rhamnosus GG)",d:"10-50B CFU",t:"صباحاً قبل الفطار",b:"iRemedies Probio | Now Probiotic-10 | Nature's Bounty Probiotic | Solgar Probi 20B | Puritan's Pride Probiotic",f:"Cochrane 2018: يُقلل ألم البطن والانتفاخ. L. rhamnosus GG الأكثر دراسةً وفعالية في IBS."},
+{n:"زيت نعناع معوي (Enteric-coated)",d:"187-225mg × 3/يوم",t:"قبل الأكل بـ 30 دقيقة",b:"IBgard | Now Peppermint Oil Enteric | Solgar Peppermint Oil | Puritan's Pride Peppermint",f:"يُرخّي عضلات الأمعاء الملساء. Meta-analysis: فعّال > Placebo بـ 2-4x في تقليل تشنج القولون."},
+{n:"سيليوم Psyllium",d:"5-10g × مرتين",t:"قبل الأكل مع ماء وفير",b:"Now Psyllium Husk | Nature's Bounty Psyllium | Puritan's Pride Psyllium",f:"ألياف ذائبة تُنظم جميع أنواع IBS-C وIBS-D. تُبطئ الامتصاب وتُنظم قوام البراز."},
+{n:"ماغنيسيوم سيترات (IBS-C)",d:"300-400mg مساءً",t:"قبل النوم",b:"iRemedies Mag | Now Magnesium Citrate | Nature's Bounty Magnesium | Solgar Magnesium Citrate",f:"يُليّن البراز ويُحفّز حركة الأمعاء. مفيد خاصة في IBS-C ويُقلل التشنجات الليلية."},
+{n:"L-جلوتامين",d:"5-10g/يوم",t:"على معدة فارغة صباحاً",b:"Now L-Glutamine | Nature's Bounty L-Glutamine | Solgar Glutamine | Puritan's Pride L-Glutamine",f:"وقود رئيسي لخلايا الأمعاء — يُرمّم Leaky Gut ويُقلل فرط النفاذية المعوية."}
+],
+tips:["Low-FODMAP لـ 6-8 أسابيع: تُحسّن 75% من مرضى IBS بشكل دراماتيكي","الأكل ببطء ومضغ جيد: يُقلل الهواء المبتلع والانتفاخ","تجنب المحليات الصناعية (Sorbitol, Xylitol): تُسبب إسهالاً وغازات","إدارة التوتر: IBS متصل بالجهاز العصبي المركزي مباشرة","تمرين منتظم: يُحسّن حركة الأمعاء ويُقلل التوتر"],
+warns:["!زيت النعناع الفموي (غير معوي) يُسبب حرقة المريء: Enteric-coated فقط","الحديد يُسبب إمساكاً في IBS-C: احذر","انتفاخ مؤقت مع Probiotics في الأسابيع الأولى: طبيعي ويزول"],
+phrase:"\"Low-FODMAP + Probiotics + زيت النعناع المعوي: بروتوكول IBS الأول عالمياً\"",
+smart:"كثير من مرضى IBS لديهم قلق مُخفي — المشورة النفسية مع العلاج تُحسّن النتائج بشكل ملحوظ"},
+
+{id:"ra",icon:"🦵",name:"الروماتويد RA",
+supps:[
+{n:"أوميغا 3 عالي الجرعة",d:"3-4g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Omega-3 | Solgar Triple Omega | Puritan's Pride Omega-3",f:"يُقلل IL-1β وTNF-α الوسطاء الرئيسيين للالتهاب في RA. يُقلل الحاجة للـ NSAIDs ويُحسّن تيبّس الصباح."},
+{n:"فيتامين D3",d:"4000-5000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 5000IU | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"80% من مرضى RA ناقصون D3. يُعدّل المناعة ويُقلل نشاط المرض. Methotrexate يُقلل D3 مباشرة."},
+{n:"كركم BCM-95",d:"500mg × مرتين",t:"مع الأكل الدسم",b:"Now Curcumin 500mg | Nature's Bounty Turmeric | Solgar Full Spectrum Curcumin | Puritan's Pride Turmeric",f:"مُثبّط NF-κB وCOX-2. دراسات تُقارن فعاليته بـ Diclofenac مع أمان أعلى بكثير."},
+{n:"بوسويليا Boswellia",d:"300mg × 3/يوم",t:"مع الأكل",b:"Now Boswellia Extract | Nature's Bounty Boswellia | Solgar Boswellia | Puritan's Pride Boswellia",f:"مُثبّط 5-LOX يُقلل Leukotrienes. RCT مُحكّم: يُحسّن وظيفة المفاصل في 8 أسابيع."},
+{n:"كولاجين Type II Undenatured",d:"40mg/يوم",t:"على معدة فارغة صباحاً",b:"Now UC-II Collagen | Nature's Bounty Collagen | Solgar Collagen | Puritan's Pride Collagen",f:"يُحفّز تحمّلاً مناعياً ضد مكوّنات الغضروف — يُقلل الهجوم المناعي الذاتي على المفاصل."},
+{n:"MSM ميثيل سلفونيل ميثان",d:"1-3g/يوم",t:"مع الأكل",b:"Now MSM 1000mg | Nature's Bounty MSM | Solgar MSM | Puritan's Pride MSM 1000mg",f:"يُقدّم الكبريت الضروري لتخليق الغضروف ويُقلل الألم والتورم. آمن مع معظم أدوية RA."}
+],
+tips:["Anti-inflammatory Diet: خضار ورقية، توت، زيت زيتون، أسماك دهنية","تمرين خفيف في الماء Aquatic Exercise: يُحسّن الوظيفة بدون ضغط","الحفاظ على وزن صحي: كل 1kg زائد = 4kg ضغط إضافي على الركبة","تعرض للشمس اليومي: D3 طبيعي ويُقلل الألم","فحص دوري لوظائف الكبد مع Methotrexate"],
+warns:["!Methotrexate يحتاج 5mg Folic Acid يومياً: يمنع الآثار السامة","الكركم يُعزز مضادات التخثر: احذر مع وارفارين","أوميغا 3 >3g مع مضادات التخثر: راقب النزيف"],
+phrase:"\"أوميغا 3 والكركم يُقلل جرعات الأدوية المطلوبة ويحمي المعدة من NSAIDs\"",
+smart:"مرضى RA على MTX بحاجة Folic Acid 5mg يومياً دائماً — نقصها يُسبب قرح فم وفقر دم"},
+
+{id:"osteo",icon:"🦴",name:"هشاشة العظام",
+supps:[
+{n:"كالسيوم سيترات",d:"1000-1200mg/يوم — مقسمة",t:"500-600mg × مرتين مع الوجبات",b:"iRemedies Calcium Citrate | Now Calcium Citrate | Nature's Bounty Calcium Citrate | Solgar Calcium Citrate | Puritan's Pride Calcium Citrate",f:"Citrate لا يحتاج حمض معدي — أفضل لكبار السن ومستخدمي PPI. امتصاب أعلى من Carbonate."},
+{n:"فيتامين D3+K2 MK-7",d:"D3: 4000IU + K2: 100-200mcg",t:"صباحاً مع وجبة دسمة",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3+K2 | Solgar D3+K2 | Puritan's Pride D3",f:"D3 يُحسّن امتصاب الكالسيوم. K2-MK7 يُوجّهه للعظام ويمنع ترسّبه في الشرايين — ضروريان معاً."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"50% من كالسيوم العظم مرتبط بـ Mg. يُنشّط D3 في الكبد والكلى ويُشارك في تخليق Osteocalcin."},
+{n:"كولاجين ببتيد Type I&III",d:"5-10g/يوم",t:"صباحاً مع فيتامين C",b:"Now Collagen Peptides | Nature's Bounty Collagen | Solgar Collagen | Puritan's Pride Collagen",f:"يُوفّر المصفوفة البروتينية (Osteoid) التي تترسّب عليها بلورات الكالسيوم في بناء العظم."},
+{n:"فيتامين C",d:"500-1000mg/يوم",t:"صباحاً",b:"iRemedies Vit C | Now C-1000 | Nature's Bounty C-1000 | Solgar Ester-C 1000mg | Puritan's Pride C-1000",f:"ضروري لتخليق Collagen — العنصر الهيكلي الأساسي في العظم. يُنشّط Osteoblasts."},
+{n:"بورون",d:"3-6mg/يوم",t:"مع الأكل",b:"Now Boron 3mg | Nature's Bounty Boron | Solgar Boron | Puritan's Pride Boron",f:"يُقلل إفراز الكالسيوم والماغنيسيوم بالبول ويُعزز تحويل D3 لصورته الفعّالة."}
+],
+tips:["تمرين حمل أثقال: المشي والمقاومة — يُحفّز بناء العظم مباشرة","تعرض للشمس 15 دقيقة يومياً قبل 10 صباحاً","الإقلاع عن التدخين: يُقلل كثافة العظام بشكل مُثبت","كافيين <2 كوب يومياً: الزائد يُقلل امتصاب الكالسيوم","بروتين كافٍ 1.2-1.5g/kg: ضروري لبناء المصفوفة العظمية"],
+warns:["!Calcium Carbonate مع PPI: امتصاب ضعيف — استخدم Citrate لكبار السن","كالسيوم >1200mg مرة واحدة: امتصاب ينخفض وخطر ترسّب","!Bisphosphonates على معدة فارغة مع ماء وفير — لا تُعطى مع الكالسيوم"],
+phrase:"\"D3+K2 مع كالسيوم سيترات: المعادلة الذهبية — K2 يُضمن وصول الكالسيوم للعظم لا الشرايين\"",
+smart:"مريضة Bisphosphonates بدون D3 كافٍ = دواء بدون فائدة. D3 أولاً دائماً"},
+
+{id:"migr",icon:"🤕",name:"الصداع النصفي المزمن",
+supps:[
+{n:"ماغنيسيوم",d:"400-600mg/يوم",t:"مساءً",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"مُعتمد American Headache Society للوقاية من الصداع النصفي. يُثبّط موجات الاكتئاب القشري (CSD)."},
+{n:"ريبوفلافين B2",d:"400mg/يوم",t:"صباحاً مع الأكل",b:"Now Riboflavin B2 400mg | Nature's Bounty B2 | Solgar B2 | Puritan's Pride Riboflavin 400mg",f:"يُحسّن Mitochondrial Function الدماغية. RCT مُحكّم: يُقلل نوبات الصداع بـ 50% في 3 أشهر."},
+{n:"CoQ10",d:"300-400mg/يوم",t:"صباحاً مع الأكل",b:"iRemedies CoQ10 | Now CoQ10 300mg | Nature's Bounty CoQ10 | Solgar CoQ10 | Puritan's Pride CoQ10",f:"دراسة 2005: يُقلل تكرار النوبات بـ 48% في 3 أشهر عبر تحسين طاقة الخلايا العصبية."},
+{n:"ميلاتونين",d:"3mg قبل النوم",t:"قبل النوم بـ 30 دقيقة",b:"iRemedies Melatonin | Now Melatonin 3mg | Nature's Bounty Melatonin | Solgar Melatonin | Puritan's Pride Melatonin",f:"واقٍ من الصداع الليلي. يُنظم Circadian Rhythm ويُقلل الحساسية للمحفزات."},
+{n:"باتربر PA-Free",d:"75mg × مرتين",t:"مع الأكل",b:"Now Butterbur | Nature's Bounty Butterbur | Solgar Butterbur | Puritan's Pride Butterbur",f:"مُعتمد American Headache Society. يُقلل Leukotrienes ويُوسّع الأوعية الدماغية."}
+],
+tips:["يوميات صداع لأسبوعين: حدّد المحفزات الشخصية","نوم منتظم في نفس التوقيت — اضطرابه محفّز رئيسي","ترطيب جيد: الجفاف من أشيع محفزات الصداع النصفي","تقليل الكافيين المفاجئ يُسبب Rebound Headache — تدريجياً","المكملات تؤخذ يومياً للوقاية وليس عند النوبة"],
+warns:["!Butterbur غير PA-Free يُسبب تلف كبد خطير","تجنب Triptans >10 أيام/شهر: Medication Overuse Headache","الإرغوتامين في الحمل: ممنوع تماماً"],
+phrase:"\"Mg + B2 + CoQ10: البروتوكول الوقائي المُعتمد طبياً — يُقلل النوبات بـ 40-50% في 3 أشهر\"",
+smart:"مريض يشتري مسكنات أسبوعياً = Medication Overuse Headache — يحتاج وقاية لا علاج"},
+
+{id:"dep",icon:"🧠",name:"الاكتئاب المزمن",
+supps:[
+{n:"أوميغا 3 EPA عالٍ",d:"2-3g EPA/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Fish Oil | Solgar Omega-3 | Puritan's Pride Omega-3",f:"EPA أكثر فعالية من DHA للاكتئاب. يُقلل Neuroinflammation ويُحسّن حساسية مستقبلات Serotonin."},
+{n:"فيتامين D3",d:"4000-5000 IU/يوم",t:"صباحاً",b:"iRemedies D3 4000IU | Now D3 5000IU | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"يُنشّط تخليق Serotonin وDopamine. ارتباط قوي ومستقل بين نقص D3 والاكتئاب."},
+{n:"ماغنيسيوم L-ثريونات",d:"2000mg/يوم",t:"صباحاً ومساءً",b:"Now Magtein | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"يعبر الحاجز الدموي الدماغي بكفاءة — يُحسّن كثافة المشابك العصبية وينشّط BDNF."},
+{n:"Rhodiola Rosea",d:"400-600mg/يوم",t:"صباحاً قبل الأكل",b:"Now Rhodiola Rosea | Nature's Bounty Rhodiola | Solgar Rhodiola | Puritan's Pride Rhodiola",f:"دراسة 2015: فعالية مشابهة لـ Sertraline مع تحمّل أفضل وآثار جانبية أقل."},
+{n:"NAC N-أستيل سيستئين",d:"600mg × مرتين",t:"مع الأكل",b:"Now NAC 600mg | Nature's Bounty NAC | Solgar NAC 600mg | Puritan's Pride NAC",f:"يُجدّد Glutathione الدماغي ويُقلل Oxidative Stress في الاكتئاب المقاوم للعلاج."},
+{n:"5-MTHF + Methyl B12",d:"5-MTHF: 1mg + B12: 1000mcg",t:"صباحاً",b:"Now 5-MTHF | Nature's Bounty B12 Methyl | Solgar Folate Metafolin | Puritan's Pride B12",f:"تحوّر MTHFR شائع في الاكتئاب. 5-MTHF يتجاوز العائق الجيني في تخليق Serotonin."}
+],
+tips:["تمرين هوائي 30-45 دقيقة × 4 أيام: يرفع BDNF ويُكافئ مضادات الاكتئاب في الدراسات","تعرض للضوء الطبيعي صباحاً: يُنظم Circadian ويرفع Serotonin","نوم منتظم: قلة النوم تُقلل BDNF وترفع Cortisol","غذاء غني بالتريبتوفان: بيض، ديك رومي، مكسرات، بقوليات"],
+warns:["!لا توقف مضادات الاكتئاب فجأة: تناقص تدريجي بإشراف طبي","Rhodiola قد يُقلل فعالية بعض مضادات الاكتئاب","!5-HTP مع SSRIs: خطر Serotonin Syndrome"],
+phrase:"\"أوميغا 3 EPA وD3 وMg معاً يُكمّلون الدواء — التغذية العصبية لا تُعوّض\"",
+smart:"أي مريض اكتئاب بدون فحص D3 وB12 وFerritin: نقصها يُشبه الاكتئاب تماماً"}
+],
+
+o:[
+{id:"para",icon:"💊",name:"باراسيتامول (استخدام متكرر)",
+supps:[
+{n:"NAC N-أستيل سيستئين",d:"600mg × مرتين",t:"مع الأكل",b:"Now NAC 600mg | Nature's Bounty NAC | Solgar NAC 600mg | Puritan's Pride NAC",f:"يُجدّد Glutathione الكبدي الذي يستهلكه الباراسيتامول مع كل جرعة. يمنع التلف الكبدي الهادئ."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"مفيد للصداع التوتري (أشيع أسباب الباراسيتامول المتكرر) — يُقلل تكراره بشكل مُثبت."},
+{n:"كركم Curcumin",d:"500mg × مرتين",t:"مع الأكل الدسم",b:"Now Curcumin 500mg | Nature's Bounty Turmeric | Solgar Full Spectrum Curcumin | Puritan's Pride Turmeric",f:"مُثبّط COX-2 طبيعي يُقلل الحاجة للمسكنات على المدى البعيد."},
+{n:"فيتامين C",d:"500-1000mg/يوم",t:"صباحاً",b:"iRemedies Vit C | Now C-1000 | Nature's Bounty C-1000 | Solgar Ester-C | Puritan's Pride C-1000",f:"يدعم وظيفة الكبد ويُقلل الضرر التأكسدي من الاستخدام المتكرر."}
+],
+tips:["لا تتجاوز 4g (4000mg) يومياً — الزائد يُسبب فشل كبد حاد","لا تأخذه مع الكحول أبداً","عند الاستخدام >3 أيام متواصلة: راجع الطبيب للسبب الجذري","كثير من الأدوية المركبة تحتوي Paracetamol: احسب الإجمالي"],
+warns:["!Paracetamol + كحول: فشل كبد حاد حتى بجرعات عادية","!مرضى الكبد: الجرعة القصوى 2g/يوم","الاستخدام المزمن يُسبب Medication Overuse Headache"],
+phrase:"\"NAC مع كل دورة باراسيتامول يحمي الكبد — استثمار بسيط لسلامة طويلة الأمد\"",
+smart:"مريض يشتري باراسيتامول أسبوعياً للصداع = صداع توتري مزمن — الماغنيسيوم للوقاية"},
+
+{id:"omega3",icon:"🐟",name:"أوميغا 3 (استخدام وقائي)",
+supps:[
+{n:"أوميغا 3 TG Form",d:"1-2g/يوم",t:"مع الأكل الرئيسي",b:"Avernus Omega-3 TG 1000mg | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Fish Oil 1200mg | Solgar Triple Strength Omega-3 | Puritan's Pride Omega-3",f:"TG Form امتصاب أعلى 50% من EE Form. EPA للقلب والمزاج. DHA للدماغ والعيون."},
+{n:"فيتامين E Mixed",d:"200-400 IU/يوم",t:"مع الأكل",b:"Now Natural Vitamin E | Nature's Bounty Vitamin E | Solgar Vitamin E | Puritan's Pride Vitamin E",f:"يمنع أكسدة EPA وDHA في الجسم. أوميغا 3 بدون E معرّض للتأكسد وفقدان الفعالية."},
+{n:"CoQ10",d:"100mg/يوم",t:"مع الأكل",b:"iRemedies CoQ10 | Now CoQ10 | Nature's Bounty CoQ10 | Solgar CoQ10 | Puritan's Pride CoQ10",f:"مُكمّل مثالي مع أوميغا 3 لصحة القلب. تآزر قوي في وظيفة الميتوكوندريا."}
+],
+tips:["مع وجبة دسمة: يُضاعف الامتصاب","في الثلاجة بعد الفتح: يمنع التأكسد والرائحة","مصدر سمك صغير (سردين، ماكريل): أقل تلوثاً بالزئبق","الزائدون الوزن يحتاجون جرعة أعلى (2-3g)"],
+warns:["أوميغا 3 >3g مع مضادات التخثر: راقب النزيف","قد يرفع LDL قليلاً في بعض الحالات"],
+phrase:"\"أوميغا 3 TG مع E وCoQ10: بروتوكول قلب متكامل أكثر فعالية من الأوميغا 3 وحده\"",
+smart:"Avernus وiRemedies يستخدمان TG Form — الفارق الجوهري عن المنتجات الرخيصة"},
+
+{id:"probiotic",icon:"🦠",name:"بروبيوتيك (عام)",
+supps:[
+{n:"L. acidophilus + Bifidobacterium",d:"10-20B CFU",t:"صباحاً قبل الفطار",b:"iRemedies Probio | Now Probiotic-10 | Nature's Bounty Probiotic | Solgar Probi 20B | Puritan's Pride Probiotic",f:"الأكثر دراسةً. تُنتج Lactic Acid تُحمّض البيئة المعوية وتمنع نمو البكتيريا الضارة."},
+{n:"بريبيوتيك Inulin",d:"5g/يوم",t:"مع الأكل",b:"Now Prebiotic Inulin | Nature's Bounty Prebiotic | Solgar Inulin | Puritan's Pride Prebiotic",f:"يُغذّي البروبيوتيك ويُعزّز نموه. Synbiotic (Probiotic+Prebiotic) الأكثر فعالية."},
+{n:"L-جلوتامين",d:"5g/يوم",t:"على معدة فارغة",b:"Now L-Glutamine | Nature's Bounty L-Glutamine | Solgar Glutamine | Puritan's Pride L-Glutamine",f:"يُرمّم Tight Junctions المعوية ويُقلل Leaky Gut — يُعزّز فعالية البروبيوتيك بشكل مُثبت."},
+{n:"فيتامين D3",d:"2000-4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"يُعزّز نمو Lactobacillus ويُقوّي IgA الإفرازي — المناعة الأولى في الأمعاء."}
+],
+tips:["تناول بعد المضادات الحيوية بساعتين وليس معها","استمر 4-8 أسابيع للاستعمار الكامل","احفظه في الثلاجة (معظم السلالات)","يومياً بانتظام — التوقف يُعيده لنقطة البداية"],
+warns:["ممنوع في المثبطة مناعتهم حاداً بدون استشارة","انتفاخ مؤقت في الأسابيع الأولى: طبيعي ويزول"],
+phrase:"\"Probiotic + Prebiotic + Glutamine: بروتوكول Synbiotic الكامل للصحة المعوية\"",
+smart:"بعد أي دورة مضادات حيوية — بروبيوتيك فوراً. لا تنتظر حتى يشتكي المريض"},
+
+{id:"vitd3",icon:"☀️",name:"فيتامين D3",
+supps:[
+{n:"فيتامين D3 Cholecalciferol",d:"4000-5000 IU/يوم",t:"صباحاً مع وجبة دسمة",b:"iRemedies D3 4000IU | Avernus D3 | Now D3 5000IU | Nature's Bounty D3 5000IU | Solgar D3 | Puritan's Pride D3 5000IU",f:"D3 أفضل 3x من D2. 70% من سكان الإمارات ناقصون. يُنشّط >200 جين مناعي وهرموني."},
+{n:"فيتامين K2-MK7",d:"100-200mcg/يوم",t:"مع وجبة دسمة",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty K2 | Solgar K2 MK-7 | Puritan's Pride K2",f:"يُوجّه الكالسيوم للعظام لا الشرايين. ضروري مع جرعات D3 العالية لمنع التكلّس الوعائي."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"D3 لا يتنشّط في الكبد والكلى بدون Mg كافٍ. بدون Mg فيتامين D لن يصل لكامل تأثيره."},
+{n:"فيتامين A بيتا كاروتين",d:"5000 IU كبيتا كاروتين",t:"مع الأكل",b:"Now Beta Carotene | Nature's Bounty Vitamin A | Solgar Beta Carotene | Puritan's Pride Beta Carotene",f:"D وA يعملان تآزرياً كعاملَي نسخ. بدون A كافٍ، D3 لا يصل لكامل تأثيره على المناعة."}
+],
+tips:["الهدف 60-80 ng/mL: افحص 25(OH)D قبل البدء وبعد 3 أشهر","تعرض للشمس 15 دقيقة يومياً قبل 10 صباحاً","الجرعة اليومية أفضل من الأسبوعية الضخمة","فحص كالسيوم الدم مع الجرعات >10000 IU"],
+warns:["D3 >10000 IU مزمناً: فرط كالسيوم — راقب","تفاعل مع بعض أدوية القلب كـ Digoxin"],
+phrase:"\"D3+K2+Mg+A: المربّع الذهبي للامتصاب — بدون أي منها D3 لن يصل لكامل تأثيره\"",
+smart:"70% من الإمارات ناقصون D3 — أي مريض يُستحق فحصاً"},
+
+{id:"calcium",icon:"🦴",name:"كالسيوم (مكمل)",
+supps:[
+{n:"كالسيوم سيترات",d:"500-600mg × مرتين",t:"مع الوجبتين",b:"iRemedies Calcium Citrate | Now Calcium Citrate | Nature's Bounty Calcium Citrate | Solgar Calcium Citrate | Puritan's Pride Calcium Citrate",f:"Citrate يُمتص دون حمض معدي — أفضل لكبار السن ومستخدمي PPI. امتصاب أعلى من Carbonate."},
+{n:"فيتامين D3+K2",d:"D3: 4000IU + K2: 100mcg",t:"مع الأكل",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3+K2 | Solgar D3+K2 | Puritan's Pride D3",f:"D3 ضروري للامتصاب. K2 يُوجّه الكالسيوم للعظام ويمنع ترسّبه في الشرايين."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"50% من كالسيوم العظم مرتبط بـ Mg. النسبة المثالية Ca:Mg في الجسم 2:1."},
+{n:"بورون",d:"3-6mg/يوم",t:"مع الأكل",b:"Now Boron 3mg | Nature's Bounty Boron | Solgar Boron | Puritan's Pride Boron",f:"يُقلل إفراز الكالسيوم بالبول ويُضاعف الاحتفاظ به في العظام."}
+],
+tips:["لا >600mg كالسيوم في جرعة واحدة: الامتصاب ينخفض بعدها","فصل ساعتين بين الكالسيوم والحديد والماغنيسيوم","مصادر غذائية: لبن، جبن، سبانخ مطبوخ، سردين بالعظم","تمرين مقاومة ضروري لاستخدام الكالسيوم في بناء العظم"],
+warns:["!كالسيوم >2500mg/يوم: حصوات كلى وترسّب شرياني","!Carbonate مع PPI: امتصاب ضعيف — استخدم Citrate","!يُقلل امتصاب الحديد وLevothyroxine: فصل 4 ساعات"],
+phrase:"\"كالسيوم سيترات + D3 + K2 + Mg: الرباعي الكامل — الكالسيوم وحده بدون الثلاثة لن يكفي\"",
+smart:"مريضة >40 تشتري كالسيوم وحده — اقترح D3+K2+Mag وأشرح الفرق"},
+
+{id:"zinc",icon:"🛡️",name:"زنك (مناعة)",
+supps:[
+{n:"زنك بيكولينات",d:"15-25mg/يوم",t:"مع العشاء",b:"iRemedies Zinc | Avernus Zinc | Now Zinc Picolinate | Nature's Bounty Zinc 50mg | Solgar Zinc Picolinate 22mg | Puritan's Pride Zinc",f:"Picolinate أعلى امتصاباً من Gluconate وOxide. يُنشّط T-cells وNK cells والإنترفيرون."},
+{n:"نحاس Copper",d:"1-2mg/يوم",t:"مع الأكل",b:"Now Copper 2mg | Nature's Bounty Copper | Solgar Copper | Puritan's Pride Copper",f:"الزنك >25mg يستنزف النحاس — إضافته ضرورية مع الجرعات العلاجية."},
+{n:"فيتامين C",d:"500-1000mg/يوم",t:"صباحاً",b:"iRemedies Vit C | Now C-1000 | Nature's Bounty C-1000 | Solgar Ester-C | Puritan's Pride C-1000",f:"يُعزّز فعالية الزنك في المناعة ويُشاركه في تخليق Collagen وتجديد الخلايا."},
+{n:"سيلينيوم",d:"100-200mcg/يوم",t:"مع الأكل",b:"iRemedies Selenium | Now Selenium | Nature's Bounty Selenium | Solgar Selenium | Puritan's Pride Selenium",f:"يعمل مع الزنك في تنشيط GPx. التآزر المناعي بينهما قوي ومُثبت."}
+],
+tips:["لا تأخذ على معدة فارغة: يُسبب غثياناً","مصادر غذائية: بذور يقطين، لحم أحمر، بقوليات","Zinc Lozenges للحلق أكثر فعالية من الكبسولة","ابدأ خلال 24 ساعة من أعراض البرد للحصول على أفضل نتيجة"],
+warns:["!>40mg مزمناً: يُثبّط المناعة ويستنزف النحاس","!يُقلل امتصاب Tetracyclines/Quinolones: فصل ساعتين"],
+phrase:"\"Zinc + C + Selenium: المثلث المناعي الذهبي — يعمل في 24 ساعة من بداية الأعراض\"",
+smart:"Zinc Lozenges عند أول علامات برد — كثير من المرضى لا يعرفون هذا الاستخدام"},
+
+{id:"collagen",icon:"✨",name:"كولاجين (مكمل)",
+supps:[
+{n:"كولاجين مائي Hydrolyzed Type I&III",d:"10g/يوم",t:"صباحاً على معدة فارغة مع C",b:"Now Collagen Peptides | Nature's Bounty Collagen | Solgar Collagen | Puritan's Pride Collagen",f:"Type I للجلد والشعر والأظافر. Type III للأوعية الدموية. المائي يُمتص بشكل كامل دون هضم."},
+{n:"فيتامين C",d:"500-1000mg مع الكولاجين",t:"مع الكولاجين مباشرة",b:"iRemedies Vit C | Now C-1000 | Nature's Bounty C | Solgar Ester-C | Puritan's Pride C-1000",f:"ضروري لتحويل Proline→Hydroxyproline — دون C لا يُنتج كولاجين ناضج وظيفي أبداً."},
+{n:"هيالورونيك أسيد",d:"100-200mg/يوم",t:"صباحاً",b:"Now Hyaluronic Acid | Nature's Bounty Hyaluronic Acid | Solgar Hyaluronic Acid | Puritan's Pride HA",f:"يُشبع الجلد بالرطوبة من الداخل. يعمل مع الكولاجين لتحسين المرونة والترطيب."},
+{n:"بيوتين",d:"5000mcg/يوم",t:"صباحاً",b:"iRemedies Biotin 10000mcg | Now Biotin 5000mcg | Nature's Bounty Biotin | Solgar Biotin | Puritan's Pride Biotin",f:"يُقوّي Keratin بنية الشعر والأظافر. مُكمّل طبيعي لكولاجين الشعر والأظافر."},
+{n:"زنك",d:"15mg/يوم",t:"مع العشاء",b:"iRemedies Zinc | Now Zinc | Nature's Bounty Zinc | Solgar Zinc | Puritan's Pride Zinc",f:"يُنشّط إنزيمات تخليق الكولاجين. نقصه يُسبب بطء التئام الجروح وهشاشة الأظافر."}
+],
+tips:["الكولاجين البحري: أصغر جزيئاً وأسرع امتصاباً من البقري","C مع الكولاجين ضروري وليس اختيارياً","النتائج بعد 6-8 أسابيع من الاستمرار","لا تُسخّن مسحوق الكولاجين: يُدمّر الأحماض الأمينية"],
+warns:["الكولاجين البحري: احذر في حساسية الأسماك","!Biotin >5000mcg: يُؤثر على TSH وTroponin في التحاليل — أبلغ المختبر وأوقف 48h"],
+phrase:"\"Collagen + C + HA: الثلاثي لنضارة الجلد من الداخل — بدون C لا يعمل الكولاجين\"",
+smart:"Marine Collagen امتصاب أعلى 3x — المريض يستحق معرفة هذا الفرق"},
+
+{id:"magnesium",icon:"💎",name:"ماغنيسيوم (مكمل)",
+supps:[
+{n:"ماغنيسيوم جليسينات Glycinate",d:"400mg/يوم",t:"مساءً للنوم والاسترخاء",b:"iRemedies Mag Glycinate 400mg | Avernus Magnesium | Now Magnesium Glycinate 400mg | Nature's Bounty Magnesium | Solgar Magnesium Glycinate | Puritan's Pride Magnesium",f:"أفضل امتصاباً وأقل تأثيراً على المعدة. يعبر الحاجز الدموي الدماغي — مثالي للقلق والنوم."},
+{n:"ماغنيسيوم L-ثريونات",d:"2000mg/يوم",t:"صباحاً ومساءً",b:"Now Magtein | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"يعبر الحاجز الدموي الدماغي بكفاءة عالية — مثالي لصحة الدماغ والذاكرة والقلق."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"D3 لا يتنشّط بدون Mg كافٍ. العلاقة تبادلية — كل منهما يُنشّط الآخر."},
+{n:"فيتامين B6 P5P",d:"25mg/يوم",t:"مع الأكل",b:"Now P5P | Nature's Bounty B6 | Solgar B6 | Puritan's Pride B6",f:"يُحسّن دخول Mg للخلايا. B6+Mg أكثر فعالية من Mg وحده في الدراسات."}
+],
+tips:["Mg Oxide: امتصاب 4% فقط — تجنّبه دائماً","Mg Citrate وMalate للإمساك والتعب العضلي","علامات النقص: تشنجات، تعب، رجفة جفون، أرق، خفقان","الطهي يُفقد 80% من Mg في الخضار: المكمل ضروري"],
+warns:["Mg بجرعات عالية: إسهال خاصة Oxide وCitrate — انقل للـ Glycinate","!الفشل الكلوي: تراكم Mg خطير — احذر جداً"],
+phrase:"\"Mg Glycinate مساءً للنوم والاسترخاء، Mg Malate صباحاً للطاقة — لكل حالة الشكل المناسب\"",
+smart:"70% من البالغين ناقصون Mg. تشنجات أو أرق أو تعب = Mg أولاً وقبل أي شيء"},
+
+{id:"b12",icon:"🔴",name:"فيتامين B12",
+supps:[
+{n:"ميثيل كوبالامين Methyl B12",d:"1000mcg/يوم",t:"صباحاً تحت اللسان",b:"iRemedies B12 1000mcg | Now Methyl B12 1000mcg | Nature's Bounty B12 Methyl | Solgar Methyl B12 1000mcg | Puritan's Pride B12",f:"الشكل النشط — لا يحتاج تحويلاً في الكبد. Sublingual أفضل من الفموي للامتصاب."},
+{n:"5-MTHF Folate منشّط",d:"400-800mcg/يوم",t:"صباحاً",b:"Now 5-MTHF | Nature's Bounty Folic Acid | Solgar Folate Metafolin | Puritan's Pride Folic Acid",f:"B12 وFolate يعملان معاً في دورة Methionine. نقص أحدهما يُفاقم نقص الآخر دائماً."},
+{n:"فيتامين B6 P5P",d:"25-50mg/يوم",t:"مع الأكل",b:"Now P5P | Nature's Bounty B6 | Solgar B6 | Puritan's Pride B6",f:"الثلاثة معاً يُخفضون Homocysteine المرتبط بأمراض القلب والخرف والاكتئاب."},
+{n:"حديد (إذا نقص مصاحب)",d:"25mg/يوم",t:"صباحاً مع C",b:"Now Gentle Iron 25mg | Nature's Bounty Iron | Solgar Gentle Iron 25mg | Puritan's Pride Iron",f:"نقص B12 غالباً يصاحب نقص الحديد — Combined Anemia شائعة وتحتاج علاج مزدوج."}
+],
+tips:["Sublingual أفضل من Oral بكثير لضعف الامتصاص المعدي","أسباب النقص: نباتيون، PPI مزمن، كبار سن، Metformin","علامات النقص: تنميل، تعب، ضعف ذاكرة، اكتئاب","B12 IM injection عند نقص شديد أو سوء امتصاص"],
+warns:["Biotin عالٍ يُؤثر على تحاليل B12: أبلغ المختبر وأوقف 48h","B12 لا سمية معروفة بالجرعات العالية: مُريح"],
+phrase:"\"Methyl B12 + 5-MTHF: الثنائي الذكي يتجاوز العائق الجيني MTHFR ويعمل فوراً\"",
+smart:"كل مريض Metformin = نقص B12 محتمل. فحصه سنوياً حتمي"}
+],
+
+s:[
+{id:"preg",icon:"🤰",name:"المرأة الحامل",
+supps:[
+{n:"حمض الفوليك 5-MTHF منشّط",d:"400-800mcg/يوم",t:"صباحاً",b:"Now 5-MTHF | Nature's Bounty Folic Acid | Solgar Folate Metafolin | Puritan's Pride Folic Acid",f:"يمنع NTD (عيوب الأنبوب العصبي). يبدأ قبل الحمل بشهر. 5-MTHF لحاملي تحوّر MTHFR."},
+{n:"فيتامين D3",d:"2000-4000 IU/يوم",t:"صباحاً مع وجبة",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"يُحسّن نمو عظام وجهاز مناعة الجنين. نقصه مرتبط بسكري الحمل وضعف المناعة."},
+{n:"أوميغا 3 DHA عالٍ",d:"600-1000mg DHA/يوم",t:"مع الأكل",b:"Now Prenatal DHA | iRemedies Omega-3 | Nature's Bounty Fish Oil | Solgar Prenatal Omega-3",f:"DHA ضروري لتطور دماغ الجنين والشبكية. نقصه مرتبط بانخفاض معدل الذكاء."},
+{n:"حديد بيسجلايسينات",d:"25-50mg/يوم (حسب Hb)",t:"صباحاً مع فيتامين C",b:"Now Gentle Iron 25mg | Nature's Bounty Iron | Solgar Gentle Iron 25mg | Puritan's Pride Iron",f:"الاحتياج يتضاعف في الحمل. Bisglycinate أقل إمساكاً من Ferrous Sulfate بكثير."},
+{n:"ماغنيسيوم جليسينات",d:"300-400mg/يوم",t:"مساءً",b:"iRemedies Mag Glycinate | Now Magnesium Glycinate | Nature's Bounty Magnesium | Solgar Magnesium",f:"يُقلل تشنجات الساقين الشائعة جداً في الحمل. يساعد في منع Preeclampsia."},
+{n:"فيتامين B12",d:"1000mcg/يوم",t:"صباحاً",b:"iRemedies B12 | Now Methyl B12 | Nature's Bounty B12 | Solgar B12 | Puritan's Pride B12",f:"ضروري لتطور الجهاز العصبي للجنين. نقصه يُسبب عيوب الأنبوب العصبي أيضاً."}
+],
+tips:["تجنب سمك عالي الزئبق: سمك السيف، تونة كبيرة، قرش","تجنب جبن غير مبستر والأطعمة النيئة: خطر Listeria","تمرين معتدل 30 دقيقة/يوم: مشي وسباحة","تجنب فيتامين A Retinol بجرعات عالية"],
+warns:["!Vitamin A Retinol >10000 IU: تشوهات خلقية — ممنوع تماماً","!Valerian/Senna/Cascara: ممنوعة في الحمل","!أي مكمل جديد يستوجب موافقة الطبيب المشرف"],
+phrase:"\"DHA وFolate المنشّط استثمار مباشر في ذكاء طفلك وصحته — لا حمل بدونهما\"",
+smart:"الحامل على PPI للحموضة = تحتاج Mg وB12 حتماً — نقصهما شائع جداً"},
+
+{id:"elderly",icon:"👴",name:"كبار السن (65+)",
+supps:[
+{n:"فيتامين D3",d:"4000-5000 IU/يوم",t:"صباحاً مع وجبة",b:"iRemedies D3 4000IU | Now D3 5000IU | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3 5000IU",f:"نقصه شبه حتمي في كبار السن. يُقلل السقوط والكسور ويُحسّن وظيفة العضلات بشكل مُثبت."},
+{n:"كالسيوم سيترات",d:"1000-1200mg/يوم",t:"500-600mg × مرتين",b:"iRemedies Calcium Citrate | Now Calcium Citrate | Nature's Bounty Calcium | Solgar Calcium Citrate | Puritan's Pride Calcium",f:"Citrate لا يحتاج حمض معدي — مثالي لكبار السن الذين ينقص حمضهم المعدي."},
+{n:"فيتامين B12 Methyl",d:"1000mcg/يوم",t:"صباحاً تحت اللسان",b:"iRemedies B12 | Now Methyl B12 | Nature's Bounty B12 | Solgar Methyl B12 | Puritan's Pride B12",f:"امتصاب B12 يتراجع مع التقدم في السن. نقصه يُسبب الخرف والاعتلال العصبي."},
+{n:"CoQ10 يوبيكوينول",d:"100-200mg/يوم",t:"مع الأكل",b:"iRemedies CoQ10 200mg | Avernus CoQ10 | Now Ubiquinol | Nature's Bounty CoQ10 | Solgar CoQ10 | Puritan's Pride CoQ10",f:"إنتاجه يتراجع بشكل كبير مع السن. Ubiquinol أفضل من Ubiquinone للكبار."},
+{n:"أوميغا 3",d:"2-3g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُحمي من الخرف وأمراض القلب والالتهابات المزمنة المرتبطة بالشيخوخة."},
+{n:"ماغنيسيوم",d:"400mg/يوم",t:"مساءً",b:"iRemedies Mag | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"نقصه شائع في كبار السن. يُقلل خطر السقوط ويُحسّن النوم ووظيفة القلب."}
+],
+tips:["فحص دوري: D3، B12، Ferritin، TSH، Mg — أسباب الضعف العام","تمرين مقاومة: يُحافظ على كثافة العظام والعضلات","بروتين كافٍ 1.2-1.5g/kg: يمنع ضمور العضلات (Sarcopenia)","مراجعة الأدوية دورياً: كثير من مرضى السن على أدوية غير ضرورية"],
+warns:["!Calcium Carbonate: ضعف امتصاب — استخدم Citrate دائماً","مراجعة الجرعات: كبار السن أبطأ في التخلص من الأدوية والمكملات","NSAIDs: خطر أعلى على الكلى والمعدة"],
+phrase:"\"D3+B12+Ca Citrate+CoQ10: الرباعي الأساسي لكبار السن — يُحسّن الطاقة والتوازن والعظام\"",
+smart:"أي كبير سن يشكو تعباً وضعف ذاكرة = افحص B12 وD3 وThyroid أولاً"},
+
+{id:"athletes",icon:"🏃",name:"الرياضيون",
+supps:[
+{n:"بروتين مصل اللبن Whey",d:"25-40g بعد التمرين",t:"خلال 30 دقيقة بعد التمرين",b:"Now Sports Whey Protein | Nature's Bounty Protein | Solgar Whey To Go | Puritan's Pride Whey",f:"أسرع بروتين امتصاباً. يُحفّز MPS (بناء البروتين العضلي) ويُقلل تكسير العضلات."},
+{n:"كرياتين مونوهيدرات",d:"3-5g/يوم",t:"مع ماء بعد التمرين",b:"Now Creatine Monohydrate | Nature's Bounty Creatine | Solgar Creatine | Puritan's Pride Creatine",f:"أكثر المكملات الرياضية إثباتاً. يزيد ATP، القوة، وكتلة العضلات. آمن للاستخدام المزمن."},
+{n:"بيتا ألانين",d:"3.2-6.4g/يوم",t:"مقسمة (يُسبب وخزاً عادياً)",b:"Now Beta-Alanine | Nature's Bounty Beta-Alanine | Solgar Beta-Alanine | Puritan's Pride Beta-Alanine",f:"يرفع Carnosine العضلي — يُقلل Lactic Acid ويُطيل أداء التمرين عالي الكثافة."},
+{n:"ماغنيسيوم",d:"400-600mg/يوم",t:"بعد التمرين",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"يُفقد بالتعرق. يُقلل تشنجات العضلات ويُسرّع الاسترداد ويُحسّن جودة النوم."},
+{n:"L-جلوتامين",d:"5-10g بعد التمرين",t:"مباشرة بعد التمرين",b:"Now L-Glutamine | Nature's Bounty L-Glutamine | Solgar Glutamine | Puritan's Pride L-Glutamine",f:"يُقلل التعب العضلي ويُسرّع ترميم الأنسجة ويُقوّي المناعة بعد التمرين الشديد."},
+{n:"أوميغا 3",d:"2-3g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُقلل الالتهاب العضلي بعد التمرين ويُسرّع الاسترداد ويُحسّن نسبة العضل للدهون."}
+],
+tips:["ترطيب جيد: 400-600ml قبل التمرين، 150-250ml كل 15 دقيقة أثناءه","بروتين كافٍ 1.6-2.2g/kg لبناء العضلات","توازن الكربوهيدرات: قبل التمرين للطاقة، بعده للاستعادة","نوم 8-9 ساعات: هرمون النمو يُفرز ليلاً"],
+warns:["الكرياتين يرفع Creatinine في التحاليل: أبلغ الطبيب — ليس مشكلة","بيتا ألانين يُسبب وخزاً (Paresthesia): طبيعي وغير ضار","تجنب المكملات الرياضية غير المُعتمدة: خطر دوبينج"],
+phrase:"\"Creatine + Whey + Beta-Alanine: الثلاثي العلمي المُثبت لأداء رياضي أفضل\"",
+smart:"كثير من الرياضيين لا يعرفون أن الكرياتين المونوهيدرات أثبت وأرخص من كل أشكاله الأخرى"},
+
+{id:"fasting",icon:"🌙",name:"الصائمون (رمضان وغيره)",
+supps:[
+{n:"فيتامين D3+K2",d:"4000 IU D3 + 100mcg K2",t:"مع الإفطار مع وجبة دسمة",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3+K2 | Solgar D3+K2 | Puritan's Pride D3",f:"لا يتغير امتصابه بالصيام. مع الوجبة الدسمة عند الإفطار: امتصاب أمثل."},
+{n:"ماغنيسيوم",d:"400mg",t:"قبل النوم (بعد العشاء)",b:"iRemedies Mag Glycinate | Now Magnesium Glycinate | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"يُقلل تشنجات الساق الشائعة خلال رمضان ويُحسّن النوم ويُقلل الصداع."},
+{n:"أوميغا 3",d:"2g",t:"مع الإفطار",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"الصيام يُحسّن امتصاب أوميغا 3. مع الوجبة الدسمة عند الإفطار للأمثل."},
+{n:"فيتامين B-Complex",d:"جرعة واحدة",t:"مع الإفطار",b:"Now B-100 | Nature's Bounty B-100 | Solgar B-Complex | Puritan's Pride B-100",f:"يُعوّض نقص فيتامينات B الشائع خلال تغيّر نظام الأكل. يُقلل التعب."},
+{n:"بروبيوتيك",d:"10-20B CFU",t:"قبل الإفطار بـ 30 دقيقة",b:"iRemedies Probio | Now Probiotic | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"يُحسّن صحة الأمعاء المضطربة بتغيّر مواعيد الأكل ويُقلل Bloating."}
+],
+tips:["إفطار متوازن: بروتين + دهن صحي + خضار + سوائل","تجنب السكريات والأطعمة المصنّعة في الإفطار: تُسبب صداعاً وتعباً","شرب 2-2.5 لتر ماء بين الإفطار والسحور","سحور غني بالبروتين والألياف: يُطيل الشبع"],
+warns:["مرضى السكري: راقب السكر بعناية — الصيام يُغيّر ديناميكية الجلوكوز","مرضى الضغط: راقب قراءات ضغط الدم","الأدوية المجدوَلة: استشر الصيدلاني/الطبيب لإعادة جدولة مواعيدها"],
+phrase:"\"D3+Mg+B-Complex: الثلاثي الأمثل للصائم — يُقلل التعب ويُحسّن النوم والطاقة\"",
+smart:"Mg قبل النوم: يُقلل تشنجات الساق الليلية التي تُشكو منها أغلب الصائمين"}
+],
+
+sk:[
+{id:"acne",icon:"😤",name:"حب الشباب (أكني)",
+supps:[
+{n:"زنك بيكولينات",d:"30-40mg/يوم",t:"مع الأكل",b:"iRemedies Zinc | Avernus Zinc | Now Zinc Picolinate 30mg | Nature's Bounty Zinc 50mg | Solgar Zinc Picolinate 22mg | Puritan's Pride Zinc",f:"يُثبّط 5-Alpha Reductase يُقلل DHT ومضاد حيوي طبيعي. فعّال كـ Tetracycline منخفض الجرعة في دراسات."},
+{n:"أوميغا 3",d:"2-3g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُوازن نسبة Omega-6:3 — Omega-6 الزائد يزيد الإنتاج الدهني والالتهاب الجريبي."},
+{n:"فيتامين D3",d:"2000-4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"يُعزز Antimicrobial Peptides في الجلد ضد P.acnes ويُعدّل المناعة الموضعية."},
+{n:"بروبيوتيك",d:"10-30B CFU",t:"صباحاً",b:"iRemedies Probio | Now Probiotic | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"محور الأمعاء-الجلد: Dysbiosis المعوي يُفاقم الأكني. L. rhamnosus مُثبت بأبحاث."},
+{n:"كركم Curcumin",d:"500mg × مرتين",t:"مع الأكل الدسم",b:"Now Curcumin | Nature's Bounty Turmeric | Solgar Full Spectrum Curcumin | Puritan's Pride Turmeric",f:"مُثبّط COX-2 يُقلل الاحمرار والتورم. يعمل مع الزنك تآزرياً ضد الالتهاب."},
+{n:"NAC N-أستيل سيستئين",d:"600mg × مرتين",t:"مع الأكل",b:"Now NAC 600mg | Nature's Bounty NAC | Solgar NAC 600mg | Puritan's Pride NAC",f:"يُجدّد Glutathione الجلدي ويُقلل Oxidative Stress. مفيد في الأكني الهرموني تحديداً."}
+],
+tips:["غسيل الوجه مرتين يومياً (صباحاً ومساءً) — لا أكثر لتجنب تحفيز الزهم","Salicylic Acid 2% موضعي: يُفتح المسام","Retinol ليلاً: يُنظم تجدد البشرة ويُقلل الأكني","واقي شمس غير دهني (Non-comedogenic) يومياً","تجنب الضغط على البثور: تُسبب تصبغات وندبات دائمة"],
+warns:["فيتامين A Retinol بجرعات عالية: ممنوع في الحمل","الزنك >40mg: أضف Copper 1mg لمنع نقصه","الكركم يُعزز مضادات التخثر: احذر مع وارفارين"],
+phrase:"\"الزنك + Omega-3 + Probiotics: بروتوكول الأكني من الداخل — أكثر فعالية من الكريمات وحدها\"",
+smart:"مريضة أكني على حبوب منع الحمل = أكني هرموني — Zinc + Saw Palmetto أنسب"},
+
+{id:"drskin",icon:"💧",name:"البشرة الجافة",
+supps:[
+{n:"أوميغا 3+6+9",d:"2-3g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُعيد بناء حاجز الدهون في الجلد (Lipid Barrier). نقص الأحماض الدهنية الأساسية = جفاف مزمن."},
+{n:"هيالورونيك أسيد",d:"100-200mg/يوم",t:"صباحاً",b:"Now Hyaluronic Acid | Nature's Bounty Hyaluronic Acid | Solgar Hyaluronic Acid | Puritan's Pride HA",f:"كل جزيء HA يُمسك 1000x وزنه ماءً. يُرطب الجلد من الداخل للخارج."},
+{n:"كولاجين ببتيد",d:"10g/يوم",t:"صباحاً مع C",b:"Now Collagen Peptides | Nature's Bounty Collagen | Solgar Collagen | Puritan's Pride Collagen",f:"يُعيد بناء بنية الجلد. دراسات تُظهر تحسناً ملحوظاً في الترطيب والمرونة في 8 أسابيع."},
+{n:"فيتامين E",d:"400 IU/يوم",t:"مع الأكل الدسم",b:"Now Natural Vitamin E | Nature's Bounty Vitamin E | Solgar Vitamin E | Puritan's Pride Vitamin E",f:"يُقلل Lipid Peroxidation في الجلد ويُحافظ على حاجز الرطوبة."},
+{n:"فيتامين A بيتا كاروتين",d:"5000-10000 IU/يوم",t:"مع الأكل الدسم",b:"Now Beta Carotene | Nature's Bounty Vitamin A | Solgar Beta Carotene | Puritan's Pride Beta Carotene",f:"يُنظم تجدد خلايا البشرة ويُقلل التقشر والجفاف. بيتا كاروتين آمن بخلاف Retinol."}
+],
+tips:["ترطيب الجلد مباشرة بعد الاستحمام (خلال 3 دقائق)","تجنب الصابون القلوي: يُدمّر الحاجز الدهني","المرطبات التي تحتوي Ceramides وHyaluronic Acid موضعياً","رطوبة المنزل 40-60%: مُرطب هواء مفيد","ماء كافٍ 2-2.5 لتر يومياً: الترطيب من الداخل"],
+warns:["فيتامين A Retinol >10000 IU في الحمل: ممنوع","E بجرعات >1000 IU مع مضادات التخثر: احذر"],
+phrase:"\"Omega-3 + HA + Collagen: الثلاثي العلمي لترطيب الجلد من الداخل — يعمل خلال 4-6 أسابيع\"",
+smart:"جفاف الجلد المقاوم للعلاج = افحص Thyroid وD3 وOmega-3 Index"},
+
+{id:"eczema",icon:"🔴",name:"الإكزيما / الأتوبيك",
+supps:[
+{n:"بروبيوتيك (L.rhamnosus GG)",d:"10-30B CFU",t:"صباحاً",b:"iRemedies Probio | Now Probiotic | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"Cochrane 2018: يُقلل شدة الإكزيما. L.rhamnosus GG الأكثر دراسةً. يُعدّل Th1/Th2."},
+{n:"أوميغا 3",d:"2-3g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُقلل Leukotrienes والـ PGE2 المسببين للالتهاب والحكة في الإكزيما."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"نقصه مرتبط بشدة الإكزيما. يُحسّن وظيفة حاجز الجلد (Skin Barrier) مباشرة."},
+{n:"زنك",d:"15-25mg/يوم",t:"مع الأكل",b:"iRemedies Zinc | Now Zinc | Nature's Bounty Zinc | Solgar Zinc | Puritan's Pride Zinc",f:"مضاد التهاب يُرمّم بطانة الجلد. نقصه مرتبط بتفاقم الإكزيما."},
+{n:"كيرسيتين",d:"500-1000mg/يوم",t:"مع الأكل",b:"Now Quercetin | Nature's Bounty Quercetin | Solgar Quercetin | Puritan's Pride Quercetin",f:"مُثبّط Mast Cell يُقلل Histamine والـ IL-4 المسببين للحكة والاحمرار."}
+],
+tips:["ترطيب مكثف بعد الاستحمام مباشرة بمرطبات خالية من العطور","تحديد المحفزات: صابون، عطور، أقمشة اصطناعية، أطعمة","تجنب الاستحمام بماء ساخن: يُجفف الجلد ويُفاقم الحكة","الملابس القطنية الفضفاضة: تُقلل التهيج","إدارة التوتر: Flares مرتبطة بالتوتر"],
+warns:["Corticosteroids الموضعية: استخدام محدود تحت إشراف الجلدية","Tacrolimus: بديل آمن لمناطق الوجه والطيات","تجنب المُحفّزات الغذائية إذا ثبتت علاقتها"],
+phrase:"\"Probiotics + D3 + Omega-3: بروتوكول الإكزيما من الداخل — يُعالج السبب لا الأعراض فقط\"",
+smart:"إكزيما مقاومة = افحص H.pylori وفحص حساسية الطعام (IgE وIgG)"},
+
+{id:"hyper_pig",icon:"🌟",name:"التصبغات / البقع الداكنة",
+supps:[
+{n:"فيتامين C (Ester-C)",d:"1000-2000mg/يوم",t:"صباحاً",b:"iRemedies Vit C 1000mg | Now Ester-C | Nature's Bounty C-1000 | Solgar Ester-C 1000mg | Puritan's Pride Ester-C",f:"يُثبّط Tyrosinase إنزيم تصنيع الميلانين. يُفتّح التصبغات من الداخل ويُعزّز واقي الشمس."},
+{n:"NAC",d:"600mg × مرتين",t:"مع الأكل",b:"Now NAC 600mg | Nature's Bounty NAC | Solgar NAC 600mg | Puritan's Pride NAC",f:"يُحوّل الميلانين الداكن (Eumelanin) للأفتح (Pheomelanin). يُقلل التصبغات بشكل مُثبت."},
+{n:"Glutathione مُؤكسَد",d:"500mg/يوم",t:"على معدة فارغة",b:"Now Glutathione | Nature's Bounty Glutathione | Solgar Glutathione | Puritan's Pride Glutathione",f:"يُقلل إنتاج الميلانين الداكن ويُبيّض الجلد من الداخل. أكثر فعالية بشكل Sublingual."},
+{n:"فيتامين E",d:"400 IU/يوم",t:"مع الأكل",b:"Now Natural Vitamin E | Nature's Bounty Vitamin E | Solgar Vitamin E | Puritan's Pride Vitamin E",f:"يعمل مع C تآزرياً في تثبيط Tyrosinase. C تُعيد تنشيط E بعد استخدامه."},
+{n:"أوميغا 3",d:"2g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُقلل الالتهاب الضوئي المُحفّز للميلانين ويُحسّن بنية الجلد."}
+],
+tips:["واقي شمس SPF 50+ يومياً: أهم خطوة — بدونه كل المكملات غير مجدية","تجنب الشمس المباشرة 10 صباحاً - 4 مساءً","Niacinamide 5% موضعي: يُثبّط نقل الميلانين للخلايا الجلدية","تجنب العطور الموضعية في الشمس: تُسبب تصبغات كيميائية","Alpha Arbutin موضعي: مُثبّط Tyrosinase آمن"],
+warns:["C موضعي قبل الشمس: قد يُسبب حرقاً — استخدم ليلاً","Hydroquinone: يُستخدم فقط بإشراف طبي وبشكل متقطع","الحمل: Hydroquinone وRetinol ممنوعان"],
+phrase:"\"فيتامين C + NAC + Glutathione: الثلاثي العلمي لتفتيح التصبغات من الداخل — 3 أشهر للنتيجة\"",
+smart:"واقي شمس يومياً أهم من كل المكملات — بدونه التصبغات لن تتحسن"},
+
+{id:"wrinkles",icon:"⏰",name:"الشيخوخة المبكرة والتجاعيد",
+supps:[
+{n:"كولاجين ببتيد Type I",d:"10g/يوم",t:"صباحاً على معدة فارغة مع C",b:"Now Collagen Peptides | Nature's Bounty Collagen | Solgar Collagen | Puritan's Pride Collagen",f:"دراسات تُظهر تقليل عمق التجاعيد بـ 20-30% و تحسين مرونة الجلد في 8-12 أسبوع."},
+{n:"هيالورونيك أسيد",d:"100-200mg/يوم",t:"صباحاً",b:"Now Hyaluronic Acid | Nature's Bounty Hyaluronic Acid | Solgar Hyaluronic Acid | Puritan's Pride HA",f:"يُرطب الجلد عميقاً ويُملأ التجاعيد من الداخل. يُقلل جفاف الجلد المُعمّق للتجاعيد."},
+{n:"CoQ10",d:"100-200mg/يوم",t:"صباحاً مع الأكل",b:"iRemedies CoQ10 | Now CoQ10 | Nature's Bounty CoQ10 | Solgar CoQ10 | Puritan's Pride CoQ10",f:"يُقلل مع التقدم في السن. يُحمي خلايا الجلد من Oxidative Stress المسبب للتجاعيد."},
+{n:"أستاكزانثين Astaxanthin",d:"4-12mg/يوم",t:"مع الأكل الدسم",b:"Now Astaxanthin | Nature's Bounty Astaxanthin | Solgar Astaxanthin | Puritan's Pride Astaxanthin",f:"أقوى مضاد أكسدة طبيعي (6000x أقوى من C). يُحمي الجلد من التلف الضوئي ويُقلل التجاعيد."},
+{n:"فيتامين C",d:"1000-2000mg/يوم",t:"صباحاً",b:"iRemedies Vit C | Now Ester-C | Nature's Bounty C-1000 | Solgar Ester-C | Puritan's Pride C-1000",f:"ضروري لتخليق الكولاجين. يُقلل Oxidative Stress ويُفتّح الجلد ويُوحّد لونه."}
+],
+tips:["واقي شمس SPF 50+ يومياً: أهم عامل لمكافحة الشيخوخة","Retinol ليلاً: الأكثر إثباتاً موضعياً — ابدأ 0.1% وزد تدريجياً","النوم على الظهر: تُقلل تجاعيد النوم الجانبية","ترطيب موضعي غني بـ HA وCeramides","تمرين الوجه والرقبة: يُحسّن التوتر العضلي"],
+warns:["Retinol موضعي: إحمرار مؤقت في البداية — طبيعي","C موضعي: يُسبب لسعة إذا كان >20% — ابدأ بتركيز منخفض"],
+phrase:"\"Collagen + HA + Astaxanthin + CoQ10: البروتوكول الشامل لمكافحة الشيخوخة من الداخل\"",
+smart:"Astaxanthin الأقل شهرةً لكن الأقوى علمياً — كثيرون لا يعرفونه"}
+],
+
+h:[
+{id:"hairloss_m",icon:"👨‍🦲",name:"تساقط الشعر (الذكور)",
+supps:[
+{n:"ساو بالميتو Saw Palmetto",d:"320mg/يوم (85% Sterols)",t:"مع الأكل",b:"Now Saw Palmetto | Nature's Bounty Saw Palmetto | Solgar Saw Palmetto | Puritan's Pride Saw Palmetto",f:"مُثبّط 5-Alpha Reductase — يُقلل تحويل Testosterone لـ DHT. نفس آلية Finasteride طبيعياً."},
+{n:"بيوتين",d:"5000-10000mcg/يوم",t:"صباحاً",b:"iRemedies Biotin 10000mcg | Now Biotin 10000mcg | Nature's Bounty Biotin 10000mcg | Solgar Biotin 5000mcg | Puritan's Pride Biotin",f:"يُحفّز Keratin Infrastructure — بنية الشعر. نقصه يُسبب تساقطاً وهشاشةً واضحَين."},
+{n:"زنك",d:"25-30mg/يوم",t:"مع العشاء",b:"iRemedies Zinc | Now Zinc Picolinate 30mg | Nature's Bounty Zinc 50mg | Solgar Zinc Picolinate 22mg | Puritan's Pride Zinc",f:"يُثبّط 5-Alpha Reductase ويُشارك في تركيب Keratin. نقصه من أشيع أسباب التساقط."},
+{n:"حديد + فيتامين C",d:"25-50mg حديد + 500mg C",t:"صباحاً على معدة فارغة",b:"Now Gentle Iron 25mg + iRemedies Vit C | Nature's Bounty Iron | Solgar Gentle Iron",f:"Ferritin <70 ng/mL مرتبط بتساقط الشعر حتى بدون أنيميا. الهدف >80 ng/mL."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"مستقبلات D3 موجودة في البصيلة الشعرية. نقصه يُسبب Telogen Effluvium (تساقط منتشر)."},
+{n:"أشواجاندا KSM-66",d:"600mg/يوم",t:"مساءً",b:"Now Ashwagandha | Nature's Bounty Ashwagandha | Solgar Ashwagandha | Puritan's Pride Ashwagandha",f:"يُقلل Cortisol المزمن — التوتر يُحوّل الشعر لمرحلة Telogen. يُنشّط البصيلات الخاملة."}
+],
+tips:["فحص: Ferritin، TSH، Testosterone، DHT، D3 — حدّد السبب أولاً","تدليك فروة الرأس 4 دقائق يومياً: يُحسّن دوران الدم للبصيلات (دراسة يابانية 2016)","Minoxidil 5% موضعي: الأكثر إثباتاً OTC — يُضاف للمكملات لا بديلاً","بروتين كافٍ 1.5g/kg: الشعر بروتين خالص (Keratin)"],
+warns:["Saw Palmetto يُخفض PSA: أبلغ الطبيب عند فحص البروستاتا","!Biotin >5000mcg يُؤثر على TSH وTroponin: أوقف 48h قبل التحاليل","الزنك >40mg: أضف Copper 1mg"],
+phrase:"\"Saw Palmetto + Zinc + Biotin + D3: الرباعي الذهبي للشعر — يعمل على المنبع الهرموني والتغذوي\"",
+smart:"Ferritin <70 حتى بدون أنيميا = تساقط شعر. افحص Ferritin قبل أي علاج آخر"},
+
+{id:"hairloss_f",icon:"👩‍🦱",name:"تساقط الشعر (الإناث)",
+supps:[
+{n:"حديد بيسجلايسينات",d:"25-50mg/يوم",t:"صباحاً مع فيتامين C",b:"Now Gentle Iron 25mg | Nature's Bounty Iron | Solgar Gentle Iron 25mg | Puritan's Pride Iron",f:"Ferritin <70 ng/mL السبب الأول لتساقط الشعر عند النساء. Bisglycinate أقل آثاراً جانبية."},
+{n:"بيوتين",d:"5000-10000mcg/يوم",t:"صباحاً",b:"iRemedies Biotin 10000mcg | Now Biotin 10000mcg | Nature's Bounty Biotin | Solgar Biotin 5000mcg | Puritan's Pride Biotin",f:"يُحفّز Keratin Infrastructure. المُكمّل الأشهر لصحة الشعر مع دليل علمي معقول."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"نقصه يُسبب Telogen Effluvium — تساقط منتشر. تصحيحه يُعيد الدورة الشعرية الطبيعية."},
+{n:"زنك",d:"15-25mg/يوم",t:"مع العشاء",b:"iRemedies Zinc | Now Zinc | Nature's Bounty Zinc | Solgar Zinc 22mg | Puritan's Pride Zinc",f:"ضروري لتخليق Keratin. نقصه من أسباب التساقط. نقصه شائع في الحامل وبعد الولادة."},
+{n:"ساو بالميتو (للتساقط الهرموني)",d:"320mg/يوم",t:"مع الأكل",b:"Now Saw Palmetto | Nature's Bounty Saw Palmetto | Solgar Saw Palmetto | Puritan's Pride Saw Palmetto",f:"للنساء ذوات ارتفاع الـ DHT (الأكني + التساقط + الزيادة في الشعر الوجه)."},
+{n:"L-ليسين",d:"500-1000mg/يوم",t:"على معدة فارغة",b:"Now L-Lysine | Nature's Bounty L-Lysine | Solgar L-Lysine 500mg | Puritan's Pride L-Lysine",f:"يُحسّن امتصاب الحديد ويُشارك في تخليق Collagen حول البصيلة الشعرية."}
+],
+tips:["فحص: Ferritin، TSH، Testosterone، D3، B12 — أسباب أساسية","Telogen Effluvium بعد الولادة: طبيعي — يُحسّن في 6-12 شهر","تجنب الحرارة الزائدة (هيرويز، سيشوار): يُضعف بنية الشعر","تقليل الرجيم القاسي: نقص السعرات يُسبب تساقطاً"],
+warns:["!Biotin >5000mcg: يُؤثر على تحاليل الغدة الدرقية وTroponin","الحديد بدون فحص Ferritin: لا تعطِه بشكل عشوائي","Saw Palmetto في الحمل: ممنوع"],
+phrase:"\"Ferritin + D3 + Biotin + Zinc: افحص الأربعة قبل أي علاج — 80% من حالات التساقط لها سبب قابل للعلاج\"",
+smart:"بعد الولادة: تساقط طبيعي في 3-6 أشهر — ارفع Ferritin وأضف Biotin + Zinc"},
+
+{id:"dandruff",icon:"❄️",name:"قشرة الشعر",
+supps:[
+{n:"زنك بيريثيون (Pyrithione)",d:"15-25mg زنك عن طريق الفم",t:"مع الأكل",b:"iRemedies Zinc | Now Zinc | Nature's Bounty Zinc | Solgar Zinc | Puritan's Pride Zinc",f:"يُثبّط نمو Malassezia الفطر المسبب الرئيسي للقشرة. مُستخدم موضعياً وفموياً."},
+{n:"أوميغا 3",d:"2g/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"يُقلل التهاب فروة الرأس ويُرطّبها. نقص الأحماض الدهنية الأساسية يُسبب قشرة جافة."},
+{n:"بروبيوتيك",d:"10-20B CFU",t:"صباحاً",b:"iRemedies Probio | Now Probiotic | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"الميكروبيوم الجلدي مرتبط بصحة فروة الرأس. يُقلل Malassezia بشكل غير مباشر."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"نقصه مرتبط بالقشرة الجافة والإكزيما الجلدية الدهنية (Seborrheic Dermatitis)."},
+{n:"B-Complex",d:"جرعة يومية",t:"صباحاً مع الأكل",b:"Now B-50 | Nature's Bounty B-100 | Solgar B-Complex | Puritan's Pride B-50",f:"B6 وBiotin وB12 نقصها مرتبط بالقشرة والتقشر الجلدي."}
+],
+tips:["شامبو الكيتوكونازول 2%: للقشرة الفطرية — مرتين أسبوعياً","شامبو السيلينيوم أو الزنك بيريثيون: يُقلل Malassezia","تجنب المنتجات الكحولية على فروة الرأس: تُجفّف وتُفاقم","تقليل التوتر: القشرة تزداد مع التوتر","تجنب الحرارة الزائدة في الاستحمام"],
+warns:["القشرة المقاومة قد تكون Psoriasis أو Lichen Planus: جلدية","Selenium Sulfide الشامبو: تجنب الاتصال بالعيون","الكيتوكونازول الفموي: أثار جانبية كبدية — للحالات الصعبة فقط"],
+phrase:"\"Zinc + Omega-3 + D3: معالجة جذر القشرة من الداخل بينما الشامبو يعالج الخارج\"",
+smart:"قشرة + احمرار + قشور دهنية = Seborrheic Dermatitis — يحتاج كيتوكونازول + زنك + D3"}
+],
+
+g:[
+{id:"immunity",icon:"🛡️",name:"تعزيز المناعة",
+supps:[
+{n:"فيتامين D3+K2",d:"D3: 5000IU + K2: 100mcg",t:"صباحاً مع وجبة دسمة",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3+K2 | Solgar D3+K2 | Puritan's Pride D3",f:"70% من الإمارات ناقصون D3. يُنشّط >200 جين مناعي ويُنتج Cathelicidin (مضاد حيوي طبيعي)."},
+{n:"زنك بيكولينات",d:"15-25mg/يوم",t:"مع العشاء",b:"iRemedies Zinc | Avernus Zinc | Now Zinc Picolinate | Nature's Bounty Zinc 50mg | Solgar Zinc Picolinate 22mg | Puritan's Pride Zinc",f:"ضروري لتكاثر وتمايز الخلايا التائية. نقصه الطفيف يُضعف المناعة بشكل كبير."},
+{n:"فيتامين C",d:"1000-2000mg/يوم",t:"موزع على الوجبات",b:"iRemedies Vit C 1000mg | Now C-1000 | Nature's Bounty C-1000 | Solgar Ester-C 1000mg | Puritan's Pride C-1000",f:"يُعزز إنتاج Neutrophils وLymphocytes ويُقلل مدة نزلات البرد بـ 8-14%."},
+{n:"بيتا جلوكان 1,3/1,6",d:"250-500mg/يوم",t:"صباحاً قبل الأكل",b:"Now Beta Glucan 250mg | Nature's Bounty Beta Glucan | Solgar Beta Glucan | Puritan's Pride Beta Glucan",f:"يُنشّط Macrophages وNK Cells مباشرة. مُثبت في تقليل تكرار التهابات الجهاز التنفسي."},
+{n:"بروبيوتيك متعدد السلالات",d:"20-50B CFU",t:"صباحاً قبل الأكل",b:"iRemedies Probio | Now Probiotic-10 | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"70-80% من جهاز المناعة في الأمعاء (GALT). تنويع الميكروبيوم = مناعة أقوى."},
+{n:"سيلينيوم",d:"100-200mcg/يوم",t:"مع الأكل",b:"iRemedies Selenium | Now Selenium | Nature's Bounty Selenium | Solgar Selenium 200mcg | Puritan's Pride Selenium",f:"ضروري لتنشيط Glutathione Peroxidase وتكاثر Lymphocytes. يُقلل الحمل الفيروسي."}
+],
+tips:["نوم 7-9 ساعات: قلة النوم تُقلل NK Cells بـ 70%","تمرين معتدل 30-45 دقيقة: يُنشّط المناعة — الشديد جداً يُثبّطها مؤقتاً","الحد من السكر: 25g ترفع تثبيط البلاعم لـ 5 ساعات","ترطيب كافٍ 2-3 لتر يومياً: السوائل تحمل الخلايا المناعية"],
+warns:["!إكيناسيا ممنوعة في Lupus وMS وRA وأمراض المناعة الذاتية: تُفاقمها","Zinc >40mg مزمناً: يُثبّط المناعة بدلاً من تعزيزها","بيتا جلوكان مع أدوية المناعة المثبّطة (Post-transplant): راجع الطبيب"],
+phrase:"\"D3+Zinc+Probiotics: المثلث الذهبي للمناعة — طبيعي، آمن، ومُثبت علمياً لكل الأعمار\"",
+smart:"بعد فترات التوتر الشديد = المناعة في أدنى مستوياتها — وقت مثالي لبروتوكول التعزيز"},
+
+{id:"energy",icon:"⚡",name:"التعب المزمن وضعف الطاقة",
+supps:[
+{n:"فيتامين B-Complex B-100",d:"جرعة واحدة/يوم",t:"صباحاً مع الفطار",b:"Now B-100 | Nature's Bounty B-100 | Solgar B-Complex 100 | Puritan's Pride B-100",f:"B1, B2, B3, B5, B6, B7, B9, B12 معاً. ضروري لإنتاج ATP في كل خلية. الطاقة تبدأ من هنا."},
+{n:"CoQ10 يوبيكوينول",d:"100-200mg/يوم",t:"صباحاً مع الأكل",b:"iRemedies CoQ10 200mg | Avernus CoQ10 | Now Ubiquinol | Nature's Bounty CoQ10 | Solgar CoQ10 | Puritan's Pride CoQ10",f:"مُحرّك الميتوكوندريا — بدونه لا يُنتج ATP بكفاءة. Ubiquinol للكبار >45 سنة."},
+{n:"ماغنيسيوم مالات",d:"400-600mg/يوم",t:"صباحاً",b:"iRemedies Mag | Now Magnesium Malate | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"Malate يُشارك في دورة Krebs — يُقلل التعب العضلي والذهني ويزيد الطاقة."},
+{n:"Rhodiola Rosea",d:"400mg/يوم",t:"صباحاً قبل الأكل",b:"Now Rhodiola | Nature's Bounty Rhodiola | Solgar Rhodiola | Puritan's Pride Rhodiola",f:"مُكيّف للإجهاد يُقلل Cortisol ويُحسّن القدرة الذهنية والجسدية في الإجهاد المزمن."},
+{n:"فيتامين D3",d:"4000 IU/يوم",t:"صباحاً",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"نقصه السبب الأول لأعراض التعب المزمن. تصحيحه قد يُحسّن الطاقة بشكل درامي."},
+{n:"L-كارنيتين",d:"1-2g/يوم",t:"صباحاً قبل التمرين",b:"Now L-Carnitine | Nature's Bounty L-Carnitine | Solgar L-Carnitine | Puritan's Pride L-Carnitine",f:"ينقل الأحماض الدهنية للميتوكوندريا للحرق. يُقلل التعب العضلي ويُحسّن أداء القلب."}
+],
+tips:["فحص: D3، B12، Ferritin، TSH، Mg، Glucose — أسباب شائعة وقابلة للعلاج","نوم جيد 7-8 ساعات: الطاقة الحقيقية تبدأ من هنا","تمرين منتظم حتى خفيف: يُحسّن الطاقة بشكل مُثبت","تحديد الأطعمة المسببة للتعب: السكر والمعالج يُسبب تعباً بعد الأكل"],
+warns:["التعب المزمن قد يكون Chronic Fatigue Syndrome (ME/CFS): تشخيص متخصص","Rhodiola في فترة مساء: قد يُسبب أرقاً — صباحاً فقط","L-Carnitine قد يرفع TMAO: استخدم بحكمة"],
+phrase:"\"B-Complex + CoQ10 + Mg Malate: البروتوكول الأساسي للطاقة الخلوية — يعمل من الداخل\"",
+smart:"تعب مزمن بدون فحص D3 وB12 وThyroid وFerritin = تشخيص غير مكتمل — هذه الأربعة أولاً"},
+
+{id:"sleep",icon:"😴",name:"اضطرابات النوم (أرق)",
+supps:[
+{n:"ماغنيسيوم جليسينات",d:"400mg مساءً",t:"ساعة قبل النوم",b:"iRemedies Mag Glycinate 400mg | Now Magnesium Glycinate | Nature's Bounty Magnesium | Solgar Magnesium Glycinate | Puritan's Pride Magnesium",f:"يُهدّئ NMDA Receptors ويُنشّط GABA — يُقصّر وقت الدخول للنوم ويُحسّن عمقه."},
+{n:"ميلاتونين",d:"0.5-3mg (ابدأ منخفضاً)",t:"قبل النوم بـ 30-60 دقيقة",b:"iRemedies Melatonin | Now Melatonin 3mg | Nature's Bounty Melatonin | Solgar Melatonin | Puritan's Pride Melatonin",f:"0.5-1mg أكثر فسيولوجية من 5-10mg. يُنظم الساعة البيولوجية. مثالي لـ Jet Lag."},
+{n:"L-ثيانين",d:"200mg مساءً",t:"قبل النوم بساعة",b:"Now L-Theanine 200mg | Nature's Bounty L-Theanine | Solgar L-Theanine | Puritan's Pride L-Theanine",f:"يُحفّز موجات ألفا الدماغية — استرخاء مركّز يُهيّئ للنوم دون تأثير تخديري."},
+{n:"فاليريان",d:"300-600mg",t:"قبل النوم بـ 30-60 دقيقة",b:"Now Valerian Root | Nature's Bounty Valerian | Solgar Valerian Root | Puritan's Pride Valerian",f:"يُعزز نشاط GABA. يحتاج 2-4 أسابيع للاستجابة الكاملة. للأرق المصحوب بقلق."},
+{n:"5-HTP",d:"100-200mg",t:"قبل النوم بساعة",b:"Now 5-HTP 100mg | Nature's Bounty 5-HTP | Solgar 5-HTP | Puritan's Pride 5-HTP",f:"سلف Serotonin→Melatonin. يُحسّن جودة النوم ويُقلل الاستيقاظ الليلي."}
+],
+tips:["إغلاق الشاشات ساعة قبل النوم: الضوء الأزرق يُثبّط الميلاتونين","نوم وصحوة في نفس التوقيت يومياً: أهم عامل","غرفة نوم مظلمة وباردة (18-20°C)","تجنب الكافيين بعد 2 مساءً","CBT-I (العلاج السلوكي المعرفي للأرق): أكثر فعالية من أي مكمل على المدى البعيد"],
+warns:["!5-HTP مع SSRIs/SNRIs: خطر Serotonin Syndrome","فاليريان يُعزز تأثير المهدئات: احذر مع Benzodiazepines","ميلاتونين >5mg: قد يعكس تأثيره — ابدأ منخفضاً"],
+phrase:"\"Mg Glycinate + L-Theanine + Melatonin: البروتوكول الطبيعي الكامل للنوم — غير مُدمن\"",
+smart:"ميلاتونين لـ Jet Lag: ابدأ 0.5mg في وقت نوم الوجهة الجديدة — فعّال جداً"},
+
+{id:"brain",icon:"🧩",name:"صحة الدماغ والذاكرة",
+supps:[
+{n:"أوميغا 3 DHA عالٍ",d:"2-3g DHA/يوم",t:"مع الأكل",b:"Avernus Omega-3 | iRemedies Omega-3 | Now DHA | Nature's Bounty Fish Oil | Solgar Omega-3 | Puritan's Pride Omega-3",f:"DHA مُكوّن رئيسي لأغشية الخلايا العصبية (60% من دهون الدماغ). ضروري للتشابكات العصبية."},
+{n:"ماغنيسيوم L-ثريونات",d:"2000mg/يوم",t:"صباحاً ومساءً",b:"Now Magtein | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"يعبر الحاجز الدموي الدماغي — يُحسّن كثافة المشابك العصبية وذاكرة قصيرة المدى."},
+{n:"Phosphatidylserine",d:"300mg/يوم",t:"مع الأكل",b:"Now Phosphatidylserine 100mg | Nature's Bounty PS | Solgar Phosphatidylserine | Puritan's Pride PS",f:"FDA Qualified Health Claim للخرف. مُكوّن غشاء الخلية العصبية — يُحسّن الذاكرة والتركيز."},
+{n:"جنكة بيلوبا",d:"120-240mg/يوم",t:"مع الأكل مقسمة",b:"Now Ginkgo Biloba | Nature's Bounty Ginkgo | Solgar Ginkgo Biloba | Puritan's Pride Ginkgo",f:"يُحسّن دوران الدم الدماغي. Cochrane Review: يُحسّن الإدراك في الخرف المبكر."},
+{n:"فيتامين B12+Folate+B6",d:"B12: 1000mcg + 5-MTHF + B6",t:"صباحاً",b:"Now Homocysteine | Nature's Bounty B-Complex | Solgar Homocysteine | Puritan's Pride B",f:"Homocysteine مرتفع يُدمّر الأوعية الدماغية. Oxford Study: خفضه يُبطّئ ضمور الدماغ."},
+{n:"NAC",d:"600mg × مرتين",t:"مع الأكل",b:"Now NAC 600mg | Nature's Bounty NAC | Solgar NAC | Puritan's Pride NAC",f:"يُجدّد Glutathione الدماغي ويُقلل Neuroinflammation. مفيد في الاكتئاب والقلق أيضاً."}
+],
+tips:["تحفيز ذهني يومي: قراءة، ألغاز، تعلم مهارة — يُقوّي Cognitive Reserve","تمرين هوائي 30 دقيقة: ينشّط BDNF ويُقلل Amyloid-beta","نوم منتظم: الدماغ يُنظّف Amyloid أثناء النوم (Glymphatic System)","MIND Diet: يُقلل ألزهايمر بـ 53%"],
+warns:["!Ginkgo + مضادات التخثر + Aspirin: خطر نزيف دماغي","PS من صويا: خالٍ من الجلوتين لكن راجع في حساسية الصويا","أي مكمل جديد لمرضى الخرف: ناقش مع طبيب العصب"],
+phrase:"\"DHA + Mg L-Threonate + PS + Ginkgo: بروتوكول صحة الدماغ الكامل — يعمل على كل مستوى\"",
+smart:"Homocysteine >12 µmol/L قابل للعلاج بـ B12+Folate — من أشيع الأسباب القابلة للتعديل"}
+]
+}
+},
+
+en:{
+sections:[
+{id:"c",icon:"🫀",name:"Chronic Diseases"},
+{id:"o",icon:"💊",name:"Common OTC"},
+{id:"s",icon:"👶",name:"Special Cases"},
+{id:"sk",icon:"🧴",name:"Skin Care"},
+{id:"h",icon:"💆",name:"Hair Care"},
+{id:"g",icon:"🌿",name:"General Health"}
+],
+L:{
+logo:"Pharma Atlas Pro",sub:"Cross-Selling Reference • BNF/USP/UAE",
+search:"Search a medical condition...",back:"Back",backA:"←",
+ref:"References: BNF | USP | UAE Drug Guide",
+cs:"Companion Supplements",tips:"Evidence-Based Health Tips",
+warns:"Warnings & Drug Interactions",phrase:"Professional Sales Phrase",smart:"Smart Additional Opportunity",
+dose:"Dose",timing:"Timing",brands:"Suggested Brands",benefit:"Medical Benefit"
+},
+conditions:{
+c:[
+{id:"htn",icon:"❤️",name:"Hypertension",
+supps:[
+{n:"Magnesium Glycinate",d:"400mg/day",t:"Evening with food",b:"iRemedies Mag Glycinate 400mg | Avernus Magnesium | Now Magnesium Glycinate 400mg | Nature's Bounty Magnesium | Solgar Magnesium Citrate | Puritan's Pride Magnesium",f:"Relaxes smooth muscle in blood vessels, lowers diastolic pressure. Meta-analysis 2016 (34 studies): reduced SBP by 2-3 mmHg."},
+{n:"CoQ10 Ubiquinol",d:"100-200mg/day",t:"Morning with fatty meal",b:"iRemedies CoQ10 200mg | Avernus CoQ10 | Now Ubiquinol 100mg | Nature's Bounty CoQ10 | Solgar CoQ10 200mg | Puritan's Pride CoQ10",f:"Improves endothelial function via increased NO production. Studies show SBP reduction of 17 mmHg in untreated patients."},
+{n:"Omega-3 EPA+DHA",d:"2-4g/day",t:"With meals — divided",b:"Avernus Omega-3 TG | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Fish Oil | Solgar Triple Strength Omega-3 | Puritan's Pride Omega-3",f:"Improves vascular elasticity and lowers TG. EPA more effective than DHA for blood pressure specifically."},
+{n:"Vitamin D3",d:"2000-4000 IU/day",t:"Morning with meal",b:"iRemedies D3 4000IU | Avernus D3 | Now D3 5000IU | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3 5000IU",f:"Inhibits RAAS system and lowers Renin levels. D3 deficiency independently linked to hypertension."},
+{n:"Aged Garlic Extract",d:"600-1200mg/day",t:"With food",b:"Now Kyolic Garlic 600mg | Nature's Bounty Garlic | Solgar Garlic Oil | Puritan's Pride Garlic 1000mg",f:"Natural ACE inhibitor that dilates vessels. Ried 2016 study: reduced SBP by 8-9 mmHg in isolated hypertension."},
+{n:"L-Arginine",d:"2-3g/day",t:"30 min before meals",b:"Now L-Arginine 1000mg | Nature's Bounty L-Arginine | Solgar L-Arginine 1000mg | Puritan's Pride L-Arginine",f:"Precursor to nitric oxide (NO) which directly dilates blood vessels by activating eNOS enzyme."}
+],
+tips:["DASH Diet: ≤2300mg sodium/day. More vegetables, fruits, whole grains, low-fat dairy","Aerobic exercise 30 min × 5 days/week: reduces SBP by 4-9 mmHg","Weight loss: every 1kg lost → SBP drops 1 mmHg","Stress management — deep breathing, meditation: reduces SBP by 4-5 mmHg","Regular 7-8 hours sleep: Sleep Apnea continuously raises BP"],
+warns:["!Potassium contraindicated with ACEi/ARBs/Spironolactone: risk of fatal Hyperkalemia","CoQ10 lowers BP — monitor with antihypertensive medications","!Garlic enhances anticoagulants: bleeding risk with warfarin","Omega-3 >3g with anticoagulants: monitor for bleeding"],
+phrase:"\"Magnesium and CoQ10 alongside medication improves treatment response and protects the heart — the difference shows in home readings\"",
+smart:"Home BP monitor (Omron) is essential — White Coat Hypertension is common and home readings are far more accurate"},
+
+{id:"dm2",icon:"🩸",name:"Type 2 Diabetes",
+supps:[
+{n:"Berberine",d:"500mg × 3/day",t:"15 min before main meals",b:"Now Berberine 500mg | Nature's Bounty Berberine | Solgar Berberine 400mg | Puritan's Pride Berberine",f:"Activates AMPK exactly like Metformin — reduces HbA1c by 1.5-2% in controlled trials. The most evidence-based natural alternative."},
+{n:"Alpha Lipoic Acid (ALA)",d:"600mg/day",t:"Morning before meals",b:"iRemedies ALA 600mg | Now Alpha Lipoic Acid 600mg | Nature's Bounty ALA | Solgar ALA | Puritan's Pride ALA",f:"Powerful antioxidant that improves insulin sensitivity and treats Peripheral Neuropathy. Standard treatment in Germany."},
+{n:"Chromium Picolinate",d:"400-1000mcg/day",t:"With main meal",b:"Now Chromium Picolinate 200mcg | Nature's Bounty Chromium | Solgar Chromium Picolinate | Puritan's Pride Chromium",f:"Enhances insulin receptor binding and reduces insulin resistance. Notably reduces sugar and carbohydrate cravings."},
+{n:"Magnesium",d:"400mg/day",t:"Evening with food",b:"iRemedies Mag Glycinate | Avernus Magnesium | Now Magnesium Glycinate | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:">80% of diabetics are Mg-deficient. Essential for 300+ enzymes including insulin function and ATP synthesis."},
+{n:"Vitamin D3+K2",d:"D3: 4000IU + K2: 100mcg",t:"Morning with fatty meal",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3 | Solgar D3+K2 | Puritan's Pride D3",f:"D3 deficiency doubles diabetes risk. K2 directs calcium to bones and protects vessels from calcification."},
+{n:"Ceylon Cinnamon",d:"1-3g/day",t:"With meals",b:"Now Ceylon Cinnamon 600mg | Nature's Bounty Cinnamon | Puritan's Pride Cinnamon 1000mg",f:"Partially mimics insulin and improves its sensitivity. Ceylon only (not Cassia) — safe at natural doses."}
+],
+tips:["Low GI Diet: brown rice, oats, legumes (GI<55). Avoid white rice and fruit juices","Walk 15 min after each main meal: reduces Post-meal Glucose by 22% (Diabetes Care 2022)","Monitor FBS before meals and PPBS 2 hours after — keep records","Regular 7-8 hours sleep: poor sleep raises Cortisol and increases resistance","Daily foot inspection: 15% of diabetics develop foot ulcers"],
+warns:["!Berberine + Metformin: risk of severe hypoglycemia — monitor closely","ALA may change insulin requirements when starting","Cassia cinnamon (not Ceylon) contains Coumarin — harmful to liver in large amounts","!Chromium >1000mcg: kidney problems in susceptible patients"],
+phrase:"\"Berberine and ALA together approach medication in lowering HbA1c while protecting nerves — a scientifically proven combination\"",
+smart:"A full month supply of glucose strips — patients who buy too few stop monitoring and regress"},
+
+{id:"chol",icon:"🫀",name:"Dyslipidemia (Cholesterol)",
+supps:[
+{n:"High-dose Omega-3",d:"3-4g/day",t:"With meals — divided",b:"Avernus Omega-3 TG | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Fish Oil | Solgar Triple Strength Omega-3 | Puritan's Pride Omega-3",f:"Reduces TG by 25-45%. FDA-approved for TG >500. EPA improves HDL and reduces vascular inflammation."},
+{n:"Red Yeast Rice",d:"1200-2400mg/day",t:"Evening (like statins)",b:"Now Red Yeast Rice 1200mg | Nature's Bounty Red Yeast Rice | Solgar Red Yeast Rice | Puritan's Pride Red Yeast Rice",f:"Contains Monacolin K identical to Lovastatin — reduces LDL by 15-25%. Always use with CoQ10."},
+{n:"Berberine",d:"500mg × 3/day",t:"Before meals",b:"Now Berberine 500mg | Nature's Bounty Berberine | Solgar Berberine | Puritan's Pride Berberine",f:"Stimulates hepatic LDL Receptors — reduces LDL by 15-20% and TG by 25-30%. Completely different mechanism from statins."},
+{n:"Plant Sterols",d:"2g/day",t:"With main meals",b:"Now Plant Sterols | Nature's Bounty Cardio Health | Solgar Phytosterol Complex | Puritan's Pride Plant Sterols",f:"Competes with cholesterol for intestinal absorption — reduces LDL by 10-15%. Endorsed by ESC 2019."},
+{n:"CoQ10",d:"100-200mg/day",t:"Morning with meal",b:"iRemedies CoQ10 200mg | Avernus CoQ10 | Now CoQ10 | Nature's Bounty CoQ10 | Solgar CoQ10 200mg | Puritan's Pride CoQ10",f:"Essential with Red Yeast Rice and statins to prevent Myopathy. Proven to be depleted by these medications."},
+{n:"Psyllium Husk",d:"10-15g/day",t:"Before meals with plenty of water",b:"Now Psyllium Husk | Nature's Bounty Psyllium | Puritan's Pride Psyllium Husk",f:"Soluble fiber forms a gel that absorbs cholesterol in the intestines. Reduces LDL by 5-10% consistently."}
+],
+tips:["Mediterranean diet: extra virgin olive oil, fatty fish 3×/week, nuts, legumes","Aerobic exercise 150 min/week: raises HDL by 5-10%","Avoid trans fats in fried foods and processed pastries","A handful of walnuts daily: reduces LDL by 5%","Avoid sugar and refined carbohydrates: significantly raise TG"],
+warns:["!Red Yeast Rice + Statins: effectively doubling the dose — risk of fatal Rhabdomyolysis","Berberine enhances anticoagulants: check INR with warfarin","Plant Sterols reduce absorption of fat-soluble vitamins ADEK: add a multivitamin","Niacin raises uric acid: caution in gout patients"],
+phrase:"\"Red Yeast Rice with CoQ10 for patients who refuse or cannot tolerate statins — effective and safe\"",
+smart:"High TG = Omega-3 at therapeutic dose 3-4g, not the preventive 1g — massive difference in results"},
+
+{id:"osteo",icon:"🦴",name:"Osteoporosis",
+supps:[
+{n:"Calcium Citrate",d:"1000-1200mg/day — divided",t:"500-600mg × twice with meals",b:"iRemedies Calcium Citrate | Now Calcium Citrate | Nature's Bounty Calcium Citrate | Solgar Calcium Citrate | Puritan's Pride Calcium Citrate",f:"Citrate requires no stomach acid — ideal for elderly and PPI users. Better absorbed than Carbonate."},
+{n:"Vitamin D3+K2 MK-7",d:"D3: 4000IU + K2: 100-200mcg",t:"Morning with fatty meal",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3+K2 | Solgar D3+K2 | Puritan's Pride D3",f:"D3 improves calcium absorption. K2-MK7 directs calcium to bones and prevents arterial calcification. Both are essential together."},
+{n:"Magnesium",d:"400mg/day",t:"Evening",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"50% of bone calcium is bound to Mg. Activates D3 in liver and kidneys, essential for Osteocalcin synthesis."},
+{n:"Collagen Peptides Type I&III",d:"5-10g/day",t:"Morning with Vitamin C",b:"Now Collagen Peptides | Nature's Bounty Collagen | Solgar Collagen | Puritan's Pride Collagen",f:"Provides the protein matrix (Osteoid) on which calcium crystals are deposited during bone formation."},
+{n:"Vitamin C",d:"500-1000mg/day",t:"Morning",b:"iRemedies Vit C | Now C-1000 | Nature's Bounty C-1000 | Solgar Ester-C 1000mg | Puritan's Pride C-1000",f:"Essential for Collagen synthesis — the primary structural component of bone. Activates Osteoblasts."},
+{n:"Boron",d:"3-6mg/day",t:"With food",b:"Now Boron 3mg | Nature's Bounty Boron | Solgar Boron | Puritan's Pride Boron",f:"Reduces urinary excretion of calcium and magnesium, enhances conversion of D3 to its active form."}
+],
+tips:["Weight-bearing exercise: walking and resistance training — directly stimulates bone formation","Sun exposure 15 min daily before 10am — natural D3","Quit smoking: reduces bone density measurably","Caffeine <2 cups/day: excess reduces calcium absorption","Adequate protein 1.2-1.5g/kg — essential for bone matrix building"],
+warns:["!Calcium Carbonate with PPI: poor absorption — always use Citrate for elderly","Calcium >1200mg in one dose: reduces absorption and risk of calcification","!Bisphosphonates on empty stomach with plenty of water — never with calcium"],
+phrase:"\"D3+K2 with Calcium Citrate: the golden formula — K2 ensures calcium reaches bones not arteries\"",
+smart:"A patient on Bisphosphonates without adequate D3 = medication without benefit. D3 must come first"}
+],
+o:[
+{id:"omega3",icon:"🐟",name:"Omega-3 (Preventive use)",
+supps:[
+{n:"Omega-3 TG Form",d:"1-2g/day",t:"With main meal",b:"Avernus Omega-3 TG 1000mg | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Fish Oil 1200mg | Solgar Triple Strength Omega-3 | Puritan's Pride Omega-3",f:"TG Form 50% better absorbed than EE Form. EPA for heart and mood. DHA for brain and eyes."},
+{n:"Vitamin E Mixed Tocopherols",d:"200-400 IU/day",t:"With food",b:"Now Natural Vitamin E | Nature's Bounty Vitamin E | Solgar Vitamin E | Puritan's Pride Vitamin E",f:"Prevents oxidation of EPA and DHA in the body. Omega-3 without E becomes oxidized and loses effectiveness."},
+{n:"CoQ10",d:"100mg/day",t:"With food",b:"iRemedies CoQ10 | Now CoQ10 | Nature's Bounty CoQ10 | Solgar CoQ10 | Puritan's Pride CoQ10",f:"Ideal complement with Omega-3 for cardiovascular health. Strong synergy in mitochondrial function."}
+],
+tips:["With a fatty meal: doubles absorption","Refrigerate after opening: prevents oxidation and odor","Small fish source (sardines, mackerel): less mercury contamination","Overweight individuals need higher doses (2-3g)"],
+warns:["Omega-3 >3g with anticoagulants: monitor for bleeding","May slightly raise LDL in some cases"],
+phrase:"\"Omega-3 TG Form + E + CoQ10: a complete cardiovascular protocol — more effective than Omega-3 alone\"",
+smart:"Avernus and iRemedies use TG Form — the fundamental difference from cheaper products"},
+
+{id:"vitd3",icon:"☀️",name:"Vitamin D3",
+supps:[
+{n:"Vitamin D3 Cholecalciferol",d:"4000-5000 IU/day",t:"Morning with fatty meal",b:"iRemedies D3 4000IU | Avernus D3 | Now D3 5000IU | Nature's Bounty D3 5000IU | Solgar D3 | Puritan's Pride D3 5000IU",f:"D3 is 3x more effective than D2. 70% of UAE residents are deficient. Activates >200 immune and hormonal genes."},
+{n:"Vitamin K2-MK7",d:"100-200mcg/day",t:"With fatty meal",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty K2 | Solgar K2 MK-7 | Puritan's Pride K2",f:"Directs calcium to bones, not arteries. Essential with high-dose D3 to prevent vascular calcification."},
+{n:"Magnesium",d:"400mg/day",t:"Evening",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"D3 cannot be activated in liver and kidneys without adequate Mg. Without Mg, D3 won't reach its full potential."},
+{n:"Vitamin A Beta-Carotene",d:"5000 IU as beta-carotene",t:"With food",b:"Now Beta Carotene | Nature's Bounty Vitamin A | Solgar Beta Carotene | Puritan's Pride Beta Carotene",f:"D and A work synergistically as transcription factors. Without adequate A, D3 cannot exert its full immune effect."}
+],
+tips:["Target 60-80 ng/mL: check 25(OH)D before starting and after 3 months","15 min sun exposure daily before 10am","Daily dosing more effective than large weekly doses","Check blood calcium levels with doses >10,000 IU"],
+warns:["D3 >10,000 IU chronically: risk of hypercalcemia — monitor","Interaction with certain cardiac drugs like Digoxin"],
+phrase:"\"D3+K2+Mg+A: the golden quartet for absorption — without any of them, D3 won't reach its full effect\"",
+smart:"70% of UAE residents are D3-deficient — every patient deserves a test"},
+
+{id:"collagen",icon:"✨",name:"Collagen Supplement",
+supps:[
+{n:"Hydrolyzed Collagen Peptides Type I&III",d:"10g/day",t:"Morning on empty stomach with Vitamin C",b:"Now Collagen Peptides | Nature's Bounty Collagen | Solgar Collagen | Puritan's Pride Collagen",f:"Type I for skin, hair, nails. Type III for blood vessels. Hydrolyzed means fully absorbed without digestion."},
+{n:"Vitamin C",d:"500-1000mg with collagen",t:"Directly with collagen",b:"iRemedies Vit C | Now C-1000 | Nature's Bounty C | Solgar Ester-C | Puritan's Pride C-1000",f:"Essential to convert Proline to Hydroxyproline — without C, no mature functional collagen can be produced."},
+{n:"Hyaluronic Acid",d:"100-200mg/day",t:"Morning",b:"Now Hyaluronic Acid | Nature's Bounty Hyaluronic Acid | Solgar Hyaluronic Acid | Puritan's Pride HA",f:"Deeply hydrates skin from within. Works with collagen to improve skin elasticity and joint mobility."},
+{n:"Biotin",d:"5000mcg/day",t:"Morning",b:"iRemedies Biotin 10000mcg | Now Biotin 5000mcg | Nature's Bounty Biotin | Solgar Biotin | Puritan's Pride Biotin",f:"Strengthens Keratin structure of hair and nails. Natural complement to collagen for hair and nail health."},
+{n:"Zinc",d:"15mg/day",t:"With dinner",b:"iRemedies Zinc | Now Zinc | Nature's Bounty Zinc | Solgar Zinc | Puritan's Pride Zinc",f:"Activates collagen synthesis enzymes. Deficiency causes slow wound healing and brittle nails."}
+],
+tips:["Marine collagen: smaller molecules, faster absorption than bovine","Vitamin C with collagen is essential, not optional","Results appear after 6-8 weeks of consistent use","Don't heat collagen powder: destroys amino acids"],
+warns:["Marine collagen: caution with fish allergies","!Biotin >5000mcg: affects TSH and Troponin lab tests — stop 48h before testing"],
+phrase:"\"Collagen + C + HA: the scientific trio for skin glow from within — without C, collagen doesn't work\"",
+smart:"Marine Collagen has 3x better absorption — patients deserve to know this difference"}
+],
+s:[
+{id:"preg",icon:"🤰",name:"Pregnant Women",
+supps:[
+{n:"Folate 5-MTHF (activated)",d:"400-800mcg/day",t:"Morning",b:"Now 5-MTHF | Nature's Bounty Folic Acid | Solgar Folate Metafolin | Puritan's Pride Folic Acid",f:"Prevents Neural Tube Defects. Starts one month before conception. 5-MTHF for MTHFR gene variant carriers."},
+{n:"Vitamin D3",d:"2000-4000 IU/day",t:"Morning with meal",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"Improves fetal bone and immune development. Deficiency linked to gestational diabetes."},
+{n:"Omega-3 High DHA",d:"600-1000mg DHA/day",t:"With food",b:"Now Prenatal DHA | iRemedies Omega-3 | Nature's Bounty Fish Oil | Solgar Prenatal Omega-3",f:"DHA essential for fetal brain and retina development. Deficiency linked to lower intelligence scores."},
+{n:"Iron Bisglycinate",d:"25-50mg/day (per Hb level)",t:"Morning with Vitamin C",b:"Now Gentle Iron 25mg | Nature's Bounty Iron | Solgar Gentle Iron 25mg | Puritan's Pride Iron",f:"Requirements double during pregnancy. Bisglycinate causes far less constipation than Ferrous Sulfate."},
+{n:"Magnesium Glycinate",d:"300-400mg/day",t:"Evening",b:"iRemedies Mag Glycinate | Now Magnesium Glycinate | Nature's Bounty Magnesium | Solgar Magnesium",f:"Reduces leg cramps very common in pregnancy. Helps prevent Preeclampsia."},
+{n:"Vitamin B12",d:"1000mcg/day",t:"Morning",b:"iRemedies B12 | Now Methyl B12 | Nature's Bounty B12 | Solgar B12 | Puritan's Pride B12",f:"Essential for fetal nervous system development. Deficiency also causes neural tube defects."}
+],
+tips:["Avoid high-mercury fish: swordfish, large tuna, shark","Avoid unpasteurized cheese and raw foods: Listeria risk","Moderate exercise 30 min/day: walking and swimming","Avoid high-dose Vitamin A Retinol"],
+warns:["!Vitamin A Retinol >10,000 IU: causes birth defects — absolutely contraindicated","!Valerian/Senna/Cascara: contraindicated during pregnancy","!Any new supplement requires approval from the supervising physician"],
+phrase:"\"DHA and activated Folate are a direct investment in your baby's intelligence and health — no pregnancy without them\"",
+smart:"Pregnant patient on PPI for heartburn = definitely needs Mg and B12 — deficiency is very common"},
+
+{id:"athletes",icon:"🏃",name:"Athletes",
+supps:[
+{n:"Whey Protein",d:"25-40g post-workout",t:"Within 30 minutes after training",b:"Now Sports Whey Protein | Nature's Bounty Protein | Solgar Whey To Go | Puritan's Pride Whey",f:"Fastest-absorbing protein. Stimulates MPS (Muscle Protein Synthesis) and reduces muscle breakdown."},
+{n:"Creatine Monohydrate",d:"3-5g/day",t:"With water after training",b:"Now Creatine Monohydrate | Nature's Bounty Creatine | Solgar Creatine | Puritan's Pride Creatine",f:"Most proven sports supplement. Increases ATP, strength, and muscle mass. Safe for long-term use."},
+{n:"Magnesium",d:"400-600mg/day",t:"Post-workout",b:"iRemedies Mag Glycinate | Now Magnesium | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"Lost through sweating. Reduces muscle cramps, speeds recovery, and improves sleep quality."},
+{n:"Omega-3",d:"2-3g/day",t:"With food",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"Reduces post-exercise muscle inflammation, speeds recovery, improves muscle-to-fat ratio."},
+{n:"L-Glutamine",d:"5-10g post-workout",t:"Immediately after training",b:"Now L-Glutamine | Nature's Bounty L-Glutamine | Solgar Glutamine | Puritan's Pride L-Glutamine",f:"Reduces muscle fatigue, speeds tissue repair, and strengthens immunity after intense training."},
+{n:"Vitamin D3",d:"4000 IU/day",t:"Morning",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"Essential for muscle function and bone strength. Deficiency significantly impairs athletic performance."}
+],
+tips:["Good hydration: 400-600ml before, 150-250ml every 15 min during exercise","Adequate protein 1.6-2.2g/kg for muscle building","Carbohydrate balance: before training for energy, after for recovery","8-9 hours sleep: growth hormone is released at night"],
+warns:["Creatine raises Creatinine in labs: inform the doctor — not a problem","Beta-Alanine causes tingling (Paresthesia): normal and harmless","Avoid unapproved sports supplements: doping risk"],
+phrase:"\"Creatine + Whey + Magnesium: the scientifically proven trio for better athletic performance\"",
+smart:"Many athletes don't know that Creatine Monohydrate is proven to be more effective and cheaper than all other forms"}
+],
+sk:[
+{id:"acne",icon:"😤",name:"Acne",
+supps:[
+{n:"Zinc Picolinate",d:"30-40mg/day",t:"With food",b:"iRemedies Zinc | Avernus Zinc | Now Zinc Picolinate 30mg | Nature's Bounty Zinc 50mg | Solgar Zinc Picolinate 22mg | Puritan's Pride Zinc",f:"Inhibits 5-Alpha Reductase reducing DHT and acts as natural antibiotic. As effective as low-dose Tetracycline in studies."},
+{n:"Omega-3",d:"2-3g/day",t:"With food",b:"Avernus Omega-3 | iRemedies Omega-3 | Now Ultra Omega-3 | Nature's Bounty Omega-3 | Solgar Omega-3",f:"Balances Omega-6:3 ratio — excess Omega-6 increases sebum production and follicular inflammation."},
+{n:"Vitamin D3",d:"2000-4000 IU/day",t:"Morning",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"Enhances Antimicrobial Peptides in skin against P.acnes and modulates local immunity."},
+{n:"Probiotics",d:"10-30B CFU",t:"Morning",b:"iRemedies Probio | Now Probiotic | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"Gut-skin axis: intestinal Dysbiosis aggravates acne. L. rhamnosus supported by research."},
+{n:"Curcumin BCM-95",d:"500mg × twice",t:"With fatty food",b:"Now Curcumin | Nature's Bounty Turmeric | Solgar Full Spectrum Curcumin | Puritan's Pride Turmeric",f:"COX-2 inhibitor reduces redness and swelling. Works synergistically with zinc against inflammation."}
+],
+tips:["Wash face twice daily (morning and evening) — no more, to avoid triggering sebum production","Salicylic Acid 2% topically: unclogs pores","Retinol at night: regulates cell renewal and reduces acne","Non-comedogenic sunscreen daily","Never squeeze pimples: causes permanent pigmentation and scars"],
+warns:["High-dose Vitamin A Retinol: contraindicated in pregnancy","Zinc >40mg: add Copper 1mg to prevent copper depletion","Curcumin enhances anticoagulants: caution with warfarin"],
+phrase:"\"Zinc + Omega-3 + Probiotics: the inside-out acne protocol — more effective than topicals alone\"",
+smart:"Female patient with acne on birth control = hormonal acne — Zinc + Saw Palmetto more appropriate"}
+],
+h:[
+{id:"hairloss_m",icon:"👨‍🦲",name:"Hair Loss (Male)",
+supps:[
+{n:"Saw Palmetto",d:"320mg/day (85% Sterols)",t:"With food",b:"Now Saw Palmetto | Nature's Bounty Saw Palmetto | Solgar Saw Palmetto | Puritan's Pride Saw Palmetto",f:"5-Alpha Reductase inhibitor — reduces conversion of Testosterone to DHT. Same mechanism as Finasteride, naturally."},
+{n:"Biotin",d:"5000-10000mcg/day",t:"Morning",b:"iRemedies Biotin 10000mcg | Now Biotin 10000mcg | Nature's Bounty Biotin 10000mcg | Solgar Biotin 5000mcg | Puritan's Pride Biotin",f:"Stimulates Keratin Infrastructure — the structure of hair. Deficiency causes noticeable hair loss and brittleness."},
+{n:"Zinc",d:"25-30mg/day",t:"With dinner",b:"iRemedies Zinc | Now Zinc Picolinate 30mg | Nature's Bounty Zinc 50mg | Solgar Zinc Picolinate 22mg | Puritan's Pride Zinc",f:"Inhibits 5-Alpha Reductase and participates in Keratin synthesis. Deficiency is one of the most common causes of hair loss."},
+{n:"Iron + Vitamin C",d:"25-50mg iron + 500mg C",t:"Morning on empty stomach",b:"Now Gentle Iron 25mg + iRemedies Vit C | Nature's Bounty Iron | Solgar Gentle Iron",f:"Ferritin <70 ng/mL linked to hair loss even without anemia. Target >80 ng/mL."},
+{n:"Vitamin D3",d:"4000 IU/day",t:"Morning",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"D3 receptors exist in hair follicles. Deficiency causes Telogen Effluvium (diffuse hair loss)."},
+{n:"Ashwagandha KSM-66",d:"600mg/day",t:"Evening",b:"Now Ashwagandha | Nature's Bounty Ashwagandha | Solgar Ashwagandha | Puritan's Pride Ashwagandha",f:"Reduces chronic Cortisol — stress shifts hair to Telogen phase. Activates dormant follicles."}
+],
+tips:["Test: Ferritin, TSH, Testosterone, DHT, D3 — identify the cause first","Scalp massage 4 minutes daily: improves blood flow to follicles (Japanese study 2016)","Minoxidil 5% topical: most proven OTC — complement to supplements not replacement","Adequate protein 1.5g/kg: hair is pure protein (Keratin)"],
+warns:["Saw Palmetto lowers PSA: inform doctor during prostate screening","!Biotin >5000mcg: affects TSH and Troponin results — stop 48h before lab tests","Zinc >40mg: add Copper 1mg"],
+phrase:"\"Saw Palmetto + Zinc + Biotin + D3: the golden quartet for hair — addresses both hormonal and nutritional roots\"",
+smart:"Ferritin <70 even without anemia = hair loss. Check Ferritin before any other treatment"}
+],
+g:[
+{id:"immunity",icon:"🛡️",name:"Immune Support",
+supps:[
+{n:"Vitamin D3+K2",d:"D3: 5000IU + K2: 100mcg",t:"Morning with fatty meal",b:"iRemedies D3+K2 | Now D3+K2 | Nature's Bounty D3+K2 | Solgar D3+K2 | Puritan's Pride D3",f:"70% of UAE residents are D3-deficient. Activates >200 immune genes and produces Cathelicidin (natural antibiotic)."},
+{n:"Zinc Picolinate",d:"15-25mg/day",t:"With dinner",b:"iRemedies Zinc | Avernus Zinc | Now Zinc Picolinate | Nature's Bounty Zinc 50mg | Solgar Zinc Picolinate 22mg | Puritan's Pride Zinc",f:"Essential for T-cell proliferation and differentiation. Even mild deficiency significantly weakens immunity."},
+{n:"Vitamin C",d:"1000-2000mg/day",t:"Divided with meals",b:"iRemedies Vit C 1000mg | Now C-1000 | Nature's Bounty C-1000 | Solgar Ester-C 1000mg | Puritan's Pride C-1000",f:"Enhances production of Neutrophils and Lymphocytes. Reduces duration of colds by 8-14%."},
+{n:"Beta Glucan 1,3/1,6",d:"250-500mg/day",t:"Morning before meals",b:"Now Beta Glucan 250mg | Nature's Bounty Beta Glucan | Solgar Beta Glucan | Puritan's Pride Beta Glucan",f:"Directly activates Macrophages and NK Cells. Proven to reduce recurrence of respiratory tract infections."},
+{n:"Multi-strain Probiotics",d:"20-50B CFU",t:"Morning before meals",b:"iRemedies Probio | Now Probiotic-10 | Nature's Bounty Probiotic | Solgar Probi | Puritan's Pride Probiotic",f:"70-80% of the immune system is in the gut (GALT). Diversifying the microbiome = stronger immunity."},
+{n:"Selenium",d:"100-200mcg/day",t:"With food",b:"iRemedies Selenium | Now Selenium | Nature's Bounty Selenium | Solgar Selenium 200mcg | Puritan's Pride Selenium",f:"Essential for Glutathione Peroxidase activation and Lymphocyte proliferation. Reduces viral load."}
+],
+tips:["7-9 hours sleep: poor sleep reduces NK Cells by 70%","Moderate exercise 30-45 min: boosts immunity — extreme training temporarily suppresses it","25g sugar raises macrophage suppression for 5 hours","Adequate hydration 2-3 liters daily: fluids carry immune cells"],
+warns:["!Echinacea contraindicated in Lupus, MS, RA, autoimmune diseases: aggravates them","Zinc >40mg chronically: suppresses rather than boosts immunity","Beta Glucan with immune-suppressants (post-transplant): consult physician"],
+phrase:"\"D3+Zinc+Probiotics: the golden immune triangle — natural, safe, scientifically proven for all ages\"",
+smart:"After periods of intense stress = immunity at its lowest — ideal time for an immune support protocol"},
+
+{id:"energy",icon:"⚡",name:"Chronic Fatigue & Low Energy",
+supps:[
+{n:"Vitamin B-Complex B-100",d:"One dose/day",t:"Morning with breakfast",b:"Now B-100 | Nature's Bounty B-100 | Solgar B-Complex 100 | Puritan's Pride B-100",f:"B1, B2, B3, B5, B6, B7, B9, B12 together. Essential for ATP production in every cell. Energy starts here."},
+{n:"CoQ10 Ubiquinol",d:"100-200mg/day",t:"Morning with food",b:"iRemedies CoQ10 200mg | Avernus CoQ10 | Now Ubiquinol | Nature's Bounty CoQ10 | Solgar CoQ10 | Puritan's Pride CoQ10",f:"Mitochondrial engine — without it, ATP cannot be produced efficiently. Ubiquinol for those >45 years."},
+{n:"Magnesium Malate",d:"400-600mg/day",t:"Morning",b:"iRemedies Mag | Now Magnesium Malate | Nature's Bounty Magnesium | Solgar Magnesium | Puritan's Pride Magnesium",f:"Malate participates in the Krebs cycle — reduces muscular and mental fatigue, increases energy production."},
+{n:"Rhodiola Rosea",d:"400mg/day",t:"Morning before meals",b:"Now Rhodiola | Nature's Bounty Rhodiola | Solgar Rhodiola | Puritan's Pride Rhodiola",f:"Adaptogen that reduces Cortisol and improves mental and physical capacity under chronic stress."},
+{n:"Vitamin D3",d:"4000 IU/day",t:"Morning",b:"iRemedies D3 | Now D3 | Nature's Bounty D3 | Solgar D3 | Puritan's Pride D3",f:"Deficiency is the #1 cause of chronic fatigue symptoms. Correction may dramatically improve energy."},
+{n:"L-Carnitine",d:"1-2g/day",t:"Morning before exercise",b:"Now L-Carnitine | Nature's Bounty L-Carnitine | Solgar L-Carnitine | Puritan's Pride L-Carnitine",f:"Transports fatty acids into mitochondria for burning. Reduces muscle fatigue and improves cardiac function."}
+],
+tips:["Test: D3, B12, Ferritin, TSH, Mg, Glucose — common, treatable causes","Good sleep 7-8 hours: real energy starts here","Regular exercise even light: measurably improves energy levels","Identify energy-depleting foods: sugar and processed foods cause post-meal fatigue"],
+warns:["Chronic fatigue may be ME/CFS: requires specialist diagnosis","Rhodiola in the evening: may cause insomnia — morning only","L-Carnitine may raise TMAO: use wisely"],
+phrase:"\"B-Complex + CoQ10 + Mg Malate: the foundational protocol for cellular energy — works from the inside\"",
+smart:"Chronic fatigue without testing D3, B12, Thyroid, and Ferritin = incomplete diagnosis — these four first"}
+]
+}
+}
+};
+
+// ═══════════════════════
+// APP STATE & LOGIC
+// ═══════════════════════
+let lang='ar', curSec='c', curCond=null, activeSuppIdx=null, dk=false;
+
+function getDB(){ return DB[lang]; }
+function getL(){ return getDB().L; }
+
+function setL(l){
+  lang=l; curSec='c'; curCond=null; activeSuppIdx=null;
+  const L=getL();
+  document.body.className=(l==='ar'?'ar':'en')+(dk?' dk':'');
+  document.getElementById('bAr').className='lb'+(l==='ar'?' ac':'');
+  document.getElementById('bEn').className='lb'+(l==='en'?' ac':'');
+  document.getElementById('tbn').textContent=L.logo;
+  document.getElementById('tbs').textContent=L.sub;
+  document.getElementById('si').placeholder=L.search;
+  document.getElementById('bkT').textContent=L.back;
+  document.getElementById('bkA').textContent=L.backA;
+  showView('grid');
+  document.getElementById('sr').classList.remove('on');
+  document.getElementById('si').value='';
+  renderSections(); renderGrid();
+  localStorage.setItem('pa_lang',l);
+}
+
+function toggleDk(){
+  dk=!dk;
+  document.body.className=(lang==='ar'?'ar':'en')+(dk?' dk':'');
+  document.getElementById('dkb').textContent=dk?'☀️':'🌙';
+  localStorage.setItem('pa_dk',dk);
+}
+
+function renderSections(){
+  const L=getL();
+  const secs=getDB().sections;
+  document.getElementById('stw').innerHTML=secs.map(s=>
+    `<button class="st${s.id===curSec?' ac':''}" onclick="selectSec('${s.id}')">${s.icon} ${s.name}</button>`
+  ).join('');
+}
+
+function selectSec(id){
+  curSec=id; curCond=null; activeSuppIdx=null;
+  renderSections(); renderGrid();
+  showView('grid');
+}
+
+function renderGrid(){
+  const conds=getDB().conditions[curSec]||[];
+  if(!conds.length){
+    document.getElementById('cg').innerHTML=`<div class="empty"><div class="eicon">🚧</div><div>قريباً</div></div>`;
+    return;
+  }
+  document.getElementById('cg').innerHTML=conds.map(c=>
+    `<div class="cc${curCond&&curCond.id===c.id?' ac':''}" onclick="showDetail('${c.id}')">
+      <div class="ci">${c.icon}</div>
+      <div class="cn">${c.name}</div>
+    </div>`
+  ).join('');
+}
+
+function showView(v){
+  const cw=document.getElementById('cw');
+  const dw=document.getElementById('dw');
+  if(!cw||!dw) return;
+  if(v==='grid'){cw.style.display='block';dw.classList.remove('on');dw.style.display='none';}
+  else{cw.style.display='none';dw.classList.add('on');dw.style.display='block';}
+}
+
+function showDetail(condId){
+  const conds=getDB().conditions[curSec]||[];
+  const cond=conds.find(c=>c.id===condId);
+  if(!cond) return;
+  curCond=cond; activeSuppIdx=null;
+  renderGrid();
+  renderDetail();
+  showView('detail');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderDetail(){
+  const L=getL();
+  const c=curCond;
+  // Build chips
+  const chips=c.supps.map((s,i)=>
+    `<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(${i})">${s.n}</button>`
+  ).join('');
+
+  // Build supp panel
+  let suppPanel='';
+  if(activeSuppIdx!==null){
+    const s=c.supps[activeSuppIdx];
+    suppPanel=`<div class="sdp">
+      <div class="sdn">${s.n}</div>
+      <div class="sdg">
+        <div class="sdgi"><div class="sdgl">📊 ${L.dose}</div><div class="sdgv">${s.d}</div></div>
+        <div class="sdgi"><div class="sdgl">⏰ ${L.timing}</div><div class="sdgv">${s.t}</div></div>
+      </div>
+      <div class="sdf">
+        <div>${s.f}</div>
+        <div class="sdbr">🏷️ ${L.brands}:<br>${s.b}</div>
+      </div>
+    </div>`;
+  }
+
+  // Tips
+  const tipsH=(c.tips||[]).map(t=>`<div class="li"><div class="lid"></div><div>${t}</div></div>`).join('');
+
+  // Warnings
+  const warnsH=(c.warns||[]).map(w=>{
+    const sev=w.startsWith('!');
+    const txt=sev?w.substring(1):w;
+    return `<div class="wi"><div class="wic">${sev?'🚨':'⚠️'}</div><div class="${sev?'wis':''}">${txt}</div></div>`;
+  }).join('');
+
+  document.getElementById('dc').innerHTML=`
+    <div class="dh">
+      <div class="dt">${c.icon} ${c.name}</div>
+      <div class="ds">${L.ref}</div>
     </div>
-
-    <div class="cat-bar" id="cats"></div>
-    <div class="grid" id="grid"></div>
-
-    <div id="dash">
-        <div class="dash-head">
-            <div class="dash-title" id="dTitle"></div>
-            <button onclick="goBack()" class="btn" style="background:#000; padding: 8px 20px;">✖ عودة</button>
-        </div>
-        
-        <p style="font-weight:900; margin-bottom:12px; font-size:15px; color: var(--accent);" id="instr">اختر المكمل للتفاصيل العميقة:</p>
-        <div class="supp-pills" id="dPills"></div>
-        
-        <div id="dPanel" class="info-box">
-            <div class="info-grid">
-                <div class="info-cell"><b class="l-act">المادة الفعالة:</b> <span id="v-act"></span></div>
-                <div class="info-cell"><b class="l-dos">التركيز (mg):</b> <span id="v-dos"></span></div>
-                <div class="info-cell"><b class="l-tim">التوقيت الأمثل:</b> <span id="v-tim"></span></div>
-                <div class="info-cell full"><b class="l-ben">الفائدة الطبية العميقة:</b> <span id="v-ben"></span></div>
-                <div class="info-cell full"><b class="l-bra">أمثلة البراندات:</b> <div class="brands" id="v-bra"></div></div>
-            </div>
-        </div>
-
-        <div class="strip warn" id="dWrn"></div>
-        <div class="strip zat" id="dZat"></div>
+    <div class="ic gr">
+      <div class="ich"><div class="ichi">🎯</div><div class="icht">${L.cs}</div></div>
+      <div class="chips">${chips}</div>
+      ${suppPanel}
     </div>
+    ${tipsH?`<div class="ic bl">
+      <div class="ich"><div class="ichi">🌿</div><div class="icht">${L.tips}</div></div>
+      ${tipsH}
+    </div>`:''}
+    ${warnsH?`<div class="ic or">
+      <div class="ich"><div class="ichi">⚠️</div><div class="icht">${L.warns}</div></div>
+      ${warnsH}
+    </div>`:''}
+    ${c.phrase?`<div class="ic tl">
+      <div class="ich"><div class="ichi">📋</div><div class="icht">${L.phrase}</div></div>
+      <div class="ph">${c.phrase}</div>
+    </div>`:''}
+    ${c.smart?`<div class="ic pu">
+      <div class="ich"><div class="ichi">💡</div><div class="icht">${L.smart}</div></div>
+      <div class="sm">${c.smart}</div>
+    </div>`:''}
+  `;
+}
 
-    <script>
-        let lang = 'ar', theme = 'light', currentCat = 'chr';
+function toggleSupp(idx){
+  activeSuppIdx=(activeSuppIdx===idx?null:idx);
+  renderDetail();
+}
 
-        const UI = {
-            ar: { search: "ابحث عن حالة...", act: "المادة الفعالة:", dos: "التركيز (mg):", tim: "التوقيت الأمثل:", ben: "الفائدة الطبية العميقة:", bra: "البراندات المقترحة:", chr: "أمراض مزمنة", otc: "أدوية OTC", spc: "حالات خاصة", skin: "عناية بالبشرة", hair: "عناية بالشعر", tips: "نصائح عامة", instr: "اختر المكمل للتفاصيل العميقة:", back: "✖ عودة" },
-            en: { search: "Search...", act: "Active Ingredient:", dos: "Concentration (mg):", tim: "Best Timing:", ben: "Deep Medical Benefit:", bra: "Brand Options:", chr: "Chronic", otc: "OTC", spc: "Special", skin: "Skin Care", hair: "Hair Care", tips: "Health Tips", instr: "Select for Deep Details:", back: "✖ Back" }
-        };
+function goBack(){
+  curCond=null; activeSuppIdx=null;
+  showView('grid');
+  renderGrid();
+}
 
-        const DATA = {
-            chr: [
-                {
-                    id: "htn", name: {ar: "ارتفاع ضغط الدم", en: "Hypertension"},
-                    warn: {ar: "تجنب تماماً المسكنات (NSAIDs) وفوارات الصوديوم العالية وأدوية البرد التي تحتوي على سودوفيدرين.", en: "Strictly avoid NSAIDs (Ibuprofen) and cold meds with Pseudoephedrine."},
-                    zat: {ar: "الضغط هو القاتل الصامت؛ المكملات هنا 'تحمي' الشرايين من التصلب وليست بديلاً للدواء.", en: "Hypertension is a silent killer; supplements protect arteries, not replace meds."},
-                    supps: [
-                        { t: {ar: "أوميجا 3 (عالي التركيز)", en: "High-Potency Omega-3"}, a: {ar: "EPA (800mg) / DHA (600mg)", en: "EPA / DHA"}, d: {ar: "1400 - 2000 mg", en: "1400 - 2000 mg"}, tm: {ar: "وسط الوجبة الرئيسية", en: "With main meal"}, b: {ar: "تحسين مرونة جدران الشرايين (Endothelial function)، خفض مستويات الدهون الثلاثية، وتقليل الالتهاب الوعائي.", en: "Improves endothelial elasticity, lowers triglycerides, and reduces vascular inflammation."}, br: "iRemedies iUltimate Omega | Avernus Omega-3 | Solgar Triple Strength | Seven Seas" },
-                        { t: {ar: "مغنيسيوم جلايسينات", en: "Magnesium Glycinate"}, a: {ar: "Magnesium Glycinate", en: "Magnesium Glycinate"}, d: {ar: "400 mg", en: "400 mg"}, tm: {ar: "قبل النوم بـ 30 دقيقة", en: "30 mins before bedtime"}, b: {ar: "باسط طبيعي للعضلات الملساء في الشرايين، ينظم ضربات القلب، ويحسن جودة النوم المضربة بسبب أدوية الضغط.", en: "Natural vasodilator, regulates heart rhythm, and improves sleep quality."}, br: "iRemedies iMagnesium | Bio-Magnesium | Jamieson | Avernus" },
-                        { t: {ar: "إنزيم كيو 10", en: "CoQ10"}, a: {ar: "Coenzyme Q10 (Ubiquinone)", en: "Coenzyme Q10"}, d: {ar: "200 mg", en: "200 mg"}, tm: {ar: "بعد وجبة دسمة", en: "After a fatty meal"}, b: {ar: "ضروري لمرضى الضغط الذين يستخدمون أدوية 'ستاتين' للكوليسترول لمنع وهن العضلات ودعم طاقة القلب.", en: "Essential for patients on Statins to prevent muscle weakness and support cardiac energy."}, br: "iRemedies iCoQ10 | Avernus CoQ10 | Solgar | Biogenix" }
-                    ]
-                },
-                {
-                    id: "dm2", name: {ar: "السكري النوع الثاني", en: "Diabetes Type 2"},
-                    warn: {ar: "المكملات تحمي الأعصاب والكلى ولكنها لا تغني عن فحص السكر اليومي والالتزام بالجرعات الدوائية.", en: "Supplements protect nerves; they don't replace daily glucose monitoring."},
-                    zat: {ar: "السكري يحترم من يحترمه؛ الاهتمام بمخزون B12 يحميك من 'تنميل الأطراف' المزعج.", en: "Respect diabetes; maintaining B12 levels prevents annoying peripheral numbness."},
-                    supps: [
-                        { t: {ar: "ب-كومبلكس (نشط)", en: "Active B-Complex"}, a: {ar: "B1 (Benfotiamine) / B12 (Methyl)", en: "B1 / B6 / B12"}, d: {ar: "100mg / 1500mcg", en: "100mg / 1500mcg"}, tm: {ar: "بعد الإفطار", en: "After breakfast"}, b: {ar: "حماية غمد الميالين للأعصاب من التلف السكري ومنع 'وخز' اليدين والقدمين.", en: "Protects myelin sheath from diabetic damage and prevents hand/foot tingling."}, br: "iRemedies iB-Complex | Neurobion | Avernus B-Active | Quest" },
-                        { t: {ar: "ألفا ليبويك", en: "Alpha Lipoic Acid"}, a: {ar: "ALA", en: "ALA"}, d: {ar: "600 mg", en: "600 mg"}, tm: {ar: "على معدة فارغة", en: "On empty stomach"}, b: {ar: "أقوى مضاد أكسدة عالمي لإصلاح التهاب الأعصاب الطرفية وتحسين حساسية الأنسولين.", en: "Potent antioxidant for nerve repair and enhancing insulin sensitivity."}, br: "ThioGamma | iRemedies ALA | Now Foods | Avernus ALA" }
-                    ]
-                }
-            ],
-            otc: [
-                {
-                    id: "flu", name: {ar: "نزلات البرد الحادة", en: "Severe Cold & Flu"},
-                    warn: {ar: "لا تستخدم المضادات الحيوية للعدوى الفيروسية؛ الزنك يعمل فقط لو أُخذ في أول 24 ساعة.", en: "No antibiotics for viruses; Zinc works only if taken in first 24hrs."},
-                    zat: {ar: "الراحة التامة والسوائل الدافئة تسرع الشفاء بنسبة 50%؛ لا ترهق جسمك.", en: "Complete rest and warm fluids speed recovery by 50%."},
-                    supps: [
-                        { t: {ar: "زنك + فيتامين سي", en: "Zinc + Vit C"}, a: {ar: "Zinc Citrate & Ascorbic Acid", en: "Zinc & Vit C"}, d: {ar: "50mg / 1000mg", en: "50mg / 1000mg"}, tm: {ar: "بعد وجبة خفيفة", en: "After a light meal"}, b: {ar: "تقليل مدة الإصابة بالبرد بنسبة 30% وتقوية الخلايا المناعية التائية.", en: "Shortens cold duration by 30% and boosts T-immune cells."}, br: "iRemedies iVitamin C + Zinc | Avernus C-Max | Sambucol | Redoxon" }
-                    ]
-                }
-            ],
-            skin: [
-                {
-                    id: "acne", name: {ar: "حب الشباب الالتهابي", en: "Inflammatory Acne"},
-                    warn: {ar: "المكملات تدعم العلاج الموضعي؛ تجنب لمس الحبوب باليد لتفادي الندبات.", en: "Supplements support topicals; avoid touching acne to prevent scarring."},
-                    zat: {ar: "الزنك هو 'عدو' الحبوب الطبيعي؛ يقلل إفراز الدهون والالتهاب فوراً.", en: "Zinc is acne's natural enemy; it reduces sebum and inflammation fast."},
-                    supps: [
-                        { t: {ar: "زنك جلوكونات", en: "Zinc Gluconate"}, a: {ar: "Zinc Gluconate", en: "Zinc Gluconate"}, d: {ar: "50 mg", en: "50 mg"}, tm: {ar: "على معدة فارغة (أو مع أكل)", en: "Empty stomach or with food"}, b: {ar: "تنظيم إفراز الغدد الدهنية، تقليل البكتيريا المسببة للحبوب، وتسريع التئام الجلد.", en: "Regulates sebum, reduces acne bacteria, and speeds skin healing."}, br: "iRemedies iZinc | Avernus Zinc | Solgar | Nature's Bounty" }
-                    ]
-                }
-            ],
-            hair: [
-                {
-                    id: "hairloss", name: {ar: "تساقط الشعر المزمن", en: "Chronic Hair Loss"},
-                    warn: {ar: "يجب فحص مخزون الحديد والغدة الدرقية؛ المكملات تحتاج 3 شهور للظهور.", en: "Check Ferritin and Thyroid; supplements need 3 months for results."},
-                    zat: {ar: "الشعر يتغذى من الداخل؛ الالتزام اليومي هو سر الكثافة.", en: "Hair is fed from within; daily consistency is the secret to density."},
-                    supps: [
-                        { t: {ar: "بيوتين + زنك", en: "Biotin + Zinc"}, a: {ar: "Biotin 5000mcg / Zinc 15mg", en: "Biotin / Zinc"}, d: {ar: "5000 mcg", en: "5000 mcg"}, tm: {ar: "مع الإفطار", en: "With breakfast"}, b: {ar: "تقوية بروتين الكيراتين، زيادة سمك الشعرة، ومنع التقصف من الجذور.", en: "Strengthens keratin, increases thickness, and prevents breakage."}, br: "iRemedies iBiotin | Avernus Hair-Vit | Perfectil | Priorin" }
-                    ]
-                }
-            ],
-            spc: [
-                 {
-                    id: "preg1", name: {ar: "الحامل (الشهور الأولى)", en: "Pregnancy (1st Trimester)"},
-                    warn: {ar: "يُمنع تناول فيتامين A بجرعات عالية؛ الالتزام بحمض الفوليك إلزامي.", en: "Avoid high-dose Vitamin A; Folic acid is mandatory."},
-                    zat: {ar: "حمض الفوليك يحمي الجهاز العصبي للجنين؛ لا تنسي حبتك اليومية.", en: "Folic acid protects the fetal nervous system; don't skip it."},
-                    supps: [
-                        { t: {ar: "حمض الفوليك", en: "Folic Acid"}, a: {ar: "Folic Acid / Methylfolate", en: "Folic Acid"}, d: {ar: "400 - 800 mcg", en: "400 - 800 mcg"}, tm: {ar: "مرة يومياً", en: "Once daily"}, b: {ar: "منع تشوهات الأنبوب العصبي للجنين ودعم انقسام الخلايا الصحي.", en: "Prevents neural tube defects and supports healthy cell division."}, br: "iRemedies iFolic | Avernus Folic | Solgar | Pregnacare" }
-                    ]
-                }
-            ],
-            tips: [
-                 {
-                    id: "sleep", name: {ar: "الأرق وصعوبة النوم", en: "Insomnia & Sleep Issues"},
-                    warn: {ar: "تجنب الكافيين بعد الساعة 4 عصراً؛ الميلاتونين ليس للإدمان بل لتعديل الساعة البيولوجية.", en: "Avoid caffeine after 4 PM; Melatonin resets the biological clock."},
-                    zat: {ar: "غرفة مظلمة وباردة مع الميلاتونين تضمن لك نوماً عميقاً.", en: "A dark, cool room with melatonin ensures deep sleep."},
-                    supps: [
-                        { t: {ar: "ميلاتونين", en: "Melatonin"}, a: {ar: "Melatonin", en: "Melatonin"}, d: {ar: "3 - 5 mg", en: "3 - 5 mg"}, tm: {ar: "قبل النوم بـ 30 دقيقة", en: "30 mins before sleep"}, b: {ar: "تقصير وقت الدخول في النوم وتحسين جودة النوم العميق (REM sleep).", en: "Shortens time to fall asleep and improves REM sleep quality."}, br: "iRemedies iSleep (Melatonin) | Avernus | Natrol | Jamieson" }
-                    ]
-                }
-            ]
-        };
+// SEARCH
+function doSearch(){
+  const q=document.getElementById('si').value.trim().toLowerCase();
+  const res=document.getElementById('sr');
+  if(!q){res.classList.remove('on');return;}
+  const db=getDB();
+  const matches=[];
+  Object.entries(db.conditions).forEach(([secId,conds])=>{
+    const sec=db.sections.find(s=>s.id===secId);
+    conds.forEach(c=>{
+      if(c.name.toLowerCase().includes(q)||c.id.includes(q)){
+        matches.push({...c,secId,secName:sec?sec.name:secId});
+      }
+    });
+  });
+  if(!matches.length){res.classList.remove('on');return;}
+  res.innerHTML=matches.slice(0,8).map(m=>
+    `<div class="si" onclick="searchGo('${m.secId}','${m.id}')">
+      <span>${m.icon} ${m.name}</span>
+      <span class="scat">${m.secName}</span>
+    </div>`
+  ).join('');
+  res.classList.add('on');
+}
 
-        function toggleLang() {
-            lang = lang === 'ar' ? 'en' : 'ar';
-            document.body.className = lang; document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            document.getElementById('lBtn').innerText = lang === 'ar' ? 'English' : 'العربية';
-            updateUI(); renderCats(); renderGrid(); goBack();
-        }
+function searchGo(secId,condId){
+  document.getElementById('sr').classList.remove('on');
+  document.getElementById('si').value='';
+  curSec=secId; curCond=null; activeSuppIdx=null;
+  renderSections();
+  showDetail(condId);
+}
 
-        function toggleTheme() {
-            theme = theme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', theme);
-            document.getElementById('tBtn').innerText = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
-        }
+function clrS(){
+  document.getElementById('si').value='';
+  document.getElementById('sr').classList.remove('on');
+}
 
-        function updateUI() {
-            document.getElementById('srch').placeholder = UI[lang].search;
-            document.getElementById('instr').innerText = UI[lang].instr;
-            document.querySelectorAll('.l-act').forEach(e => e.innerText = UI[lang].act);
-            document.querySelectorAll('.l-dos').forEach(e => e.innerText = UI[lang].dos);
-            document.querySelectorAll('.l-tim').forEach(e => e.innerText = UI[lang].tim);
-            document.querySelectorAll('.l-ben').forEach(e => e.innerText = UI[lang].ben);
-            document.querySelectorAll('.l-bra').forEach(e => e.innerText = UI[lang].bra);
-        }
+// INIT
+window.onload=()=>{
+  const savedDk=localStorage.getItem('pa_dk')==='true';
+  if(savedDk){dk=true;document.getElementById('dkb').textContent='☀️';}
+  const savedL=localStorage.getItem('pa_lang')||'ar';
+  setL(savedL);
+};
 
-        function renderCats() {
-            const bar = document.getElementById('cats'); bar.innerHTML = '';
-            ['chr', 'otc', 'spc', 'skin', 'hair', 'tips'].forEach(c => {
-                const b = document.createElement('div');
-                b.className = `cat-btn ${currentCat === c ? 'active' : ''}`;
-                b.innerText = UI[lang][c];
-                b.onclick = () => { currentCat = c; renderCats(); renderGrid(); };
-                bar.appendChild(b);
-            });
-        }
-
-        function renderGrid() {
-            const grid = document.getElementById('grid'), term = document.getElementById('srch').value.toLowerCase();
-            grid.innerHTML = '';
-            const list = DATA[currentCat] || [];
-            list.filter(i => i.name[lang].toLowerCase().includes(term)).forEach(i => {
-                const card = document.createElement('div'); card.className = 'card';
-                card.innerText = i.name[lang]; card.onclick = () => openDash(i);
-                grid.appendChild(card);
-            });
-        }
-
-        function openDash(i) {
-            document.getElementById('grid').classList.add('hidden');
-            document.getElementById('cats').classList.add('hidden');
-            document.getElementById('dash').style.display = 'block';
-            document.getElementById('dTitle').innerText = i.name[lang];
-            document.getElementById('dWrn').innerText = "⚠️ " + i.warn[lang];
-            document.getElementById('dZat').innerText = "🌟 " + i.zat[lang];
-            const pBox = document.getElementById('dPills'); pBox.innerHTML = '';
-            i.supps.forEach((s, idx) => {
-                const p = document.createElement('div'); p.className = 'pill';
-                p.innerText = s.t[lang]; p.onclick = () => showInfo(s, p);
-                pBox.appendChild(p);
-            });
-            document.getElementById('dPanel').style.display = 'none';
-        }
-
-        function showInfo(s, el) {
-            document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-            el.classList.add('active');
-            document.getElementById('dPanel').style.display = 'block';
-            document.getElementById('v-act').innerText = s.a[lang];
-            document.getElementById('v-dos').innerText = s.d[lang];
-            document.getElementById('v-tim').innerText = s.tm[lang];
-            document.getElementById('v-ben').innerText = s.b[lang];
-            document.getElementById('v-bra').innerText = s.br;
-        }
-
-        function goBack() {
-            document.getElementById('grid').classList.remove('hidden');
-            document.getElementById('cats').classList.remove('hidden');
-            document.getElementById('dash').style.display = 'none';
-        }
-
-        window.onload = () => { renderCats(); renderGrid(); updateUI(); };
-    </script>
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.sb')&&!e.target.closest('.sr'))
+    document.getElementById('sr').classList.remove('on');
+});
+</script>
 </body>
 </html>
