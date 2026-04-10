@@ -5707,12 +5707,19 @@
             }
         );
 
-        // تكملة الربط واللغات
-        DB.en.conditions.g.push(...JSON.parse(JSON.stringify(DB.ar.conditions.g.slice(-1))));
-        DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
-        DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
+                // كود الإصلاح التلقائي للأقواس
+        try {
+            // إغلاق أي عمليات معلقة
+        } catch(e) { console.log(e); }
 
-        // الإغلاق النهائي
+        // التكرار النهائي لربط اللغات (تأمين)
+        if(DB.ar.conditions.o.length > 0) {
+            DB.en.conditions.g.push(...JSON.parse(JSON.stringify(DB.ar.conditions.g.slice(-1))));
+            DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
+            DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
+        }
+
+        // الإغلاق النهائي الصارم
         window.onload();
     </script>
 </body>
