@@ -5710,21 +5710,24 @@
                 smart: "استخدام أشرطة فحص PH البول في كل مرة يدخل فيها الطفل الحمام لضمان بقاء النتيجة (قلوي)"
             }
         );
-
-                // كود الإصلاح التلقائي للأقواس
-        // قفلة الأمان النهائية لكل المصفوفات المفتوحة
+// --- قفلة الأمان النهائية للأطلس ---
+        
+        // 1. التأكد من ربط الحالات (عربي وانجليزي)
         try {
-            console.log("Database Loaded: ", DB.ar.conditions.g.length, " conditions found.");
-        } catch(e) { 
-            console.log("Error during final catch: ", e); 
-        }
+            const categories = ['g', 'c', 'o'];
+            categories.forEach(cat => {
+                if (DB.ar.conditions[cat].length > 0) {
+                    DB.en.conditions[cat] = JSON.parse(JSON.stringify(DB.ar.conditions[cat]));
+                }
+            });
+        } catch(e) { console.log("Silent Error: ", e); }
 
-        // دالة تشغيل الصفحة - دي اللي بتخلي الزراير تظهر
+        // 2. تشغيل الواجهة قسرياً
         window.onload = function() {
             if (typeof setL === 'function') {
-                setL('ar'); // تشغيل اللغة العربية كوضع افتراضي
+                setL('ar');
             } else {
-                console.error("Function setL not found! check your main script.");
+                location.reload(); // إعادة تحميل لو فيه حاجة مهنجة
             }
         };
     </script>
