@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>Pharma Atlas Pro</title>
+    <title>Pharma Atlas Pro | المرجع الأقصى</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
     <style>
         :root {
@@ -31,19 +31,16 @@
         body {background:var(--bg);color:var(--tx);font-family:'Cairo',sans-serif;min-height:100vh;transition:0.3s}
         body.ar {direction:rtl} body.en {direction:ltr}
 
-        /* TOPBAR */
         .tb {background:var(--bg2);border-bottom:3px solid var(--gr);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:var(--sh)}
         .tbi {width:38px;height:38px;background:linear-gradient(135deg,var(--gr),var(--tl));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
         .tbn {font-size:16px;font-weight:900;color:var(--tx)}
         .tbs {font-size:10px;color:var(--tx3);font-weight:700}
-        .tbr {display:flex;gap:8px;align-items:center}
         
         .lt {display:flex;border:2px solid var(--bg4);border-radius:10px;overflow:hidden}
         .lb {padding:6px 14px;font-size:12px;font-weight:800;border:none;background:transparent;color:var(--tx3);cursor:pointer}
         .lb.ac {background:var(--gr);color:#fff}
         .ib {width:38px;height:38px;border-radius:10px;border:2px solid var(--bg4);background:var(--bg3);color:var(--tx);cursor:pointer;display:flex;align-items:center;justify-content:center}
 
-        /* SEARCH */
         .sw {padding:15px 16px 0;max-width:900px;margin:0 auto}
         .sb {display:flex;align-items:center;gap:10px;background:var(--bg2);border:2.5px solid var(--bg4);border-radius:var(--r);padding:10px 15px;box-shadow:var(--sh)}
         .sb input {flex:1;border:none;background:transparent;color:var(--tx);font-size:15px;font-family:inherit;outline:none;font-weight:700}
@@ -51,13 +48,11 @@
         .sr.on {display:block}
         .si {padding:12px 16px;border-bottom:1px solid var(--bg3);cursor:pointer;display:flex;justify-content:space-between;font-weight:700}
 
-        /* TABS */
         .stw {padding:15px 16px 5px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
         .stw::-webkit-scrollbar {display:none}
         .st {padding:10px 18px;border-radius:25px;border:2px solid var(--bg4);background:var(--bg2);color:var(--tx2);font-weight:900;font-size:13px;white-space:nowrap;cursor:pointer}
         .st.ac {background:var(--gr);border-color:var(--gr);color:#fff}
 
-        /* GRID */
         .cw {padding:15px 16px;max-width:900px;margin:0 auto}
         .cg {display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
         .cc {background:var(--bg2);border:2px solid var(--bg4);border-radius:var(--r);padding:18px 10px;text-align:center;box-shadow:var(--sh);cursor:pointer}
@@ -65,7 +60,6 @@
         .ci {font-size:28px;margin-bottom:8px}
         .cn {font-size:14px;font-weight:900;color:var(--tx)}
 
-        /* DETAIL VIEW */
         .dw {display:none;padding:0 16px 50px;animation:su 0.3s ease}
         .dw.on {display:block}
         @keyframes su {from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
@@ -75,18 +69,15 @@
         body.en .dh {border-right:none;border-left:6px solid var(--gr)}
         .dt {font-size:22px;font-weight:900}
 
-        /* CARDS */
         .ic {background:var(--bg2);border-radius:var(--r);padding:16px;margin-bottom:12px;border:2px solid var(--bg4);box-shadow:var(--sh)}
         .ich {display:flex;align-items:center;gap:10px;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid var(--bg3)}
         .icht {font-size:15px;font-weight:900}
         .ic.gr {border-color:var(--grb)} .ic.bl {border-color:var(--blb)} .ic.or {border-color:var(--orb)}
 
-        /* SUPPLEMENT CHIPS */
         .chips {display:flex;flex-wrap:wrap;gap:8px}
-        .chip {padding:8px 16px;background:var(--bg3);border:2px solid var(--bg4);border-radius:25px;font-size:13px;font-weight:800;color:var(--tx2);cursor:pointer}
+        .chip {padding:10px 18px;background:var(--bg3);border:2px solid var(--bg4);border-radius:25px;font-size:13px;font-weight:800;color:var(--tx2);cursor:pointer}
         .chip.ac {background:var(--gr);color:#fff;border-color:var(--gr)}
 
-        /* SUPP PANEL */
         .sdp {background:var(--grl);border:2px solid var(--grb);border-radius:15px;padding:16px;margin-top:12px;animation:fd 0.2s ease}
         .sdn {font-size:16px;font-weight:900;color:var(--gr);margin-bottom:10px}
         .sdg {display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
@@ -96,9 +87,8 @@
         .sdf {font-size:14px;line-height:1.6;background:var(--bg2);padding:12px;border-radius:10px;color:var(--tx)}
         .sdbr {font-size:13px;color:var(--bl);font-weight:900;margin-top:8px}
 
-        /* TEXT STRIPS */
-        .li {display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--bg3);font-size:14px;font-weight:700}
-        .wi {display:flex;gap:10px;padding:8px 0;font-size:14px;font-weight:700;color:var(--rd)}
+        .li {display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--bg3);font-size:14px;font-weight:700}
+        .wi {display:flex;gap:10px;padding:10px 0;font-size:14px;font-weight:700;color:var(--rd)}
         .ph {background:var(--tll);padding:15px;border-radius:12px;border-right:4px solid var(--tl);font-style:italic;font-weight:700}
         .sm {background:var(--pul);padding:15px;border-radius:12px;border-right:4px solid var(--pu);font-weight:700}
     </style>
@@ -139,63 +129,88 @@
     </div>
 
 <script>
-    // قاعدة البيانات (دسمة وعميقة بـ 6 مكملات)
     const DB = {
         ar: {
-            L: { logo:"أطلس الصيدلاني", search:"ابحث عن حالة طبية...", back:"رجوع", backA:"→", cs:"المكملات المصاحبة (6+ خيارات)", tips:"نصائح صحية مبنية على الأدلة", warns:"تحذيرات هامة", phrase:"جملة البيع الاحترافية", smart:"فرصة ذكية إضافية", dose:"الجرعة", timing:"التوقيت", brands:"البراندات المقترحة" },
+            L: { logo:"أطلس الصيدلاني", search:"ابحث عن حالة طبية...", back:"رجوع", backA:"→", cs:"المكملات المصاحبة (6+ خيارات)", tips:"نصائح صحية مبنية على الأدلة", warns:"تحذيرات هامة", phrase:"جملة البيع الاحترافية", smart:"فرصة ذكية إضافية", dose:"الجرعة", timing:"التوقيت", brands:"البراندات" },
             sections: [
-                {id:"c", icon:"🫀", name:"أمراض مزمنة"},
-                {id:"o", icon:"💊", name:"OTC شائع"},
-                {id:"sk", icon:"🧴", name:"العناية بالبشرة"},
-                {id:"h", icon:"💆", name:"العناية بالشعر"}
+                {id:"c", icon:"🫀", name:"مزمنة"}, {id:"o", icon:"💊", name:"OTC"}, {id:"sk", icon:"🧴", name:"بشرة"}, {id:"h", icon:"💆", name:"شعر"}, {id:"s", icon:"👶", name:"خاصة"}, {id:"g", icon:"🌿", name:"صحة"}
             ],
             conditions: {
                 c: [
                     {
-                        id:"htn", icon:"❤️", name:"الضغط المرتفع",
+                        id:"htn", icon:"❤️", name:"ارتفاع الضغط",
                         supps: [
-                            {n:"ماغنيسيوم جليسينات", d:"400mg", t:"مساءً مع الأكل", f:"يُرخّي الأوعية الدموية ويقلل التوتر الشرياني.", b:"iRemedies | Avernus | Now"},
-                            {n:"CoQ10 (Ubiquinol)", d:"200mg", t:"صباحاً بعد الأكل", f:"يُحسّن وظيفة القلب ويحمي من آثار أدوية الكوليسترول.", b:"iRemedies | Avernus | Solgar"},
-                            {n:"أوميغا 3 (EPA/DHA)", d:"2000mg", t:"وسط الغداء", f:"يُحسّن مرونة الشرايين ويخفض الدهون الثلاثية.", b:"Avernus TG | iRemedies | Seven Seas"},
-                            {n:"فيتامين D3", d:"5000 IU", t:"صباحاً مع دهون", f:"نقص د3 مرتبط بارتفاع ضغط الدم المستمر.", b:"iRemedies | Avernus | Now"},
-                            {n:"بوتاسيوم", d:"99mg", t:"مع الوجبة", f:"يُوازن الصوديوم في الجسم ويساعد في خفض الضغط.", b:"Now | Nature's Bounty"},
-                            {n:"L-Arginine", d:"1000mg", t:"على معدة فارغة", f:"يُعزز إنتاج Nitric Oxide لتوسيع الشرايين.", b:"Solgar | Now"}
+                            {n:"ماغنيسيوم جليسينات", d:"400mg", t:"مساءً", f:"يُرخّي الأوعية الدموية ويحسن النوم.", b:"iRemedies | Avernus | Now"},
+                            {n:"CoQ10 Ubiquinol", d:"200mg", t:"صباحاً", f:"ضروري لعضلة القلب وحمايتها من أدوية الستاتين.", b:"iRemedies | Avernus | Solgar"},
+                            {n:"أوميغا 3 TG", d:"2000mg", t:"مع الغداء", f:"يقلل الالتهابات الوعائية ويخفض الدهون الثلاثية.", b:"Avernus | iRemedies"},
+                            {n:"فيتامين D3", d:"5000 IU", t:"صباحاً", f:"تصحيح النقص يحسن التحكم في ضغط الدم.", b:"iRemedies | Avernus"},
+                            {n:"مستخلص الثوم", d:"1200mg", t:"يومياً", f:"يعمل كموسع طبيعي للأوعية الدموية.", b:"Kyolic | Now"},
+                            {n:"إل-أرجنين", d:"1000mg", t:"على الريق", f:"يزيد إنتاج أكسيد النيتريك لتوسيع الشرايين.", b:"Now | Solgar"}
                         ],
-                        tips: ["تقليل الصوديوم لأقل من 2300mg", "مشي 30 دقيقة يومياً", "نوم 8 ساعات منتظمة"],
-                        warns: ["🚨 البوتاسيوم ممنوع مع أدوية ACEi مثل Zestril", "CoQ10 قد يزيد أثر أدوية الضغط"],
-                        phrase: "\"هذه المجموعة من iRemedies وAvernus تعمل كفريق حماية لقلبك مع الدواء\"",
-                        smart: "جهاز ضغط Omron للمتابعة المنزلية الدقيقة"
+                        tips: ["تقليل الملح < 2300mg", "مشي 30 دقيقة يومياً"],
+                        warns: ["🚨 لا بوتاسيوم مع ACEi", "راقب الضغط عند بدء CoQ10"],
+                        phrase: "\"الماغنيسيوم والـ CoQ10 درع حماية لقلبك مع الدواء\"",
+                        smart: "جهاز ضغط Omron لمتابعة القراءات في المنزل"
+                    },
+                    {
+                        id:"dm2", icon:"🩸", name:"السكري النوع 2",
+                        supps: [
+                            {n:"بربرين", d:"500mg x 3", t:"قبل الأكل", f:"يخفض التراكمي بمعدلات تقارب الميتفورمين.", b:"Now | Nature's Bounty"},
+                            {n:"حمض ألفا ليبويك (ALA)", d:"600mg", t:"على الريق", f:"يعالج التهاب الأعصاب ويحسن حساسية الأنسولين.", b:"iRemedies | Avernus"},
+                            {n:"كروميوم", d:"400mcg", t:"مع الوجبة", f:"يقلل مقاومة الأنسولين والشوق للسكريات.", b:"Now | Solgar"},
+                            {n:"ب-كومبلكس منشط", d:"حبة يومياً", t:"صباحاً", f:"يحمي الأعصاب من التلف السكري.", b:"iRemedies | Avernus"},
+                            {n:"ماغنيسيوم", d:"400mg", t:"مساءً", f:"80% من مرضى السكري لديهم نقص في المغنيسيوم.", b:"iRemedies | Now"},
+                            {n:"فيتامين D3", d:"5000 IU", t:"بعد الأكل", f:"ضروري للمناعة وتقليل التهابات الخلايا.", b:"iRemedies | Avernus"}
+                        ],
+                        tips: ["حمية منخفضة النشويات", "مشي 15 دقيقة بعد الأكل"],
+                        warns: ["🚨 البربرين مع الميتفورمين قد يسبب هبوط سكر", "ALA يحتاج مراقبة للسكر"],
+                        phrase: "\"مزيج البربرين والـ ALA هو الأقوى لحماية أعصابك وضبط سكرك\"",
+                        smart: "شرائط قياس سكر إضافية للمتابعة الدقيقة"
+                    }
+                    // هنا سنضيف باقي الـ 180 حالة بنفس النمط
+                ],
+                o: [
+                    {
+                        id:"joint", icon:"🦵", name:"خشونة المفاصل",
+                        supps: [
+                            {n:"جلوكوزامين وكندرويتين", d:"1500mg", t:"بعد الأكل", f:"يبني الغضاريف ويقلل الاحتكاك.", b:"iRemedies | Avernus"},
+                            {n:"كولاجين نوع 2", d:"40mg", t:"على الريق", f:"يوقف هجوم المناعة على المفاصل.", b:"Now | iRemedies"},
+                            {n:"كركمين (BCM-95)", d:"500mg x 2", t:"بعد الأكل", f:"مضاد التهاب طبيعي أقوى من المسكنات.", b:"iRemedies | Avernus"},
+                            {n:"أوميغا 3", d:"2000mg", t:"مع الأكل", f:"يقلل تيبس المفاصل الصباحي.", b:"Avernus | Now"},
+                            {n:"MSM", d:"1000mg", t:"يومياً", f:"مهم جداً لمرونة الأربطة والأوتار.", b:"Solgar | Now"},
+                            {n:"حمض الهيالورونيك", d:"100mg", t:"يومياً", f:"يعمل كمزيت طبيعي للسائل الزلالي.", b:"iRemedies | Now"}
+                        ],
+                        tips: ["تقليل الوزن يخفف الضغط", "تمارين سباحة خفيفة"],
+                        warns: ["⚠️ الكركمين مع وارفارين يحتاج حذر", "الجلوكوزامين قد يرفع السكر قليلاً"],
+                        phrase: "\"الكولاجين والكركمين معاً يغنيانك عن كثرة المسكنات الضارة\"",
+                        smart: "ركبة طبية أو دهان مسكن موضعي"
                     }
                 ],
-                o: [], sk: [], h: []
+                sk: [], h: [], s: [], g: []
             }
         },
         en: {
-            L: { logo:"Pharma Atlas Pro", search:"Search condition...", back:"Back", backA:"←", cs:"Companion Supplements (6+ Options)", tips:"Evidence-Based Tips", warns:"Important Warnings", phrase:"Pro Sales Phrase", smart:"Smart Opportunity", dose:"Dose", timing:"Timing", brands:"Brands" },
-            sections: [
-                {id:"c", icon:"🫀", name:"Chronic"},
-                {id:"o", icon:"💊", name:"OTC"},
-                {id:"sk", icon:"🧴", name:"Skin Care"},
-                {id:"h", icon:"💆", name:"Hair Care"}
-            ],
+            L: { logo:"Pharma Atlas Pro", search:"Search...", back:"Back", backA:"←", cs:"Supplements", tips:"Tips", warns:"Warnings", phrase:"Sales Phrase", smart:"Smart Op", dose:"Dose", timing:"Timing", brands:"Brands" },
+            sections: [ {id:"c", icon:"🫀", name:"Chronic"}, {id:"o", icon:"💊", name:"OTC"}, {id:"sk", icon:"🧴", name:"Skin"}, {id:"h", icon:"💆", name:"Hair"}, {id:"s", icon:"👶", name:"Special"}, {id:"g", icon:"🌿", name:"Health"} ],
             conditions: {
                 c: [
                     {
                         id:"htn", icon:"❤️", name:"Hypertension",
                         supps: [
-                            {n:"Magnesium Glycinate", d:"400mg", t:"Evening", f:"Relaxes blood vessels and reduces arterial tension.", b:"iRemedies | Avernus"},
-                            {n:"CoQ10", d:"200mg", t:"Morning", f:"Protects the heart and supports energy.", b:"iRemedies | Solgar"},
-                            {n:"Omega-3", d:"2000mg", t:"Lunch", f:"Improves arterial elasticity.", b:"Avernus | Seven Seas"},
-                            {n:"Vitamin D3", d:"5000 IU", t:"Morning", f:"Essential for blood pressure regulation.", b:"iRemedies | Now"},
-                            {n:"Potassium", d:"99mg", t:"With meal", f:"Balances sodium levels.", b:"Nature's Bounty"},
-                            {n:"L-Arginine", d:"1000mg", t:"Empty stomach", f:"Promotes Nitric Oxide production.", b:"Solgar"}
+                            {n:"Magnesium Glycinate", d:"400mg", t:"PM", f:"Relaxes vessels.", b:"iRemedies"},
+                            {n:"CoQ10", d:"200mg", t:"AM", f:"Heart support.", b:"Avernus"},
+                            {n:"Omega 3", d:"2000mg", t:"Lunch", f:"Arterial health.", b:"Avernus"},
+                            {n:"Vit D3", d:"5000 IU", t:"AM", f:"BP regulation.", b:"iRemedies"},
+                            {n:"Garlic", d:"1200mg", t:"Daily", f:"Natural vasodilator.", b:"Kyolic"},
+                            {n:"L-Arginine", d:"1000mg", t:"Empty", f:"NO booster.", b:"Now"}
                         ],
-                        tips: ["Reduce sodium <2300mg", "30 min walk daily"],
-                        warns: ["🚨 No potassium with ACEi drugs", "Monitor BP when starting CoQ10"],
-                        phrase: "\"This protocol from iRemedies & Avernus protects your heart alongside meds\"",
-                        smart: "Omron Blood Pressure Monitor for home tracking"
+                        tips: ["Low salt", "Daily walk"],
+                        warns: ["No potassium with ACEi"],
+                        phrase: "\"Magnesium and CoQ10 protect your heart.\"",
+                        smart: "Omron BP Monitor"
                     }
-                ]
+                ],
+                o: [], sk: [], h: [], s: [], g: []
             }
         }
     };
