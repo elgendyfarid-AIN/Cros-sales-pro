@@ -5712,19 +5712,21 @@
         );
 
                 // كود الإصلاح التلقائي للأقواس
+        // قفلة الأمان النهائية لكل المصفوفات المفتوحة
         try {
-            // إغلاق أي عمليات معلقة
-        } catch(e) { console.log(e); }
-
-        // التكرار النهائي لربط اللغات (تأمين)
-        if(DB.ar.conditions.o.length > 0) {
-            DB.en.conditions.g.push(...JSON.parse(JSON.stringify(DB.ar.conditions.g.slice(-1))));
-            DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
-            DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
+            console.log("Database Loaded: ", DB.ar.conditions.g.length, " conditions found.");
+        } catch(e) { 
+            console.log("Error during final catch: ", e); 
         }
 
-        // الإغلاق النهائي الصارم
-        window.onload();
+        // دالة تشغيل الصفحة - دي اللي بتخلي الزراير تظهر
+        window.onload = function() {
+            if (typeof setL === 'function') {
+                setL('ar'); // تشغيل اللغة العربية كوضع افتراضي
+            } else {
+                console.error("Function setL not found! check your main script.");
+            }
+        };
     </script>
 </body>
 </html>
