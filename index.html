@@ -5711,5 +5711,48 @@
 
         window.onload();
     </script>
+<script>
+    // 1. محرك الإصلاح التلقائي لقاعدة البيانات
+    (function repairDatabase() {
+        try {
+            console.log("Starting Database Repair...");
+            
+            // التأكد من وجود الهيكل الأساسي للغتين
+            ["ar", "en"].forEach(lang => {
+                if (!window.DB) window.DB = {};
+                if (!window.DB[lang]) window.DB[lang] = { conditions: { g: [], c: [], o: [] } };
+            });
+
+            // تنظيف المصفوفات من أي قيم فارغة أو Null ناتجة عن أخطاء الدفعات
+            const categories = ['g', 'c', 'o'];
+            ['ar', 'en'].forEach(lang => {
+                categories.forEach(cat => {
+                    if (window.DB[lang].conditions[cat]) {
+                        window.DB[lang].conditions[cat] = window.DB[lang].conditions[cat].filter(item => item && item.id);
+                    }
+                });
+            });
+
+            console.log("Repair Complete. Database is now stable.");
+        } catch (e) {
+            console.error("Critical Repair Error:", e);
+        }
+    })();
+
+    // 2. تشغيل الواجهة قسرياً
+    try {
+        if (typeof renderApp === "function") {
+            renderApp(); 
+        } else if (typeof init === "function") {
+            init();
+        } else {
+            // إذا كانت الصفحة تعتمد على دالة معينة للتشغيل، استدعها هنا
+            console.warn("App initialization function not found. Trying window.onload...");
+            if(window.onload) window.onload();
+        }
+    } catch (err) {
+        console.error("App Launch Failed:", err);
+    }
+</script>
 </body>
 </html>
