@@ -471,6 +471,86 @@
                 smart: "Night Retinol serum for faster skin tightening"
             }
         );
+
+        DB.ar.conditions.h.push(
+            {
+                id:"hairloss_m", icon:"👨‍🦲", name:"تساقط الشعر الوراثي (رجال)",
+                supps: [
+                    {n:"ساو بالميتو (Saw Palmetto)", d:"320mg", t:"مع الأكل", f:"يُثبّط إنزيم 5-Alpha Reductase ويقلل من هرمون الـ DHT المسبب للصلع.", b:"Now | Nature's Bounty | Solgar"},
+                    {n:"بيوتين (تركيز 10,000)", d:"10,000mcg", t:"صباحاً", f:"يُقوّي البنية الأساسية للشعرة (الكيراتين) ويزيد من سمكها.", b:"iRemedies Biotin | Avernus | Now"},
+                    {n:"زنك بيكولينات", d:"25-50mg", t:"مساءً", f:"معدن أساسي لنمو الخلايا الشعرية وإصلاح التلف في البصيلات.", b:"iRemedies Zinc | Avernus | Now"},
+                    {n:"فيتامين D3", d:"5000 IU", t:"صباحاً مع دهون", f:"نقص د3 يؤدي لخمول البصيلات؛ تصحيحه ينشط نمو الشعر الجديد.", b:"iRemedies | Avernus | Now"},
+                    {n:"أوميغا 3", d:"2000mg", t:"وسط الغداء", f:"يُرطب فروة الرأس من الداخل ويقلل الالتهابات حول البصيلات.", b:"Avernus TG | iRemedies"},
+                    {n:"إل-سيستين (L-Cysteine)", d:"500mg", t:"يومياً", f:"حمض أميني أساسي يدخل في تكوين بروتين الشعر ويمنع تكسره.", b:"Now | Solgar"}
+                ],
+                tips: ["تدليك فروة الرأس يومياً لزيادة تدفق الدم", "تجنب الاستحمام بماء ساخن جداً", "فحص هرمونات الذكورة والـ DHT"],
+                warns: ["البيوتين بجرعات عالية قد يؤثر على نتائج تحاليل الغدة الدرقية"],
+                phrase: "\"ساو بالميتو مع البيوتين هما الثنائي الأقوى لمنع التساقط الوراثي\"",
+                smart: "بخاخ مينوكسيديل (Minoxidil 5%) لتحفيز النمو الموضعي"
+            },
+            {
+                id:"hairloss_f", icon:"👩‍🦱", name:"تساقط الشعر عند النساء",
+                supps: [
+                    {n:"حديد (Gentle Iron)", d:"25-50mg", t:"على الريق مع فيتامين سي", f:"السبب الأول لتساقط الشعر عند النساء هو نقص مخزون الحديد (Ferritin).", b:"iRemedies | Avernus | Solgar"},
+                    {n:"بيوتين", d:"5000-10000mcg", t:"صباحاً", f:"يُحسّن مظهر الشعر ويزيد من معدل النمو السنوي للخصلات.", b:"iRemedies | Avernus | Now"},
+                    {n:"فيتامين D3", d:"5000 IU", t:"يومياً", f:"ضروري جداً لدورة حياة الشعرة؛ نقصه يسبب تساقطاً منتشراً (Telogen Effluvium).", b:"iRemedies | Avernus"},
+                    {n:"سيليكا (Silica / Horsetail)", d:"500mg", t:"يومياً", f:"معدن الجمال؛ يقوي أطراف الشعر ويمنع التقصف ويزيد اللمعان.", b:"Now | Solgar"},
+                    {n:"ب-كومبلكس منشط", d:"حبة يومياً", t:"صباحاً", f:"يُحسن التروية الدموية للبصيلات ويدعم العمليات الحيوية للشعر.", b:"iRemedies | Avernus"},
+                    {n:"كولاجين بحري", d:"10,000mg", t:"صباحاً على الريق", f:"يوفر الأحماض الأمينية اللازمة لبناء كيراتين الشعر.", b:"iRemedies Collagen | Avernus"}
+                ],
+                tips: ["فحص مخزون الحديد (Ferritin) - يجب أن يكون فوق 70 للشعر", "تجنب شد الشعر بقوة (تسريحات الذيل حصان)", "استخدام شامبو خالي من السلفات"],
+                warns: ["لا تأخذي الحديد مع الكالسيوم أو القهوة (يمنع الامتصاص)"],
+                phrase: "\"الحديد مع البيوتين سيعيد حيوية شعرك ويوقف التساقط في 8 أسابيع\"",
+                smart: "أمبولات فيتامينات موضعية لتغذية البصيلات مباشرة"
+            },
+            {
+                id:"dandruff_h", icon:"❄️", name:"القشرة والحكة المزمنة",
+                supps: [
+                    {n:"زنك بيكولينات", d:"25-50mg", t:"مساءً", f:"يُساعد في التحكم في مستويات الفطريات (Malassezia) المسببة للقشرة.", b:"iRemedies Zinc | Avernus | Now"},
+                    {n:"أوميغا 3", d:"2000mg", t:"وسط الأكل", f:"يُرطب فروة الرأس ويمنع الجفاف والقشور الجافة.", b:"Avernus | iRemedies"},
+                    {n:"بروبيوتيك", d:"20 Billion CFU", t:"على الريق", f:"تحسين مناعة الجلد وفروة الرأس ضد الالتهابات الفطرية.", b:"iRemedies Probio | Now"},
+                    {n:"فيتامين D3", d:"5000 IU", t:"يومياً", f:"يُقلل من سرعة تجدد خلايا فروة الرأس (التي تسبب القشرة).", b:"iRemedies | Avernus"},
+                    {n:"فيتامين E", d:"400 IU", t:"بعد الأكل", f:"مضاد أكسدة يحمي فروة الرأس من التهيج والحكة.", b:"Now | Solgar"},
+                    {n:"بيوتين", d:"5000mcg", t:"يومياً", f:"يُحسن صحة الغدد الدهنية في فروة الرأس.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["غسل الشعر مرتين أسبوعياً بشامبو طبي", "تجنب وضع البلسم على فروة الرأس مباشرة", "تليل السكريات"],
+                warns: ["القشرة الدهنية الشديدة قد تحتاج شامبو كيتوكونازول"],
+                phrase: "\"الزنك والأوميغا 3 يحلان مشكلة القشرة من جذورها في فروة الرأس\"",
+                smart: "شامبو نيزورال أو سيلسون بلو للقضاء على الفطريات"
+            }
+        );
+        DB.en.conditions.h.push(
+            {
+                id:"hairloss_m", icon:"👨‍🦲", name:"Male Hair Loss",
+                supps: [
+                    {n:"Saw Palmetto", d:"320mg", t:"With food", f:"Blocks 5-Alpha Reductase to lower DHT levels.", b:"Now | Nature's Bounty"},
+                    {n:"Biotin 10,000", d:"10,000mcg", t:"AM", f:"Strengthens keratin structure and hair thickness.", b:"iRemedies | Avernus"},
+                    {n:"Zinc", d:"25-50mg", t:"PM", f:"Essential for hair cell growth and repair.", b:"iRemedies | Now"},
+                    {n:"Vitamin D3", d:"5000 IU", t:"AM", f:"Activates hair follicles; essential for new growth.", b:"iRemedies | Avernus"},
+                    {n:"Omega-3", d:"2000mg", t:"Lunch", f:"Reduces scalp inflammation.", b:"Avernus TG | iRemedies"},
+                    {n:"L-Cysteine", d:"500mg", t:"Daily", f:"Building block for hair protein.", b:"Now | Solgar"}
+                ],
+                tips: ["Daily scalp massage", "Avoid hot water", "Check DHT levels"],
+                warns: ["High dose Biotin may affect Thyroid lab results"],
+                phrase: "\"Saw Palmetto and Biotin are the ultimate duo for hereditary hair loss.\"",
+                smart: "Minoxidil 5% spray for local growth stimulation"
+            },
+            {
+                id:"hairloss_f", icon:"👩‍🦱", name:"Female Hair Loss",
+                supps: [
+                    {n:"Gentle Iron", d:"25-50mg", t:"AM Empty stomach", f:"Corrects Ferritin deficiency, the #1 cause in women.", b:"iRemedies | Avernus"},
+                    {n:"Biotin", d:"5000-10000mcg", t:"AM", f:"Improves hair texture and growth rate.", b:"iRemedies | Avernus"},
+                    {n:"Vitamin D3", d:"5000 IU", t:"Daily", f:"Crucial for hair cycle; prevents diffuse thinning.", b:"iRemedies | Avernus"},
+                    {n:"Silica", d:"500mg", t:"Daily", f:"Strengthens hair ends and prevents breakage.", b:"Now | Solgar"},
+                    {n:"B-Complex", d:"Daily", t:"AM", f:"Improves blood flow to the follicles.", b:"iRemedies | Avernus"},
+                    {n:"Marine Collagen", d:"10,000mg", t:"AM", f:"Provides amino acids for keratin production.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["Check Ferritin (should be >70)", "Avoid tight hairstyles", "Use sulfate-free shampoo"],
+                warns: ["Don't take iron with calcium or coffee"],
+                phrase: "\"Iron and Biotin will restore hair vitality in 8 weeks.\"",
+                smart: "Topical vitamin ampoules for direct follicle nourishment"
+            }
+        );
         
         // الإغلاق النهائي
         window.onload();
