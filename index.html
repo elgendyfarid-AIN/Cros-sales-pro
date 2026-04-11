@@ -5533,14 +5533,11 @@ DB.ar.conditions.g.push(
             }
         );
 
-        // --- الربط النهائي للغات والتشغيل ---
         DB.en.conditions.g.push(...JSON.parse(JSON.stringify(DB.ar.conditions.g.slice(-1))));
         DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
         DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
 
-      // --- موديولات الـ OTC الخاصة (89 - 90) ---
 
-        // 89. نزلات البرد لمرضى السكري (Common Cold for Diabetics)
         DB.ar.conditions.p.push(
             {
                 id:"cold_diabetic_p", icon:"🩸🤧", name:"نزلات البرد (لمرضى السكري)",
@@ -5554,7 +5551,6 @@ DB.ar.conditions.g.push(
                 phrase: "\"الوقاية من الجفاف ومتابعة السكر هما مفتاح الأمان للبرد مع السكري\"",
                 smart: "تناول فيتامين B-Complex (بتركيز ميثيل) يُساعد في استعادة طاقة الجسم المنهكة بعد البرد لمرضى السكر"
             },
-            // 90. نزلات البرد لمرضى الضغط (Common Cold for Hypertensive Patients)
             {
                 id:"cold_hypertension_p", icon:"❤️🩹", name:"نزلات البرد (لمرضى الضغط)",
                 supps: [
@@ -5574,7 +5570,6 @@ DB.ar.conditions.g.push(
 
      // --- موديولات الـ OTC الجديدة (85 - 88) ---
 
-        // 85. نزلات البرد للكبار (Adult Common Cold)
         DB.ar.conditions.p.push(
             {
                 id:"cold_adult_p", icon:"🤧", name:"نزلات البرد (للكبار)",
@@ -5601,7 +5596,6 @@ DB.ar.conditions.g.push(
                 phrase: "\"السامبوكول وماء البحر هما الحل الأأمن والأذكى لبرد طفلك\"",
                 smart: "ملعقة عسل نحل صغيرة قبل النوم (للأطفال فوق سنة) مفعولها أقوى من أدوية السعال"
             },
-            // 87. ارتفاع الحرارة للكبار (Adult Fever)
             {
                 id:"fever_adult_p", icon:"🌡️", name:"ارتفاع الحرارة (للكبار)",
                 supps: [
@@ -5614,7 +5608,6 @@ DB.ar.conditions.g.push(
                 phrase: "\"الباراسيتامول والترطيب الكافي هما الحل لاستعادة توازن جسمك الحراري\"",
                 smart: "تناول الماغنيسيوم جليسينات (400mg) يُقلل من آلام العضلات المصاحبة للحمى بشكل مذهل"
             },
-            // 88. ارتفاع الحرارة للأطفال (Pediatric Fever)
             {
                 id:"fever_kids_p", icon:"👶🔥", name:"ارتفاع الحرارة (للأطفال)",
                 supps: [
