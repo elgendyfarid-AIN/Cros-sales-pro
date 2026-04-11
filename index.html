@@ -5537,95 +5537,9 @@ DB.ar.conditions.g.push(
         DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
         DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
 
-// ==========================================
-        // الكود الموحد: التنظيم + تشغيل الزراير + الحالات الجديدة
-        // ==========================================
 
-        // 1. إنشاء "الأدراج" الجديدة
-        DB.ar.conditions.alz = [];   
-        DB.ar.conditions.park = [];  
-        DB.ar.conditions.w = [];     
-        DB.ar.conditions.s = [];     
-        DB.ar.conditions.h = [];     
-
-        // 2. كود "المهاجر الذكي" (نقل الزهايمر وباركنسون لأدراجهم الجديدة)
-        ['g', 'c', 'o', 'p'].forEach(section => {
-            if (DB.ar.conditions[section]) {
-                DB.ar.conditions[section] = DB.ar.conditions[section].filter(condition => {
-                    if (condition.id.startsWith('alz')) {
-                        DB.ar.conditions.alz.push(condition);
-                        return false; 
-                    }
-                    if (condition.id.startsWith('park')) {
-                        DB.ar.conditions.park.push(condition);
-                        return false; 
-                    }
-                    return true; 
-                });
-            }
-        });
-
-        // 3. تحديث "خريطة التصنيفات" (عشان الزراير تفهم هي بتفتح إيه)
-        // ملاحظة: تأكد أن هذه الأسماء (alz, park, w, s, h) هي المستخدمة في أزرار الـ HTML عندك
-        const categoryMap = {
-            'common': 'p',     
-            'special': 'o',    
-            'skin': 's',       
-            'hair': 'h',       
-            'general': 'g',    
-            'women': 'w',      
-            'alzheimer': 'alz', 
-            'parkinson': 'park' 
-        };
-
-        // 4. إضافة الحالات الجديدة (95, 96, 97)
-        // 95. حموضة الحوامل
-        DB.ar.conditions.w.push({
-            id:"preg_acidity_w", icon:"🤰🔥", name:"حموضة المعدة (للحوامل)",
-            supps: [
-                {n:"كالسيوم كربونات", d:"500mg", t:"عند اللزوم", f:"آمن تماماً (Tums) ويعادل الحموضة فوراً.", b:"Tums | Rennie"},
-                {n:"مغنيسيوم هيدروكسيد", d:"جرعة بسيطة", t:"عند اللزوم", f:"آمن ويقلل تشنجات الساقين أيضاً.", b:"Mylanta"}
-            ],
-            tips: ["وجبات صغيرة متكررة", "النوم على الجانب الأيسر"],
-            warns: ["🚨 تجنب الفوارات التي تحتوي على بيكربونات صوديوم"],
-            phrase: "\"تومز هو الخيار الأول للأمان أثناء الحمل\"",
-            smart: "شرب القليل من الحليب البارد يعطي راحة فورية"
-        });
-
-        // 96. تساقط الشعر الوراثي
-        DB.ar.conditions.h.push({
-            id:"hair_loss_gen_h", icon:"💇‍♂️", name:"تساقط الشعر الوراثي",
-            supps: [
-                {n:"Saw Palmetto", d:"320mg", t:"يومياً", f:"يعمل كـ DHT Blocker طبيعي لمنع ضمور البصيلات.", b:"Now | Solgar"},
-                {n:"بيوتين", d:"5000mcg", t:"يومياً", f:"يُقوي بروتين الكيراتين ويزيد سماكة الشعرة.", b:"Now | iRemedies"}
-            ],
-            tips: ["شامبو خالي من السلفات", "تدليك فروة الرأس يومياً"],
-            warns: ["🚨 النتائج تحتاج من 3 إلى 6 أشهر من الاستمرار"],
-            phrase: "\"الساو بالميتو والبيوتين لحماية بصيلاتك من الضمور\"",
-            smart: "إضافة نقطتين زيت روزماري للشامبو يعزز النمو"
-        });
-
-        // 97. جفاف البشرة الشديد
-        DB.ar.conditions.s.push({
-            id:"dry_skin_s", icon:"🧴", name:"جفاف البشرة الشديد",
-            supps: [
-                {n:"سيلاميد (Ceramides)", d:"دهان", f:"يرمم حاجز البشرة ويمنع فقدان الرطوبة.", b:"CeraVe | Avernus"},
-                {n:"حمض الهيالورونيك", d:"سيروم", f:"يجذب الماء لطبقات الجلد العميقة.", b:"Now | Solgar"}
-            ],
-            tips: ["شرب 3 لتر ماء يومياً", "ترطيب البشرة فوراً بعد الاستحمام"],
-            warns: ["🚨 تجنب الصابون القوي الذي يجفف الجلد"],
-            phrase: "\"السيلاميد هو الدرع الحامي لرطوبة بشرتك\"",
-            smart: "تقنية الـ Slugging (فازلين فوق المرطب) تضاعف الترطيب"
-        });
-
-        // 5. مزامنة اللغات
-        DB.en.conditions.alz = JSON.parse(JSON.stringify(DB.ar.conditions.alz));
-        DB.en.conditions.park = JSON.parse(JSON.stringify(DB.ar.conditions.park));
-        DB.en.conditions.w = JSON.parse(JSON.stringify(DB.ar.conditions.w));
-        DB.en.conditions.h = JSON.parse(JSON.stringify(DB.ar.conditions.h));
-        DB.en.conditions.s = JSON.parse(JSON.stringify(DB.ar.conditions.s));
-
-        // قفلة المحل النهائية
+        
+        // قفلة المحل النهائية 
         window.onload();
     </script>
 </body>
