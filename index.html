@@ -277,6 +277,71 @@
             }
         );
         
+      DB.ar.conditions.c.push(
+            {
+                id:"ibs", icon:"🫃", name:"القولون العصبي (IBS)",
+                supps: [
+                    {n:"بروبيوتيك (L.rhamnosus)", d:"20 Billion CFU", t:"صباحاً قبل الإفطار", f:"يُوازن الميكروبيوم ويُقلل الغازات والآلام بشكل ملحوظ.", b:"iRemedies Probio | Now | Avernus"},
+                    {n:"زيت النعناع المعوي", d:"0.2 ml", t:"قبل الأكل بـ 30 دقيقة", f:"باسط طبيعي لعضلات القولون الملساء ويمنع التشنجات.", b:"IBgard | Now Peppermint Oil"},
+                    {n:"ألياف السيليوم (Psyllium)", d:"5-10g", t:"مع ماء وفير", f:"ألياف ذائبة تُنظم حركة الأمعاء في حالات الإمساك والإسهال.", b:"Now Psyllium | iRemedies"},
+                    {n:"ماغنيسيوم سيترات", d:"300mg", t:"مساءً", f:"يُساعد في تليين البراز وتقليل التوتر العصبي المرتبط بالقولون.", b:"Now | Solgar | iRemedies"},
+                    {n:"L-Glutamine", d:"5g", t:"على الريق", f:"يُرمّم بطانة الأمعاء ويُقلل من نفاذية جدار القولون (Leaky Gut).", b:"Now | Solgar | Avernus"},
+                    {n:"الكركمين (Curcumin)", d:"500mg", t:"بعد الأكل", f:"يُقلل الالتهابات الهادئة في جدار الأمعاء ويُحسن الهضم.", b:"iRemedies | Avernus | Now"}
+                ],
+                tips: ["اتباع حمية Low-FODMAP مؤقتاً", "شرب 2 لتر ماء يومياً", "إدارة التوتر والضغوط النفسية"],
+                warns: ["زيت النعناع غير المعوي قد يسبب حرقة في المريء", "السيليوم يحتاج شرب ماء كثير جداً"],
+                phrase: "\"البروبيوتيك وزيت النعناع هما الحل العلمي لراحة القولون الدائمة\"",
+                smart: "إنزيمات هاضمة (Digestive Enzymes) لتقليل النفخة بعد الوجبات"
+            },
+            {
+                id:"migr", icon:"🤕", name:"الصداع النصفي المزمن",
+                supps: [
+                    {n:"ماغنيسيوم جليسينات", d:"400-600mg", t:"مساءً", f:"يُقلل من موجات التوتر العصبي الدماغي المسببة للنوبة.", b:"iRemedies | Avernus | Now"},
+                    {n:"ريبوفلافين (B2)", d:"400mg", t:"صباحاً", f:"يُحسّن طاقة الميتوكوندريا في الخلايا العصبية ويُقلل تكرار النوبات.", b:"Now | Solgar | Nature's Bounty"},
+                    {n:"CoQ10", d:"300mg", t:"صباحاً", f:"دراسات تؤكد قدرته على تقليل عدد أيام الصداع بنسبة 50%.", b:"iRemedies | Avernus | Now"},
+                    {n:"ميلاتونين", d:"3mg", t:"قبل النوم", f:"يُحسن جودة النوم ويُنظم الساعة البيولوجية لمنع نوبات الصداع الليلي.", b:"iRemedies | Avernus | Now"},
+                    {n:"أوميغا 3", d:"2000mg", t:"مع الأكل", f:"يُقلل الالتهابات الوعائية في الدماغ المسببة للألم.", b:"Avernus | iRemedies"},
+                    {n:"فيتامين D3", d:"5000 IU", t:"يومياً", f:"ارتباط وثيق بين نقص د3 وتكرار نوبات الصداع النصفي.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["الالتزام بمواعيد نوم ثابتة", "تجنب المحفزات (الأجبان القديمة، الشوكولاتة، الضوء القوي)", "شرب الماء بانتظام"],
+                warns: ["المكملات تحتاج 4-8 أسابيع لتعطي مفعولاً وقائياً", "راقب الضغط عند استخدام جرعات عالية من B2"],
+                phrase: "\"مزيج الماغنيسيوم والـ B2 هو البروتوكول الوقائي الأول عالمياً للصداع\"",
+                smart: "قناع عين بارد (Cooling Mask) لتخفيف الألم عند بداية النوبة"
+            }
+        );
+        DB.en.conditions.c.push(
+            {
+                id:"ibs", icon:"🫃", name:"IBS",
+                supps: [
+                    {n:"Probiotics (L.rhamnosus)", d:"20 Billion", t:"AM Empty stomach", f:"Balances microbiome and reduces gas/bloating.", b:"iRemedies | Now | Avernus"},
+                    {n:"Peppermint Oil (Enteric)", d:"0.2 ml", t:"30 min before food", f:"Natural muscle relaxant for the colon.", b:"IBgard | Now"},
+                    {n:"Psyllium Husk", d:"5-10g", t:"With plenty of water", f:"Regulates bowel movements (Constipation/Diarrhea).", b:"Now | iRemedies"},
+                    {n:"Magnesium Citrate", d:"300mg", t:"PM", f:"Softens stool and reduces stress-related spasms.", b:"Now | iRemedies"},
+                    {n:"L-Glutamine", d:"5g", t:"Empty stomach", f:"Repairs intestinal lining (Leaky Gut).", b:"Now | Solgar"},
+                    {n:"Curcumin", d:"500mg", t:"Post-meal", f:"Reduces low-grade gut inflammation.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["Follow Low-FODMAP diet", "Hydrate (2L/day)", "Stress management"],
+                warns: ["Non-enteric peppermint may cause heartburn", "Psyllium requires high water intake"],
+                phrase: "\"Probiotics and Peppermint Oil are the scientific duo for gut comfort.\"",
+                smart: "Digestive Enzymes to reduce post-meal bloating"
+            },
+            {
+                id:"migr", icon:"🤕", name:"Chronic Migraine",
+                supps: [
+                    {n:"Magnesium Glycinate", d:"400-600mg", t:"PM", f:"Inhibits cortical spreading depression (CSD).", b:"iRemedies | Avernus | Now"},
+                    {n:"Riboflavin (B2)", d:"400mg", t:"AM", f:"Improves mitochondrial energy in neurons.", b:"Now | Nature's Bounty"},
+                    {n:"CoQ10", d:"300mg", t:"AM", f:"Reduces migraine frequency by up to 50%.", b:"iRemedies | Avernus"},
+                    {n:"Melatonin", d:"3mg", t:"Bedtime", f:"Improves sleep and prevents nocturnal attacks.", b:"iRemedies | Avernus"},
+                    {n:"Omega-3", d:"2000mg", t:"With food", f:"Reduces neurovascular inflammation.", b:"Avernus | iRemedies"},
+                    {n:"Vitamin D3", d:"5000 IU", t:"Daily", f:"Deficiency is linked to migraine frequency.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["Fixed sleep schedule", "Avoid triggers (Aged cheese, chocolate)", "Stay hydrated"],
+                warns: ["Supplements take 4-8 weeks for effect", "Monitor BP with high B2 doses"],
+                phrase: "\"Magnesium and B2 are the world's leading protocol for migraine prevention.\"",
+                smart: "Cooling Eye Mask for immediate relief during attacks"
+            }
+        );
+        
         // الإغلاق النهائي
         window.onload();
     </script>
