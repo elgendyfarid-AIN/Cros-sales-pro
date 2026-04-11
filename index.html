@@ -551,6 +551,71 @@
                 smart: "Topical vitamin ampoules for direct follicle nourishment"
             }
         );
+
+        DB.ar.conditions.s.push(
+            {
+                id:"preg_s", icon:"🤰", name:"صحة الحامل والجنين",
+                supps: [
+                    {n:"فوليك أسيد (5-MTHF)", d:"400-800mcg", t:"صباحاً", f:"الصيغة النشطة التي تمنع تشوهات الأنبوب العصبي للجنين وتدعم انقسام الخلايا.", b:"Now 5-MTHF | Solgar Folate | Avernus"},
+                    {n:"أوميغا 3 (DHA عالٍ)", d:"600-1000mg DHA", t:"وسط الأكل", f:"ضروري جداً لتطور دماغ الجنين وشبكية العين وتحسين مستوى ذكاء الطفل المستقبلي.", b:"Now Prenatal DHA | iRemedies | Avernus"},
+                    {n:"حديد (Gentle Iron)", d:"25-50mg", t:"على الريق مع عصير برتقال", f:"بيسجلايسينات الحديد لا تسبب إمساكاً وتمنع فقر الدم الناتج عن زيادة حجم الدم في الحمل.", b:"iRemedies | Avernus | Solgar"},
+                    {n:"فيتامين D3", d:"2000-4000 IU", t:"صباحاً مع دهون", f:"يُحسّن امتصاص الكالسيوم لبناء عظام الجنين ويمنع تسمم الحمل.", b:"iRemedies | Avernus | Now"},
+                    {n:"ماغنيسيوم جليسينات", d:"400mg", t:"مساءً", f:"يُقلل بشكل فعال من تشنجات الساقين (Leg Cramps) الشائعة جداً في الشهور الأخيرة.", b:"iRemedies | Avernus | Now"},
+                    {n:"فيتامين B12 (Methyl)", d:"1000mcg", t:"صباحاً", f:"يعمل تآزرياً مع الفوليك أسيد لدعم نمو الجهاز العصبي المركزي للجنين.", b:"iRemedies | Avernus | Now"}
+                ],
+                tips: ["تجنب الأسماك عالية الزئبق (التونة الكبيرة)", "شرب كميات وفيرة من السوائل", "تجنب الأجبان غير المبسترة"],
+                warns: ["لا تتناولي فيتامين A بجرعات عالية (Retinol) لأنه قد يسبب تشوهات"],
+                phrase: "\"الـ DHA والفوليك أسيد المنشط هما أفضل استثمار في صحة وذكاء طفلك القادم\"",
+                smart: "كريم علامات التمدد (Stretch Marks) للعناية بجلد البطن"
+            },
+            {
+                id:"elderly_s", icon:"👴", name:"صحة كبار السن (65+)",
+                supps: [
+                    {n:"فيتامين D3+K2", d:"5000 IU", t:"صباحاً", f:"يمنع هشاشة العظام ويُوجّه الكالسيوم بعيداً عن الشرايين لمنع التصلب.", b:"iRemedies D3+K2 | Avernus"},
+                    {n:"CoQ10 (Ubiquinol)", d:"100-200mg", t:"صباحاً مع الأكل", f:"يُعزز طاقة القلب ويُقلل من وهن العضلات المرتبط بالتقدم في السن.", b:"iRemedies | Avernus | Solgar"},
+                    {n:"فيتامين B12 (تحت اللسان)", d:"1000mcg", t:"صباحاً", f:"كبار السن يعانون من ضعف امتصاص B12؛ تعويضه يحمي الذاكرة والأعصاب.", b:"iRemedies | Avernus | Now"},
+                    {n:"أوميغا 3", d:"2000mg", t:"يومياً", f:"يُحافظ على صحة الدماغ ويُقلل من مخاطر التدهور المعرفي (ألزهايمر).", b:"Avernus | iRemedies | Seven Seas"},
+                    {n:"كالسيوم سيترات", d:"500-1000mg", t:"مقسمة مع الوجبات", f:"السيترات لا يحتاج حموضة معدة عالية للامتصاص، وهو الأفضل لكبار السن.", b:"iRemedies | Now | Solgar"},
+                    {n:"بروبيوتيك (عالي التركيز)", d:"30-50 Billion", t:"على الريق", f:"يُحسن الامتصاص الهضمي الضعيف ويُقوّي جهاز المناعة.", b:"iRemedies Probio | Avernus"}
+                ],
+                tips: ["المشي اليومي لمدة 20 دقيقة", "فحص دوري لمخزون الحديد وB12", "الحفاظ على شرب الماء لتجنب الجفاف"],
+                warns: ["الكالسيوم بجرعات عالية قد يسبب إمساكاً؛ زد شرب الماء"],
+                phrase: "\"هذه المجموعة ستحافظ على نشاط قلبك وقوة عظامك وتركيز ذاكرتك\"",
+                smart: "جهاز قياس السكر أو الضغط للمتابعة المنزلية الدائمة"
+            },
+            {
+                id:"athletes_s", icon:"🏃", name:"الرياضيون والأداء البدني",
+                supps: [
+                    {n:"بروتين مصل اللبن (Whey)", d:"25-40g", t:"بعد التمرين مباشرة", f:"أسرع مصدر لترميم العضلات الممزقة بعد التمرين وتحفيز البناء العضلي.", b:"Now Sports | Nature's Bounty"},
+                    {n:"كرياتين مونوهيدرات", d:"5g", t:"يومياً مع ماء", f:"يزيد من طاقة الـ ATP داخل العضلات مما يرفع القوة والتحمل.", b:"Now Sports | Solgar"},
+                    {n:"ماغنيسيوم جليسينات", d:"400-600mg", t:"قبل النوم", f:"يُرخّي العضلات ويمنع التشنجات (Cramps) ويُحسن جودة الاستشفاء العضلي.", b:"iRemedies | Avernus | Now"},
+                    {n:"أوميغا 3", d:"2000-3000mg", t:"مع الأكل", f:"يُقلل من التهابات المفاصل والعضلات (DOMS) بعد التمارين الشاقة.", b:"Avernus TG | iRemedies"},
+                    {n:"إل-جلوتامين (L-Glutamine)", d:"5-10g", t:"بعد التمرين", f:"يُقوّي جهاز المناعة الذي يضعف بعد الجهد البدني العالي ويُسرّع الاستشفاء.", b:"Now | Solgar | Avernus"},
+                    {n:"فيتامين D3", d:"5000 IU", t:"يومياً", f:"ضروري جداً لقوة انقباض العضلات والحفاظ على كثافة العظام تحت الضغط البدني.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["شرب 3-4 لتر ماء يومياً", "النوم لمدة 8 ساعات للاستشفاء العضلي", "تناول وجبة غنية بالكربوهيدرات قبل التمرين"],
+                warns: ["الكرياتين يتطلب شرب كميات كبيرة من الماء لحماية الكلى"],
+                phrase: "\"الكرياتين والبروتين هما الوقود الحقيقي لبناء عضلات قوية في وقت قياسي\"",
+                smart: "علبة مالتي فيتامين (Multi-Vitamin) شاملة للرياضيين"
+            }
+        );
+        DB.en.conditions.s.push(
+            {
+                id:"preg_s", icon:"🤰", name:"Pregnancy & Fetal Health",
+                supps: [
+                    {n:"Active Folate (5-MTHF)", d:"400-800mcg", t:"AM", f:"Prevents neural tube defects and supports fetal cell division.", b:"Now | Solgar"},
+                    {n:"DHA Omega-3", d:"600-1000mg", t:"With food", f:"Essential for fetal brain and eye development.", b:"Now Prenatal | iRemedies"},
+                    {n:"Gentle Iron", d:"25-50mg", t:"Empty stomach", f:"Prevents pregnancy anemia without causing constipation.", b:"iRemedies | Avernus"},
+                    {n:"Vitamin D3", d:"4000 IU", t:"AM", f:"Improves calcium absorption for fetal bones.", b:"iRemedies | Avernus"},
+                    {n:"Magnesium Glycinate", d:"400mg", t:"PM", f:"Effectively reduces common pregnancy leg cramps.", b:"iRemedies | Now"},
+                    {n:"Vitamin B12", d:"1000mcg", t:"AM", f:"Works with Folate to support central nervous system growth.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["Avoid high-mercury fish", "Stay hydrated", "Avoid unpasteurized foods"],
+                warns: ["Avoid high dose Retinol (Vit A) during pregnancy"],
+                phrase: "\"DHA and Active Folate are the best investment in your baby's intelligence.\"",
+                smart: "Anti-stretch mark cream for skin care"
+            }
+        );
         
         // الإغلاق النهائي
         window.onload();
