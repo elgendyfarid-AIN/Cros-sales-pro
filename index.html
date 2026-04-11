@@ -151,7 +151,132 @@
         };
         DB.ar.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
         DB.en.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
-       
+
+      DB.ar.conditions.c.push(
+            {
+                id:"htn", icon:"❤️", name:"ارتفاع ضغط الدم",
+                supps: [
+                    {n:"ماغنيسيوم جليسينات", d:"400mg", t:"مساءً", f:"يُرخّي العضلات الملساء في الأوعية الدموية ويُقلل النشاط العصبي الودّي.", b:"iRemedies | Avernus | Now"},
+                    {n:"CoQ10 (Ubiquinol)", d:"200mg", t:"صباحاً مع وجبة دسمة", f:"يُحسّن وظيفة البطانة الوعائية ويُعوض النقص الناتج عن أدوية الكوليسترول.", b:"iRemedies | Avernus | Solgar"},
+                    {n:"أوميغا 3 (High EPA)", d:"2000-4000mg", t:"وسط الغداء", f:"يُحسّن مرونة الشرايين ويُقلل مستويات الدهون الثلاثية والالتهاب الوعائي.", b:"Avernus TG | iRemedies | Now"},
+                    {n:"فيتامين D3+K2", d:"5000 IU", t:"صباحاً مع وجبة", f:"K2 يُوجّه الكالسيوم للعظام ومنع تكلّس الشرايين، وD3 يُنظم نظام الـ RAAS.", b:"iRemedies | Avernus | Now"},
+                    {n:"مستخلص الثوم (Aged)", d:"1200mg", t:"يومياً", f:"مُثبّط طبيعي لإنزيم ACE ويُعزز إنتاج أكسيد النيتريك الموسّع للأوعية.", b:"Kyolic Garlic | Now | Solgar"},
+                    {n:"L-Arginine", d:"1000-2000mg", t:"على معدة فارغة", f:"سلف مباشر لأكسيد النيتريك الذي يُوسّع الشرايين فوراً ويُحسن التروية.", b:"Now | Nature's Bounty | Solgar"}
+                ],
+                tips: ["حمية DASH: تقليل الملح < 2300mg", "مشي 30 دقيقة × 5 أيام أسبوعياً", "تقليل الكافيين وإدارة التوتر"],
+                warns: ["البوتاسيوم ممنوع مع أدوية ACEi (مثل Zestril)", "راقب الضغط عند البدء بـ CoQ10 بجرعات عالية"],
+                phrase: "\"الماغنيسيوم والـ CoQ10 درع حماية لقلبك مع الدواء لضمان أفضل نتائج\"",
+                smart: "جهاز ضغط Omron للمتابعة المنزلية - القياس البيتي أدق من قياس العيادة"
+            },
+            {
+                id:"dm2", icon:"🩸", name:"السكري النوع الثاني",
+                supps: [
+                    {n:"بربرين (Berberine)", d:"500mg × 3", t:"قبل الأكل بـ 15 دقيقة", f:"يُنشّط AMPK ويُخفض HbA1c بمعدلات تقارب الأدوية الكيميائية.", b:"Now | Nature's Bounty | Solgar"},
+                    {n:"حمض ألفا ليبويك (ALA)", d:"600mg", t:"صباحاً على الريق", f:"أقوى مضاد أكسدة لعلاج التهاب الأعصاب السكري وتحسين حساسية الأنسولين.", b:"iRemedies | Avernus | Now"},
+                    {n:"كروميوم بيكولينات", d:"500mcg", t:"مع الوجبة الرئيسية", f:"يُعزز ارتباط الأنسولين بمستقبلاته ويُقلل الشوق للسكريات والنشويات.", b:"Now | Nature's Bounty | Solgar"},
+                    {n:"ب-كومبلكس (منشط)", d:"حبة يومياً", t:"بعد الإفطار", f:"يحمي غمد الميالين للأعصاب من التلف الناتج عن ارتفاع السكر المزمن.", b:"iRemedies | Avernus | Neurobion"},
+                    {n:"ماغنيسيوم جليسينات", d:"400mg", t:"مساءً", f:"ضروري لتمثيل الجلوكوز؛ نقص المغنيسيوم يزيد من مقاومة الأنسولين.", b:"iRemedies | Avernus | Now"},
+                    {n:"فيتامين D3", d:"5000 IU", t:"صباحاً مع دهون", f:"يُحسّن وظيفة خلايا بيتا في البنكرياس ويُعدّل الاستجابة المناعية.", b:"iRemedies | Avernus | Now"}
+                ],
+                tips: ["مشي 15 دقيقة بعد كل وجبة دسمة", "تجنب الرز الأبيض والعصائر المحلاة", "فحص القدمين يومياً"],
+                warns: ["البربرين مع ميتفورمين قد يسبب هبوط سكر حاد", "ALA قد يغير متطلبات الأنسولين"],
+                phrase: "\"مزيج البربرين والـ ALA هو المعيار الذهبي لحماية أعصابك وضبط سكرك\"",
+                smart: "شرائط قياس سكر إضافية للمتابعة الدقيقة"
+            },
+            {
+                id:"chol", icon:"🫀", name:"ارتفاع الكوليسترول",
+                supps: [
+                    {n:"خميرة الأرز الأحمر", d:"1200mg", t:"مساءً", f:"تحتوي Monacolin K الطبيعي الذي يخفض LDL بكفاءة عالية.", b:"Now | Solgar | Nature's Bounty"},
+                    {n:"CoQ10", d:"100-200mg", t:"صباحاً مع الأكل", f:"حتمي مع أدوية الكوليسترول (Statins) لمنع آلام العضلات ووهن القلب.", b:"iRemedies | Avernus | Solgar"},
+                    {n:"أوميغا 3 (جرعة علاجية)", d:"3000-4000mg", t:"وسط الأكل", f:"يخفض الدهون الثلاثية (TG) بنسبة تصل لـ 45% ويحمي الشرايين.", b:"Avernus | iRemedies | Now"},
+                    {n:"بربرين", d:"500mg × 2", t:"قبل الأكل", f:"يُحفز مستقبلات LDL في الكبد للتخلص من الكوليسترول الضار.", b:"Now | Solgar"},
+                    {n:"ستيرولات نباتية", d:"2000mg", t:"مع الوجبات", f:"تتنافس مع الكوليسترول في الامتصاص المعوي وتخفضه بنسبة 15%.", b:"Now | Nature's Bounty"},
+                    {n:"ألياف السيليوم", d:"10g", t:"قبل الأكل مع ماء وفير", f:"تلتصق بالكوليسترول في الأمعاء وتمنع امتصاصه للدم.", b:"Now | iRemedies"}
+                ],
+                tips: ["استبدال السمن بزيت الزيتون البكر", "تناول الشوفان يومياً للفطور", "خسارة 5% من الوزن تحسن الأرقام درامياً"],
+                warns: ["لا تستخدم خميرة الأرز الأحمر مع الستاتينات (Statins)", "CoQ10 ضروري جداً لمنع آلام العضلات"],
+                phrase: "\"أوميغا 3 والـ CoQ10 يكملان عمل دواء الكوليسترول ويحمي عضلاتك من الوهن\"",
+                smart: "فحص دهون شامل (Lipid Profile) كل 3 أشهر لمراقبة التقدم"
+            },
+            {
+                id:"hypo", icon:"🦋", name:"قصور الغدة الدرقية",
+                supps: [
+                    {n:"سيلينيوم (Selenium)", d:"200mcg", t:"مع الغداء", f:"ضروري لتحويل هرمون T4 إلى T3 الفعّال داخل الخلايا.", b:"iRemedies | Now | Solgar"},
+                    {n:"زنك بيكولينات", d:"25mg", t:"مساءً بعيداً عن الكالسيوم", f:"مُشارك أساسي في تخليق هرمونات الغدة واستجابة الخلايا لها.", b:"iRemedies | Avernus | Now"},
+                    {n:"فيتامين D3", d:"5000 IU", t:"صباحاً", f:"يُعدّل المناعة ويُقلل أجسام TPO المضادة في حالات هاشيموتو.", b:"iRemedies | Avernus | Now"},
+                    {n:"ماغنيسيوم جليسينات", d:"400mg", t:"مساءً", f:"يُحسّن استجابة الخلايا لهرمونات الغدة ويُقلل الإمساك المرتبط بالقصور.", b:"iRemedies | Now"},
+                    {n:"فيتامين B12 (Methyl)", d:"1000mcg", t:"صباحاً تحت اللسان", f:"نقص B12 شائع جداً مع قصور الغدة ويسبب تعباً مماثلاً لأعراضها.", b:"iRemedies | Avernus | Now"},
+                    {n:"أشواجاندا (KSM-66)", d:"600mg", t:"مساءً", f:"تُقلل الكورتيزول الذي يُثبّط وظيفة الغدة وتُساعد في رفع T4/T3.", b:"Now | Solgar | Puritan's Pride"}
+                ],
+                tips: ["دواء الغدة على معدة فارغة قبل الفطار بساعة", "فصل 4 ساعات بين الدواء والحديد/الكالسيوم", "فحص TSH كل 6 أشهر"],
+                warns: ["اليود الزائد قد يضر في حالات هاشيموتو", "الأشواجاندا قد ترفع T4؛ راقب مع الطبيب"],
+                phrase: "\"السيلينيوم والزنك يُحوّلان دواءك لصورته الفعّالة لضمان نشاطك طوال اليوم\"",
+                smart: "فحص فيتامين D3 و B12 - نقصهما يُشبه أعراض الغدة تماماً"
+            }
+        );
+        DB.en.conditions.c.push(
+            {
+                id:"htn", icon:"❤️", name:"Hypertension",
+                supps: [
+                    {n:"Magnesium Glycinate", d:"400mg", t:"PM", f:"Relaxes blood vessels and reduces sympathetic nervous activity.", b:"iRemedies | Avernus | Now"},
+                    {n:"CoQ10 (Ubiquinol)", d:"200mg", t:"AM with fatty meal", f:"Improves endothelial function and protects heart muscle.", b:"iRemedies | Avernus | Solgar"},
+                    {n:"Omega-3 (High EPA)", d:"2-4g", t:"Lunch", f:"Improves arterial elasticity and lowers triglycerides.", b:"Avernus TG | iRemedies | Now"},
+                    {n:"Vitamin D3+K2", d:"5000 IU", t:"AM", f:"K2 directs calcium to bones, D3 regulates RAAS system.", b:"iRemedies | Avernus | Now"},
+                    {n:"Aged Garlic Extract", d:"1200mg", t:"Daily", f:"Natural ACE inhibitor and Nitric Oxide booster.", b:"Kyolic | Now | Solgar"},
+                    {n:"L-Arginine", d:"1-2g", t:"Empty stomach", f:"Direct precursor for NO to dilate arteries immediately.", b:"Now | Nature's Bounty | Solgar"}
+                ],
+                tips: ["DASH Diet: <2300mg sodium", "30 min walk 5 days/week", "Stress management"],
+                warns: ["No potassium with ACEi drugs", "Monitor BP when starting CoQ10"],
+                phrase: "\"Magnesium and CoQ10 provide a protective shield for your heart with medication.\"",
+                smart: "Omron BP monitor for home tracking"
+            },
+            {
+                id:"dm2", icon:"🩸", name:"Type 2 Diabetes",
+                supps: [
+                    {n:"Berberine", d:"500mg x 3", t:"15 min before food", f:"Activates AMPK and lowers HbA1c effectively.", b:"Now | Nature's Bounty | Solgar"},
+                    {n:"Alpha Lipoic Acid", d:"600mg", t:"AM empty stomach", f:"Potent antioxidant for nerve repair and insulin sensitivity.", b:"iRemedies | Avernus | Now"},
+                    {n:"Chromium Picolinate", d:"500mcg", t:"With main meal", f:"Reduces insulin resistance and sugar cravings.", b:"Now | Nature's Bounty | Solgar"},
+                    {n:"Active B-Complex", d:"Daily", t:"After breakfast", f:"Protects nerve myelin sheath from glucose damage.", b:"iRemedies | Avernus | Neurobion"},
+                    {n:"Magnesium", d:"400mg", t:"Evening", f:"Crucial for glucose metabolism and insulin function.", b:"iRemedies | Avernus | Now"},
+                    {n:"Vitamin D3", d:"5000 IU", t:"Morning", f:"Improves pancreatic beta-cell function.", b:"iRemedies | Avernus | Now"}
+                ],
+                tips: ["15 min walk after main meals", "Avoid white rice and sugary juices", "Daily foot inspection"],
+                warns: ["Berberine + Metformin may cause hypoglycemia", "Monitor sugar when starting ALA"],
+                phrase: "\"Berberine and ALA are the gold standard for nerve protection and sugar control.\"",
+                smart: "Additional glucose test strips for regular monitoring"
+            },
+            {
+                id:"chol", icon:"🫀", name:"Dyslipidemia",
+                supps: [
+                    {n:"Red Yeast Rice", d:"1200mg", t:"Evening", f:"Contains natural Monacolin K to lower LDL.", b:"Now | Solgar"},
+                    {n:"CoQ10", d:"100-200mg", t:"Morning", f:"Essential for Statin users to prevent muscle pain.", b:"iRemedies | Avernus"},
+                    {n:"Omega-3", d:"3-4g", t:"With food", f:"Lowers Triglycerides (TG) by up to 45%.", b:"Avernus | iRemedies"},
+                    {n:"Berberine", d:"500mg x 2", t:"Before meals", f:"Stimulates LDL receptors for cholesterol clearance.", b:"Now | Solgar"},
+                    {n:"Plant Sterols", d:"2g", t:"With meals", f:"Competes with cholesterol absorption in the gut.", b:"Now | Nature's Bounty"},
+                    {n:"Psyllium Husk", d:"10g", t:"Before meals with water", f:"Binds cholesterol in intestines.", b:"Now | iRemedies"}
+                ],
+                tips: ["Use Extra Virgin Olive Oil", "Daily oats for breakfast", "5% weight loss improves lipid profile"],
+                warns: ["No Red Yeast Rice with Statins", "CoQ10 is mandatory for Statin users"],
+                phrase: "\"Omega-3 and CoQ10 complement your statin while protecting your muscles.\"",
+                smart: "Full Lipid Profile test every 3 months"
+            },
+            {
+                id:"hypo", icon:"🦋", name:"Hypothyroidism",
+                supps: [
+                    {n:"Selenium", d:"200mcg", t:"Lunch", f:"Essential for T4 to active T3 conversion.", b:"iRemedies | Now"},
+                    {n:"Zinc", d:"25mg", t:"Evening", f:"Vital for thyroid hormone synthesis.", b:"iRemedies | Avernus"},
+                    {n:"Vitamin D3", d:"5000 IU", t:"Morning", f:"Modulates immunity in Hashimoto's disease.", b:"iRemedies | Avernus"},
+                    {n:"Magnesium", d:"400mg", t:"Evening", f:"Improves cellular response to thyroid hormones.", b:"iRemedies | Now"},
+                    {n:"B12 Methylcobalamin", d:"1000mcg", t:"Sublingual AM", f:"Correction improves fatigue commonly seen in hypo.", b:"iRemedies | Avernus"},
+                    {n:"Ashwagandha", d:"600mg", t:"Evening", f:"Helps reduce TSH and boost T4 levels.", b:"Now | Solgar"}
+                ],
+                tips: ["Levothyroxine on empty stomach 1hr before breakfast", "4hr gap between meds and Calcium/Iron", "Regular TSH check-up"],
+                warns: ["Caution with Ashwagandha if on high-dose medication", "Excess iodine can be harmful"],
+                phrase: "\"Selenium and Zinc convert your medicine to its active form for all-day energy.\"",
+                smart: "Test D3 and B12 - deficiency mimics thyroid symptoms"
+            }
+        );
+        
         // الإغلاق النهائي
         window.onload();
     </script>
