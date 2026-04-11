@@ -342,6 +342,71 @@
             }
         );
         
+       DB.ar.conditions.o.push(
+            {
+                id:"joint_otc", icon:"🦴", name:"خشونة المفاصل وآلامها",
+                supps: [
+                    {n:"جلوكوزامين وكندرويتين", d:"1500mg/1200mg", t:"بعد الأكل", f:"يُحفّز بناء الغضاريف المتآكلة ويُقلل معدل تدهور المفصل.", b:"iRemedies | Avernus | Solgar"},
+                    {n:"كولاجين نوع 2 (UC-II)", d:"40mg", t:"على الريق صباحاً", f:"يوقف هجوم الجهاز المناعي على الغضاريف (Immunomodulation).", b:"Now UC-II | iRemedies | Jarrow"},
+                    {n:"كركمين (BCM-95)", d:"500mg x 2", t:"بعد وجبة دسمة", f:"مضاد التهاب طبيعي فائق القوة يغني عن كثرة المسكنات.", b:"iRemedies | Avernus | Solgar"},
+                    {n:"أوميغا 3 (جرعة عالية)", d:"2000-3000mg", t:"وسط الأكل", f:"يُقلل تيبّس المفاصل الصباحي والالتهابات الناتجة عن الحركة.", b:"Avernus TG | iRemedies"},
+                    {n:"MSM", d:"1000-2000mg", t:"يومياً", f:"يوفر الكبريت العضوي الضروري لترميم الأربطة والأوتار.", b:"Solgar | Now | Nature's Bounty"},
+                    {n:"حمض الهيالورونيك", d:"100-200mg", t:"صباحاً", f:"يعمل كـ 'مزيّت' (Lubricant) للسائل الزلالي داخل المفصل.", b:"iRemedies | Now | Solgar"}
+                ],
+                tips: ["تقليل الوزن يقلل الضغط على الركبة بنسبة 400%", "تمارين سباحة أو مشي خفيف", "كمادات دافئة للمفصل"],
+                warns: ["الكركمين قد يزيد سيولة الدم مع الارفارين", "الجلوكوزامين قد يرفع السكر طفيفاً"],
+                phrase: "\"الكولاجين والكركمين معاً يغنيانك عن كثرة المسكنات الضارة بالمعدة\"",
+                smart: "جل مسكن موضعي أو ركبة طبية داعمة للمفصل"
+            },
+            {
+                id:"gerd_otc", icon:"🔥", name:"الحموضة والارتجاع (GERD)",
+                supps: [
+                    {n:"ليكوريس DGL (مضغ)", d:"380mg x 3", t:"قبل الأكل بـ 20 دقيقة", f:"يُحفّز إنتاج المخاط الواقي للمعدة دون رفع ضغط الدم.", b:"Now DGL | Nature's Bounty | Solgar"},
+                    {n:"بروبيوتيك (L.reuteri)", d:"10 Billion CFU", t:"صباحاً على الريق", f:"يُوازن بكتيريا المعدة ويُقلل من ارتداد الحمض.", b:"iRemedies Probio | Now | Avernus"},
+                    {n:"ماغنيسيوم جليسينات", d:"400mg", t:"مساءً", f:"PPIs تسبب نقصاً حاداً في الماغنيسيوم؛ تعويضه يحمي القلب والأعصاب.", b:"iRemedies | Now | Solgar"},
+                    {n:"إنزيمات هاضمة", d:"حبة مع كل وجبة", t:"بداية الأكل", f:"تُحسن الهضم الكامل وتُقلل الضغط على صمام المريء.", b:"Now Super Enzymes | Solgar"},
+                    {n:"مستخلص الزنجبيل", d:"500mg", t:"بعد الأكل", f:"يُسرّع إفراغ المعدة ويُقلل الشعور بالامتلاء والارتجاع.", b:"Now | Nature's Bounty | Solgar"},
+                    {n:"فيتامين B12 (Methyl)", d:"1000mcg", t:"صباحاً", f:"مستخدمو أدوية الحموضة لفترات طويلة يعانون من نقص حاد في B12.", b:"iRemedies | Avernus | Now"}
+                ],
+                tips: ["تجنب النوم مباشرة بعد الأكل (3 ساعات)", "رفع رأس السرير 15 سم", "تجنب القهوة والنعناع والدهون"],
+                warns: ["استخدام أدوية الحموضة (PPI) مزمناً يتطلب تعويض Mg و B12 حتماً"],
+                phrase: "\"الـ DGL والإنزيمات الهاضمة هي الحل العلمي للتحرر من أدوية المعدة\"",
+                smart: "مخدة طبية (Wedge Pillow) لمنع الارتجاع الليلي"
+            }
+        );
+        DB.en.conditions.o.push(
+            {
+                id:"joint_otc", icon:"🦴", name:"Joint Pain & Arthritis",
+                supps: [
+                    {n:"Glucosamine/Chondroitin", d:"1500mg/1200mg", t:"Post-meal", f:"Stimulates cartilage repair and slows degradation.", b:"iRemedies | Avernus"},
+                    {n:"UC-II Collagen", d:"40mg", t:"AM Empty stomach", f:"Immunomodulation to stop cartilage attack.", b:"Now | iRemedies"},
+                    {n:"Curcumin (BCM-95)", d:"500mg x 2", t:"With fatty meal", f:"Potent natural anti-inflammatory.", b:"iRemedies | Avernus"},
+                    {n:"Omega-3 (High dose)", d:"2000-3000mg", t:"With food", f:"Reduces morning stiffness.", b:"Avernus TG | iRemedies"},
+                    {n:"MSM", d:"1000-2000mg", t:"Daily", f:"Essential for ligament and tendon flexibility.", b:"Solgar | Now"},
+                    {n:"Hyaluronic Acid", d:"100-200mg", t:"AM", f:"Acts as a natural joint lubricant.", b:"iRemedies | Now"}
+                ],
+                tips: ["Weight loss reduces joint pressure", "Low-impact exercise (swimming)", "Warm compresses"],
+                warns: ["Curcumin may interact with blood thinners", "Glucosamine may affect blood sugar"],
+                phrase: "\"Collagen and Curcumin together reduce the need for harmful painkillers.\"",
+                smart: "Topical analgesic gel or joint support brace"
+            },
+            {
+                id:"gerd_otc", icon:"🔥", name:"Heartburn & GERD",
+                supps: [
+                    {n:"DGL Licorice", d:"380mg x 3", t:"20 min before food", f:"Stimulates protective gastric mucus.", b:"Now DGL | Solgar"},
+                    {n:"Probiotics (L.reuteri)", d:"10 Billion", t:"AM Empty stomach", f:"Balances gut flora and reduces reflux symptoms.", b:"iRemedies | Now"},
+                    {n:"Magnesium", d:"400mg", t:"PM", f:"Compensates for PPI-induced depletion.", b:"iRemedies | Now"},
+                    {n:"Digestive Enzymes", d:"1 capsule", t:"With meals", f:"Reduces bloating and pressure on the LES.", b:"Now | Solgar"},
+                    {n:"Ginger Extract", d:"500mg", t:"Post-meal", f:"Speeds up gastric emptying.", b:"Now | Solgar"},
+                    {n:"Vitamin B12", d:"1000mcg", t:"AM", f:"Essential for long-term PPI users due to malabsorption.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["Wait 3 hours after eating before sleep", "Elevate bed head", "Avoid coffee/mints"],
+                warns: ["Chronic PPI use requires Mg and B12 supplementation"],
+                phrase: "\"DGL and Enzymes are the scientific path to healthy digestion.\"",
+                smart: "Wedge pillow for nocturnal reflux prevention"
+            }
+        );
+        
         // الإغلاق النهائي
         window.onload();
     </script>
