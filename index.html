@@ -5538,84 +5538,95 @@ DB.ar.conditions.g.push(
         DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
 
 // ==========================================
-        // مرحلة التنظيم الكبرى (إعادة الهيكلة)
+        // الكود الموحد: التنظيم + تشغيل الزراير + الحالات الجديدة
         // ==========================================
 
-        // 1. إنشاء "الأدراج" الجديدة في قاعدة البيانات
-        DB.ar.conditions.alz = [];   // قسم الزهايمر المنفصل
-        DB.ar.conditions.park = [];  // قسم باركنسون المنفصل
-        DB.ar.conditions.w = [];     // قسم المرأة والحوامل
-        DB.ar.conditions.s = [];     // قسم البشرة (Skin)
-        DB.ar.conditions.h = [];     // قسم الشعر (Hair)
+        // 1. إنشاء "الأدراج" الجديدة
+        DB.ar.conditions.alz = [];   
+        DB.ar.conditions.park = [];  
+        DB.ar.conditions.w = [];     
+        DB.ar.conditions.s = [];     
+        DB.ar.conditions.h = [];     
 
-        // 2. كود "الفرز الآلي" (المهاجر الذكي)
-        // هذا الكود يبحث في كل الأقسام القديمة (g, c, o, p) 
-        // ويأخذ أي حالة تبدأ بـ "alz" أو "park" ويضعها في قسمها الجديد
+        // 2. كود "المهاجر الذكي" (نقل الزهايمر وباركنسون لأدراجهم الجديدة)
         ['g', 'c', 'o', 'p'].forEach(section => {
-            DB.ar.conditions[section] = DB.ar.conditions[section].filter(condition => {
-                if (condition.id.startsWith('alz')) {
-                    DB.ar.conditions.alz.push(condition);
-                    return false; // إزالته من القسم القديم
-                }
-                if (condition.id.startsWith('park')) {
-                    DB.ar.conditions.park.push(condition);
-                    return false; // إزالته من القسم القديم
-                }
-                return true; // يبقى في مكانه إذا لم يكن زهايمر أو باركنسون
-            });
+            if (DB.ar.conditions[section]) {
+                DB.ar.conditions[section] = DB.ar.conditions[section].filter(condition => {
+                    if (condition.id.startsWith('alz')) {
+                        DB.ar.conditions.alz.push(condition);
+                        return false; 
+                    }
+                    if (condition.id.startsWith('park')) {
+                        DB.ar.conditions.park.push(condition);
+                        return false; 
+                    }
+                    return true; 
+                });
+            }
         });
 
-        // 3. مزامنة الأقسام الجديدة مع النسخة الإنجليزية
+        // 3. تحديث "خريطة التصنيفات" (عشان الزراير تفهم هي بتفتح إيه)
+        // ملاحظة: تأكد أن هذه الأسماء (alz, park, w, s, h) هي المستخدمة في أزرار الـ HTML عندك
+        const categoryMap = {
+            'common': 'p',     
+            'special': 'o',    
+            'skin': 's',       
+            'hair': 'h',       
+            'general': 'g',    
+            'women': 'w',      
+            'alzheimer': 'alz', 
+            'parkinson': 'park' 
+        };
+
+        // 4. إضافة الحالات الجديدة (95, 96, 97)
+        // 95. حموضة الحوامل
+        DB.ar.conditions.w.push({
+            id:"preg_acidity_w", icon:"🤰🔥", name:"حموضة المعدة (للحوامل)",
+            supps: [
+                {n:"كالسيوم كربونات", d:"500mg", t:"عند اللزوم", f:"آمن تماماً (Tums) ويعادل الحموضة فوراً.", b:"Tums | Rennie"},
+                {n:"مغنيسيوم هيدروكسيد", d:"جرعة بسيطة", t:"عند اللزوم", f:"آمن ويقلل تشنجات الساقين أيضاً.", b:"Mylanta"}
+            ],
+            tips: ["وجبات صغيرة متكررة", "النوم على الجانب الأيسر"],
+            warns: ["🚨 تجنب الفوارات التي تحتوي على بيكربونات صوديوم"],
+            phrase: "\"تومز هو الخيار الأول للأمان أثناء الحمل\"",
+            smart: "شرب القليل من الحليب البارد يعطي راحة فورية"
+        });
+
+        // 96. تساقط الشعر الوراثي
+        DB.ar.conditions.h.push({
+            id:"hair_loss_gen_h", icon:"💇‍♂️", name:"تساقط الشعر الوراثي",
+            supps: [
+                {n:"Saw Palmetto", d:"320mg", t:"يومياً", f:"يعمل كـ DHT Blocker طبيعي لمنع ضمور البصيلات.", b:"Now | Solgar"},
+                {n:"بيوتين", d:"5000mcg", t:"يومياً", f:"يُقوي بروتين الكيراتين ويزيد سماكة الشعرة.", b:"Now | iRemedies"}
+            ],
+            tips: ["شامبو خالي من السلفات", "تدليك فروة الرأس يومياً"],
+            warns: ["🚨 النتائج تحتاج من 3 إلى 6 أشهر من الاستمرار"],
+            phrase: "\"الساو بالميتو والبيوتين لحماية بصيلاتك من الضمور\"",
+            smart: "إضافة نقطتين زيت روزماري للشامبو يعزز النمو"
+        });
+
+        // 97. جفاف البشرة الشديد
+        DB.ar.conditions.s.push({
+            id:"dry_skin_s", icon:"🧴", name:"جفاف البشرة الشديد",
+            supps: [
+                {n:"سيلاميد (Ceramides)", d:"دهان", f:"يرمم حاجز البشرة ويمنع فقدان الرطوبة.", b:"CeraVe | Avernus"},
+                {n:"حمض الهيالورونيك", d:"سيروم", f:"يجذب الماء لطبقات الجلد العميقة.", b:"Now | Solgar"}
+            ],
+            tips: ["شرب 3 لتر ماء يومياً", "ترطيب البشرة فوراً بعد الاستحمام"],
+            warns: ["🚨 تجنب الصابون القوي الذي يجفف الجلد"],
+            phrase: "\"السيلاميد هو الدرع الحامي لرطوبة بشرتك\"",
+            smart: "تقنية الـ Slugging (فازلين فوق المرطب) تضاعف الترطيب"
+        });
+
+        // 5. مزامنة اللغات
         DB.en.conditions.alz = JSON.parse(JSON.stringify(DB.ar.conditions.alz));
         DB.en.conditions.park = JSON.parse(JSON.stringify(DB.ar.conditions.park));
-        DB.en.conditions.w = [];
-        DB.en.conditions.s = [];
-        DB.en.conditions.h = [];
+        DB.en.conditions.w = JSON.parse(JSON.stringify(DB.ar.conditions.w));
+        DB.en.conditions.h = JSON.parse(JSON.stringify(DB.ar.conditions.h));
+        DB.en.conditions.s = JSON.parse(JSON.stringify(DB.ar.conditions.s));
 
-        // ==========================================
-        // الآن الميدان يا حميدان.. جاهزين للحوامل والبشرة
-        // ==========================================
-
-        // موديول 95: حموضة المعدة للحوامل (OTC)
-        DB.ar.conditions.w.push(
-            {
-                id:"preg_acidity_w", icon:"🤰🔥", name:"حموضة المعدة (للحوامل)",
-                supps: [
-                    {n:"كالسيوم كربونات", d:"500-1000mg", t:"عند اللزوم", f:"الخيار الأول والآمن (Tums)؛ يعادل الحموضة ويوفر كالسيوم إضافي للجنين.", b:"Tums | Rennie"},
-                    {n:"مغنيسيوم هيدروكسيد", d:"جرعة منخفضة", t:"عند اللزوم", f:"آمن تماماً ويساعد أيضاً في تقليل تشنجات الساقين المصاحبة للحمل.", b:"Mylanta | Avernus"},
-                    {n:"ألياف السيليوم", d:"5g", t:"يومياً", f:"تحسن الهضم وتمنع الإمساك الذي يضغط على المعدة ويسبب الارتجاع.", b:"iRemedies | Now"}
-                ],
-                tips: ["تناول وجبات صغيرة ومتعددة", "تجنب الأكل قبل النوم بـ 3 ساعات", "النوم على الجانب الأيسر يقلل الارتجاع"],
-                warns: ["🚨 تجنب الأدوية التي تحتوي على (Sodium Bicarbonate) لأنها تسبب احتباس سوائل وضغط"],
-                phrase: "\"تومز هو صديقك الوفي لحرقان المعدة الآمن أثناء رحلة حملك\"",
-                smart: "شرب القليل من الحليب البارد عند الإحساس بالحرقان يعطي راحة فورية طبيعية"
-            }
-        );
-
-        // موديول 96: تساقط الشعر الوراثي (Skin & Hair)
-        DB.ar.conditions.h.push(
-            {
-                id:"hair_loss_gen_h", icon:"💇‍♂️", name:"تساقط الشعر الوراثي",
-                supps: [
-                    {n:"مستخلص المنشار النخلي (Saw Palmetto)", d:"320mg", t:"يومياً", f:"يعمل كـ DHT Blocker طبيعي لمنع ضمور بصيلات الشعر.", b:"Now | Solgar | Avernus"},
-                    {n:"بيوتين (Biotin)", d:"5000-10000mcg", t:"يومياً", f:"يُقوي بروتين الكيراتين المكون للشعر ويزيد من سماكة الشعرة.", b:"Now | Solgar | iRemedies"},
-                    {n:"زيت بذور اليقطين", d:"1000mg", t:"يومياً", f:"يُدعم صحة فروة الرأس ويمنع الالتهابات المسببة للتساقط.", b:"Now | Avernus"}
-                ],
-                tips: ["استخدام شامبو خالي من السلفات والبارابين", "تدليك فروة الرأس يومياً لتنشيط الدورة الدموية", "تجنب التوتر والقلق"],
-                warns: ["🚨 النتائج تحتاج لـ 3-6 أشهر من الاستمرار؛ الصبر هو مفتاح استعادة شعرك"],
-                phrase: "\"الساو بالميتو والبيوتين هما الثنائي الذهبي لحماية بصيلاتك من الضمور\"",
-                smart: "إضافة نقطتين من (زيت الروزماري) للشامبو الخاص بك يُعزز نمو الشعر بشكل مذهل"
-            }
-        );
-
-        // تفعيل الربط للجديد
-        DB.en.conditions.w.push(...JSON.parse(JSON.stringify(DB.ar.conditions.w.slice(-1))));
-        DB.en.conditions.h.push(...JSON.parse(JSON.stringify(DB.ar.conditions.h.slice(-1))));
-
-        // قفلة المحل (اللي هتحطها تاني)
+        // قفلة المحل النهائية
         window.onload();
     </script>
 </body>
 </html>
-        
-      
