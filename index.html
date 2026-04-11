@@ -406,6 +406,71 @@
                 smart: "Wedge pillow for nocturnal reflux prevention"
             }
         );
+
+        DB.ar.conditions.sk.push(
+            {
+                id:"acne_sk", icon:"😤", name:"حب الشباب (Acne)",
+                supps: [
+                    {n:"زنك بيكولينات", d:"30-50mg", t:"بعد الأكل", f:"يُثبّط إنتاج الدهون ويُقلل من نشاط البكتيريا المسببة للحبوب.", b:"iRemedies Zinc | Avernus | Now"},
+                    {n:"أوميغا 3 (جرعة عالية)", d:"2000-3000mg", t:"وسط الغداء", f:"يُوازن مستويات الالتهاب ويُقلل من انسداد المسام الدهنية.", b:"Avernus | iRemedies | Now"},
+                    {n:"بروبيوتيك (بكتيريا نافعة)", d:"20 Billion CFU", t:"على الريق", f:"محور الأمعاء-الجلد؛ تحسين الهضم يُقلل من ظهور الحبوب الالتهابية.", b:"iRemedies Probio | Avernus | Now"},
+                    {n:"فيتامين A (بيتا كاروتين)", d:"10,000 IU", t:"مع وجبة دسمة", f:"يُنظم تجدد خلايا البشرة ويمنع تراكم الخلايا الميتة داخل المسام.", b:"Now | Nature's Bounty | Solgar"},
+                    {n:"حمض البانثوثينيك (B5)", d:"500mg", t:"يومياً", f:"يُساعد في تكسير الدهون الجلدية ويُقلل من حجم الغدد الزهمية.", b:"Now | Solgar"},
+                    {n:"كركمين (Curcumin)", d:"500mg", t:"بعد الأكل", f:"مضاد التهاب طبيعي قوي يقلل الاحمرار والتورم المصاحب للحبوب.", b:"iRemedies | Avernus | Now"}
+                ],
+                tips: ["غسل الوجه مرتين فقط يومياً", "تغيير غطاء الوسادة بانتظام", "تجنب السكريات المكررة (تزيد الأنسولين والحبوب)"],
+                warns: ["الزنك بجرعات عالية يحتاج تعويض النحاس", "تجنب فيتامين A عالي الجرعة في الحمل"],
+                phrase: "\"الزنك والأوميغا 3 من الداخل يعملان بفعالية أكبر من كل الكريمات الموضعية\"",
+                smart: "غسول يحتوي على Salicylic Acid لتنظيف المسام بعمق"
+            },
+            {
+                id:"aging_sk", icon:"⏰", name:"التجاعيد وشيخوخة الجلد",
+                supps: [
+                    {n:"كولاجين بحري (Marine)", d:"10,000mg", t:"على الريق صباحاً", f:"يُعيد بناء مرونة الجلد ويقلل عمق الخطوط الدقيقة بشكل مثبت.", b:"iRemedies Collagen | Avernus | Neocell"},
+                    {n:"حمض الهيالورونيك", d:"120-200mg", t:"صباحاً", f:"يُرطب البشرة من الداخل للخارج ويُعطي امتلاءً فورياً للجلد.", b:"iRemedies | Now | Solgar"},
+                    {n:"فيتامين C (Ester-C)", d:"1000mg", t:"مع الكولاجين", f:"المُحفّز الأساسي لإنتاج الكولاجين الطبيعي ومحارب للجذور الحرة.", b:"iRemedies Vit C | Avernus | Solgar"},
+                    {n:"أستاكزانثين (Astaxanthin)", d:"4-8mg", t:"مع الأكل", f:"أقوى مضاد أكسدة في العالم (أقوى من فيتامين سي بـ 6000 مرة).", b:"Now | Solgar | iRemedies"},
+                    {n:"فيتامين E (Mixed)", d:"400 IU", t:"بعد الأكل", f:"يحمي جدران الخلايا الجلدية من التلف الناتج عن أشعة الشمس.", b:"iRemedies | Now | Solgar"},
+                    {n:"CoQ10", d:"100-200mg", t:"يومياً", f:"يُنشّط طاقة الخلايا الجلدية ويُقلل من الإجهاد التأكسدي.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["واقي شمس يومياً (أهم نصيحة)", "شرب 3 لتر ماء", "نوم 8 ساعات (نوم الجمال)"],
+                warns: ["الكولاجين يحتاج 8 أسابيع لتظهر نتائجه على البشرة"],
+                phrase: "\"هذا الثلاثي (كولاجين + سي + هيالورونيك) هو سر شباب البشرة الدائم\"",
+                smart: "سيروم ريتينول (Retinol) ليلي لنتائج أسرع في شد الجلد"
+            }
+        );
+        DB.en.conditions.sk.push(
+            {
+                id:"acne_sk", icon:"😤", name:"Acne (Skin Care)",
+                supps: [
+                    {n:"Zinc Picolinate", d:"30-50mg", t:"Post-meal", f:"Reduces sebum production and bacterial activity.", b:"iRemedies | Avernus | Now"},
+                    {n:"Omega-3", d:"2-3g", t:"Lunch", f:"Balances systemic inflammation and prevents clogged pores.", b:"Avernus | iRemedies"},
+                    {n:"Probiotics", d:"20 Billion", t:"AM Empty stomach", f:"Gut-Skin axis; improves digestion to clear skin.", b:"iRemedies Probio | Avernus"},
+                    {n:"Vitamin A", d:"10,000 IU", t:"With fatty meal", f:"Regulates skin cell turnover.", b:"Now | Solgar"},
+                    {n:"Pantothenic Acid (B5)", d:"500mg", t:"Daily", f:"Helps break down skin oils.", b:"Now | Solgar"},
+                    {n:"Curcumin", d:"500mg", t:"Post-meal", f:"Reduces redness and swelling of cysts.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["Wash face twice daily only", "Change pillowcases regularly", "Low glycemic diet"],
+                warns: ["Long term high zinc needs copper", "Avoid high dose Vit A in pregnancy"],
+                phrase: "\"Zinc and Omega-3 work from the inside to clear your skin faster.\"",
+                smart: "Salicylic Acid cleanser for deep pore cleaning"
+            },
+            {
+                id:"aging_sk", icon:"⏰", name:"Anti-Aging & Wrinkles",
+                supps: [
+                    {n:"Marine Collagen", d:"10,000mg", t:"AM Empty stomach", f:"Rebuilds skin elasticity and reduces wrinkle depth.", b:"iRemedies | Avernus"},
+                    {n:"Hyaluronic Acid", d:"120-200mg", t:"AM", f:"Deeply hydrates skin from within for a plump look.", b:"iRemedies | Now"},
+                    {n:"Vitamin C (Ester-C)", d:"1000mg", t:"With Collagen", f:"Essential catalyst for natural collagen synthesis.", b:"iRemedies | Avernus"},
+                    {n:"Astaxanthin", d:"4-8mg", t:"With food", f:"World's strongest antioxidant for UV protection.", b:"Now | Solgar"},
+                    {n:"Vitamin E", d:"400 IU", t:"Post-meal", f:"Protects skin cell membranes from oxidation.", b:"iRemedies | Now"},
+                    {n:"CoQ10", d:"100-200mg", t:"Daily", f:"Boosts skin cell energy and repairs damage.", b:"iRemedies | Avernus"}
+                ],
+                tips: ["Daily sunscreen is mandatory", "3 liters of water", "8 hours of quality sleep"],
+                warns: ["Collagen takes 8 weeks for visible results"],
+                phrase: "\"This trio (Collagen + C + Hyaluronic) is the secret to lasting youth.\"",
+                smart: "Night Retinol serum for faster skin tightening"
+            }
+        );
         
         // الإغلاق النهائي
         window.onload();
