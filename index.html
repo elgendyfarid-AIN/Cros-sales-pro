@@ -5537,10 +5537,85 @@ DB.ar.conditions.g.push(
         DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
         DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
 
+// ==========================================
+        // مرحلة التنظيم الكبرى (إعادة الهيكلة)
+        // ==========================================
 
-        
-        // قفلة المحل النهائية 
+        // 1. إنشاء "الأدراج" الجديدة في قاعدة البيانات
+        DB.ar.conditions.alz = [];   // قسم الزهايمر المنفصل
+        DB.ar.conditions.park = [];  // قسم باركنسون المنفصل
+        DB.ar.conditions.w = [];     // قسم المرأة والحوامل
+        DB.ar.conditions.s = [];     // قسم البشرة (Skin)
+        DB.ar.conditions.h = [];     // قسم الشعر (Hair)
+
+        // 2. كود "الفرز الآلي" (المهاجر الذكي)
+        // هذا الكود يبحث في كل الأقسام القديمة (g, c, o, p) 
+        // ويأخذ أي حالة تبدأ بـ "alz" أو "park" ويضعها في قسمها الجديد
+        ['g', 'c', 'o', 'p'].forEach(section => {
+            DB.ar.conditions[section] = DB.ar.conditions[section].filter(condition => {
+                if (condition.id.startsWith('alz')) {
+                    DB.ar.conditions.alz.push(condition);
+                    return false; // إزالته من القسم القديم
+                }
+                if (condition.id.startsWith('park')) {
+                    DB.ar.conditions.park.push(condition);
+                    return false; // إزالته من القسم القديم
+                }
+                return true; // يبقى في مكانه إذا لم يكن زهايمر أو باركنسون
+            });
+        });
+
+        // 3. مزامنة الأقسام الجديدة مع النسخة الإنجليزية
+        DB.en.conditions.alz = JSON.parse(JSON.stringify(DB.ar.conditions.alz));
+        DB.en.conditions.park = JSON.parse(JSON.stringify(DB.ar.conditions.park));
+        DB.en.conditions.w = [];
+        DB.en.conditions.s = [];
+        DB.en.conditions.h = [];
+
+        // ==========================================
+        // الآن الميدان يا حميدان.. جاهزين للحوامل والبشرة
+        // ==========================================
+
+        // موديول 95: حموضة المعدة للحوامل (OTC)
+        DB.ar.conditions.w.push(
+            {
+                id:"preg_acidity_w", icon:"🤰🔥", name:"حموضة المعدة (للحوامل)",
+                supps: [
+                    {n:"كالسيوم كربونات", d:"500-1000mg", t:"عند اللزوم", f:"الخيار الأول والآمن (Tums)؛ يعادل الحموضة ويوفر كالسيوم إضافي للجنين.", b:"Tums | Rennie"},
+                    {n:"مغنيسيوم هيدروكسيد", d:"جرعة منخفضة", t:"عند اللزوم", f:"آمن تماماً ويساعد أيضاً في تقليل تشنجات الساقين المصاحبة للحمل.", b:"Mylanta | Avernus"},
+                    {n:"ألياف السيليوم", d:"5g", t:"يومياً", f:"تحسن الهضم وتمنع الإمساك الذي يضغط على المعدة ويسبب الارتجاع.", b:"iRemedies | Now"}
+                ],
+                tips: ["تناول وجبات صغيرة ومتعددة", "تجنب الأكل قبل النوم بـ 3 ساعات", "النوم على الجانب الأيسر يقلل الارتجاع"],
+                warns: ["🚨 تجنب الأدوية التي تحتوي على (Sodium Bicarbonate) لأنها تسبب احتباس سوائل وضغط"],
+                phrase: "\"تومز هو صديقك الوفي لحرقان المعدة الآمن أثناء رحلة حملك\"",
+                smart: "شرب القليل من الحليب البارد عند الإحساس بالحرقان يعطي راحة فورية طبيعية"
+            }
+        );
+
+        // موديول 96: تساقط الشعر الوراثي (Skin & Hair)
+        DB.ar.conditions.h.push(
+            {
+                id:"hair_loss_gen_h", icon:"💇‍♂️", name:"تساقط الشعر الوراثي",
+                supps: [
+                    {n:"مستخلص المنشار النخلي (Saw Palmetto)", d:"320mg", t:"يومياً", f:"يعمل كـ DHT Blocker طبيعي لمنع ضمور بصيلات الشعر.", b:"Now | Solgar | Avernus"},
+                    {n:"بيوتين (Biotin)", d:"5000-10000mcg", t:"يومياً", f:"يُقوي بروتين الكيراتين المكون للشعر ويزيد من سماكة الشعرة.", b:"Now | Solgar | iRemedies"},
+                    {n:"زيت بذور اليقطين", d:"1000mg", t:"يومياً", f:"يُدعم صحة فروة الرأس ويمنع الالتهابات المسببة للتساقط.", b:"Now | Avernus"}
+                ],
+                tips: ["استخدام شامبو خالي من السلفات والبارابين", "تدليك فروة الرأس يومياً لتنشيط الدورة الدموية", "تجنب التوتر والقلق"],
+                warns: ["🚨 النتائج تحتاج لـ 3-6 أشهر من الاستمرار؛ الصبر هو مفتاح استعادة شعرك"],
+                phrase: "\"الساو بالميتو والبيوتين هما الثنائي الذهبي لحماية بصيلاتك من الضمور\"",
+                smart: "إضافة نقطتين من (زيت الروزماري) للشامبو الخاص بك يُعزز نمو الشعر بشكل مذهل"
+            }
+        );
+
+        // تفعيل الربط للجديد
+        DB.en.conditions.w.push(...JSON.parse(JSON.stringify(DB.ar.conditions.w.slice(-1))));
+        DB.en.conditions.h.push(...JSON.parse(JSON.stringify(DB.ar.conditions.h.slice(-1))));
+
+        // قفلة المحل (اللي هتحطها تاني)
         window.onload();
     </script>
 </body>
 </html>
+        
+      
