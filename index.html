@@ -8,50 +8,28 @@
     <style>
         :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --white: #ffffff; }
         body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; direction: rtl; color: #333; }
-        
-        /* الهيدر الجديد */
         .header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .header h1 { margin: 0; font-weight: 900; cursor: pointer; letter-spacing: 1px; }
-        .header p { margin: 5px 0 0; font-size: 0.9em; opacity: 0.9; }
-
-        /* تقسيم الـ 3 أعمدة */
+        .header h1 { margin: 0; font-weight: 900; cursor: pointer; }
         .main-layout { display: grid; grid-template-columns: 280px 1fr 280px; gap: 25px; padding: 25px; max-width: 1600px; margin: 0 auto; }
-        
-        /* التجاوب مع الموبايل والتابلت */
         @media (max-width: 1150px) { .main-layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
-        
         .sidebar { background: var(--white); border-radius: 15px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 20px; max-height: 90vh; overflow-y: auto; }
-        .sidebar h3 { border-bottom: 3px solid var(--accent); padding-bottom: 12px; color: var(--primary); margin-bottom: 15px; font-size: 1.1em; }
-        
-        /* ستايل القوائم الجانبية */
-        .side-list { list-style: none; padding: 0; margin: 0; }
-        .side-item { padding: 12px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: 0.3s; font-size: 0.9em; border-radius: 8px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
-        .side-item:hover { background: #eef7ff; color: var(--accent); padding-right: 20px; }
-
-        /* ستايل البطاقة والجداول */
+        .sidebar h3 { border-bottom: 3px solid var(--accent); padding-bottom: 12px; color: var(--primary); margin-bottom: 15px; }
+        .side-item { padding: 10px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: 0.3s; font-size: 0.9em; border-radius: 8px; margin-bottom: 5px; }
+        .side-item:hover { background: #eef7ff; color: var(--accent); padding-right: 15px; }
         .condition-card { background: var(--white); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border-top: 6px solid var(--accent); }
-        .card-title { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .card-title h2 { margin: 0; font-size: 1.5em; color: var(--primary); }
-        
         .supp-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
-        .supp-table th { background: #f8f9fa; color: var(--primary); padding: 15px; text-align: right; font-size: 0.9em; border-bottom: 2px solid #eee; }
-        .supp-table td { padding: 15px; border-bottom: 1px solid #f0f0f0; vertical-align: top; font-size: 0.9em; }
-        
+        .supp-table th { background: #f8f9fa; color: var(--primary); padding: 12px; text-align: right; }
+        .supp-table td { padding: 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
         .brand-tag { display: inline-block; background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; margin-top: 5px; font-weight: 600; }
-        .tips-box { background: #fff9f0; padding: 15px; border-radius: 12px; margin-top: 20px; border-right: 5px solid #ffb74d; font-size: 0.9em; }
-
-        /* شريط البحث */
-        .search-wrapper { margin-bottom: 25px; }
-        input#mainSearch { width: 100%; padding: 16px 25px; border-radius: 50px; border: 2px solid #e0e0e0; font-size: 1.1em; outline: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-family: inherit; }
-        input#mainSearch:focus { border-color: var(--accent); box-shadow: 0 4px 20px rgba(52,152,219,0.2); }
+        .tips-box { background: #fff9f0; padding: 15px; border-radius: 12px; margin-top: 20px; border-right: 5px solid #ffb74d; }
+        input#mainSearch { width: 100%; padding: 16px 25px; border-radius: 50px; border: 2px solid #e0e0e0; font-size: 1.1em; outline: none; }
     </style>
 </head>
 <body class="ar">
     <header class="header">
         <h1 onclick="location.reload()">أطلس الصيدلاني Pro</h1>
-        <p>مرجع د. فريد الجندي • BNF / USP / UAE</p>
+        <p>مرجع د. فريد الجندي • يحيى وآية</p>
     </header>
-
     <div class="main-layout">
         <aside class="sidebar">
             <h3>الأكثر شيوعاً 🔥</h3>
@@ -63,34 +41,24 @@
                 <div class="side-item" onclick="quickSearch('تساقط الشعر نساء')">👩‍🦰 تساقط الشعر (نساء)</div>
                 <div class="side-item" onclick="quickSearch('قشرة')">❄️ القشرة</div>
                 <div class="side-item" onclick="quickSearch('مناعة')">🛡️ تعزيز المناعة</div>
+                <div class="side-item" onclick="quickSearch('خمول')">⚡ الخمول والطاقة</div>
+                <div class="side-item" onclick="quickSearch('تركيز')">🧠 التركيز</div>
+                <div class="side-item" onclick="quickSearch('قلق')">🧘 القلق</div>
             </div>
-            
             <h3 style="margin-top:25px;">مقالات وأخبار 📰</h3>
-            <div class="side-list">
-                <div class="side-item" onclick="alert('قريباً: مقالات طبية محدثة')">📑 نصائح التغذية العلاجية</div>
-                <div class="side-item" onclick="alert('قريباً: جديد الأدوية')">📢 جديد دليل الأدوية الإماراتي</div>
-            </div>
+            <div class="side-item" onclick="alert('قريباً')">📑 نصائح التغذية العلاجية</div>
+            <div class="side-item" onclick="alert('قريباً')">📢 جديد دليل الأدوية</div>
         </aside>
-
         <main>
-            <div class="search-wrapper">
-                <input type="text" id="mainSearch" placeholder="ابحث بالحالة، المكمل، أو البراند (Now, Solgar...)" 
-                       onkeyup="handleSearch(this.value)">
-            </div>
-            
+            <div style="margin-bottom:25px;"><input type="text" id="mainSearch" placeholder="ابحث بالحالة، المكمل، أو البراند..." onkeyup="handleSearch(this.value)"></div>
             <div id="resultsContainer"></div>
         </main>
-
         <aside class="sidebar">
             <h3>دليل المكملات 💊</h3>
-            <div id="suppIndex" class="side-list">
-                <p style="font-size: 0.8em; color: #999; text-align: center;">جاري استخراج المكملات...</p>
-            </div>
+            <div id="suppIndex"></div>
         </aside>
     </div>
-
     <script>
-    // تهيئة قاعدة البيانات - سيتم ملؤها من الـ 6000 سطر القادمة
     const DB = { ar: { conditions: { p: [], c: [], o: [], g: [], w: [], s: [], h: [], alz: [], park: [] } } };
       DB.ar.conditions.c.push(
             {
@@ -5473,117 +5441,61 @@ DB.ar.conditions.g.push(
             }
         );
 
-   // المحرك العالمي - أطلس الصيدلاني Pro
-function renderHome() {
+        function renderHome() {
     const sections = [
-        { id: 'p', name: 'أدوية OTC الشائعة', icon: '💊' },
-        { id: 'c', name: 'الأمراض المزمنة', icon: '🩸' },
-        { id: 'o', name: 'حالات طبية خاصة', icon: '🧪' },
-        { id: 'g', name: 'الصحة العامة والمناعة', icon: '🍏' },
-        { id: 'w', name: 'صحة المرأة والحوامل', icon: '🤰' },
-        { id: 's', name: 'قسم العناية بالبشرة', icon: '🧴' },
-        { id: 'h', name: 'قسم العناية بالشعر', icon: '💇' },
-        { id: 'alz', name: 'مرض الزهايمر', icon: '🧠' },
+        { id: 'p', name: 'أدوية OTC الشائعة', icon: '💊' }, { id: 'c', name: 'الأمراض المزمنة', icon: '🩸' },
+        { id: 'o', name: 'حالات طبية خاصة', icon: '🧪' }, { id: 'g', name: 'الصحة العامة والمناعة', icon: '🍏' },
+        { id: 'w', name: 'صحة المرأة والحوامل', icon: '🤰' }, { id: 's', name: 'قسم العناية بالبشرة', icon: '🧴' },
+        { id: 'h', name: 'قسم العناية بالشعر', icon: '💇' }, { id: 'alz', name: 'مرض الزهايمر', icon: '🧠' },
         { id: 'park', name: 'مرض باركنسون', icon: '🦯' }
     ];
-
     let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">';
     sections.forEach(s => {
-        html += `
-            <div class="condition-card" style="text-align: center; cursor: pointer; transition: 0.3s; padding: 20px;" onclick="loadCat('${s.id}')">
+        html += `<div class="condition-card" style="text-align: center; cursor: pointer;" onclick="loadCat('${s.id}')">
                 <div style="font-size: 2.5em; margin-bottom: 10px;">${s.icon}</div>
-                <div style="font-weight: bold; font-size: 0.9em; color: var(--primary);">${s.name}</div>
-            </div>
-        `;
+                <div style="font-weight: bold; font-size: 0.9em;">${s.name}</div>
+              </div>`;
     });
     document.getElementById('resultsContainer').innerHTML = html + '</div>';
 }
-
-function loadCat(id) {
-    renderResults(DB.ar.conditions[id] || []);
-}
-
+function loadCat(id) { renderResults(DB.ar.conditions[id] || []); }
 function renderResults(list) {
     const container = document.getElementById('resultsContainer');
-    if (!list.length) { 
-        container.innerHTML = "<div style='text-align:center; padding:50px;'><h3>لم يتم العثور على نتائج</h3></div>"; 
-        return; 
-    }
-    
+    if (!list.length) { container.innerHTML = "<h3 style='text-align:center'>لم يتم العثور على نتائج</h3>"; return; }
     container.innerHTML = list.map(c => `
         <div class="condition-card">
-            <div class="card-title">
-                <span style="font-size: 1.8em;">${c.icon}</span>
-                <h2>${c.name}</h2>
-            </div>
-            <div style="overflow-x:auto;">
-                <table class="supp-table">
-                    <thead>
-                        <tr>
-                            <th>المكمل</th>
-                            <th>الجرعة والتوقيت</th>
-                            <th>الفائدة الطبية</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${c.supps.map(s => `
-                            <tr>
-                                <td>
-                                    <strong>${s.n}</strong><br>
-                                    <span class="brand-tag">🏷️ ${s.b}</span>
-                                </td>
-                                <td>
-                                    <div style="font-weight:600; color:var(--primary);">${s.d}</div>
-                                    <div style="font-size:0.85em; color:#666; margin-top:4px;">🕒 ${s.t}</div>
-                                </td>
-                                <td>${s.f}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            </div>
-            <div class="tips-box">
-                <strong style="color:#e67e22;">💡 نصائح إضافية:</strong>
-                <div style="margin-top:8px;">${c.tips.join(' • ')}</div>
-            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;"><span>${c.icon}</span><h2>${c.name}</h2></div>
+            <table class="supp-table">
+                <thead><tr><th>المكمل</th><th>الجرعة والتوقيت</th><th>الفائدة</th></tr></thead>
+                <tbody>
+                    ${c.supps.map(s => `<tr><td><strong>${s.n}</strong><br><span class="brand-tag">${s.b}</span></td><td>${s.d}<br><small>${s.t}</small></td><td>${s.f}</td></tr>`).join('')}
+                </tbody>
+            </table>
+            <div class="tips-box"><strong>💡 نصائح:</strong> ${c.tips.join(' • ')}</div>
         </div>
     `).join('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function handleSearch(q) {
     if (!q) { renderHome(); return; }
-    const searchQ = q.toLowerCase();
+    const sq = q.toLowerCase();
     let res = [];
-    Object.values(DB.ar.conditions).forEach(section => {
-        section.forEach(c => {
-            const matchName = c.name.toLowerCase().includes(searchQ);
-            const matchSupp = c.supps.some(s => s.n.toLowerCase().includes(searchQ) || s.b.toLowerCase().includes(searchQ));
-            if (matchName || matchSupp) res.push(c);
-        });
-    });
+    Object.values(DB.ar.conditions).forEach(sec => sec.forEach(c => {
+        if (c.name.includes(sq) || c.supps.some(s => s.n.includes(sq) || s.b.includes(sq))) res.push(c);
+    }));
     renderResults(res);
 }
-
-function quickSearch(t) {
-    document.getElementById('mainSearch').value = t;
-    handleSearch(t);
-}
-
+function quickSearch(t) { document.getElementById('mainSearch').value = t; handleSearch(t); }
 function buildIndex() {
     let s = new Set();
     Object.values(DB.ar.conditions).forEach(sec => sec.forEach(c => c.supps.forEach(sup => s.add(sup.n))));
-    const container = document.getElementById('suppIndex');
-    if(container) {
-        container.innerHTML = Array.from(s).sort().map(n => `<div class="side-item" onclick="quickSearch('${n}')">💊 ${n}</div>`).join('');
-    }
+    document.getElementById('suppIndex').innerHTML = Array.from(s).sort().map(n => `<div class="side-item" onclick="quickSearch('${n}')">💊 ${n}</div>`).join('');
 }
-
 function organize() {
     DB.ar.conditions.alz = []; DB.ar.conditions.park = [];
-    ['p','c','o','g','w','s','h'].forEach(secId => {
-        if(DB.ar.conditions[secId]) {
-            DB.ar.conditions[secId] = DB.ar.conditions[secId].filter(c => {
+    ['p','c','o','g','w','s','h'].forEach(id => {
+        if(DB.ar.conditions[id]) {
+            DB.ar.conditions[id] = DB.ar.conditions[id].filter(c => {
                 if(c.id && c.id.includes('alz')) { DB.ar.conditions.alz.push(c); return false; }
                 if(c.id && c.id.includes('park')) { DB.ar.conditions.park.push(c); return false; }
                 return true;
@@ -5591,12 +5503,8 @@ function organize() {
         }
     });
 }
-
-window.onload = () => {
-    organize();
-    renderHome();
-    buildIndex();
-};
+window.onload = () => { organize(); renderHome(); buildIndex(); };
 </script>
 </body>
 </html>
+
