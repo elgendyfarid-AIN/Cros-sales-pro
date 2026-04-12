@@ -180,14 +180,7 @@ body {
 
 ---
 
-### **إيه اللي هيحصل أول ما تعمل كده؟**
-* الموقع "هينطق" فوراً وهيتقسم لـ ٣ أعمدة منظمة.
-* القائمة اليمين اللي طلبتها (تجاعيد، حب شباب..) هتظهر بشكل شيك جداً.
-* كلمة "أطلس الصيدلاني" هتبقى زرار "هوم" شغال.
 
-**بمجرد ما تعمل الخطوة دي، الموقع هيتعدل شكله ٩٠٪، بس الزراير والقوائم مش هتشتغل لسه.. ده دور "البلوك التالت" (العقل) اللي هبعتهولك بعد ما تقولي "تمام المنظر اتصلح".**
-
-يالا يا دكتور، امسح "القرف" ده وطمني إن الـ ٣ أعمدة ظهروا! ✌️💊
     <script>
         let lang='ar',curSec='c',curCond=null,activeSuppIdx=null,dk=false;
         const DB={ar:{sections:[],L:{},conditions:{}},en:{sections:[],L:{},conditions:{}}};
@@ -5629,14 +5622,131 @@ DB.ar.conditions.g.push(
             }
         );
 
-        DB.en.conditions.g.push(...JSON.parse(JSON.stringify(DB.ar.conditions.g.slice(-1))));
-        DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
-        DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
 
+    function renderHome() {
+    const sections = [
+        { id: 'p', name: 'أدوية OTC الشائعة', icon: '💊' },
+        { id: 'c', name: 'الأمراض المزمنة', icon: '🩸' },
+        { id: 'o', name: 'حالات طبية خاصة', icon: '🧪' },
+        { id: 'g', name: 'الصحة العامة والمناعة', icon: '🍏' },
+        { id: 'w', name: 'صحة المرأة والحوامل', icon: '🤰' },
+        { id: 's', name: 'قسم العناية بالبشرة', icon: '🧴' },
+        { id: 'h', name: 'قسم العناية بالشعر', icon: '💇' },
+        { id: 'alz', name: 'مرض الزهايمر', icon: '🧠' },
+        { id: 'park', name: 'مرض باركنسون', icon: '🦯' }
+    ];
 
-        
-        // قفلة المحل النهائية 
-        window.onload();
-    </script>
+    let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">';
+    sections.forEach(cat => {
+        html += `
+            <div class="condition-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="loadCat('${cat.id}')">
+                <div style="font-size: 3em; margin-bottom: 10px;">${cat.icon}</div>
+                <div style="font-weight: bold; color: #2c3e50;">${cat.name}</div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    document.getElementById('resultsContainer').innerHTML = html;
+}
+
+function loadCat(id) {
+    const conditions = DB.ar.conditions[id] || [];
+    renderResults(conditions);
+}
+
+function renderResults(list) {
+    const container = document.getElementById('resultsContainer');
+    if (list.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 50px;"><h2>لم يتم العثور على نتائج</h2></div>';
+        return;
+    }
+
+    container.innerHTML = list.map(c => `
+        <div class="condition-card">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <span style="font-size: 1.5em;">${c.icon}</span>
+                <h2 style="margin: 0; color: #2c3e50;">${c.name}</h2>
+            </div>
+            <table>
+                <tr>
+                    <th>المكمل</th>
+                    <th>الجرعة</th>
+                    <th>الهدف</th>
+                </tr>
+                ${c.supps.map(s => `
+                    <tr>
+                        <td><strong>${s.n}</strong><br><small style="color: #666;">${s.b}</small></td>
+                        <td>${s.d}<br>${s.t}</td>
+                        <td>${s.f}</td>
+                    </tr>
+                `).join('')}
+            </table>
+            <div style="margin-top: 15px; padding: 10px; background: #fff4e5; border-radius: 8px; font-size: 0.9em;">
+                <strong>💡 نصيحة:</strong> ${c.tips.join(' • ')}
+            </div>
+        </div>
+    `).join('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handleSearch(query) {
+    if (!query) {
+        renderHome();
+        return;
+    }
+    const q = query.toLowerCase();
+    const results = [];
+    
+    Object.values(DB.ar.conditions).forEach(section => {
+        section.forEach(cond => {
+            const inName = cond.name.toLowerCase().includes(q);
+            const inSupp = cond.supps.some(s => s.n.toLowerCase().includes(q) || s.b.toLowerCase().includes(q));
+            if (inName || inSupp) results.push(cond);
+        });
+    });
+    renderResults(results);
+}
+
+function quickSearch(term) {
+    document.getElementById('mainSearch').value = term;
+    handleSearch(term);
+}
+
+function buildIndex() {
+    const suppSet = new Set();
+    Object.values(DB.ar.conditions).forEach(section => {
+        section.forEach(cond => {
+            cond.supps.forEach(s => suppSet.add(s.n));
+        });
+    });
+
+    const sortedSupps = Array.from(suppSet).sort();
+    const container = document.getElementById('suppIndex');
+    
+    container.innerHTML = sortedSupps.map(s => `
+        <div class="side-item" onclick="quickSearch('${s}')">💊 ${s}</div>
+    `).join('');
+}
+
+function organize() {
+    DB.ar.conditions.alz = [];
+    DB.ar.conditions.park = [];
+    ['g', 'c', 'o', 'p'].forEach(s => {
+        if (DB.ar.conditions[s]) {
+            DB.ar.conditions[s] = DB.ar.conditions[s].filter(c => {
+                if (c.id && c.id.includes('alz')) { DB.ar.conditions.alz.push(c); return false; }
+                if (c.id && c.id.includes('park')) { DB.ar.conditions.park.push(c); return false; }
+                return true;
+            });
+        }
+    });
+}
+
+window.onload = () => {
+    organize();
+    renderHome();
+    buildIndex();
+};
+</script>
 </body>
 </html>
