@@ -132,24 +132,62 @@ body {
 }
     </style>
 </head>
-<body class="ar">
-    <div class="tb">
-        <div style="display:flex;align-items:center;gap:10px">
-            <div class="tbi">💊</div>
-            <div><div class="tbn" id="tbn">أطلس الصيدلاني</div><div class="tbs" id="tbs">مرجع Cross-Selling</div></div>
-        </div>
-        <div class="tbr">
-            <div class="lt"><button class="lb ac" id="bAr" onclick="setL('ar')">ع</button><button class="lb" id="bEn" onclick="setL('en')">EN</button></div>
-            <button class="ib" onclick="toggleDk()" id="dkb">🌙</button>
-        </div>
+<body>
+    <header class="header">
+        <h1 onclick="location.reload()">أطلس الصيدلاني</h1>
+        <p>Cross-Selling • BNF/USP/UAE • مرجع د. فريد الجندي</p>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar" id="rightSidebar">
+            <h3>الأكثر شيوعاً 🔥</h3>
+            <ul class="side-list">
+                <li class="side-item" onclick="quickSearch('تجاعيد')">✨ التجاعيد</li>
+                <li class="side-item" onclick="quickSearch('حب الشباب')">🛡️ حب الشباب</li>
+                <li class="side-item" onclick="quickSearch('خشونة')">🦴 خشونة العظام</li>
+                <li class="side-item" onclick="quickSearch('تساقط الشعر رجال')">👨‍🦲 تساقط الشعر (رجال)</li>
+                <li class="side-item" onclick="quickSearch('تساقط الشعر نساء')">👩‍🦰 تساقط الشعر (نساء)</li>
+                <li class="side-item" onclick="quickSearch('قشرة')">❄️ القشرة</li>
+                <li class="side-item" onclick="quickSearch('مناعة')">🛡️ تعزيز المناعة</li>
+                <li class="side-item" onclick="quickSearch('خمول')">⚡ الخمول وضعف الطاقة</li>
+                <li class="side-item" onclick="quickSearch('تركيز')">🧠 التركيز</li>
+                <li class="side-item" onclick="quickSearch('قلق')">🧘 القلق</li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <div class="search-container">
+                <input type="text" id="mainSearch" placeholder="ابحث عن حالة، مكمل، أو براند..." onkeyup="handleSearch(this.value)">
+            </div>
+            
+            <div id="resultsContainer">
+                <div style="text-align: center; color: #666; padding: 50px;">
+                    <h2>مرحباً بك في النسخة الاحترافية</h2>
+                    <p>اختر حالة من اليمين أو ابحث عما تريد...</p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar" id="leftSidebar">
+            <h3>دليل المكملات 💊</h3>
+            <div id="supplementsIndex" class="side-list">
+                <p style="font-size: 0.8em; color: #999;">جاري تحميل المكملات...</p>
+            </div>
+        </aside>
     </div>
-    <div class="sw">
-        <div class="sb">🔍 <input id="si" type="text" oninput="doSearch()"/><span style="cursor:pointer" onclick="clrS()">✕</span></div>
-        <div class="sr" id="sr"></div>
-    </div>
-    <div class="stw" id="stw"></div>
-    <div class="cw" id="cw"><div class="cg" id="cg"></div></div>
-    <div class="dw" id="dw"><div class="bk" onclick="goBack()"><span id="bkA">→</span> <span id="bkT">رجوع</span></div><div id="dc"></div></div>
+
+    ```
+
+---
+
+### **إيه اللي هيحصل أول ما تعمل كده؟**
+* الموقع "هينطق" فوراً وهيتقسم لـ ٣ أعمدة منظمة.
+* القائمة اليمين اللي طلبتها (تجاعيد، حب شباب..) هتظهر بشكل شيك جداً.
+* كلمة "أطلس الصيدلاني" هتبقى زرار "هوم" شغال.
+
+**بمجرد ما تعمل الخطوة دي، الموقع هيتعدل شكله ٩٠٪، بس الزراير والقوائم مش هتشتغل لسه.. ده دور "البلوك التالت" (العقل) اللي هبعتهولك بعد ما تقولي "تمام المنظر اتصلح".**
+
+يالا يا دكتور، امسح "القرف" ده وطمني إن الـ ٣ أعمدة ظهروا! ✌️💊
     <script>
         let lang='ar',curSec='c',curCond=null,activeSuppIdx=null,dk=false;
         const DB={ar:{sections:[],L:{},conditions:{}},en:{sections:[],L:{},conditions:{}}};
