@@ -7,130 +7,38 @@
     <title>Pharma Atlas Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
     <style>
-       /* تنسيق الأطلس الاحترافي - النسخة العالمية */
-:root {
-    --primary-color: #2c3e50;
-    --accent-color: #3498db;
-    --bg-color: #f4f7f6;
-    --side-bg: #ffffff;
-}
+      <style>
+    :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --white: #ffffff; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; direction: rtl; color: #333; }
+    .header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .header h1 { margin: 0; font-weight: 900; cursor: pointer; letter-spacing: 1px; }
+    
+    .main-layout { display: grid; grid-template-columns: 280px 1fr 280px; gap: 25px; padding: 25px; max-width: 1600px; margin: 0 auto; }
+    @media (max-width: 1150px) { .main-layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+    
+    .sidebar { background: var(--white); border-radius: 15px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 20px; max-height: 90vh; overflow-y: auto; }
+    .sidebar h3 { border-bottom: 3px solid var(--accent); padding-bottom: 12px; color: var(--primary); margin-bottom: 15px; font-size: 1.2em; }
+    .side-item { padding: 12px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: 0.3s; font-size: 0.95em; border-radius: 8px; margin-bottom: 5px; }
+    .side-item:hover { background: #eef7ff; color: var(--accent); padding-right: 20px; }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    margin: 0;
-    direction: rtl;
-}
+    /* ستايل البطاقة الاحترافية */
+    .condition-card { background: var(--white); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); transition: 0.3s; }
+    .card-title { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: var(--primary); }
+    .card-title h2 { margin: 0; font-size: 1.6em; font-weight: 800; }
 
-/* الهيدر اللوجو */
-.header {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    color: white;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+    /* ستايل الجدول العالمي */
+    .supp-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
+    .supp-table th { background: #f8f9fa; color: var(--primary); padding: 15px; text-align: right; font-weight: 700; border-bottom: 2px solid #eee; }
+    .supp-table td { padding: 15px; border-bottom: 1px solid #f0f0f0; vertical-align: top; font-size: 0.95em; line-height: 1.6; }
+    .supp-table tr:last-child td { border-bottom: none; }
+    .supp-table tr:hover { background-color: #fcfdfe; }
 
-.header h1 {
-    margin: 0;
-    cursor: pointer; /* عشان يبان إنه زرار هوم */
-    transition: transform 0.2s;
-}
-
-.header h1:hover { transform: scale(1.02); }
-
-/* الحاوية الكبرى المقسمة لـ 3 أعمدة */
-.main-layout {
-    display: grid;
-    grid-template-columns: 250px 1fr 250px; /* يمين، نص، يسار */
-    gap: 20px;
-    padding: 20px;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-/* التنسيق للموبايل: تتحول لعمود واحد */
-@media (max-width: 1100px) {
-    .main-layout {
-        grid-template-columns: 1fr;
-    }
-    .sidebar { display: none; } /* بنخفي الجوانب في الموبايل عشان الزحمة */
-}
-
-/* القوائم الجانبية (يمين ويسار) */
-.sidebar {
-    background: var(--side-bg);
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    height: fit-content;
-    position: sticky;
-    top: 20px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.sidebar h3 {
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 10px;
-    color: var(--primary-color);
-    font-size: 1.1em;
-}
-
-/* الروابط داخل القوائم */
-.side-list {
-    list-style: none;
-    padding: 0;
-}
-
-.side-item {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-    transition: 0.2s;
-    font-size: 0.95em;
-    color: #555;
-}
-
-.side-item:hover {
-    background-color: #f0f7ff;
-    color: var(--accent-color);
-    padding-right: 15px;
-}
-
-/* الساحة الرئيسية (اللي في النص) */
-.content-area {
-    min-width: 0; /* لمنع التمدد الخاطئ */
-}
-
-/* مربع البحث الجديد */
-.search-container {
-    margin-bottom: 30px;
-    position: relative;
-}
-
-#mainSearch {
-    width: 100%;
-    padding: 15px 45px 15px 15px;
-    border-radius: 30px;
-    border: 2px solid #ddd;
-    font-size: 1.1em;
-    outline: none;
-    transition: 0.3s;
-}
-
-#mainSearch:focus { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(52,152,219,0.2); }
-
-/* ستايل الكروت (الحالات) */
-.condition-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border-right: 5px solid var(--accent-color);
-}
-    </style>
+    .brand-tag { display: inline-block; background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; margin-top: 5px; font-weight: 600; }
+    .tips-box { background: #fff9f0; padding: 15px; border-radius: 12px; margin-top: 20px; border-right: 5px solid #ffb74d; font-size: 0.95em; }
+    
+    input#mainSearch { width: 100%; padding: 18px 25px; border-radius: 50px; border: 2px solid #e0e0e0; font-size: 1.1em; outline: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    input#mainSearch:focus { border-color: var(--accent); box-shadow: 0 4px 20px rgba(52,152,219,0.2); }
+</style>
 </head>
 <body>
     <header class="header">
@@ -5623,130 +5531,45 @@ DB.ar.conditions.g.push(
         );
 
 
-    function renderHome() {
-    const sections = [
-        { id: 'p', name: 'أدوية OTC الشائعة', icon: '💊' },
-        { id: 'c', name: 'الأمراض المزمنة', icon: '🩸' },
-        { id: 'o', name: 'حالات طبية خاصة', icon: '🧪' },
-        { id: 'g', name: 'الصحة العامة والمناعة', icon: '🍏' },
-        { id: 'w', name: 'صحة المرأة والحوامل', icon: '🤰' },
-        { id: 's', name: 'قسم العناية بالبشرة', icon: '🧴' },
-        { id: 'h', name: 'قسم العناية بالشعر', icon: '💇' },
-        { id: 'alz', name: 'مرض الزهايمر', icon: '🧠' },
-        { id: 'park', name: 'مرض باركنسون', icon: '🦯' }
-    ];
-
-    let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">';
-    sections.forEach(cat => {
-        html += `
-            <div class="condition-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="loadCat('${cat.id}')">
-                <div style="font-size: 3em; margin-bottom: 10px;">${cat.icon}</div>
-                <div style="font-weight: bold; color: #2c3e50;">${cat.name}</div>
-            </div>
-        `;
-    });
-    html += '</div>';
-    document.getElementById('resultsContainer').innerHTML = html;
-}
-
-function loadCat(id) {
-    const conditions = DB.ar.conditions[id] || [];
-    renderResults(conditions);
-}
-
-function renderResults(list) {
+    function renderResults(list) {
     const container = document.getElementById('resultsContainer');
-    if (list.length === 0) {
-        container.innerHTML = '<div style="text-align: center; padding: 50px;"><h2>لم يتم العثور على نتائج</h2></div>';
-        return;
-    }
-
+    if (!list.length) { container.innerHTML = "<div style='text-align:center; padding:50px;'><h3>لم يتم العثور على نتائج</h3></div>"; return; }
+    
     container.innerHTML = list.map(c => `
         <div class="condition-card">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                <span style="font-size: 1.5em;">${c.icon}</span>
-                <h2 style="margin: 0; color: #2c3e50;">${c.name}</h2>
+            <div class="card-title">
+                <span style="font-size: 2em;">${c.icon}</span>
+                <h2>${c.name}</h2>
             </div>
-            <table>
-                <tr>
-                    <th>المكمل</th>
-                    <th>الجرعة</th>
-                    <th>الهدف</th>
-                </tr>
-                ${c.supps.map(s => `
+            <table class="supp-table">
+                <thead>
                     <tr>
-                        <td><strong>${s.n}</strong><br><small style="color: #666;">${s.b}</small></td>
-                        <td>${s.d}<br>${s.t}</td>
-                        <td>${s.f}</td>
+                        <th style="width: 30%;">المكمل</th>
+                        <th style="width: 30%;">الجرعة والتوقيت</th>
+                        <th style="width: 40%;">الفائدة الطبية</th>
                     </tr>
-                `).join('')}
+                </thead>
+                <tbody>
+                    ${c.supps.map(s => `
+                        <tr>
+                            <td>
+                                <strong>${s.n}</strong><br>
+                                <span class="brand-tag">🏷️ ${s.b}</span>
+                            </td>
+                            <td>
+                                <div style="color:#2c3e50; font-weight:600;">${s.d}</div>
+                                <div style="color:#666; font-size:0.9em;">🕒 ${s.t}</div>
+                            </td>
+                            <td>${s.f}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
             </table>
-            <div style="margin-top: 15px; padding: 10px; background: #fff4e5; border-radius: 8px; font-size: 0.9em;">
-                <strong>💡 نصيحة:</strong> ${c.tips.join(' • ')}
+            <div class="tips-box">
+                <strong style="color:#e67e22;">💡 نصائح إضافية:</strong><br>
+                <div style="margin-top:8px;">${c.tips.join(' • ')}</div>
             </div>
         </div>
     `).join('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-function handleSearch(query) {
-    if (!query) {
-        renderHome();
-        return;
-    }
-    const q = query.toLowerCase();
-    const results = [];
-    
-    Object.values(DB.ar.conditions).forEach(section => {
-        section.forEach(cond => {
-            const inName = cond.name.toLowerCase().includes(q);
-            const inSupp = cond.supps.some(s => s.n.toLowerCase().includes(q) || s.b.toLowerCase().includes(q));
-            if (inName || inSupp) results.push(cond);
-        });
-    });
-    renderResults(results);
-}
-
-function quickSearch(term) {
-    document.getElementById('mainSearch').value = term;
-    handleSearch(term);
-}
-
-function buildIndex() {
-    const suppSet = new Set();
-    Object.values(DB.ar.conditions).forEach(section => {
-        section.forEach(cond => {
-            cond.supps.forEach(s => suppSet.add(s.n));
-        });
-    });
-
-    const sortedSupps = Array.from(suppSet).sort();
-    const container = document.getElementById('suppIndex');
-    
-    container.innerHTML = sortedSupps.map(s => `
-        <div class="side-item" onclick="quickSearch('${s}')">💊 ${s}</div>
-    `).join('');
-}
-
-function organize() {
-    DB.ar.conditions.alz = [];
-    DB.ar.conditions.park = [];
-    ['g', 'c', 'o', 'p'].forEach(s => {
-        if (DB.ar.conditions[s]) {
-            DB.ar.conditions[s] = DB.ar.conditions[s].filter(c => {
-                if (c.id && c.id.includes('alz')) { DB.ar.conditions.alz.push(c); return false; }
-                if (c.id && c.id.includes('park')) { DB.ar.conditions.park.push(c); return false; }
-                return true;
-            });
-        }
-    });
-}
-
-window.onload = () => {
-    organize();
-    renderHome();
-    buildIndex();
-};
-</script>
-</body>
-</html>
