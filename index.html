@@ -3,155 +3,95 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>Pharma Atlas Pro</title>
+    <title>أطلس الصيدلاني Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
     <style>
-        :root{ --bg:#f0f6ff;--bg2:#fff;--bg3:#e8f0fb;--bg4:#d0ddf5; --tx:#0d1b3e;--tx2:#2d4070;--tx3:#6b7fa8; --gr:#0a6e50;--grl:#d4f5ea;--grb:#7dd9b8; --bl:#1a4db8;--bll:#dde8ff;--blb:#93b4f0; --or:#b84a00;--orl:#fff3e0;--orb:#ffb74d; --pu:#6a1fcf;--pul:#f0e8ff;--pub:#c9a8f5; --tl:#006e82;--tll:#e0f7ff;--tlb:#7cd8f0; --rd:#c0281a;--sh:0 2px 12px rgba(10,30,80,.09);--r:14px}
-        .dk{ --bg:#0a0f1e;--bg2:#111827;--bg3:#1a2035;--bg4:#252f48; --tx:#e8f0ff;--tx2:#a8bcdc;--tx3:#6a7a9a; --gr:#00c896;--grl:rgba(0,200,150,.1);--grb:rgba(0,200,150,.35); --bl:#58a6ff;--bll:rgba(88,166,255,.1);--blb:rgba(88,166,255,.35); --or:#ffb347;--orl:rgba(255,179,71,.1);--orb:rgba(255,179,71,.35); --pu:#c084fc;--pul:rgba(192,132,252,.1);--pub:rgba(192,132,252,.35); --tl:#38d2ef;--tll:rgba(56,210,239,.1);--tlb:rgba(56,210,239,.35); --rd:#ff6b6b;--sh:0 2px 12px rgba(0,0,0,.3)}
-        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-        body{background:var(--bg);color:var(--tx);font-family:'Cairo',sans-serif;min-height:100vh;transition:background .25s,color .25s}
-        body.ar{direction:rtl} body.en{direction:ltr}
-        .tb{background:var(--bg2);border-bottom:2px solid var(--grb);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:var(--sh)}
-        .tbi{width:34px;height:34px;background:linear-gradient(135deg,var(--gr),var(--tl));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-        .tbn{font-size:14px;font-weight:900;color:var(--tx)}
-        .tbs{font-size:10px;color:var(--tx3);font-weight:600}
-        .tbr{display:flex;gap:7px;align-items:center}
-        .lt{display:flex;border:1.5px solid var(--bg4);border-radius:9px;overflow:hidden}
-        .lb{padding:5px 12px;font-size:11px;font-weight:700;border:none;background:transparent;color:var(--tx3);cursor:pointer;font-family:inherit}
-        .lb.ac{background:var(--gr);color:#fff}
-        .ib{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--bg4);background:var(--bg3);color:var(--tx2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
-        .sw{padding:12px 14px 0;max-width:900px;margin:0 auto}
-        .sb{display:flex;align-items:center;gap:8px;background:var(--bg2);border:2px solid var(--bg4);border-radius:var(--r);padding:9px 13px;box-shadow:var(--sh);transition:border .2s}
-        .sb:focus-within{border-color:var(--gr)}
-        .sb input{flex:1;border:none;background:transparent;color:var(--tx);font-size:13px;font-family:inherit;outline:none}
-        .sr{max-width:900px;margin:6px auto 0;background:var(--bg2);border:1.5px solid var(--bg4);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:none;position:relative;z-index:100}
-        .sr.on{display:block}
-        .si{padding:9px 14px;cursor:pointer;border-bottom:1px solid var(--bg3);font-size:13px;color:var(--tx2);display:flex;justify-content:space-between}
-        .scat{font-size:10px;color:var(--tx3);background:var(--bg3);padding:2px 6px;border-radius:5px}
-        .stw{padding:12px 14px 0;max-width:900px;margin:0 auto;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
-        .stw::-webkit-scrollbar{display:none}
-        .st{padding:7px 14px;border-radius:18px;border:1.5px solid var(--bg4);background:var(--bg2);color:var(--tx2);font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0;transition:all .2s}
-        .st.ac{background:var(--gr);border-color:var(--gr);color:#fff}
-        .cw{padding:12px 14px;max-width:900px;margin:0 auto}
-        .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px}
-        .cc{background:var(--bg2);border:1.5px solid var(--bg4);border-radius:var(--r);padding:12px 10px;cursor:pointer;text-align:center;box-shadow:var(--sh);transition:all .2s}
-        .dw{display:none;padding:0 14px 40px;max-width:900px;margin:0 auto;animation:su .3s ease}
-        .dw.on{display:block}
-        @keyframes su{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-        .bk{display:flex;align-items:center;gap:6px;color:var(--gr);font-size:13px;font-weight:700;cursor:pointer;padding:10px 0}
-        .dh{background:var(--bg2);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh);border-right:4px solid var(--gr)}
-        body.en .dh{border-right:none;border-left:4px solid var(--gr)}
-        .dt{font-size:19px;font-weight:900}
-        .ds{font-size:11px;color:var(--tx3);margin-top:3px}
-        .ic{background:var(--bg2);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh);border:1.5px solid var(--bg4)}
-        .ich{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1.5px solid var(--bg3)}
-        .ichi{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-        .icht{font-size:13px;font-weight:800}
-        .ic.gr{border-color:var(--grb)}.ic.gr .ichi{background:var(--grl);color:var(--gr)}.ic.gr .icht{color:var(--gr)}
-        .ic.bl{border-color:var(--blb)}.ic.bl .ichi{background:var(--bll);color:var(--bl)}.ic.bl .icht{color:var(--bl)}
-        .ic.or{border-color:var(--orb)}.ic.or .ichi{background:var(--orl);color:var(--or)}.ic.or .icht{color:var(--or)}
-        .ic.tl{border-color:var(--tlb)}.ic.tl .ichi{background:var(--tll);color:var(--tl)}.ic.tl .icht{color:var(--tl)}
-        .ic.pu{border-color:var(--pub)}.ic.pu .ichi{background:var(--pul);color:var(--pu)}.ic.pu .icht{color:var(--pu)}
-        .chips{display:flex;flex-wrap:wrap;gap:6px}
-        .chip{padding:6px 12px;background:var(--grl);border:1.5px solid var(--grb);border-radius:18px;font-size:12px;font-weight:700;color:var(--gr);cursor:pointer;font-family:inherit}
-        .chip.ac{background:var(--gr);color:#fff;border-color:var(--gr)}
-        .sdp{background:var(--grl);border:1.5px solid var(--grb);border-radius:12px;padding:13px;margin-top:8px}
-        .sdn{font-size:14px;font-weight:900;color:var(--gr);margin-bottom:8px}
-        .sdg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-        .sdgi{background:var(--bg2);border-radius:8px;padding:7px 10px}
-        .sdgl{font-size:10px;color:var(--tx3);font-weight:700;margin-bottom:2px}
-        .sdgv{font-size:12px;font-weight:700;color:var(--tx)}
-        .sdf{font-size:12px;color:var(--tx2);line-height:1.75;background:var(--bg2);border-radius:8px;padding:8px 10px}
-        .sdbr{font-size:11px;color:var(--bl);font-weight:700;margin-top:5px}
-        .li{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--bg3);font-size:13px;color:var(--tx2);line-height:1.6}
-        .lid{width:7px;height:7px;border-radius:50%;background:var(--bl);flex-shrink:0;margin-top:5px}
-        .wi{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--orb);font-size:13px;color:var(--tx2);line-height:1.6}
-        .wis{color:var(--rd);font-weight:700}
-        .ph{background:var(--tll);border-radius:10px;padding:12px;border-right:3px solid var(--tl);font-size:13px;color:var(--tx);font-style:italic;font-weight:600}
-        body.en .ph{border-right:none;border-left:3px solid var(--tl)}
-        .sm{background:var(--pul);border-radius:10px;padding:12px;border-right:3px solid var(--pu);font-size:13px;color:var(--tx)}
-        body.en .sm{border-right:none;border-left:3px solid var(--pu)}
+        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --white: #ffffff; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg); margin: 0; direction: rtl; color: #333; }
+        
+        /* الهيدر الجديد */
+        .header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header h1 { margin: 0; font-weight: 900; cursor: pointer; letter-spacing: 1px; }
+        .header p { margin: 5px 0 0; font-size: 0.9em; opacity: 0.9; }
+
+        /* تقسيم الـ 3 أعمدة */
+        .main-layout { display: grid; grid-template-columns: 280px 1fr 280px; gap: 25px; padding: 25px; max-width: 1600px; margin: 0 auto; }
+        
+        /* التجاوب مع الموبايل والتابلت */
+        @media (max-width: 1150px) { .main-layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+        
+        .sidebar { background: var(--white); border-radius: 15px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 20px; max-height: 90vh; overflow-y: auto; }
+        .sidebar h3 { border-bottom: 3px solid var(--accent); padding-bottom: 12px; color: var(--primary); margin-bottom: 15px; font-size: 1.1em; }
+        
+        /* ستايل القوائم الجانبية */
+        .side-list { list-style: none; padding: 0; margin: 0; }
+        .side-item { padding: 12px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: 0.3s; font-size: 0.9em; border-radius: 8px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .side-item:hover { background: #eef7ff; color: var(--accent); padding-right: 20px; }
+
+        /* ستايل البطاقة والجداول */
+        .condition-card { background: var(--white); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border-top: 6px solid var(--accent); }
+        .card-title { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-title h2 { margin: 0; font-size: 1.5em; color: var(--primary); }
+        
+        .supp-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
+        .supp-table th { background: #f8f9fa; color: var(--primary); padding: 15px; text-align: right; font-size: 0.9em; border-bottom: 2px solid #eee; }
+        .supp-table td { padding: 15px; border-bottom: 1px solid #f0f0f0; vertical-align: top; font-size: 0.9em; }
+        
+        .brand-tag { display: inline-block; background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; margin-top: 5px; font-weight: 600; }
+        .tips-box { background: #fff9f0; padding: 15px; border-radius: 12px; margin-top: 20px; border-right: 5px solid #ffb74d; font-size: 0.9em; }
+
+        /* شريط البحث */
+        .search-wrapper { margin-bottom: 25px; }
+        input#mainSearch { width: 100%; padding: 16px 25px; border-radius: 50px; border: 2px solid #e0e0e0; font-size: 1.1em; outline: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-family: inherit; }
+        input#mainSearch:focus { border-color: var(--accent); box-shadow: 0 4px 20px rgba(52,152,219,0.2); }
     </style>
 </head>
 <body class="ar">
-    <div class="tb">
-        <div style="display:flex;align-items:center;gap:10px">
-            <div class="tbi">💊</div>
-            <div><div class="tbn" id="tbn">أطلس الصيدلاني</div><div class="tbs" id="tbs">مرجع Cross-Selling</div></div>
-        </div>
-        <div class="tbr">
-            <div class="lt"><button class="lb ac" id="bAr" onclick="setL('ar')">ع</button><button class="lb" id="bEn" onclick="setL('en')">EN</button></div>
-            <button class="ib" onclick="toggleDk()" id="dkb">🌙</button>
-        </div>
-    </div>
-    <div class="sw">
-        <div class="sb">🔍 <input id="si" type="text" oninput="doSearch()"/><span style="cursor:pointer" onclick="clrS()">✕</span></div>
-        <div class="sr" id="sr"></div>
-    </div>
-    <div class="stw" id="stw"></div>
-    <div class="cw" id="cw"><div class="cg" id="cg"></div></div>
-    <div class="dw" id="dw"><div class="bk" onclick="goBack()"><span id="bkA">→</span> <span id="bkT">رجوع</span></div><div id="dc"></div></div>
-    <script>
-        let lang='ar',curSec='c',curCond=null,activeSuppIdx=null,dk=false;
-        const DB={ar:{sections:[],L:{},conditions:{}},en:{sections:[],L:{},conditions:{}}};
-        function setL(l){ lang=l; curSec='c'; curCond=null; activeSuppIdx=null; const L=getL(); document.body.className=(l==='ar'?'ar':'en')+(dk?' dk':''); document.getElementById('bAr').className='lb'+(l==='ar'?' ac':''); document.getElementById('bEn').className='lb'+(l==='en'?' ac':''); document.getElementById('tbn').textContent=L.logo; document.getElementById('tbs').textContent=L.sub; document.getElementById('si').placeholder=L.search; document.getElementById('bkT').textContent=L.back; document.getElementById('bkA').textContent=L.backA; showView('grid'); clrS(); renderSections(); renderGrid(); }
-        function toggleDk(){ dk=!dk; document.body.classList.toggle('dk'); document.getElementById('dkb').textContent=dk?'☀️':'🌙'; }
-        function getDB(){ return DB[lang]; } function getL(){ return getDB().L; }
-        function renderSections(){ const L=getL(); const secs=getDB().sections; document.getElementById('stw').innerHTML=secs.map(s=>`<button class="st${s.id===curSec?' ac':''}" onclick="selectSec('${s.id}')">${s.icon} ${s.name}</button>`).join(''); }
-        function selectSec(id){ curSec=id; curCond=null; activeSuppIdx=null; renderSections(); renderGrid(); showView('grid'); }
-        function renderGrid(){ const conds=getDB().conditions[curSec]||[]; document.getElementById('cg').innerHTML=conds.map(c=>`<div class="cc" onclick="showDetail('${c.id}')"><div style="font-size:22px;margin-bottom:5px">${c.icon}</div><div style="font-size:12px;font-weight:700">${c.name}</div></div>`).join(''); }
-        function showView(v){ if(v==='grid'){document.getElementById('cw').style.display='block';document.getElementById('dw').style.display='none';}else{document.getElementById('cw').style.display='none';document.getElementById('dw').style.display='block';document.getElementById('dw').classList.add('on');} }
-        function showDetail(id){ const conds=getDB().conditions[curSec]||[]; const cond=conds.find(c=>c.id===id); if(!cond) return; curCond=cond; activeSuppIdx=null; renderDetail(); showView('detail'); window.scrollTo(0,0); }
-        function toggleSupp(i){ activeSuppIdx=(activeSuppIdx===i?null:i); renderDetail(); }
-        function goBack(){ curCond=null; activeSuppIdx=null; showView('grid'); }
-        function clrS(){ document.getElementById('si').value=''; document.getElementById('sr').classList.remove('on'); }
-        function doSearch(){ const q=document.getElementById('si').value.trim().toLowerCase(); const res=document.getElementById('sr'); if(!q){res.classList.remove('on');return;} const db=getDB(); const matches=[]; Object.entries(db.conditions).forEach(([secId,conds])=>{ const sec=db.sections.find(s=>s.id===secId); conds.forEach(c=>{ if(c.name.toLowerCase().includes(q)){matches.push({...c,secId,secName:sec?sec.name:secId});} }); }); if(!matches.length){res.classList.remove('on');return;} res.innerHTML=matches.slice(0,8).map(m=>`<div class="si" onclick="searchGo('${m.secId}','${m.id}')"><span>${m.icon} ${m.name}</span><span class="scat">${m.secName}</span></div>`).join(''); res.classList.add('on'); }
-        function searchGo(s,c){ clrS(); curSec=s; renderSections(); showDetail(c); }
-        function renderDetail(){
-            const L=getL(); const c=curCond;
-            const chips=c.supps.map((s,i)=>`<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(${i})">${s.n}</button>`).join('');
-            let suppHTML='';
-            if(activeSuppIdx!==null){
-                const s=c.supps[activeSuppIdx];
-                suppHTML=`<div class="sdp"><div class="sdn">${s.n}</div><div class="sdg"><div class="sdgi"><div class="sdgl">${L.dose}</div><div class="sdgv">${s.d}</div></div><div class="sdgi"><div class="sdgl">${L.timing}</div><div class="sdgv">${s.t}</div></div></div><div class="sdf"><div>${s.f}</div><div class="sdbr">🏷️ ${L.brands}: ${s.b}</div></div></div>`;
-            }
-            const tipsH=(c.tips||[]).map(t=>`<div class="li"><div class="lid"></div><div>${t}</div></div>`).join('');
-            const warnsH=(c.warns||[]).map(w=>`<div class="wi"><div class="wis">⚠️ ${w}</div></div>`).join('');
-            document.getElementById('dc').innerHTML=`<div class="dh"><div class="dt">${c.icon} ${c.name}</div><div class="ds">${L.ref}</div></div><div class="ic gr"><div class="ich"><div class="icht">${L.cs}</div></div><div class="chips">${chips}</div>${suppHTML}</div><div class="ic bl"><div class="ich"><div class="icht">${L.tips}</div></div>${tipsH}</div><div class="ic or"><div class="ich"><div class="icht">${L.warns}</div></div>${warnsH}</div>${c.phrase?`<div class="ic tl"><div class="ph">${c.phrase}</div></div>`:''}${c.smart?`<div class="ic pu"><div class="sm">💡 ${c.smart}</div></div>`:''}`;
-        }
-        window.onload = () => {
-            DB.ar.L = { 
-                logo: "أطلس الصيدلاني", sub: "مرجع Cross-Selling • BNF/USP/UAE", 
-                search: "ابحث عن حالة طبية...", back: "رجوع", backA: "→", 
-                ref: "المراجع: BNF | USP | UAE Drug Guide", cs: "المكملات المصاحبة", 
-                tips: "نصائح صحية مبنية على الأدلة", warns: "تحذيرات وتفاعلات دوائية", 
-                phrase: "جملة البيع الاحترافية", smart: "فرصة ذكية إضافية", 
-                dose: "الجرعة", timing: "التوقيت", brands: "الماركات المقترحة", benefit: "الفائدة الطبية" 
-            };
-            DB.ar.sections = [ 
-                { id: "c", icon: "🫀", name: "أمراض مزمنة" }, { id: "o", icon: "💊", name: "OTC شائع" }, 
-                { id: "s", icon: "👶", name: "حالات خاصة" }, { id: "sk", icon: "🧴", name: "العناية بالبشرة" }, 
-                { id: "h", icon: "💆", name: "العناية بالشعر" }, { id: "g", icon: "🌿", name: "الصحة العامة" } 
-            ];
-            DB.en.L = { 
-                logo: "Pharma Atlas Pro", sub: "Cross-Selling Reference • BNF/USP/UAE", 
-                search: "Search a medical condition...", back: "Back", backA: "←", 
-                ref: "References: BNF | USP | UAE Drug Guide", cs: "Companion Supplements", 
-                tips: "Evidence-Based Health Tips", warns: "Warnings & Drug Interactions", 
-                phrase: "Professional Sales Phrase", smart: "Smart Additional Opportunity", 
-                dose: "Dose", timing: "Timing", brands: "Suggested Brands", benefit: "Medical Benefit" 
-            };
-            DB.en.sections = [ 
-                { id: "c", icon: "🫀", name: "Chronic Diseases" }, { id: "o", icon: "💊", name: "Common OTC" }, 
-                { id: "s", icon: "👶", name: "Special Cases" }, { id: "sk", icon: "🧴", name: "Skin Care" }, 
-                { id: "h", icon: "💆", name: "Hair Care" }, { id: "g", icon: "🌿", name: "General Health" } 
-            ];
-            setL('ar');
-        };
-        DB.ar.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
-        DB.en.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
+    <header class="header">
+        <h1 onclick="location.reload()">أطلس الصيدلاني Pro</h1>
+        <p>مرجع د. فريد الجندي • BNF / USP / UAE</p>
+    </header>
 
+    <div class="main-layout">
+        <aside class="sidebar">
+            <h3>الأكثر شيوعاً 🔥</h3>
+            <div class="side-list">
+                <div class="side-item" onclick="quickSearch('تجاعيد')">✨ التجاعيد</div>
+                <div class="side-item" onclick="quickSearch('حب الشباب')">🛡️ حب الشباب</div>
+                <div class="side-item" onclick="quickSearch('خشونة')">🦴 خشونة العظام</div>
+                <div class="side-item" onclick="quickSearch('تساقط الشعر رجال')">👨‍🦲 تساقط الشعر (رجال)</div>
+                <div class="side-item" onclick="quickSearch('تساقط الشعر نساء')">👩‍🦰 تساقط الشعر (نساء)</div>
+                <div class="side-item" onclick="quickSearch('قشرة')">❄️ القشرة</div>
+                <div class="side-item" onclick="quickSearch('مناعة')">🛡️ تعزيز المناعة</div>
+            </div>
+            
+            <h3 style="margin-top:25px;">مقالات وأخبار 📰</h3>
+            <div class="side-list">
+                <div class="side-item" onclick="alert('قريباً: مقالات طبية محدثة')">📑 نصائح التغذية العلاجية</div>
+                <div class="side-item" onclick="alert('قريباً: جديد الأدوية')">📢 جديد دليل الأدوية الإماراتي</div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="search-wrapper">
+                <input type="text" id="mainSearch" placeholder="ابحث بالحالة، المكمل، أو البراند (Now, Solgar...)" 
+                       onkeyup="handleSearch(this.value)">
+            </div>
+            
+            <div id="resultsContainer"></div>
+        </main>
+
+        <aside class="sidebar">
+            <h3>دليل المكملات 💊</h3>
+            <div id="suppIndex" class="side-list">
+                <p style="font-size: 0.8em; color: #999; text-align: center;">جاري استخراج المكملات...</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+    // تهيئة قاعدة البيانات - سيتم ملؤها من الـ 6000 سطر القادمة
+    const DB = { ar: { conditions: { p: [], c: [], o: [], g: [], w: [], s: [], h: [], alz: [], park: [] } } };
       DB.ar.conditions.c.push(
             {
                 id:"htn", icon:"❤️", name:"ارتفاع ضغط الدم",
@@ -5533,14 +5473,130 @@ DB.ar.conditions.g.push(
             }
         );
 
-        DB.en.conditions.g.push(...JSON.parse(JSON.stringify(DB.ar.conditions.g.slice(-1))));
-        DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
-        DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
+   // المحرك العالمي - أطلس الصيدلاني Pro
+function renderHome() {
+    const sections = [
+        { id: 'p', name: 'أدوية OTC الشائعة', icon: '💊' },
+        { id: 'c', name: 'الأمراض المزمنة', icon: '🩸' },
+        { id: 'o', name: 'حالات طبية خاصة', icon: '🧪' },
+        { id: 'g', name: 'الصحة العامة والمناعة', icon: '🍏' },
+        { id: 'w', name: 'صحة المرأة والحوامل', icon: '🤰' },
+        { id: 's', name: 'قسم العناية بالبشرة', icon: '🧴' },
+        { id: 'h', name: 'قسم العناية بالشعر', icon: '💇' },
+        { id: 'alz', name: 'مرض الزهايمر', icon: '🧠' },
+        { id: 'park', name: 'مرض باركنسون', icon: '🦯' }
+    ];
 
+    let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">';
+    sections.forEach(s => {
+        html += `
+            <div class="condition-card" style="text-align: center; cursor: pointer; transition: 0.3s; padding: 20px;" onclick="loadCat('${s.id}')">
+                <div style="font-size: 2.5em; margin-bottom: 10px;">${s.icon}</div>
+                <div style="font-weight: bold; font-size: 0.9em; color: var(--primary);">${s.name}</div>
+            </div>
+        `;
+    });
+    document.getElementById('resultsContainer').innerHTML = html + '</div>';
+}
 
-        
-        // قفلة المحل النهائية 
-        window.onload();
-    </script>
+function loadCat(id) {
+    renderResults(DB.ar.conditions[id] || []);
+}
+
+function renderResults(list) {
+    const container = document.getElementById('resultsContainer');
+    if (!list.length) { 
+        container.innerHTML = "<div style='text-align:center; padding:50px;'><h3>لم يتم العثور على نتائج</h3></div>"; 
+        return; 
+    }
+    
+    container.innerHTML = list.map(c => `
+        <div class="condition-card">
+            <div class="card-title">
+                <span style="font-size: 1.8em;">${c.icon}</span>
+                <h2>${c.name}</h2>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="supp-table">
+                    <thead>
+                        <tr>
+                            <th>المكمل</th>
+                            <th>الجرعة والتوقيت</th>
+                            <th>الفائدة الطبية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${c.supps.map(s => `
+                            <tr>
+                                <td>
+                                    <strong>${s.n}</strong><br>
+                                    <span class="brand-tag">🏷️ ${s.b}</span>
+                                </td>
+                                <td>
+                                    <div style="font-weight:600; color:var(--primary);">${s.d}</div>
+                                    <div style="font-size:0.85em; color:#666; margin-top:4px;">🕒 ${s.t}</div>
+                                </td>
+                                <td>${s.f}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tips-box">
+                <strong style="color:#e67e22;">💡 نصائح إضافية:</strong>
+                <div style="margin-top:8px;">${c.tips.join(' • ')}</div>
+            </div>
+        </div>
+    `).join('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handleSearch(q) {
+    if (!q) { renderHome(); return; }
+    const searchQ = q.toLowerCase();
+    let res = [];
+    Object.values(DB.ar.conditions).forEach(section => {
+        section.forEach(c => {
+            const matchName = c.name.toLowerCase().includes(searchQ);
+            const matchSupp = c.supps.some(s => s.n.toLowerCase().includes(searchQ) || s.b.toLowerCase().includes(searchQ));
+            if (matchName || matchSupp) res.push(c);
+        });
+    });
+    renderResults(res);
+}
+
+function quickSearch(t) {
+    document.getElementById('mainSearch').value = t;
+    handleSearch(t);
+}
+
+function buildIndex() {
+    let s = new Set();
+    Object.values(DB.ar.conditions).forEach(sec => sec.forEach(c => c.supps.forEach(sup => s.add(sup.n))));
+    const container = document.getElementById('suppIndex');
+    if(container) {
+        container.innerHTML = Array.from(s).sort().map(n => `<div class="side-item" onclick="quickSearch('${n}')">💊 ${n}</div>`).join('');
+    }
+}
+
+function organize() {
+    DB.ar.conditions.alz = []; DB.ar.conditions.park = [];
+    ['p','c','o','g','w','s','h'].forEach(secId => {
+        if(DB.ar.conditions[secId]) {
+            DB.ar.conditions[secId] = DB.ar.conditions[secId].filter(c => {
+                if(c.id && c.id.includes('alz')) { DB.ar.conditions.alz.push(c); return false; }
+                if(c.id && c.id.includes('park')) { DB.ar.conditions.park.push(c); return false; }
+                return true;
+            });
+        }
+    });
+}
+
+window.onload = () => {
+    organize();
+    renderHome();
+    buildIndex();
+};
+</script>
 </body>
 </html>
