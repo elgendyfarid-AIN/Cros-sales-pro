@@ -72,11 +72,78 @@
         body.en .ph{border-right:none;border-left:3px solid var(--tl)}
         .sm{background:var(--pul);border-radius:10px;padding:12px;border-right:3px solid var(--pu);font-size:13px;color:var(--tx)}
         body.en .sm{border-right:none;border-left:3px solid var(--pu)}
+
+        /* ===== DESKTOP 3-COLUMN LAYOUT ===== */
+        .page-layout{display:grid;grid-template-columns:250px 1fr 250px;min-height:calc(100vh - 58px);align-items:start}
+        .main-col{min-width:0;border-right:1.5px solid var(--bg3);border-left:1.5px solid var(--bg3)}
+        .sidebar{padding:14px 12px;position:sticky;top:58px;max-height:calc(100vh - 68px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--bg4) transparent}
+        .sidebar::-webkit-scrollbar{width:3px}
+        .sidebar::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px}
+        .sb-title{font-size:10px;font-weight:900;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding:4px 6px;border-radius:6px;background:var(--bg3)}
+        /* Right Sidebar - Popular Diseases */
+        .pop-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;cursor:pointer;transition:all .15s;margin-bottom:3px;border:1.5px solid transparent}
+        .pop-item:hover{background:var(--bg3);border-color:var(--bg4)}
+        .pop-item.ac{background:var(--bll);border-color:var(--blb)}
+        .pop-item-icon{font-size:16px;flex-shrink:0}
+        .pop-item-name{font-size:12px;font-weight:700;color:var(--tx2);line-height:1.3}
+        .sb-divider{height:1px;background:var(--bg3);margin:10px 0}
+        /* Left Sidebar - Supplement Index */
+        .supp-item{padding:7px 10px;border-radius:9px;cursor:pointer;transition:all .15s;margin-bottom:3px;font-size:12px;font-weight:700;color:var(--tx2);border:1.5px solid transparent;display:flex;align-items:center;gap:6px}
+        .supp-item:hover{background:var(--grl);color:var(--gr);border-color:var(--grb)}
+        .supp-item.ac{background:var(--grl);color:var(--gr);border-color:var(--grb)}
+        .supp-conds{margin:4px 0 8px 0;padding:8px 10px;background:var(--bg3);border-radius:9px;border:1.5px solid var(--bg4)}
+        .supp-cond-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:var(--bg2);border:1.5px solid var(--bg4);border-radius:7px;font-size:10px;font-weight:700;color:var(--tx2);cursor:pointer;margin:2px;transition:all .15s}
+        .supp-cond-chip:hover{background:var(--bll);color:var(--bl);border-color:var(--blb)}
+        .supp-role{font-size:10px;color:var(--tx2);line-height:1.6;margin-top:6px;padding:6px 8px;background:var(--bg2);border-radius:7px;border-right:2px solid var(--gr)}
+        body.en .supp-role{border-right:none;border-left:2px solid var(--gr)}
+        /* News Section */
+        .news-wrap{padding:16px 14px 40px}
+        .news-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+        .news-ttl{font-size:15px;font-weight:900;color:var(--tx);display:flex;align-items:center;gap:7px}
+        .news-add-btn{display:flex;align-items:center;gap:5px;padding:6px 12px;background:var(--grl);border:1.5px solid var(--grb);border-radius:9px;color:var(--gr);font-weight:700;font-size:11px;cursor:pointer;font-family:inherit;transition:all .15s}
+        .news-add-btn:hover{background:var(--gr);color:#fff;border-color:var(--gr)}
+        .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+        .news-card{background:var(--bg2);border:1.5px solid var(--bg4);border-radius:var(--r);padding:13px;cursor:pointer;transition:all .2s;box-shadow:var(--sh);text-decoration:none;display:block}
+        .news-card:hover{border-color:var(--grb);transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,30,80,.13)}
+        .news-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:7px}
+        .news-badge.ext{background:var(--bll);color:var(--bl)}
+        .news-badge.own{background:var(--grl);color:var(--gr)}
+        .news-card-title{font-size:13px;font-weight:800;color:var(--tx);margin-bottom:5px;line-height:1.5}
+        .news-card-desc{font-size:11px;color:var(--tx3);line-height:1.65;margin-bottom:8px}
+        .news-card-footer{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--tx3);border-top:1px solid var(--bg3);padding-top:7px;margin-top:4px}
+        .news-card-src{font-weight:700}
+        .news-card-del{color:var(--rd);font-size:11px;padding:2px 6px;border-radius:5px;border:none;background:transparent;cursor:pointer;font-family:inherit}
+        .news-card-del:hover{background:rgba(192,40,26,.1)}
+        /* Admin Modal */
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:none;align-items:center;justify-content:center;padding:16px}
+        .modal-overlay.on{display:flex}
+        .modal-box{background:var(--bg2);border-radius:var(--r);padding:20px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+        .modal-title{font-size:15px;font-weight:900;margin-bottom:14px;color:var(--tx)}
+        .modal-field{margin-bottom:10px}
+        .modal-field label{font-size:11px;font-weight:700;color:var(--tx3);display:block;margin-bottom:4px}
+        .modal-field input,.modal-field textarea,.modal-field select{width:100%;padding:9px 12px;border:1.5px solid var(--bg4);border-radius:9px;background:var(--bg3);color:var(--tx);font-family:inherit;font-size:13px;outline:none}
+        .modal-field textarea{resize:vertical;min-height:70px}
+        .modal-field input:focus,.modal-field textarea:focus,.modal-field select:focus{border-color:var(--gr)}
+        .modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+        .modal-btns button{padding:8px 18px;border-radius:9px;border:none;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s}
+        .btn-save{background:var(--gr);color:#fff}.btn-save:hover{opacity:.88}
+        .btn-cancel{background:var(--bg3);color:var(--tx2)}.btn-cancel:hover{background:var(--bg4)}
+        /* Logo clickable */
+        .logo-btn{cursor:pointer;display:flex;align-items:center;gap:10px;transition:opacity .15s}
+        .logo-btn:hover{opacity:.8}
+        /* Responsive */
+        @media(max-width:1000px){
+          .page-layout{grid-template-columns:1fr}
+          .main-col{border:none}
+          .sidebar{position:static;max-height:none;padding:10px 14px}
+          .sidebar-r{display:none}
+          .sidebar-l{display:none}
+        }
     </style>
 </head>
 <body class="ar">
     <div class="tb">
-        <div style="display:flex;align-items:center;gap:10px">
+        <div class="logo-btn" onclick="goHome()">
             <div class="tbi">💊</div>
             <div><div class="tbn" id="tbn">أطلس الصيدلاني</div><div class="tbs" id="tbs">مرجع Cross-Selling</div></div>
         </div>
@@ -85,6 +152,11 @@
             <button class="ib" onclick="toggleDk()" id="dkb">🌙</button>
         </div>
     </div>
+    <div class="page-layout">
+        <!-- Right Sidebar: Popular Diseases -->
+        <div class="sidebar sidebar-r" id="sidebar-r"></div>
+        <!-- Main Column -->
+        <div class="main-col">
     <div class="sw">
         <div class="sb">🔍 <input id="si" type="text" oninput="doSearch()"/><span style="cursor:pointer" onclick="clrS()">✕</span></div>
         <div class="sr" id="sr"></div>
@@ -92,10 +164,36 @@
     <div class="stw" id="stw"></div>
     <div class="cw" id="cw"><div class="cg" id="cg"></div></div>
     <div class="dw" id="dw"><div class="bk" onclick="goBack()"><span id="bkA">→</span> <span id="bkT">رجوع</span></div><div id="dc"></div></div>
+    <!-- News Section -->
+    <div class="news-wrap" id="news-wrap">
+        <div class="news-header">
+            <div class="news-ttl">📰 <span id="news-ttl-txt">أحدث المقالات والأخبار</span></div>
+            <button class="news-add-btn" onclick="openNewsModal()">＋ <span id="news-add-txt">أضف مقالاً</span></button>
+        </div>
+        <div class="news-grid" id="news-grid"></div>
+    </div>
+        </div>
+        <!-- Left Sidebar: Supplement Index -->
+        <div class="sidebar sidebar-l" id="sidebar-l"></div>
+    </div>
+    <!-- Add News Modal -->
+    <div class="modal-overlay" id="news-modal">
+        <div class="modal-box">
+            <div class="modal-title" id="modal-ttl">إضافة مقال / خبر</div>
+            <div class="modal-field"><label id="ml-title">العنوان</label><input id="mn-title" type="text"/></div>
+            <div class="modal-field"><label id="ml-desc">وصف قصير</label><textarea id="mn-desc"></textarea></div>
+            <div class="modal-field"><label id="ml-url">رابط (اختياري)</label><input id="mn-url" type="url"/></div>
+            <div class="modal-field"><label id="ml-src">المصدر</label><input id="mn-src" type="text"/></div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeNewsModal()" id="mb-cancel">إلغاء</button>
+                <button class="btn-save" onclick="saveNews()" id="mb-save">حفظ</button>
+            </div>
+        </div>
+    </div>
     <script>
         let lang='ar',curSec='c',curCond=null,activeSuppIdx=null,dk=false;
         const DB={ar:{sections:[],L:{},conditions:{}},en:{sections:[],L:{},conditions:{}}};
-        function setL(l){ lang=l; curSec='c'; curCond=null; activeSuppIdx=null; const L=getL(); document.body.className=(l==='ar'?'ar':'en')+(dk?' dk':''); document.getElementById('bAr').className='lb'+(l==='ar'?' ac':''); document.getElementById('bEn').className='lb'+(l==='en'?' ac':''); document.getElementById('tbn').textContent=L.logo; document.getElementById('tbs').textContent=L.sub; document.getElementById('si').placeholder=L.search; document.getElementById('bkT').textContent=L.back; document.getElementById('bkA').textContent=L.backA; showView('grid'); clrS(); renderSections(); renderGrid(); }
+        function setL(l){ lang=l; curSec='c'; curCond=null; activeSuppIdx=null; const L=getL(); document.body.className=(l==='ar'?'ar':'en')+(dk?' dk':''); document.getElementById('bAr').className='lb'+(l==='ar'?' ac':''); document.getElementById('bEn').className='lb'+(l==='en'?' ac':''); document.getElementById('tbn').textContent=L.logo; document.getElementById('tbs').textContent=L.sub; document.getElementById('si').placeholder=L.search; document.getElementById('bkT').textContent=L.back; document.getElementById('bkA').textContent=L.backA; showView('grid'); clrS(); renderSections(); renderGrid(); renderRightSidebar(); renderLeftSidebar(); renderNews(); updateNewsUI(); }
         function toggleDk(){ dk=!dk; document.body.classList.toggle('dk'); document.getElementById('dkb').textContent=dk?'☀️':'🌙'; }
         function getDB(){ return DB[lang]; } function getL(){ return getDB().L; }
         function renderSections(){ const L=getL(); const secs=getDB().sections; document.getElementById('stw').innerHTML=secs.map(s=>`<button class="st${s.id===curSec?' ac':''}" onclick="selectSec('${s.id}')">${s.icon} ${s.name}</button>`).join(''); }
@@ -106,7 +204,8 @@
         function toggleSupp(i){ activeSuppIdx=(activeSuppIdx===i?null:i); renderDetail(); }
         function goBack(){ curCond=null; activeSuppIdx=null; showView('grid'); }
         function clrS(){ document.getElementById('si').value=''; document.getElementById('sr').classList.remove('on'); }
-        function doSearch(){ const q=document.getElementById('si').value.trim().toLowerCase(); const res=document.getElementById('sr'); if(!q){res.classList.remove('on');return;} const db=getDB(); const matches=[]; Object.entries(db.conditions).forEach(([secId,conds])=>{ const sec=db.sections.find(s=>s.id===secId); conds.forEach(c=>{ if(c.name.toLowerCase().includes(q)){matches.push({...c,secId,secName:sec?sec.name:secId});} }); }); if(!matches.length){res.classList.remove('on');return;} res.innerHTML=matches.slice(0,8).map(m=>`<div class="si" onclick="searchGo('${m.secId}','${m.id}')"><span>${m.icon} ${m.name}</span><span class="scat">${m.secName}</span></div>`).join(''); res.classList.add('on'); }
+        function doSearch(){ const q=document.getElementById('si').value.trim().toLowerCase(); const res=document.getElementById('sr'); if(!q){res.classList.remove('on');return;} const db=getDB(); const condMatches=[]; const suppMap={}; Object.entries(db.conditions).forEach(([secId,conds])=>{ const sec=db.sections.find(s=>s.id===secId); conds.forEach(c=>{ if(c.name.toLowerCase().includes(q)){condMatches.push({...c,secId,secName:sec?sec.name:secId});} c.supps.forEach(s=>{ if(s.n.toLowerCase().includes(q)){ if(!suppMap[s.n]) suppMap[s.n]={name:s.n,conds:[]}; suppMap[s.n].conds.push({secId,condId:c.id,condName:c.name,condIcon:c.icon}); } }); }); }); const suppMatches=Object.values(suppMap); if(!condMatches.length&&!suppMatches.length){res.classList.remove('on');return;} let html=''; const L=getL(); if(condMatches.length){ html+=`<div style="padding:6px 14px 4px;font-size:10px;font-weight:900;color:var(--tx3);background:var(--bg3)">${L.search_cond||'حالات طبية'}</div>`; html+=condMatches.slice(0,5).map(m=>`<div class="si" onclick="searchGo('${m.secId}','${m.id}')"><span>${m.icon} ${m.name}</span><span class="scat">${m.secName}</span></div>`).join(''); } if(suppMatches.length){ html+=`<div style="padding:6px 14px 4px;font-size:10px;font-weight:900;color:var(--tx3);background:var(--bg3)">${L.search_supp||'مكملات غذائية'}</div>`; html+=suppMatches.slice(0,5).map(m=>`<div class="si" onclick="searchSupp('${encodeURIComponent(m.name)}')"><span>💊 ${m.name}</span><span class="scat">${m.conds.length} ${L.search_used||'حالة'}</span></div>`).join(''); } res.innerHTML=html; res.classList.add('on'); }
+        function searchSupp(nameEnc){ const name=decodeURIComponent(nameEnc); clrS(); showSuppInSidebar(name); }
         function searchGo(s,c){ clrS(); curSec=s; renderSections(); showDetail(c); }
         function renderDetail(){
             const L=getL(); const c=curCond;
@@ -120,6 +219,108 @@
             const warnsH=(c.warns||[]).map(w=>`<div class="wi"><div class="wis">⚠️ ${w}</div></div>`).join('');
             document.getElementById('dc').innerHTML=`<div class="dh"><div class="dt">${c.icon} ${c.name}</div><div class="ds">${L.ref}</div></div><div class="ic gr"><div class="ich"><div class="icht">${L.cs}</div></div><div class="chips">${chips}</div>${suppHTML}</div><div class="ic bl"><div class="ich"><div class="icht">${L.tips}</div></div>${tipsH}</div><div class="ic or"><div class="ich"><div class="icht">${L.warns}</div></div>${warnsH}</div>${c.phrase?`<div class="ic tl"><div class="ph">${c.phrase}</div></div>`:''}${c.smart?`<div class="ic pu"><div class="sm">💡 ${c.smart}</div></div>`:''}`;
         }
+        // ===== goHome =====
+        function goHome(){ curCond=null; activeSuppIdx=null; curSec='c'; renderSections(); renderGrid(); showView('grid'); window.scrollTo(0,0); }
+
+        // ===== RIGHT SIDEBAR — Popular Diseases =====
+        const POPULAR = [
+            {secId:'c',id:'htn'},{secId:'c',id:'dm2'},{secId:'c',id:'chol'},
+            {secId:'c',id:'hypo'},{secId:'c',id:'migr'},{secId:'c',id:'ibs'},
+            {secId:'c',id:'osteo_c'},{secId:'c',id:'gout_c'},{secId:'c',id:'fatty_liver_c'},
+            {secId:'c',id:'kidney_c'},{secId:'c',id:'arteries_c'},{secId:'g',id:'alzheimer_g'},
+            {secId:'g',id:'anxiety_g'},{secId:'s',id:'preg_s'},{secId:'o',id:'anemia_o'}
+        ];
+        function renderRightSidebar(){
+            const db=getDB(); const L=getL();
+            const items=POPULAR.map(p=>{ const conds=db.conditions[p.secId]||[]; return conds.find(c=>c.id===p.id); }).filter(Boolean);
+            const html=`<div class="sb-title">${L.popular||'الأكثر شيوعاً'}</div>`+items.map(c=>`<div class="pop-item${curCond&&curCond.id===c.id?' ac':''}" onclick="goToDisease('${c.secId||findSecId(c.id)}','${c.id}')"><span class="pop-item-icon">${c.icon}</span><span class="pop-item-name">${c.name}</span></div>`).join('');
+            document.getElementById('sidebar-r').innerHTML=html;
+        }
+        function findSecId(id){ const db=getDB(); for(const [s,conds] of Object.entries(db.conditions)){if(conds.find(c=>c.id===id))return s;} return 'c'; }
+        function goToDisease(secId,condId){
+            // attach secId to items for quick lookup
+            const db=getDB(); const conds=db.conditions[secId]||[];
+            const cond=conds.find(c=>c.id===condId); if(!cond) return;
+            cond.secId=secId; curSec=secId; curCond=cond; activeSuppIdx=null;
+            renderSections(); renderDetail(); showView('detail'); window.scrollTo(0,0);
+            renderRightSidebar();
+        }
+
+        // ===== LEFT SIDEBAR — Supplement Index =====
+        let activeSuppName=null;
+        function buildSuppIndex(){
+            const db=getDB(); const map={};
+            Object.entries(db.conditions).forEach(([secId,conds])=>{ conds.forEach(c=>{ c.supps.forEach(s=>{ if(!map[s.n]) map[s.n]={name:s.n,uses:[]}; const already=map[s.n].uses.find(u=>u.condId===c.id&&u.secId===secId); if(!already) map[s.n].uses.push({secId,condId:c.id,condName:c.name,condIcon:c.icon,role:s.f}); }); }); });
+            return Object.values(map).sort((a,b)=>b.uses.length-a.uses.length);
+        }
+        function renderLeftSidebar(){
+            const L=getL(); const supps=buildSuppIndex();
+            let html=`<div class="sb-title">${L.supp_index||'فهرس المكملات'}</div>`;
+            html+=supps.map(s=>{
+                const isAc=activeSuppName===s.name;
+                let inner=`<div class="supp-item${isAc?' ac':''}" onclick="showSuppInSidebar('${encodeURIComponent(s.name)}')">💊 ${s.name} <span style="margin-right:auto;margin-left:auto"></span><span style="font-size:10px;color:var(--tx3)">${s.uses.length}</span></div>`;
+                if(isAc){
+                    inner+=`<div class="supp-conds"><div style="font-size:10px;font-weight:700;color:var(--tx3);margin-bottom:6px">${L.used_in||'يُستخدم في'}:</div>`;
+                    inner+=s.uses.map(u=>`<span class="supp-cond-chip" onclick="goToDisease('${u.secId}','${u.condId}')">${u.condIcon} ${u.condName}</span>`).join('');
+                    inner+=`</div>`;
+                }
+                return inner;
+            }).join('');
+            document.getElementById('sidebar-l').innerHTML=html;
+        }
+        function showSuppInSidebar(nameEnc){
+            const name=decodeURIComponent(nameEnc);
+            activeSuppName=(activeSuppName===name?null:name);
+            renderLeftSidebar();
+            // scroll to it
+            setTimeout(()=>{ const el=document.querySelector('.supp-item.ac'); if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'}); },80);
+        }
+
+        // ===== NEWS SECTION =====
+        const STATIC_NEWS=[
+            {id:'sn1',type:'ext',title:'دراسة: أوميغا-3 يقلل خطر الأحداث القلبية بنسبة 25%',desc:'نتائج تحليل شامل (Meta-analysis 2024) شمل 40,000 مريض أثبتت فاعلية EPA/DHA في خفض الدهون الثلاثية.',url:'https://pubmed.ncbi.nlm.nih.gov',src:'PubMed',date:'2024'},
+            {id:'sn2',type:'ext',title:'إرشادات ADA الجديدة: البربرين بديل آمن للميتفورمين',desc:'جمعية السكري الأمريكية أدرجت البربرين ضمن الخيارات التكميلية لتحسين مقاومة الأنسولين.',url:'https://diabetes.org',src:'ADA',date:'2024'},
+            {id:'sn3',type:'ext',title:'ماغنيسيوم جليسينات: الأفضل امتصاصاً لصحة القلب والأعصاب',desc:'مراجعة Cochrane 2023 تُقارن أشكال الماغنيسيوم وتُثبت تفوق الجليسينات والمالات على الأوكسيد.',url:'https://cochrane.org',src:'Cochrane',date:'2023'},
+        ];
+        function getCustomNews(){ try{ return JSON.parse(localStorage.getItem('pharma_news')||'[]'); }catch(e){return[];} }
+        function saveCustomNews(arr){ localStorage.setItem('pharma_news',JSON.stringify(arr)); }
+        function renderNews(){
+            const custom=getCustomNews();
+            const all=[...STATIC_NEWS,...custom];
+            const grid=document.getElementById('news-grid');
+            if(!all.length){grid.innerHTML=`<div style="color:var(--tx3);font-size:13px;padding:20px 0">لا توجد مقالات بعد</div>`;return;}
+            grid.innerHTML=all.map(n=>`
+                <${n.url?'a':'div'} class="news-card" ${n.url?`href="${n.url}" target="_blank" rel="noopener"`:''}  >
+                    <span class="news-badge ${n.type}">${n.type==='ext'?'🔵 خارجي':'🟢 مضاف'}</span>
+                    <div class="news-card-title">${n.title}</div>
+                    <div class="news-card-desc">${n.desc||''}</div>
+                    <div class="news-card-footer">
+                        <span class="news-card-src">${n.src||''}</span>
+                        <span>${n.date||''}</span>
+                        ${n.type==='own'?`<button class="news-card-del" onclick="deleteNews('${n.id}',event)">🗑️</button>`:''}
+                    </div>
+                </${n.url?'a':'div'}>
+            `).join('');
+        }
+        function deleteNews(id,e){ e.preventDefault(); e.stopPropagation(); const arr=getCustomNews().filter(n=>n.id!==id); saveCustomNews(arr); renderNews(); }
+        function openNewsModal(){ document.getElementById('news-modal').classList.add('on'); }
+        function closeNewsModal(){ document.getElementById('news-modal').classList.remove('on'); ['mn-title','mn-desc','mn-url','mn-src'].forEach(id=>document.getElementById(id).value=''); }
+        function saveNews(){
+            const title=document.getElementById('mn-title').value.trim();
+            const desc=document.getElementById('mn-desc').value.trim();
+            const url=document.getElementById('mn-url').value.trim();
+            const src=document.getElementById('mn-src').value.trim();
+            if(!title){alert('العنوان مطلوب');return;}
+            const arr=getCustomNews();
+            arr.unshift({id:'own_'+Date.now(),type:'own',title,desc,url,src,date:new Date().getFullYear().toString()});
+            saveCustomNews(arr); closeNewsModal(); renderNews();
+        }
+        function updateNewsUI(){
+            const L=getL();
+            const ttl=document.getElementById('news-ttl-txt'); if(ttl) ttl.textContent=L.news_title||'أحدث المقالات والأخبار';
+            const add=document.getElementById('news-add-txt'); if(add) add.textContent=L.news_add||'أضف مقالاً';
+        }
+
         window.onload = () => {
             DB.ar.L = { 
                 logo: "أطلس الصيدلاني", sub: "مرجع Cross-Selling • BNF/USP/UAE", 
@@ -127,7 +328,10 @@
                 ref: "المراجع: BNF | USP | UAE Drug Guide", cs: "المكملات المصاحبة", 
                 tips: "نصائح صحية مبنية على الأدلة", warns: "تحذيرات وتفاعلات دوائية", 
                 phrase: "جملة البيع الاحترافية", smart: "فرصة ذكية إضافية", 
-                dose: "الجرعة", timing: "التوقيت", brands: "الماركات المقترحة", benefit: "الفائدة الطبية" 
+                dose: "الجرعة", timing: "التوقيت", brands: "الماركات المقترحة", benefit: "الفائدة الطبية",
+                popular: "⭐ الأكثر شيوعاً", supp_index: "💊 فهرس المكملات", used_in: "يُستخدم في",
+                search_cond: "🏥 حالات طبية", search_supp: "💊 مكملات غذائية", search_used: "حالة",
+                news_title: "📰 أحدث المقالات والأخبار", news_add: "＋ أضف مقالاً"
             };
             DB.ar.sections = [ 
                 { id: "c", icon: "🫀", name: "أمراض مزمنة" }, { id: "o", icon: "💊", name: "OTC شائع" }, 
@@ -140,7 +344,10 @@
                 ref: "References: BNF | USP | UAE Drug Guide", cs: "Companion Supplements", 
                 tips: "Evidence-Based Health Tips", warns: "Warnings & Drug Interactions", 
                 phrase: "Professional Sales Phrase", smart: "Smart Additional Opportunity", 
-                dose: "Dose", timing: "Timing", brands: "Suggested Brands", benefit: "Medical Benefit" 
+                dose: "Dose", timing: "Timing", brands: "Suggested Brands", benefit: "Medical Benefit",
+                popular: "⭐ Most Common", supp_index: "💊 Supplement Index", used_in: "Used in",
+                search_cond: "🏥 Medical Conditions", search_supp: "💊 Supplements", search_used: "condition",
+                news_title: "📰 Latest Articles & News", news_add: "＋ Add Article"
             };
             DB.en.sections = [ 
                 { id: "c", icon: "🫀", name: "Chronic Diseases" }, { id: "o", icon: "💊", name: "Common OTC" }, 
