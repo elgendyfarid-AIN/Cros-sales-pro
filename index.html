@@ -276,7 +276,19 @@
         function renderSections(){ const L=getL(); const secs=getDB().sections; document.getElementById('stw').innerHTML=secs.map(s=>`<button class="st${s.id===curSec?' ac':''}" onclick="selectSec('${s.id}')">${s.icon} ${s.name}</button>`).join(''); }
         function selectSec(id){ curSec=id; curCond=null; activeSuppIdx=null; renderSections(); renderGrid(); showView('grid'); }
         function renderGrid(){ const conds=getDB().conditions[curSec]||[]; document.getElementById('cg').innerHTML=conds.map(c=>`<div class="cc" onclick="showDetail('${c.id}')"><div style="font-size:22px;margin-bottom:5px">${c.icon}</div><div style="font-size:12px;font-weight:700">${c.name}</div></div>`).join(''); }
-        function showView(v){ if(v==='grid'){document.getElementById('cw').style.display='block';document.getElementById('dw').style.display='none';}else{document.getElementById('cw').style.display='none';document.getElementById('dw').style.display='block';document.getElementById('dw').classList.add('on');} }
+        function showView(v){ 
+            const newsWrap=document.getElementById('news-wrap');
+            if(v==='grid'){
+                document.getElementById('cw').style.display='block';
+                document.getElementById('dw').style.display='none';
+                if(newsWrap) newsWrap.style.display=(curSec==='c'?'block':'none');
+            }else{
+                document.getElementById('cw').style.display='none';
+                document.getElementById('dw').style.display='block';
+                document.getElementById('dw').classList.add('on');
+                if(newsWrap) newsWrap.style.display='none';
+            }
+        }
         function showDetail(id){ const conds=getDB().conditions[curSec]||[]; const cond=conds.find(c=>c.id===id); if(!cond) return; curCond=cond; activeSuppIdx=null; renderDetail(); showView('detail'); window.scrollTo(0,0); }
         function toggleSupp(i){ activeSuppIdx=(activeSuppIdx===i?null:i); renderDetail(); }
         function goBack(){ curCond=null; activeSuppIdx=null; showView('grid'); }
@@ -348,16 +360,18 @@
             const flyout=document.getElementById('supp-flyout');
             flyout.innerHTML=`<div class="flyout-title">💊 ${supp.name}</div><div class="flyout-sub">${L.used_in||'يُستخدم في'} ${supp.uses.length} ${L.search_used||'حالة'}:</div>`+
                 supp.uses.map(u=>`<div class="flyout-cond" onclick="goToDisease('${u.secId}','${u.condId}')"><span class="flyout-cond-icon">${u.condIcon}</span><span class="flyout-cond-name">${u.condName}</span></div>`).join('');
-            // Position flyout beside the sidebar
+            // Position flyout toward center column
             const rect=e.currentTarget.getBoundingClientRect();
             const isAr=document.body.classList.contains('ar');
             flyout.style.top=Math.min(rect.top, window.innerHeight-300)+'px';
             if(isAr){
-                flyout.style.right=(window.innerWidth-rect.left+6)+'px';
-                flyout.style.left='auto';
-            } else {
+                // In AR (RTL): sidebar-l is physically on LEFT side → flyout goes RIGHT
                 flyout.style.left=(rect.right+6)+'px';
                 flyout.style.right='auto';
+            } else {
+                // In EN (LTR): sidebar-l is physically on RIGHT side → flyout goes LEFT
+                flyout.style.right=(window.innerWidth-rect.left+6)+'px';
+                flyout.style.left='auto';
             }
             flyout.classList.add('on');
         }
