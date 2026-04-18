@@ -102,7 +102,9 @@
         .flyout-cond-name{font-size:11px;font-weight:700;color:var(--tx2);line-height:1.3}
         .flyout-cond:hover .flyout-cond-name{color:var(--bl)}
 
-        /* ===== SEARCH ===== */
+        .dk .cg-group{border-color:var(--bg4)!important}
+        .dk .cg-group-hd{background:var(--bg3)!important}
+        .dk .cg-sub{background:var(--bg2)}
         .sw{padding:14px 16px 0}
         .sb{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1.5px solid var(--bg4);border-radius:10px;padding:10px 14px;box-shadow:var(--sh);transition:border .2s}
         .sb:focus-within{border-color:var(--gr);box-shadow:0 0 0 3px rgba(0,133,77,.1)}
@@ -124,12 +126,21 @@
         /* ===== CONDITION GRID ===== */
         .cw{padding:14px 16px}
         .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+
+        /* ===== GROUPED VIEW ===== */
+        .cg-grouped{display:flex;flex-direction:column;gap:18px}
+        .cg-group{border-radius:14px;overflow:hidden;border:1.5px solid var(--bg4);box-shadow:var(--sh)}
+        .cg-group-hd{display:flex;align-items:center;gap:9px;padding:11px 15px;font-size:13px;font-weight:900;border-bottom:1.5px solid var(--bg4)}
+        .cg-group-hd-icon{font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0}
+        .cg-group-cnt{margin-inline-start:auto;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.35)}
+        .cg-sub{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;padding:12px}
         .cc{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:16px 10px 14px;cursor:pointer;text-align:center;box-shadow:var(--sh);transition:all .2s;position:relative;overflow:hidden}
         .cc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--grl),transparent);opacity:0;transition:opacity .2s}
         .cc:hover{border-color:var(--gr);transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,133,77,.18)}
         .cc:hover::before{opacity:1}
         .cc-icon{font-size:28px;margin-bottom:8px;display:block}
         .cc-name{font-size:12px;font-weight:700;color:var(--tx2);line-height:1.4;position:relative}
+        .cg-sub .cc:hover{border-color:var(--gr);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,133,77,.15)}
 
         /* ===== DETAIL VIEW ===== */
         .dw{display:none;padding:0 16px 40px;animation:su .25s ease}
@@ -280,7 +291,77 @@
         function getDB(){ return DB[lang]; } function getL(){ return getDB().L; }
         function renderSections(){ const L=getL(); const secs=getDB().sections; document.getElementById('stw').innerHTML=secs.map(s=>`<button class="st${s.id===curSec?' ac':''}" onclick="selectSec('${s.id}')">${s.icon} ${s.name}</button>`).join(''); }
         function selectSec(id){ curSec=id; curCond=null; activeSuppIdx=null; renderSections(); renderGrid(); showView('grid'); }
-        function renderGrid(){ const conds=getDB().conditions[curSec]||[]; document.getElementById('cg').innerHTML=conds.map(c=>`<div class="cc" onclick="showDetail('${c.id}')"><div style="font-size:22px;margin-bottom:5px">${c.icon}</div><div style="font-size:12px;font-weight:700">${c.name}</div></div>`).join(''); }
+        // ===== GROUPS CONFIG for Chronic Diseases =====
+        const COND_GROUPS_AR = [
+            { icon:'🫀', name:'قلب وشرايين', bg:'#fff0f0', hd:'#c0281a', ids:['htn','chol','arteries_c','microvascular_c','stroke_recovery','dvt_prevent'] },
+            { icon:'🩸', name:'السكري والأيض', bg:'#fff7ed', hd:'#c0560a', ids:['dm2','insulin_res','diabetic_cold_c'] },
+            { icon:'🦋', name:'غدد وهرمونات', bg:'#f5f0ff', hd:'#5e21b8', ids:['hypo','hypo_adv_c','hyperthyroid_c','parathyroid_c'] },
+            { icon:'🫃', name:'جهاز هضمي وكبد', bg:'#f0fff8', hd:'#00854d', ids:['ibs','colitis_c','pancreas_c','fatty_liver_c','liver_bile','gallstones_c','gall_maintenance_c','gall_bile_adv','bile_duct_c'] },
+            { icon:'🧠', name:'أعصاب ودماغ', bg:'#eef4ff', hd:'#1557b0', ids:['migr','nerve_adv','ms_support_c','alzheimer_adv','parkinson_c','parkinson_adv_2','parkinson_balance_c','parkinson_tremor_c','park_rigidity_c','park_gait_c','park_swallowing_c','park_lateral_c'] },
+            { icon:'🦴', name:'عظام ومفاصل', bg:'#fffbeb', hd:'#b45309', ids:['osteo_c','gout_c'] },
+            { icon:'🫘', name:'كلى ومسالك', bg:'#f0f9ff', hd:'#0077a3', ids:['kidney_c','kidney_adv','oxalate_adv','dialysis_support'] },
+            { icon:'🫁', name:'جهاز تنفسي', bg:'#f0fdf4', hd:'#15803d', ids:['asthma_c'] },
+            { icon:'🩺', name:'بروستاتا', bg:'#fdf4ff', hd:'#7e22ce', ids:['prostate_c','prostatitis_adv'] },
+            { icon:'🦵', name:'أوردة ودوران', bg:'#fff1f2', hd:'#be123c', ids:['varicose_c','varicose_adv_c','heavy_legs_c','cold_extremities_c','cold_feet_c','venous_cold_c','raynauds_adv_c','varicocele_adv_c','rls_adv_c','extreme_cold_c','burning_feet_c','pelvic_congestion_c','evening_leg_heavy','varicocele_fertility','varicocele_vein_support','summer_cold_feet','summer_cold_final','vascular_flushing_c','red_man_adv_c','neuropathy_cold_c','hot_feet_night','hot_feet_prev','hot_feet_final_c'] },
+            { icon:'🔴', name:'دوالي المريء والكبد', bg:'#fff5f5', hd:'#991b1b', ids:['esophageal_varices_c','portal_hypertension_c','esoph_maint_c','esoph_ulcer_c','esoph_valve_c','esoph_liver_c','esoph_maint_adv','esoph_ulcer_adv','esoph_liver_adv_c','esoph_valve_adv_c','esoph_liver_maint_c','esoph_ulcer_84'] },
+            { icon:'👁', name:'صحة العيون', bg:'#f0f9ff', hd:'#0369a1', ids:['eye_g'] }
+        ];
+        const COND_GROUPS_EN = [
+            { icon:'🫀', name:'Heart & Vessels', bg:'#fff0f0', hd:'#c0281a', ids:['htn','chol','arteries_c','microvascular_c','stroke_recovery','dvt_prevent'] },
+            { icon:'🩸', name:'Diabetes & Metabolism', bg:'#fff7ed', hd:'#c0560a', ids:['dm2','insulin_res','diabetic_cold_c'] },
+            { icon:'🦋', name:'Hormones & Thyroid', bg:'#f5f0ff', hd:'#5e21b8', ids:['hypo','hypo_adv_c','hyperthyroid_c','parathyroid_c'] },
+            { icon:'🫃', name:'Digestive & Liver', bg:'#f0fff8', hd:'#00854d', ids:['ibs','colitis_c','pancreas_c','fatty_liver_c','liver_bile','gallstones_c','gall_maintenance_c','gall_bile_adv','bile_duct_c'] },
+            { icon:'🧠', name:'Neurology', bg:'#eef4ff', hd:'#1557b0', ids:['migr','nerve_adv','ms_support_c','alzheimer_adv','parkinson_c','parkinson_adv_2','parkinson_balance_c','parkinson_tremor_c','park_rigidity_c','park_gait_c','park_swallowing_c','park_lateral_c'] },
+            { icon:'🦴', name:'Bones & Joints', bg:'#fffbeb', hd:'#b45309', ids:['osteo_c','gout_c'] },
+            { icon:'🫘', name:'Kidney & Urinary', bg:'#f0f9ff', hd:'#0077a3', ids:['kidney_c','kidney_adv','oxalate_adv','dialysis_support'] },
+            { icon:'🫁', name:'Respiratory', bg:'#f0fdf4', hd:'#15803d', ids:['asthma_c'] },
+            { icon:'🩺', name:'Prostate', bg:'#fdf4ff', hd:'#7e22ce', ids:['prostate_c','prostatitis_adv'] },
+            { icon:'🦵', name:'Veins & Circulation', bg:'#fff1f2', hd:'#be123c', ids:['varicose_c','varicose_adv_c','heavy_legs_c','cold_extremities_c','cold_feet_c','venous_cold_c','raynauds_adv_c','varicocele_adv_c','rls_adv_c','extreme_cold_c','burning_feet_c','pelvic_congestion_c','evening_leg_heavy','varicocele_fertility','varicocele_vein_support','summer_cold_feet','summer_cold_final','vascular_flushing_c','red_man_adv_c','neuropathy_cold_c','hot_feet_night','hot_feet_prev','hot_feet_final_c'] },
+            { icon:'🔴', name:'Esophageal & Portal', bg:'#fff5f5', hd:'#991b1b', ids:['esophageal_varices_c','portal_hypertension_c','esoph_maint_c','esoph_ulcer_c','esoph_valve_c','esoph_liver_c','esoph_maint_adv','esoph_ulcer_adv','esoph_liver_adv_c','esoph_valve_adv_c','esoph_liver_maint_c','esoph_ulcer_84'] },
+            { icon:'👁', name:'Eye Health', bg:'#f0f9ff', hd:'#0369a1', ids:['eye_g'] }
+        ];
+        function getGroups(){ return lang==='ar'?COND_GROUPS_AR:COND_GROUPS_EN; }
+        function cardHTML(c){ return `<div class="cc" onclick="showDetail('${c.id}')"><div class="cc-icon">${c.icon}</div><div class="cc-name">${c.name}</div></div>`; }
+        function renderGrid(){
+            const conds=getDB().conditions[curSec]||[];
+            const cgEl=document.getElementById('cg');
+            if(curSec==='c'){
+                // Grouped rendering
+                const groups=getGroups();
+                const usedIds=new Set();
+                let html='<div class="cg-grouped">';
+                for(const g of groups){
+                    const gConds=conds.filter(c=>g.ids.includes(c.id));
+                    if(!gConds.length) continue;
+                    gConds.forEach(c=>usedIds.add(c.id));
+                    const isDk=document.body.classList.contains('dk');
+                    const hdBg=isDk?'rgba(255,255,255,.06)':g.bg;
+                    html+=`<div class="cg-group" style="border-color:${g.hd}33">
+                        <div class="cg-group-hd" style="background:${hdBg};color:${g.hd}">
+                            <div class="cg-group-hd-icon" style="background:${g.hd}22">${g.icon}</div>
+                            <span>${g.name}</span>
+                            <span class="cg-group-cnt" style="background:${g.hd};color:#fff">${gConds.length}</span>
+                        </div>
+                        <div class="cg-sub">${gConds.map(c=>cardHTML(c)).join('')}</div>
+                    </div>`;
+                }
+                // Any ungrouped conditions
+                const ungrouped=conds.filter(c=>!usedIds.has(c.id));
+                if(ungrouped.length){
+                    html+=`<div class="cg-group"><div class="cg-group-hd" style="background:var(--bg3);color:var(--tx2)"><div class="cg-group-hd-icon" style="background:var(--bg4)">📋</div><span>${lang==='ar'?'أخرى':'Other'}</span><span class="cg-group-cnt" style="background:var(--tx3);color:#fff">${ungrouped.length}</span></div><div class="cg-sub">${ungrouped.map(c=>cardHTML(c)).join('')}</div></div>`;
+                }
+                html+='</div>';
+                cgEl.innerHTML=html;
+                cgEl.style.display='block';
+                cgEl.style.gridTemplateColumns='none';
+                cgEl.style.gap='0';
+            } else {
+                cgEl.style.display='grid';
+                cgEl.style.gridTemplateColumns='';
+                cgEl.style.gap='';
+                cgEl.innerHTML=conds.map(c=>cardHTML(c)).join('');
+            }
+        }
         function showView(v){ 
             const newsWrap=document.getElementById('news-wrap');
             if(v==='grid'){
