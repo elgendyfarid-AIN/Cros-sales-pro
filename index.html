@@ -219,16 +219,39 @@
         .btn-cancel{background:var(--bg3);color:var(--tx2);border:1.5px solid var(--bg4)}.btn-cancel:hover{background:var(--bg4)}
 
         /* ===== RESPONSIVE ===== */
-        @media(max-width:1050px){
+        /* ===== RESPONSIVE — Mobile / Tablet / Desktop ===== */
+        @media(max-width:1200px){
+            .page-layout{grid-template-columns:200px 1fr 200px}
+        }
+        @media(max-width:900px){
             .page-layout{grid-template-columns:1fr}
             .main-col{border:none}
-            .sidebar{position:static;max-height:none;padding:10px 14px;border-bottom:1px solid var(--bg4)}
+            .sidebar{position:static;max-height:280px;padding:10px 14px;border-bottom:1px solid var(--bg4)}
             .sidebar-r{order:-1}
             .sidebar-l{display:none}
         }
         @media(max-width:600px){
+            :root{--topbar-h:54px}
             .sidebar-r{display:none}
-            .tb{padding:0 14px}
+            .tb{padding:0 10px;height:var(--topbar-h)}
+            .tbn{font-size:13px}
+            .tbs{display:none}
+            .tbi{width:32px;height:32px;font-size:16px}
+            .chip{padding:5px 10px;font-size:11px}
+            .sdg{grid-template-columns:1fr}
+            .cg-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+            .cond-card{padding:10px 8px}
+            .cond-icon{font-size:20px}
+            .cond-name{font-size:11px}
+            .dt{font-size:16px}
+            .ic{padding:12px}
+            .stw{padding:8px 10px 0}
+            .st{padding:6px 12px;font-size:11px}
+            .sw{padding:8px 10px 0}
+            .sdp{padding:10px}
+        }
+        @media(min-width:601px) and (max-width:900px){
+            .cg-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
         }
     </style>
 </head>
@@ -421,15 +444,23 @@
             }
         }
         function showDetail(id){ const conds=getDB().conditions[curSec]||[]; const cond=conds.find(c=>c.id===id); if(!cond) return; curCond=cond; activeSuppIdx=null; renderDetail(); showView('detail'); window.scrollTo(0,0); }
-        function toggleSupp(i){ activeSuppIdx=(activeSuppIdx===i?null:i); renderDetail(); }
+        function toggleSupp(e,i){ e.stopPropagation(); activeSuppIdx=(activeSuppIdx===i?null:i); const cr=document.getElementById('chips_row'); const sp=document.getElementById('supp_panel'); if(cr) cr.innerHTML=mkChipsHTML(curCond); if(sp) sp.innerHTML=mkPanelHTML(curCond); }
         function goBack(){ curCond=null; activeSuppIdx=null; showView('grid'); }
         function clrS(){ document.getElementById('si').value=''; document.getElementById('sr').classList.remove('on'); }
         function doSearch(){ const q=document.getElementById('si').value.trim().toLowerCase(); const res=document.getElementById('sr'); if(!q){res.classList.remove('on');return;} const db=getDB(); const condMatches=[]; const suppMap={}; Object.entries(db.conditions).forEach(([secId,conds])=>{ const sec=db.sections.find(s=>s.id===secId); conds.forEach(c=>{ if(c.name.toLowerCase().includes(q)){condMatches.push({...c,secId,secName:sec?sec.name:secId});} c.supps.forEach(s=>{ if(s.n.toLowerCase().includes(q)){ if(!suppMap[s.n]) suppMap[s.n]={name:s.n,conds:[]}; suppMap[s.n].conds.push({secId,condId:c.id,condName:c.name,condIcon:c.icon}); } }); }); }); const suppMatches=Object.values(suppMap); if(!condMatches.length&&!suppMatches.length){res.classList.remove('on');return;} let html=''; const L=getL(); if(condMatches.length){ html+=`<div style="padding:6px 14px 4px;font-size:10px;font-weight:900;color:var(--tx3);background:var(--bg3)">${L.search_cond||'حالات طبية'}</div>`; html+=condMatches.slice(0,5).map(m=>`<div class="si" onclick="searchGo('${m.secId}','${m.id}')"><span>${m.icon} ${m.name}</span><span class="scat">${m.secName}</span></div>`).join(''); } if(suppMatches.length){ html+=`<div style="padding:6px 14px 4px;font-size:10px;font-weight:900;color:var(--tx3);background:var(--bg3)">${L.search_supp||'مكملات غذائية'}</div>`; html+=suppMatches.slice(0,5).map(m=>`<div class="si" onclick="searchSupp('${encodeURIComponent(m.name)}')"><span>💊 ${m.name}</span><span class="scat">${m.conds.length} ${L.search_used||'حالة'}</span></div>`).join(''); } res.innerHTML=html; res.classList.add('on'); }
         function searchSupp(nameEnc){ const name=decodeURIComponent(nameEnc); clrS(); showSuppInSidebar(name); }
         function searchGo(s,c){ clrS(); curSec=s; renderSections(); showDetail(c); }
+                function mkChipsHTML(c){
+            return (c.supps||[]).map((s,i)=>`<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(event,${i})">${s.n}</button>`).join('');
+        }
+        function mkPanelHTML(c){
+            if(activeSuppIdx===null) return '';
+            const L=getL(); const s=c.supps[activeSuppIdx];
+            return `<div class="sdp"><div class="sdn">${s.n}</div><div class="sdg"><div class="sdgi"><div class="sdgl">${L.dose}</div><div class="sdgv">${s.d}</div></div><div class="sdgi"><div class="sdgl">${L.timing}</div><div class="sdgv">${s.t}</div></div></div><div class="sdf"><div>${s.f}</div><div class="sdbr">🏷️ ${L.brands}: ${s.b}</div></div></div>`;
+        }
         function renderDetail(){
             const L=getL(); const c=curCond;
-            const chips=c.supps.map((s,i)=>`<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(${i})">${s.n}</button>`).join('');
+            const chips=c.supps.map((s,i)=>`<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(event,${i})">${s.n}</button>`).join('');
             let suppHTML='';
             if(activeSuppIdx!==null){
                 const s=c.supps[activeSuppIdx];
@@ -441,7 +472,7 @@
                 const txt=w.startsWith('!')?w.slice(1).trim():w;
                 return `<div class="wi"><div class="wis" style="color:${severe?'var(--rd)':'var(--or)'}">${severe?'🚨':'⚠️'} ${txt}</div></div>`;
             }).join('');
-            document.getElementById('dc').innerHTML=`<div class="dh"><div class="dt">${c.icon} ${c.name}</div><div class="ds">${L.ref}</div></div><div class="ic gr"><div class="ich"><div class="icht">${L.cs}</div></div><div class="chips">${chips}</div>${suppHTML}</div><div class="ic bl"><div class="ich"><div class="icht">${L.tips}</div></div>${tipsH}</div><div class="ic or"><div class="ich"><div class="icht">${L.warns}</div></div>${warnsH}</div>${c.phrase?`<div class="ic tl"><div class="ph">${c.phrase}</div></div>`:''}${c.smart?`<div class="ic pu"><div class="sm">💡 ${c.smart}</div></div>`:''}`;
+            document.getElementById('dc').innerHTML=`<div class="dh"><div class="dt">${c.icon} ${c.name}</div><div class="ds">${L.ref}</div></div><div class="ic gr"><div class="ich"><div class="icht">${L.cs}</div></div><div id="chips_row" class="chips">${mkChipsHTML(c)}</div><div id="supp_panel">${mkPanelHTML(c)}</div></div><div class="ic bl"><div class="ich"><div class="icht">${L.tips}</div></div>${tipsH}</div><div class="ic or"><div class="ich"><div class="icht">${L.warns}</div></div>${warnsH}</div>${c.phrase?`<div class="ic tl"><div class="ph">${c.phrase}</div></div>`:''}${c.smart?`<div class="ic pu"><div class="sm">💡 ${c.smart}</div></div>`:''}`;
         }
         // ===== goHome =====
         function goHome(){ curCond=null; activeSuppIdx=null; curSec='c'; renderSections(); renderGrid(); showView('grid'); window.scrollTo(0,0); }
@@ -587,7 +618,7 @@
                 { id: "s", icon: "👶", name: "Special Cases" }, { id: "sk", icon: "🧴", name: "Skin Care" }, 
                 { id: "h", icon: "💆", name: "Hair Care" }, { id: "g", icon: "🌿", name: "General Health" } 
             ];
-            setL('ar');
+            processENConditions(); setL('ar');
         };
         DB.ar.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
         DB.en.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
@@ -5978,6 +6009,106 @@ DB.ar.conditions.g.push(
         DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
 
 
+        
+
+        // ===== AUTO-TRANSLATE EN CONDITIONS =====
+        // Translates any remaining Arabic text in EN database
+        const SUPP_MAP = {
+            "بروبيوتيك": "Probiotics", "زيت النعناع المعوي": "Peppermint Oil (Enteric-coated)",
+            "ألياف السيليوم": "Psyllium Husk", "ماغنيسيوم سيترات": "Magnesium Citrate",
+            "ماغنيسيوم جليسينات": "Magnesium Glycinate", "ماغنيسيوم": "Magnesium",
+            "الكركمين": "Curcumin (BCM-95)", "كيرسيتين": "Quercetin",
+            "فيتامين D3": "Vitamin D3", "فيتامين D3+K2": "Vitamin D3+K2",
+            "فيتامين C": "Vitamin C", "فيتامين E": "Vitamin E",
+            "فيتامين B12": "Vitamin B12", "فيتامين K2": "Vitamin K2 (MK-7)",
+            "زنك": "Zinc", "سيلينيوم": "Selenium",
+            "NAC": "NAC (N-Acetyl Cysteine)", "أوميغا 3": "Omega-3",
+            "بربرين": "Berberine", "أشواجاندا": "Ashwagandha",
+            "ميلاتونين": "Melatonin", "L-ثيانين": "L-Theanine",
+            "حديد": "Iron", "كالسيوم": "Calcium",
+            "بيوتين": "Biotin", "كولاجين": "Collagen",
+            "هيالورونيك أسيد": "Hyaluronic Acid", "سيليوم": "Psyllium Husk",
+            "تودكا": "TUDCA", "سيليمارين": "Milk Thistle (Silymarin)",
+            "بوسويليا": "Boswellia", "غلوكوزامين": "Glucosamine",
+            "L-كارنيتين": "L-Carnitine", "جنكة بيلوبا": "Ginkgo Biloba",
+            "أستاكزانثين": "Astaxanthin", "خميرة الأرز الأحمر": "Red Yeast Rice",
+            "ستيرول نباتي": "Plant Sterols", "بيتا جلوكان": "Beta-Glucan",
+            "ثوم معمّر": "Aged Garlic Extract", "DGL ليكوريس": "DGL Licorice",
+            "إنزيمات هاضمة": "Digestive Enzymes", "زنجبيل": "Ginger Root",
+            "ناتوكيناز": "Nattokinase", "سيرابيبتاز": "Serrapeptase",
+            "بروميلين": "Bromelain", "ليثيوم أوروتات": "Lithium Orotate",
+            "مستخلص الزعفران": "Saffron Extract", "كولين": "Choline",
+            "مستخلص الخرشوف": "Artichoke Extract", "زنك كارنوزين": "Zinc Carnosine",
+            "بوتاسيوم سيترات": "Potassium Citrate", "5-HTP": "5-HTP",
+            "حمض الفوليك": "Folic Acid / Folate", "ساو بالميتو": "Saw Palmetto",
+            "رودويلا": "Rhodiola Rosea", "كرياتين": "Creatine Monohydrate",
+            "كركم": "Turmeric / Curcumin", "حمض الألفا ليبويك": "Alpha Lipoic Acid (ALA)",
+            "فيتامين B6": "Vitamin B6 (P5P)", "CoQ10": "CoQ10 (Ubiquinol)",
+        };
+        const COND_NAME_MAP = {
+            "القولون العصبي (IBS)": "IBS (Irritable Bowel Syndrome)",
+            "القولون العصبي": "IBS (Irritable Bowel Syndrome)",
+            "الروماتويد": "Rheumatoid Arthritis (RA)",
+            "الذئبة الحمراء": "Lupus (SLE)",
+            "التصلب المتعدد": "Multiple Sclerosis (MS)",
+            "السكري النوع الثاني": "Type 2 Diabetes",
+            "الاكتئاب المزمن": "Chronic Depression",
+            "القلق والتوتر المزمن": "Chronic Anxiety & Stress",
+            "هشاشة العظام": "Osteoporosis",
+            "النقرس": "Gout (Hyperuricemia)",
+            "الصداع النصفي": "Chronic Migraine",
+            "الكبد الدهني": "Non-Alcoholic Fatty Liver (NAFLD)",
+            "الفشل الكلوي المزمن": "Chronic Kidney Disease (CKD)",
+            "قصور القلب المزمن": "Chronic Heart Failure (CHF)",
+            "فقر الدم": "Anemia (Iron Deficiency)",
+            "تعزيز المناعة": "Immune Support",
+            "التعب المزمن": "Chronic Fatigue Syndrome",
+            "اضطرابات النوم": "Sleep Disorders / Insomnia",
+        };
+        function isArabic(str){ return /[\u0600-\u06FF]/.test(str); }
+        function translateSuppName(n){
+            for(const [ar,en] of Object.entries(SUPP_MAP)){
+                if(n.includes(ar)) return n.replace(ar,en);
+            }
+            return n;
+        }
+        function translateCondName(n){
+            return COND_NAME_MAP[n] || n;
+        }
+        function translateTip(t){
+            // If tip is Arabic, return a generic clinical tip indicator
+            if(isArabic(t)) return t; // keep as-is for now, data quality issue
+            return t;
+        }
+        function processENConditions(){
+            const ENconds = DB.en.conditions;
+            Object.values(ENconds).forEach(arr=>{
+                arr.forEach(cond=>{
+                    if(isArabic(cond.name)) cond.name = translateCondName(cond.name);
+                    cond.supps.forEach(s=>{
+                        if(isArabic(s.n)) s.n = translateSuppName(s.n);
+                        if(isArabic(s.d)) s.d = s.d; // doses often mixed
+                        if(isArabic(s.t)){
+                            // translate common timings
+                            s.t = s.t
+                                .replace("صباحاً","Morning").replace("مساءً","Evening")
+                                .replace("على الريق","Empty stomach").replace("مع الأكل","With food")
+                                .replace("قبل النوم","Before bed").replace("مع الغداء","With lunch")
+                                .replace("بعد الإفطار","After breakfast").replace("يومياً","Daily")
+                                .replace("مرتين","Twice daily").replace("ثلاث مرات","Three times daily")
+                                .replace("قبل الأكل","Before meals").replace("بعد الأكل","After meals")
+                                .replace("مع ماء وفير","With plenty of water");
+                        }
+                        if(isArabic(s.f)){
+                            // mark as needing translation but show English note
+                            s.f = "[EN] " + s.f;
+                        }
+                    });
+                    if(cond.phrase && isArabic(cond.phrase)) cond.phrase = null;
+                    if(cond.smart && isArabic(cond.smart)) cond.smart = "[See Arabic version for full details]";
+                });
+            });
+        }
         
         // قفلة المحل النهائية 
         window.onload();
