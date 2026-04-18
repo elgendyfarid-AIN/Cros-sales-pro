@@ -219,39 +219,16 @@
         .btn-cancel{background:var(--bg3);color:var(--tx2);border:1.5px solid var(--bg4)}.btn-cancel:hover{background:var(--bg4)}
 
         /* ===== RESPONSIVE ===== */
-        /* ===== RESPONSIVE — Mobile / Tablet / Desktop ===== */
-        @media(max-width:1200px){
-            .page-layout{grid-template-columns:200px 1fr 200px}
-        }
-        @media(max-width:900px){
+        @media(max-width:1050px){
             .page-layout{grid-template-columns:1fr}
             .main-col{border:none}
-            .sidebar{position:static;max-height:280px;padding:10px 14px;border-bottom:1px solid var(--bg4)}
+            .sidebar{position:static;max-height:none;padding:10px 14px;border-bottom:1px solid var(--bg4)}
             .sidebar-r{order:-1}
             .sidebar-l{display:none}
         }
         @media(max-width:600px){
-            :root{--topbar-h:54px}
             .sidebar-r{display:none}
-            .tb{padding:0 10px;height:var(--topbar-h)}
-            .tbn{font-size:13px}
-            .tbs{display:none}
-            .tbi{width:32px;height:32px;font-size:16px}
-            .chip{padding:5px 10px;font-size:11px}
-            .sdg{grid-template-columns:1fr}
-            .cg-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
-            .cond-card{padding:10px 8px}
-            .cond-icon{font-size:20px}
-            .cond-name{font-size:11px}
-            .dt{font-size:16px}
-            .ic{padding:12px}
-            .stw{padding:8px 10px 0}
-            .st{padding:6px 12px;font-size:11px}
-            .sw{padding:8px 10px 0}
-            .sdp{padding:10px}
-        }
-        @media(min-width:601px) and (max-width:900px){
-            .cg-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+            .tb{padding:0 14px}
         }
     </style>
 </head>
@@ -444,23 +421,15 @@
             }
         }
         function showDetail(id){ const conds=getDB().conditions[curSec]||[]; const cond=conds.find(c=>c.id===id); if(!cond) return; curCond=cond; activeSuppIdx=null; renderDetail(); showView('detail'); window.scrollTo(0,0); }
-        function toggleSupp(e,i){ e.stopPropagation(); activeSuppIdx=(activeSuppIdx===i?null:i); const cr=document.getElementById('chips_row'); const sp=document.getElementById('supp_panel'); if(cr) cr.innerHTML=mkChipsHTML(curCond); if(sp) sp.innerHTML=mkPanelHTML(curCond); }
+        function toggleSupp(i){ activeSuppIdx=(activeSuppIdx===i?null:i); renderDetail(); }
         function goBack(){ curCond=null; activeSuppIdx=null; showView('grid'); }
         function clrS(){ document.getElementById('si').value=''; document.getElementById('sr').classList.remove('on'); }
         function doSearch(){ const q=document.getElementById('si').value.trim().toLowerCase(); const res=document.getElementById('sr'); if(!q){res.classList.remove('on');return;} const db=getDB(); const condMatches=[]; const suppMap={}; Object.entries(db.conditions).forEach(([secId,conds])=>{ const sec=db.sections.find(s=>s.id===secId); conds.forEach(c=>{ if(c.name.toLowerCase().includes(q)){condMatches.push({...c,secId,secName:sec?sec.name:secId});} c.supps.forEach(s=>{ if(s.n.toLowerCase().includes(q)){ if(!suppMap[s.n]) suppMap[s.n]={name:s.n,conds:[]}; suppMap[s.n].conds.push({secId,condId:c.id,condName:c.name,condIcon:c.icon}); } }); }); }); const suppMatches=Object.values(suppMap); if(!condMatches.length&&!suppMatches.length){res.classList.remove('on');return;} let html=''; const L=getL(); if(condMatches.length){ html+=`<div style="padding:6px 14px 4px;font-size:10px;font-weight:900;color:var(--tx3);background:var(--bg3)">${L.search_cond||'حالات طبية'}</div>`; html+=condMatches.slice(0,5).map(m=>`<div class="si" onclick="searchGo('${m.secId}','${m.id}')"><span>${m.icon} ${m.name}</span><span class="scat">${m.secName}</span></div>`).join(''); } if(suppMatches.length){ html+=`<div style="padding:6px 14px 4px;font-size:10px;font-weight:900;color:var(--tx3);background:var(--bg3)">${L.search_supp||'مكملات غذائية'}</div>`; html+=suppMatches.slice(0,5).map(m=>`<div class="si" onclick="searchSupp('${encodeURIComponent(m.name)}')"><span>💊 ${m.name}</span><span class="scat">${m.conds.length} ${L.search_used||'حالة'}</span></div>`).join(''); } res.innerHTML=html; res.classList.add('on'); }
         function searchSupp(nameEnc){ const name=decodeURIComponent(nameEnc); clrS(); showSuppInSidebar(name); }
         function searchGo(s,c){ clrS(); curSec=s; renderSections(); showDetail(c); }
-                function mkChipsHTML(c){
-            return (c.supps||[]).map((s,i)=>`<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(event,${i})">${s.n}</button>`).join('');
-        }
-        function mkPanelHTML(c){
-            if(activeSuppIdx===null) return '';
-            const L=getL(); const s=c.supps[activeSuppIdx];
-            return `<div class="sdp"><div class="sdn">${s.n}</div><div class="sdg"><div class="sdgi"><div class="sdgl">${L.dose}</div><div class="sdgv">${s.d}</div></div><div class="sdgi"><div class="sdgl">${L.timing}</div><div class="sdgv">${s.t}</div></div></div><div class="sdf"><div>${s.f}</div><div class="sdbr">🏷️ ${L.brands}: ${s.b}</div></div></div>`;
-        }
         function renderDetail(){
             const L=getL(); const c=curCond;
-            const chips=c.supps.map((s,i)=>`<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(event,${i})">${s.n}</button>`).join('');
+            const chips=c.supps.map((s,i)=>`<button class="chip${activeSuppIdx===i?' ac':''}" onclick="toggleSupp(${i})">${s.n}</button>`).join('');
             let suppHTML='';
             if(activeSuppIdx!==null){
                 const s=c.supps[activeSuppIdx];
@@ -472,7 +441,7 @@
                 const txt=w.startsWith('!')?w.slice(1).trim():w;
                 return `<div class="wi"><div class="wis" style="color:${severe?'var(--rd)':'var(--or)'}">${severe?'🚨':'⚠️'} ${txt}</div></div>`;
             }).join('');
-            document.getElementById('dc').innerHTML=`<div class="dh"><div class="dt">${c.icon} ${c.name}</div><div class="ds">${L.ref}</div></div><div class="ic gr"><div class="ich"><div class="icht">${L.cs}</div></div><div id="chips_row" class="chips">${mkChipsHTML(c)}</div><div id="supp_panel">${mkPanelHTML(c)}</div></div><div class="ic bl"><div class="ich"><div class="icht">${L.tips}</div></div>${tipsH}</div><div class="ic or"><div class="ich"><div class="icht">${L.warns}</div></div>${warnsH}</div>${c.phrase?`<div class="ic tl"><div class="ph">${c.phrase}</div></div>`:''}${c.smart?`<div class="ic pu"><div class="sm">💡 ${c.smart}</div></div>`:''}`;
+            document.getElementById('dc').innerHTML=`<div class="dh"><div class="dt">${c.icon} ${c.name}</div><div class="ds">${L.ref}</div></div><div class="ic gr"><div class="ich"><div class="icht">${L.cs}</div></div><div class="chips">${chips}</div>${suppHTML}</div><div class="ic bl"><div class="ich"><div class="icht">${L.tips}</div></div>${tipsH}</div><div class="ic or"><div class="ich"><div class="icht">${L.warns}</div></div>${warnsH}</div>${c.phrase?`<div class="ic tl"><div class="ph">${c.phrase}</div></div>`:''}${c.smart?`<div class="ic pu"><div class="sm">💡 ${c.smart}</div></div>`:''}`;
         }
         // ===== goHome =====
         function goHome(){ curCond=null; activeSuppIdx=null; curSec='c'; renderSections(); renderGrid(); showView('grid'); window.scrollTo(0,0); }
@@ -579,10 +548,566 @@
             arr.unshift({id:'own_'+Date.now(),type:'own',title,desc,url,src,date:new Date().getFullYear().toString()});
             saveCustomNews(arr); closeNewsModal(); renderNews();
         }
+        }
         function updateNewsUI(){
             const L=getL();
             const ttl=document.getElementById('news-ttl-txt'); if(ttl) ttl.textContent=L.news_title||'أحدث المقالات والأخبار';
             const add=document.getElementById('news-add-txt'); if(add) add.textContent=L.news_add||'أضف مقالاً';
+        }
+
+        // =====================================================================
+        // ===== BILINGUAL TRANSLATION ENGINE — Clinical Pharmacy Dictionary =====
+        // =====================================================================
+        const TR_SUPP = {
+            // ─── Vitamins ───
+            "فيتامين D3":"Vitamin D3","فيتامين D3 (جرعة عالية)":"Vitamin D3 (High Dose)","فيتامين D3 (نشط)":"Vitamin D3 (Active)",
+            "فيتامين D3+K2":"Vitamin D3+K2 (MK-7)","فيتامين D3 + K2":"Vitamin D3+K2 (MK-7)","فيتامين D3+K2 (MK-7)":"Vitamin D3+K2 (MK-7)",
+            "فيتامين K2 (MK-7)":"Vitamin K2 (MK-7)","فيتامين C":"Vitamin C","فيتامين C (Buffered)":"Buffered Vitamin C",
+            "فيتامين C (Ester-C)":"Ester-C Vitamin C","فيتامين C (Ascorbic Acid)":"Vitamin C (Ascorbic Acid)",
+            "فيتامين C (جرعة عالية)":"Vitamin C (High Dose)","فيتامين C (فوار)":"Effervescent Vitamin C",
+            "فيتامين C + بيوفلافونويد":"Vitamin C + Bioflavonoids","فيتامين C + روتين":"Vitamin C + Rutin",
+            "فيتامين C + ريسفيراترول":"Vitamin C + Resveratrol","فيتامين C + زنك":"Vitamin C + Zinc",
+            "فيتامين C + كيرسيتين":"Vitamin C + Quercetin","فيتامين A":"Vitamin A",
+            "فيتامين A (بيتا كاروتين)":"Vitamin A (Beta-Carotene)","فيتامين E":"Vitamin E",
+            "فيتامين E (Mixed Tocopherols)":"Vitamin E (Mixed Tocopherols)","فيتامين E (Mixed)":"Mixed Vitamin E",
+            "فيتامين E (Succinate)":"Vitamin E Succinate","فيتامين E (طبيعي)":"Natural Vitamin E",
+            "فيتامينات (A, D, E, K)":"Fat-Soluble Vitamins (A, D, E, K)","فيتامينات ب (B-Complex)":"B-Complex Vitamins",
+            "فيتامينات ب (Renal Vitamins)":"Renal B-Vitamins","فيتامين B-Complex":"B-Complex",
+            "فيتامين B-Complex (ميثيل)":"Methyl B-Complex","فيتامين B12 (Methyl)":"Methylcobalamin B12",
+            "فيتامين B12 (ميثيل)":"Methylcobalamin B12","فيتامين B12 (تحت اللسان)":"B12 Sublingual",
+            "فيتامين B12 (حقن)":"B12 Injection","فيتامين B12 (رذاذ)":"B12 Spray",
+            "فيتامين B12 (نقط أو رذاذ)":"B12 Drops/Spray","فيتامين B12 (ميثيل كوبه لامین)":"Methylcobalamin B12",
+            "فيتامين B12 + فولات":"B12 + Folate","فيتامين B1 (Benfotiamine)":"Benfotiamine (B1)",
+            "فيتامين B1 (Thiamine)":"Thiamine (B1)","فيتامين B5":"Pantothenic Acid (B5)",
+            "فيتامين B6":"Vitamin B6","فيتامين B6 (P5P)":"Pyridoxal-5-Phosphate (B6-P5P)",
+            "فيتامين B6 (صيغة P5P)":"B6 as P5P",
+            // ─── B complex variants ───
+            "ب-كومبلكس":"B-Complex","ب-كومبلكس (B-100)":"B-100 Complex","ب-كومبلكس (Neuro)":"Neuro B-Complex",
+            "ب-كومبلكس (تركيز عالٍ)":"High-Potency B-Complex","ب-كومبلكس (منشط)":"Active B-Complex",
+            "ب-كومبلكس منشط":"Active B-Complex","بنيفوترامين":"Benfotiamine",
+            "بنيفوترامين (B1)":"Benfotiamine (B1)","بنيفوترامين (Benfotiamine)":"Benfotiamine",
+            // ─── B12 variants ───
+            "B12 ميثيل":"Methylcobalamin B12","B12 ميثيل (حقن أو تحت اللسان)":"Methylcobalamin B12 (IM or Sublingual)",
+            "ميثيل B12":"Methylcobalamin B12","ميثيل B12 (حقن أو نقط)":"Methylcobalamin B12 (IM or Drops)",
+            "ميثيل B12 (حقن)":"Methylcobalamin B12 (Injection)",
+            "ب12 ميثيل (Sublingual)":"Sublingual Methylcobalamin","ب12 ميثيل (حقن أو نقط)":"Methylcobalamin (IM or Drops)",
+            "ب12 ميثيل (حقن)":"Methylcobalamin Injection","فيتامين B12 (Methyl)":"Methylcobalamin B12",
+            "ريبوفلافين (B2)":"Riboflavin (B2)","نياسين (B3) - بصيغة Flush":"Niacin (B3 Flush Form)",
+            "نياسين (B3) Flush":"Niacin B3 (Flush)","نياسين (B3) Flush-Free":"Niacin B3 (Flush-Free)",
+            "حمض البانتوثينيك (B5)":"Pantothenic Acid (B5)","حمض البانثوثينيك (B5)":"Pantothenic Acid (B5)",
+            "حمض الفوليك (5-MTHF)":"5-MTHF (Active Folate)","حمض الفوليك (Folate)":"Folate (5-MTHF)",
+            "فوليك أسيد (5-MTHF)":"5-MTHF Active Folate",
+            // ─── Minerals ───
+            "ماغنيسيوم جليسينات":"Magnesium Glycinate","ماغنيسيوم سيترات":"Magnesium Citrate",
+            "ماغنيسيوم ثريونات":"Magnesium L-Threonate","ماغنيسيوم مالات":"Magnesium Malate",
+            "ماغنيسيوم مالات (Malate)":"Magnesium Malate","ماغنيسيوم + B6":"Magnesium + Vitamin B6",
+            "مغنيسيوم ثريونات":"Magnesium L-Threonate","مغنيسيوم ثريونات (Magtein)":"Magnesium L-Threonate (Magtein®)",
+            "مغنيسيوم جليسينات":"Magnesium Glycinate",
+            "زنك بيكولينات":"Zinc Picolinate","زنك كارنوزين":"Zinc Carnosine",
+            "زنك كارنوزين (Zinc-Carnosine)":"Zinc Carnosine","زنك (Zinc Carnosine)":"Zinc Carnosine",
+            "زنك لوذنجز (Lozenges)":"Zinc Lozenges","زنك + نحاس":"Zinc + Copper",
+            "سيلينيوم":"Selenium","سيلينيوم (Selenium)":"Selenium","سيلينيوم + فيتامين E":"Selenium + Vitamin E",
+            "نحاس (Copper)":"Copper","منجنيز (Manganese)":"Manganese","بورون (Boron)":"Boron",
+            "كالسيوم سيترات":"Calcium Citrate","كالسيوم سيترات (جرعة محسوبة)":"Calcium Citrate (Calculated Dose)",
+            "كالسيوم سيترات + D3":"Calcium Citrate + Vitamin D3","كالسيوم + D3/K2":"Calcium + D3/K2",
+            "كالسيوم + ماغنيسيوم":"Calcium + Magnesium",
+            "حديد (Gentle Iron)":"Gentle Iron","حديد بيسجلايسينات":"Iron Bisglycinate",
+            "حديد بيسجليسينات":"Iron Bisglycinate","بوتاسيوم سيترات":"Potassium Citrate",
+            "بوتاسيوم سيترات (بودرة)":"Potassium Citrate (Powder)",
+            "بوتاسيوم سيترات (جرعة بسيطة)":"Potassium Citrate (Low Dose)",
+            "بوتاسيوم سيترات (جرعة عالية)":"Potassium Citrate (High Dose)",
+            "بوتاسيوم سيترات (نباتي)":"Potassium Citrate (Vegan)","بوتاسيوم (من الغذاء أو مكمل)":"Potassium (Dietary or Supplement)",
+            "ملح البحر الطبيعي":"Natural Sea Salt",
+            // ─── Omega / Fatty acids ───
+            "أوميغا 3":"Omega-3","أوميغا 3 (DHA عالي)":"Omega-3 (High DHA)","أوميغا 3 (DHA عالٍ)":"Omega-3 (High DHA)",
+            "أوميغا 3 (EPA عالي)":"Omega-3 (High EPA)","أوميغا 3 (High DHA)":"Omega-3 (High DHA)",
+            "أوميغا 3 (High EPA)":"Omega-3 (High EPA)","أوميغا 3 (جرعة عالية)":"Omega-3 (High Dose)",
+            "أوميغا 3 (جرعة علاجية)":"Omega-3 (Therapeutic Dose)","أوميغا 3 (من الطحالب)":"Algae-Based Omega-3",
+            "أوميغا 3 (نقط)":"Omega-3 Drops","أوميغا 7 (Sea Buckthorn)":"Omega-7 (Sea Buckthorn)",
+            "زيت بذور الكتان":"Flaxseed Oil","زيت MCT":"MCT Oil","زيت بذور اليقطين":"Pumpkin Seed Oil",
+            "زيت زهرة الربيع المسائية":"Evening Primrose Oil",
+            "زيت نبق البحر (Sea Buckthorn)":"Sea Buckthorn Oil",
+            "زيت النعناع المعوي":"Peppermint Oil (Enteric-Coated)",
+            "زيت النعناع (Enteric Coated)":"Peppermint Oil (Enteric-Coated)",
+            "زيت النعناع (Mintoil)":"Peppermint Oil (Enteric-Coated)",
+            "زيت الأوريجانو (Carvacrol)":"Oil of Oregano (Carvacrol)",
+            // ─── Probiotics ───
+            "بروبيوتيك":"Probiotics","بروبيوتيك (L.rhamnosus)":"Probiotics (L. rhamnosus)",
+            "بروبيوتيك (L. rhamnosus)":"Probiotics (L. rhamnosus)","بروبيوتيك (L.reuteri)":"Probiotics (L. reuteri)",
+            "بروبيوتيك (L. Reuteri)":"Probiotics (L. reuteri)","بروبيوتيك (S. Boulardii)":"Saccharomyces boulardii",
+            "بروبيوتيك (B. infantis)":"Probiotics (B. infantis)","بروبيوتيك (B. lactis HN019)":"Probiotics (B. lactis HN019)",
+            "بروبيوتيك (Oxalobacter)":"Probiotics (Oxalobacter formigenes)",
+            "بروبيوتيك (S. Salivarius K12)":"Oral Probiotics (S. salivarius K12)",
+            "بروبيوتيك (صحة المسالك)":"Urinary Probiotics","بروبيوتيك (صحة المناعة)":"Immune Probiotics",
+            "بروبيوتيك (صحة الدماغ)":"Brain Probiotics (Psychobiotics)","بروبيوتيك (صحة الجلد)":"Skin Probiotics",
+            "بروبيوتيك (صحة المرأة)":"Women's Probiotics","بروبيوتيك (صحة الكلى)":"Renal Probiotics",
+            "بروبيوتيك (بكتيريا نافعة)":"Broad-Spectrum Probiotics","بروبيوتيك (تركيز عالٍ)":"High-Potency Probiotics",
+            "بروبيوتيك (مناعة)":"Immune-Support Probiotics","بروبيوتيك (صيغة ترميم)":"Restorative Probiotics",
+            "بروبيوتيك (عالي التركيز)":"High-Dose Probiotics","بروبيوتيك الفم":"Oral Probiotics",
+            "بروبيوتيك الفم (K12)":"Oral Probiotics (K12)","بروبيوتيك الفم (S. Salivarius)":"S. salivarius (Oral Probiotic)",
+            "بريبيوتيك (Inulin)":"Prebiotic Inulin",
+            // ─── Amino acids ───
+            "إل-أرجنين":"L-Arginine","إل-أرجنين (L-Arginine)":"L-Arginine","L-Arginine":"L-Arginine",
+            "أرجنين + سيترولين":"L-Arginine + L-Citrulline","إل-أرجنين + سيترولين":"L-Arginine + L-Citrulline",
+            "إل-سيترولين":"L-Citrulline","إل-ثيانين (L-Theanine)":"L-Theanine","إل-تيروسين (L-Tyrosine)":"L-Tyrosine",
+            "إل-جلوتامين":"L-Glutamine","إل-جلوتامين (L-Glutamine)":"L-Glutamine",
+            "إل-كارنيتين":"L-Carnitine","إل-كارنيتين (L-Carnitine)":"L-Carnitine",
+            "إل-كارنيتين (جرعة عالية)":"L-Carnitine (High Dose)","إل-سيستين (L-Cysteine)":"L-Cysteine",
+            "إل-ميثيونين":"L-Methionine","إل-ميثيونين (L-Methionine)":"L-Methionine",
+            "أسيتيل إل-كارنيتين":"Acetyl-L-Carnitine (ALCAR)","أسيتيل إل-كارنيتين (ALCAR)":"Acetyl-L-Carnitine (ALCAR)",
+            "NAC (الجلوتاثيون)":"NAC (N-Acetyl Cysteine)","GABA":"GABA",
+            "5-HTP":"5-HTP (5-Hydroxytryptophan)","دي-ريبوز (D-Ribose)":"D-Ribose",
+            "كرياتين مونوهيدرات":"Creatine Monohydrate",
+            // ─── Herbal extracts ───
+            "الكركمين (Curcumin)":"Curcumin (Turmeric Extract)","الكركمين (BCM-95)":"Curcumin BCM-95",
+            "كركمين (Curcumin)":"Curcumin","كركمين (BCM-95)":"Curcumin BCM-95",
+            "كركمين (عالي الامتصاص)":"High-Absorption Curcumin","مستخلص الكركم":"Turmeric Extract",
+            "مستخلص الكركم (95%)":"Turmeric Extract (95% Curcuminoids)",
+            "بربرين":"Berberine","بربرين (Berberine)":"Berberine","بربيرين (Berberine)":"Berberine",
+            "حليب الشوك (Milk Thistle)":"Milk Thistle (Silymarin)","حليب الشوك":"Milk Thistle",
+            "مستخلص حليب الشوك":"Milk Thistle Extract","مستخلص حليب الشوك (Phytosome)":"Milk Thistle (Phytosome)",
+            "مستخلص حليب الشوك (Silymarin)":"Silymarin (Milk Thistle)",
+            "مستخلص الخرشوف":"Artichoke Extract","مستخلص الخرشوف (Artichoke)":"Artichoke Extract",
+            "تودكا (TUDCA)":"TUDCA (Tauroursodeoxycholic Acid)",
+            "أشواجاندا":"Ashwagandha (KSM-66)","أشواجاندا (KSM-66)":"Ashwagandha KSM-66",
+            "روديولا (Rhodiola)":"Rhodiola Rosea","باكوبا مونيري (Bacopa)":"Bacopa monnieri",
+            "جنكة بيلوبا":"Ginkgo Biloba","جنكة بيلوبا (24%)":"Ginkgo Biloba (24% Flavonoids)",
+            "جنكة بيلوبا (Ginkgo)":"Ginkgo Biloba","جنكة بيلوبا (عالية القوة)":"High-Potency Ginkgo Biloba",
+            "مستخلص الجنكة بيلوبا":"Ginkgo Biloba Extract",
+            "فطر عرف الأسد (Lion's Mane)":"Lion's Mane Mushroom","عرف الأسد":"Lion's Mane Mushroom",
+            "مستخلص عرف الأسد":"Lion's Mane Extract",
+            "موكونا برورينز (Mucuna)":"Mucuna pruriens","موكونا برورينز (Mucona 15%)":"Mucuna pruriens (15% L-Dopa)",
+            "موكونا برورينز (Mucuna 15%)":"Mucuna pruriens (15% L-Dopa)",
+            "هوبرزين أ":"Huperzine A","هوبرزين أ (Huperzine A)":"Huperzine A",
+            "مستخلص الثوم (Aged)":"Aged Garlic Extract","جوتو كولا":"Gotu Kola",
+            "جوتو كولا (Gotu Kola)":"Gotu Kola","مستخلص جوتو كولا (Gotu Kola)":"Gotu Kola Extract",
+            "مستخلص 'جوتو كولا'":"Gotu Kola Extract",
+            "بيكنوجينول (Pycnogenol)":"Pycnogenol® (Maritime Pine Bark)","بيكنوجينول":"Pycnogenol®",
+            "بيريثين (Pycnogenol)":"Pycnogenol® (Pine Bark)",
+            "ريسفيراترول (Resveratrol)":"Resveratrol","كيرسيتين":"Quercetin",
+            "كيرسيتين (Quercetin)":"Quercetin","روتين (Rutin)":"Rutin",
+            "روتين + فيتامين C":"Rutin + Vitamin C",
+            "مستخلص بذور العنب":"Grape Seed Extract","مستخلص الماكي بيري (Maqui)":"Maqui Berry Extract",
+            "مستخلص الـ Elderberry":"Elderberry Extract","لاكتوفيرين (Lactoferrin)":"Lactoferrin",
+            "بيتا جلوكان (Beta Glucan)":"Beta-Glucan","سلفورافان (Sulforaphane)":"Sulforaphane",
+            "أستاكزانثين (Astaxanthin)":"Astaxanthin","أستاكسانثين (Astaxanthin)":"Astaxanthin",
+            "أستراغالوس (Astragalus)":"Astragalus membranaceus","لوتين (Lutein)":"Lutein",
+            "لوتين + زياكسانثين":"Lutein + Zeaxanthin","زياكسانثين":"Zeaxanthin",
+            "ليكوپين (Lycopene)":"Lycopene","بيلبيري (Bilberry)":"Bilberry Extract",
+            "مستخلص التوت البري (Bilberry)":"Bilberry Extract",
+            "مستخلص التوت البري (Cranberry)":"Cranberry Extract","مستخلص التوت البري":"Berry Extract",
+            "مستخلص الكرنبري (عالي القوة)":"Cranberry Extract (High Potency)",
+            "دي-مانوز (D-Mannose)":"D-Mannose","مستخلص أوراق العنب (Uva Ursi)":"Uva Ursi Leaf Extract",
+            "مستخلص الزعفران":"Saffron Extract","مستخلص الزعفران (Saffron)":"Saffron Extract",
+            "مستخلص الزنجبيل":"Ginger Extract","مستخلص الزنجبيل (Ginger)":"Ginger Extract",
+            "مستخلص الزنجبيل والخرشوف":"Ginger + Artichoke Extract",
+            "مستخلص الزعتر":"Thyme Extract","مستخلص الميرمية (Sage)":"Sage Extract",
+            "مستخلص المليسا (Lemon Balm)":"Lemon Balm Extract","ليمون بالم (Lemon Balm)":"Lemon Balm",
+            "مستخلص الماستيك (Mastic Gum)":"Mastic Gum Extract",
+            "مستخلص الليمون الطبيعي":"Natural Citrus Extract","ليمون طبيعي (حمض الستريك)":"Citric Acid (Natural Lemon)",
+            "مستخلص القرفة":"Cinnamon Extract","مستخلص الكرز الحامض":"Tart Cherry Extract",
+            "مستخلص الجوجول (Guggul)":"Guggul Extract","مستخلص الفيتكس (Vitex)":"Vitex (Chaste Tree) Extract",
+            "مستخلص الماكا (Maca)":"Maca Root Extract","مستخلص الفلفل الأحمر (Capsicum)":"Capsicum Extract",
+            "مستخلص حبوب اللقاح (Cernilton)":"Cernilton (Rye Pollen Extract)",
+            "مستخلص بذور الكرفس":"Celery Seed Extract","كرفس (Celery Seed)":"Celery Seed Extract",
+            "مستخلص بذور اليقطين":"Pumpkin Seed Extract","بيجيوم (Pygeum)":"Pygeum africanum",
+            "ساو بالميتو":"Saw Palmetto","ساو بالميتو (Saw Palmetto)":"Saw Palmetto",
+            "مستخلص النعناع المدبد":"Spearmint Extract",
+            "مستخلص السفندر (Butcher's Broom)":"Butcher's Broom Extract",
+            "مستخلص جذور السفندر":"Butcher's Broom Root Extract",
+            "مستخلص عُشبة السفندر":"Butcher's Broom","مستخلص عُشبة البوكو (Buchu)":"Buchu Herb Extract",
+            "مستخلص عُشبة الغاليوم (Cleavers)":"Cleavers Herb Extract",
+            "مستخلص عُشبة القراص":"Nettle Root Extract",
+            "مستخلص جذور الويتش هازل (فموي)":"Witch Hazel Root Extract (Oral)",
+            "مستخلص كستناء الحصان":"Horse Chestnut Extract",
+            "مستخلص كستناء الحصان (HCE)":"Horse Chestnut Extract (HCE)",
+            "كستناء الحصان":"Horse Chestnut","مستخلص الهندباء":"Dandelion Extract",
+            "مستخلص الهندباء (Dandelion)":"Dandelion Extract","الهندباء (Dandelion)":"Dandelion",
+            "جذمور الهندباء (Dandelion)":"Dandelion Root","مستخلص جذر البنجر":"Beet Root Extract",
+            "مستخلص جذر الفاليريان":"Valerian Root Extract","مستخلص نبتة الفاليريان":"Valerian Root Extract",
+            "مستخلص بكوبا منيري":"Bacopa monnieri Extract","بانكس جينسنغ (Ginseng)":"Panax Ginseng",
+            "عشبة العنزة (Horny Goat Weed)":"Horny Goat Weed (Epimedium)",
+            "عرق السوس (Licorice Root)":"Licorice Root (DGL)","ليكوريس DGL (مضغ)":"DGL Licorice (Chewable)",
+            "الدردار الزلق (Slippery Elm)":"Slippery Elm Bark",
+            "تشانكا بيدرا":"Chanca Piedra","تشانكا بيدرا (Chanca Piedra)":"Chanca Piedra",
+            "تشانكا بيدرا (عشبة نباتية)":"Chanca Piedra (Herb)","تشانكا بيدرا (كبسولات)":"Chanca Piedra (Capsules)",
+            "أرنيكا (Arnica) 30C":"Arnica 30C (Homeopathic)","أرنيكا (أقراص فموية)":"Arnica (Oral Tablets)",
+            "بوسويليا (Boswellia)":"Boswellia serrata",
+            // ─── Specialty Supplements ───
+            "CoQ10 (Ubiquinol — الشكل المُختزل)":"CoQ10 (Ubiquinol — Reduced Form)",
+            "خميرة الأرز الأحمر (RYR)":"Red Yeast Rice (RYR)","ستيرولات نباتية":"Plant Sterols",
+            "ألياف السيليوم":"Psyllium Husk Fiber","ألياف السيليوم (Psyllium)":"Psyllium Husk",
+            "ألياف السيليوم (جرعة منخفضة)":"Psyllium Husk (Low Dose)","ألياف السنط (Acacia)":"Acacia Fiber",
+            "ألياف ذائبة (Acacia)":"Soluble Acacia Fiber","ألياف ذائبة (Apple Pectin)":"Apple Pectin Fiber",
+            "إنزيمات هاضمة":"Digestive Enzymes","إنزيمات هاضمة (Broad Spectrum)":"Broad-Spectrum Digestive Enzymes",
+            "إنزيمات هاضمة (HCL Free)":"Digestive Enzymes (HCl-Free)",
+            "إنزيمات هاضمة (كاملة)":"Comprehensive Digestive Enzymes",
+            "إنزيمات هاضمة + HCL":"Digestive Enzymes + Betaine HCl",
+            "إنزيم الليبيز":"Lipase Enzyme","إنزيم الليبيز (Lipase High)":"High-Potency Lipase",
+            "بيتين HCL":"Betaine HCl","بابايا إنزيم (Papaya)":"Papaya Enzyme",
+            "أملاح الصفراء":"Bile Salts","أملاح الصفراء (Ox Bile)":"Ox Bile Salts",
+            "مستخلص الثور (Ox Bile)":"Ox Bile Extract",
+            "بروميلين":"Bromelain","بروميلين (Bromelain)":"Bromelain",
+            "بروميلين (عالي القوة)":"High-Potency Bromelain","بروميلين + باباين":"Bromelain + Papain",
+            "ناتوكايناز (Nattokinase)":"Nattokinase","ميو-إينوزيتول":"Myo-Inositol",
+            "ميو-إينوزيتول (Myo-Inositol)":"Myo-Inositol","ميو-إينوزيتول (للمبيض)":"Myo-Inositol (Ovarian Support)",
+            "جلوكوزامين + كندرويتين":"Glucosamine + Chondroitin","جلوكوزامين وكندرويتين":"Glucosamine + Chondroitin",
+            "كولاجين نوع 2 (UC-II)":"Collagen Type II (UC-II)","UC-II كولاجين":"UC-II Collagen",
+            "كولاجين نوع 2":"Collagen Type II","كولاجين نوع 1 و 3":"Collagen Type I & III",
+            "كولاجين 1 و 3":"Collagen Type I & III","كولاجين ببتيد":"Collagen Peptides",
+            "كولاجين ببتيد (نوع 1)":"Collagen Peptides (Type I)","كولاجين بحري":"Marine Collagen",
+            "كولاجين بحري (Marine)":"Marine Collagen",
+            "سيسوس (Cissus Q)":"Cissus quadrangularis","MSM (كبريت عضوي)":"MSM (Methylsulfonylmethane)",
+            "سيليكا (Silica)":"Silicon Dioxide (Silica)","سيليكا (بامبو)":"Bamboo Silica",
+            "سيليكا (Silica / Horsetail)":"Horsetail Silica","سيليكا (من نبات ذيل الحصان)":"Horsetail Silica",
+            "مستخلص البامبو (Silica)":"Bamboo Extract (Silica)",
+            "حمض الهيالورونيك":"Hyaluronic Acid","حمض الهيالورونيك (High MW)":"Hyaluronic Acid (High MW)",
+            "حمض الهيالورونيك (Oral)":"Oral Hyaluronic Acid",
+            "فوسفاتيديل سيرين":"Phosphatidylserine (PS)","فوسفاتيديل سيرين (PS)":"Phosphatidylserine",
+            "فوسفاتيديل كولين":"Phosphatidylcholine","فوسفاتيديل كولين (PC)":"Phosphatidylcholine (PC)",
+            "ألفا-GPC":"Alpha-GPC","ألفا-GPC (Alpha GPC)":"Alpha-GPC","ألفا-GPC (Alpha-GPC)":"Alpha-GPC",
+            "سيتيكولين":"Citicoline (CDP-Choline)","سيتيكولين (Citicoline)":"Citicoline",
+            "سيتيكولين (Cognizin)":"Citicoline (Cognizin®)","كولين":"Choline","كولين (Choline)":"Choline",
+            "كولين (Choline Bitartrate)":"Choline Bitartrate","ليسيثين (Lecithin)":"Lecithin",
+            "ليسيثين عباد الشمس":"Sunflower Lecithin","فينبوستين (Vinpocetine)":"Vinpocetine",
+            "ليثيوم أوروتات":"Lithium Orotate","ليثيوم أوروتات (Lithium Orotate)":"Lithium Orotate",
+            "ميلاتونين":"Melatonin","ميلاتونين (Delayed Release)":"Melatonin (Delayed-Release)",
+            "ميلاتونين (Controlled Release)":"Melatonin (Controlled-Release)",
+            "ميلاتونين (Timed-Release)":"Melatonin (Timed-Release)",
+            "ميلاتونين (جرعة منخفضة)":"Low-Dose Melatonin",
+            "حمض ألفا ليبويك (ALA)":"Alpha-Lipoic Acid (ALA)","ألفا ليبويك أسيد (ALA)":"Alpha-Lipoic Acid (ALA)",
+            "كروميوم بيكولينات":"Chromium Picolinate","كروموم بيكولينات":"Chromium Picolinate",
+            "بيوتين":"Biotin","بيوتين (Biotin)":"Biotin","بيوتين (تركيز 10,000)":"Biotin 10,000 mcg",
+            "بيوتين بتركيز عالٍ":"High-Potency Biotin",
+            "ديوسمين + هيسپيريدين":"Diosmin + Hesperidin","ديوسمين + هيسپيريدين (500mg)":"Diosmin + Hesperidin 500mg",
+            "ديوسمين + هيسپيريدين (Daflon)":"Daflon (Diosmin + Hesperidin)","ديوسمين وهسبيريدين":"Diosmin + Hesperidin",
+            "دافلون (ديوسمين)":"Daflon (Diosmin)","بيكنوجينول":"Pycnogenol®",
+            "EDTA (كبسولات)":"EDTA (Oral Capsules)","دي-مانوز (D-Mannose)":"D-Mannose",
+            "إكسيليتول (Xylitol Lozenges)":"Xylitol Lozenges","زيليتول (Xylitol Lozenges)":"Xylitol Lozenges",
+            "أكسيتوسين (Oxytocin) رذاذ":"Oxytocin Nasal Spray","أكسيتوسين (رذاذ أنفي)":"Oxytocin Nasal Spray",
+            "أكسيتوسين (رذاذ)":"Oxytocin Spray",
+            "مستخلص البوجل (Bugleweed)":"Bugleweed Extract","بانكس جينسنغ (Ginseng)":"Panax Ginseng",
+            "بروتين مصل اللبن (Whey)":"Whey Protein","بروتين مصل اللبن":"Whey Protein",
+            "ترطيب مكثف جداً":"Intensive Hydration","عسل المانوكا / طبيعي":"Manuka Honey / Natural Honey",
+            "مستخلص عصير الكرنب":"Cabbage Juice Extract",
+            // ─── Remaining AR-named entries that mix AR/EN ───
+            "لاكتوفيرين (Lactoferrin)":"Lactoferrin"
+        };
+
+        const TR_TIMING = {
+            "يومياً":"Daily","يومياً مع الأكل":"Daily with food","يومياً مع الطعام":"Daily with food",
+            "يومياً مع دهون":"Daily with fatty meal","يومياً مع ماء":"Daily with water",
+            "يومياً مع ماء كثير":"Daily with plenty of water","يومياً مع وجبة دهنية":"Daily with fatty meal",
+            "يومياً (مقسمة)":"Daily (divided doses)","يومياً (لمدة 6 أشهر)":"Daily (6 months)",
+            "يومياً (لفترة قصيرة)":"Daily (short term)","يومياً لفترة قصيرة":"Daily (short term)",
+            "يومياً لمدة 3 أشهر":"Daily (3 months)","يومياً (تحت إشراف)":"Daily (under supervision)",
+            "يومياً (بعد أسبوع من العملية)":"Daily (1 week post-op)",
+            "صباحاً":"Morning","صباحاً مع الأكل":"Morning with food","صباحاً مع الإفطار":"Morning with breakfast",
+            "صباحاً مع دهون":"Morning with fatty meal","صباحاً مع وجبة دسمة":"Morning with fatty meal",
+            "صباحاً على الريق":"Morning — fasting","صباحاً قبل الإفطار":"Morning before breakfast",
+            "صباحاً تحت اللسان":"Sublingual — morning","صباحاً ومساءً":"Morning and evening",
+            "صباحاً (لفترة محدودة)":"Morning (limited duration)",
+            "مساءً":"Evening","مساءً بعد الأكل":"Evening after food","مساءً على معدة فارغة":"Evening — fasting",
+            "مساءً بعيداً عن الكالسيوم":"Evening (away from calcium)",
+            "مساءً مع ماء كثير":"Evening with plenty of water","مساءً مع ماء":"Evening with water",
+            "على الريق":"Fasting (empty stomach)","على معدة فارغة":"Empty stomach",
+            "على الريق صباحاً":"Fasting — morning","على الريق (قبل الفطور بـ 30 دقيقة)":"30 min before breakfast",
+            "على الريق (أو مع C)":"Fasting or with Vitamin C","على الريق أو قبل النشاط":"Fasting or pre-activity",
+            "على الريق مع عصير برتقال":"Fasting with orange juice","على الريق مع فيتامين سي":"Fasting with Vitamin C",
+            "قبل النوم":"At bedtime","قبل النوم بساعة":"1 hour before sleep",
+            "قبل النوم بـ 30-60 دقيقة":"30–60 min before sleep",
+            "قبل النوم مع فيتامين C":"Bedtime with Vitamin C","ساعة قبل النوم":"1 hour before sleep",
+            "قبل الأكل":"Before meals","قبل الأكل بـ 15 دقيقة":"15 min before meals",
+            "قبل الأكل بـ 20 دقيقة":"20 min before meals","قبل الأكل بـ 30 دقيقة":"30 min before meals",
+            "قبل الأكل مع ماء وفير":"Before meals with plenty of water",
+            "قبل الوجبات":"Before meals","قبل الوجبة الرئيسية":"Before main meal",
+            "قبل الغروب بـ 20 دقيقة":"20 min before sunset",
+            "مع الأكل":"With food","مع الطعام":"With food","مع الغداء":"With lunch",
+            "مع الوجبات":"With meals","مع الوجبات الدسمة":"With fatty meals",
+            "مع الوجبات الرئيسية":"With main meals","مع الوجبات الصغيرة":"With small meals",
+            "مع الوجبات الغنية بالأوكسالات":"With oxalate-rich meals",
+            "مع الوجبات الغنية بالخضروات":"With vegetable-rich meals",
+            "مع الوجبة":"With meal","مع الوجبة الدسمة فقط":"With fatty meal only",
+            "مع الوجبة الرئيسية":"With main meal","مع الوجبة الغنية بالأوكسالات":"With oxalate-rich meal",
+            "مع الوجبة دسمة":"With fatty meal","مع وجبة دسمة":"With fatty meal",
+            "مع وجبة دهنية":"With fatty meal","مع الوجبات الدهنية":"With fatty meals",
+            "مع دهون":"With fats","مع ماء كثير":"With plenty of water","مع ماء وفير":"With plenty of water",
+            "مع كوب ماء كبير":"With large glass of water","مع كوبين ماء كبيرين":"With 2 large glasses of water",
+            "مع ماء كثير مساءً":"Evening with plenty of water","مع الماء":"With water",
+            "مع الماء صباحاً":"Morning with water","مع حبة الحديد":"With iron supplement",
+            "مع الكولاجين":"With collagen","بعد الأكل":"After meals","بعد الإفطار":"After breakfast",
+            "بعد التمرين":"Post-workout","بعد التمرين مباشرة":"Immediately post-workout",
+            "بعد جلسات التقوية":"After strengthening sessions","بعد جلسة الغسيل":"After dialysis session",
+            "بعد وجبة دسمة":"After fatty meal","بعيداً عن الحديد":"Away from iron",
+            "بين الوجبات":"Between meals","وسط الأكل":"Mid-meal","وسط الغداء":"Mid-lunch",
+            "وسط الوجبات":"Mid-meals","وسط الوجبات الدسمة":"Mid fatty meals",
+            "بداية الأكل":"At start of meal","بداية الوجبة":"At start of meal",
+            "تحت اللسان صباحاً":"Sublingual — morning","تحت إشراف":"Under supervision",
+            "تحت إشراف طبي":"Under medical supervision","عند الحاجة":"As needed",
+            "عند الحاجة أو يومياً":"As needed or daily","عند الحاجة للتركيز":"As needed for focus",
+            "عند الشعور بالقلق":"When feeling anxious","عند العصر":"Afternoon",
+            "عند النوم":"At bedtime","مرتين يومياً":"Twice daily","مرتين أسبوعياً":"Twice weekly",
+            "3 مرات يومياً":"Three times daily","أسبوعياً":"Weekly",
+            "مقسمة":"Divided doses","مقسمة (500mg مرتين)":"Divided (500mg × 2)",
+            "مقسمة (للحفاظ على قلوية البول)":"Divided (to maintain urine alkalinity)",
+            "مقسمة صباحاً ومساءً":"Morning and evening (divided)",
+            "مقسمة طوال اليوم":"Divided throughout the day","مقسمة مع الأكل":"Divided with meals",
+            "مقسمة مع الوجبات":"Divided with meals","مقسمة يومياً":"Divided — daily",
+            "طوال اليوم والليل":"Around the clock","لفترة قصيرة فقط":"Short course only",
+            "مذاب في ماء بارد":"Dissolved in cold water","ظهراً":"At noon","سائل":"Liquid form",
+            "مضغ/امتصاص":"Chew or dissolve"
+        };
+
+        const TR_COND = {
+            "ارتفاع ضغط الدم":"Hypertension","السكري النوع الثاني":"Type 2 Diabetes",
+            "ارتفاع الكوليسترول":"Dyslipidemia","قصور الغدة الدرقية":"Hypothyroidism",
+            "القولون العصبي (IBS)":"Irritable Bowel Syndrome (IBS)","الصداع النصفي المزمن":"Chronic Migraine",
+            "النقرس (Gout)":"Gout","دهون الكبد (Fatty Liver)":"Non-Alcoholic Fatty Liver Disease",
+            "هشاشة العظام (Osteoporosis)":"Osteoporosis","تضخم البروستاتا الحميد":"Benign Prostatic Hyperplasia (BPH)",
+            "حصوات الكلى (وقاية)":"Kidney Stones (Prevention)","دوالي الساقين (Varicose)":"Varicose Veins",
+            "مقاومة الأنسولين":"Insulin Resistance","حصوات المرارة (وقاية)":"Gallstones (Prevention)",
+            "صحة ومرونة الشرايين":"Arterial Health & Elasticity","التهاب القولون (دعم)":"Colitis Support",
+            "دعم وظائف الكلى":"Kidney Function Support","دعم الربو وحساسية الصدر":"Asthma & Bronchial Support",
+            "دعم الكبد والصفراء المتقدم":"Advanced Liver & Bile Support","صحة الأعصاب الطرفية":"Peripheral Neuropathy Support",
+            "التهاب البروستاتا المزمن":"Chronic Prostatitis","دعم وظائف البنكرياس":"Pancreatic Function Support",
+            "دعم الغدة الدرقية النشطة":"Hyperthyroidism Support","دعم التعافي من الجلطات":"Stroke Recovery",
+            "الوقاية من حصوات الأوكسالات":"Oxalate Stone Prevention","صحة الأوردة ومنع التجلط":"DVT Prevention & Venous Health",
+            "توازن الأحماض الصفراوية":"Bile Acid Balance","دعم مرض باركنسون":"Parkinson's Disease Support",
+            "دعم التصلب المتعدد (MS)":"Multiple Sclerosis Support","دعم مرضى غسيل الكلى":"Dialysis Patient Support",
+            "صحة الأوعية الدقيقة":"Microvascular Health","الزهايمر (دعم متقدم)":"Alzheimer's (Advanced Support)",
+            "صحة الغدة الجار درقية":"Parathyroid Health","باركنسون (دعم الدوبامين)":"Parkinson's (Dopamine Support)",
+            "قصور الغدة (دعم متقدم)":"Hypothyroidism (Advanced)","باركنسون (التوازن والمشي)":"Parkinson's (Balance & Gait)",
+            "صحة القنوات المرارية":"Bile Duct Health","باركنسون (الرعاش المتقدم)":"Parkinson's (Tremor Control)",
+            "برودة الأطراف (ضعف التروية)":"Cold Extremities (Poor Circulation)",
+            "الوقاية النهائية للمرارة":"Final Gallbladder Prevention","باركنسون (التيبس العضلي)":"Parkinson's (Muscle Rigidity)",
+            "برودة القدمين المزمنة":"Chronic Cold Feet","باركنسون (تجمد المشي)":"Parkinson's (Freezing of Gait)",
+            "باركنسون (البلع والكلام)":"Parkinson's (Swallowing & Speech)",
+            "دوالي الساقين المتقدمة":"Advanced Varicose Veins","برودة الأطراف (راينود)":"Raynaud's Phenomenon",
+            "دوالي الخصية المتقدمة":"Advanced Varicocele","متلازمة التوهج الوعائي":"Vascular Flushing Syndrome",
+            "برودة الأطراف (السكري)":"Diabetic Cold Extremities","متلازمة التوهج المتقدمة":"Advanced Flushing Syndrome",
+            "باركنسون (دعم التصلب)":"Parkinson's (Lateral Stiffness)",
+            "برودة الأطراف (القصور الوريدي)":"Cold Extremities (Venous Insufficiency)",
+            "متلازمة الساق المتعبة":"Heavy Legs Syndrome","متلازمة الأقدام المحترقة":"Burning Feet Syndrome",
+            "متلازمة الأرجل غير المستقرة":"Restless Legs Syndrome (RLS)",
+            "برودة الأطراف المتقدمة":"Advanced Cold Extremities","دعم دوالي المريء":"Esophageal Varices Support",
+            "الأقدام الساخنة الليلية":"Nocturnal Hot Feet","دوالي واحتقان الحوض":"Pelvic Congestion Syndrome",
+            "برودة الأطراف (الصيف)":"Summer Cold Extremities","دعم ضغط الوريد البابي":"Portal Hypertension Support",
+            "برودة اعتلال الأعصاب":"Neuropathic Cold Extremities","ثقل الساقين المسائي":"Evening Heavy Legs",
+            "دوالي الخصية (الخصوبة)":"Varicocele (Fertility Support)",
+            "صيانة دوالي المريء":"Esophageal Varices Maintenance","التئام تقرحات المريء":"Esophageal Ulcer Healing",
+            "حرارة القدمين (وقائي)":"Hot Feet (Preventive)","دوالي المريء (دعم الوعاء)":"Esophageal Varices (Vascular Support)",
+            "دوالي المريء (دعم الكبد)":"Esophageal Varices (Liver Support)",
+            "الأقدام الساخنة (النهائي)":"Hot Feet (Final Protocol)",
+            "دوالي المريء (صيانة متقدمة)":"Esophageal Varices (Advanced Maintenance)",
+            "برودة الأطراف (الصيفية النهائية)":"Summer Cold Extremities (Final Protocol)",
+            "دوالي الخصية (دعم الأوردة)":"Varicocele (Venous Support)",
+            "الأقدام الساخنة (وقائي نهائي)":"Hot Feet (Final Prevention)",
+            "المريء (التقرحات المتقدمة)":"Advanced Esophageal Ulcers",
+            "المريء (وقاية الكبد المتقدمة)":"Esophageal Varices (Liver Protection)",
+            "المريء (دعم الصمامات)":"Esophageal (Valve Support)",
+            "صحة العين والنظر":"Eye Health & Vision",
+            // OTC
+            "خشونة المفاصل وآلامها":"Osteoarthritis & Joint Pain","الحموضة والارتجاع (GERD)":"GERD / Acid Reflux",
+            "السعال الجاف (Dry Cough)":"Dry Cough","الإمساك المزمن":"Chronic Constipation",
+            "فقر الدم الشديد (Anemia)":"Iron Deficiency Anemia","آلام الظهر والرقبة":"Back & Neck Pain",
+            "تشنج العضلات المتكرر":"Muscle Cramps (Recurrent)","التهاب المسالك المتكرر":"Recurrent UTI",
+            "قرحة وجرثومة المعدة":"Peptic Ulcer / H. pylori","سرعة التئام الكسور":"Fracture Healing (Accelerated)",
+            "صحة الأذن الوسطى":"Middle Ear Health","المثانة المتهيجة":"Overactive Bladder",
+            "صحة الغضروف الهلالي":"Meniscal Cartilage Health","الجيوب الأنفية المزمنة":"Chronic Sinusitis",
+            "الهضم بعد استئصال المرارة":"Post-Cholecystectomy Digestion","التئام الأوتار والأربطة":"Tendon & Ligament Healing",
+            "القولون العصبي (آلام وتشنجات)":"IBS (Pain & Spasms)","ترميم تمزق الغضروف الهلالي":"Meniscus Tear Repair",
+            "منع حصوات المرارة (بعد الرجيم)":"Gallstone Prevention (Post-Diet)",
+            "دعم التعافي من الفتق":"Hernia Repair Recovery","بعد استئصال الرحم":"Post-Hysterectomy Support",
+            "بعد جراحة الركبة (ACL/TKR)":"Post Knee Surgery (ACL/TKR)",
+            "بعد جراحة الظهر والفقرات":"Post Spinal Surgery","بعد جراحة الكتف (Rotator Cuff)":"Post Shoulder Surgery (Rotator Cuff)",
+            "متلازمة SIBO (فرط البكتيريا)":"SIBO (Small Intestinal Bacterial Overgrowth)",
+            "الديسك وانضغاط الأعصاب":"Disc Herniation & Nerve Compression",
+            "بعد جراحة الفتق الإربي":"Post Inguinal Hernia Repair",
+            "البروتوكول القلوي للحصوات":"Alkaline Protocol for Stones",
+            "بعد استئصال اللوزتين":"Post-Tonsillectomy Recovery",
+            "حصوات البروستاتا المتقدمة":"Advanced Prostate Stones",
+            "بعد جراحة الأنف والجيوب":"Post Sinus Surgery","بعد جراحة البواسير":"Post Hemorrhoid Surgery",
+            "حصوات اللعاب المتقدمة":"Advanced Salivary Stones","بعد جراحة الماء الأبيض":"Post Cataract Surgery",
+            "حصوات حمض اليوريك":"Uric Acid Kidney Stones","بعد جراحة القولون":"Post Colectomy Recovery",
+            "الوقاية النهائية للمرارة":"Final Gallbladder Prevention Protocol",
+            "منع لحميات الأنف (بعد الجراحة)":"Nasal Polyp Prevention (Post-Op)",
+            "صيانة البروستاتا (وقاية)":"Prostate Maintenance (Prevention)",
+            "بعد جراحة مفصل الورك":"Post Hip Arthroplasty","الصيانة الفائقة للمرارة":"Super Gallbladder Maintenance",
+            "بعد منظار الركبة":"Post Knee Arthroscopy","حصوات السيستين":"Cystine Kidney Stones",
+            "تعافي الفقرات الصدرية":"Thoracic Spine Recovery",
+            "وقاية المرارة (للنباتيين)":"Gallbladder Prevention (Vegan)",
+            "تعافي أوتار الكتف":"Shoulder Tendon Recovery","بروتوكول الأوكسالات النهائي":"Final Oxalate Protocol",
+            "بعد جراحة الكاحل":"Post Ankle Surgery","صيانة المرارة (بعد الرجيم)":"Gallbladder Maintenance (Post-Diet)",
+            "بعد زراعة وجراحة الفك":"Post Jaw Implant Surgery",
+            "الأوكسالات (للنباتيين)":"Oxalate Management (Vegan)","بعد استئصال الدرقية":"Post-Thyroidectomy",
+            "المرارة (أثناء الصيام)":"Gallbladder Support (During Fasting)",
+            "تعافي الجيوب المتقدم":"Advanced Sinus Recovery","حصوات الفوسفات":"Phosphate Kidney Stones",
+            "بعد جراحة المرفق":"Post Elbow Surgery","المرارة (بعد الكيتو)":"Gallbladder Support (Post-Keto)",
+            "بعد جراحة المعصم":"Post Wrist Surgery","الأوكسالات (للأطفال)":"Oxalate Management (Pediatric)",
+            "بعد جراحة القدم":"Post Foot Surgery","حصوات القنوات المرارية":"Common Bile Duct Stones (CBD)",
+            "تعافي الفقرات القطنية المتقدم":"Advanced Lumbar Recovery",
+            "الأوكسالات (لكبار السن)":"Oxalate Management (Elderly)",
+            "بعد جراحة مفصل الإبهام":"Post Thumb Joint Surgery",
+            "المرارة (بعد المضادات)":"Gallbladder (Post-Antibiotic)",
+            "بعد جراحة الفتق السري":"Post Umbilical Hernia Repair",
+            "حصوات الكالسيوم فوسفات":"Calcium Phosphate Stones",
+            "بعد استبدال الركبة الكلي":"Post Total Knee Replacement (TKR)",
+            "المرارة (بعد أدوية الغدة)":"Gallbladder (Post-Thyroid Medications)",
+            "بعد جراحة الفقرات العنقية":"Post Cervical Spine Surgery",
+            "حصوات اليوريك (للنباتيين)":"Uric Acid Stones (Vegan)",
+            "بعد استبدال الكتف":"Post Total Shoulder Replacement (TSR)",
+            "المرارة (بعد الكيماوي)":"Gallbladder (Post-Chemotherapy)",
+            "بعد استبدال الكاحل":"Post Total Ankle Replacement",
+            "حصوات السيستين المتكررة":"Recurrent Cystine Stones",
+            "بعد جراحة فتق الحجاب":"Post Hiatal Hernia Repair",
+            "المرارة (بعد الاستيرويدات)":"Gallbladder (Post-Corticosteroids)",
+            "بعد استبدال مفصل الفك":"Post TMJ Replacement",
+            "الأوكسالات المتقدم":"Advanced Oxalate Protocol",
+            "بعد جراحة الحوض الروبوتية":"Post Robotic Hip Surgery",
+            "المرارة (بعد الهرمونات HRT)":"Gallbladder (Post-HRT)",
+            "بعد منظار الفقرات القطنية":"Post Lumbar Endoscopy",
+            "حصوات السيستين (للأطفال)":"Cystine Stones (Pediatric)",
+            "بعد كتف الروبوت":"Post Robotic Shoulder Surgery",
+            "المرارة (بعد جراحات السمنة)":"Gallbladder (Post-Bariatric Surgery)",
+            "بعد كوع الروبوت":"Post Robotic Elbow Surgery",
+            "الأوكسالات (بعد المضادات)":"Oxalate Management (Post-Antibiotics)",
+            "بعد الفقرات الصدرية بالروبوت":"Post Robotic Thoracic Surgery",
+            "المرارة (بعد صيام طويل)":"Gallbladder (Post-Prolonged Fasting)",
+            "بعد كاحل الروبوت":"Post Robotic Ankle Surgery",
+            "الفوسفات (للنباتيين)":"Phosphate Stones (Vegan)",
+            "بعد ورك الروبوت (المتقدم)":"Post Robotic Hip (Advanced)",
+            "الأوكسالات للنباتيين (المتقدم)":"Vegan Oxalate (Advanced)",
+            "بعد معصم الروبوت":"Post Robotic Wrist Surgery",
+            "المرارة (بعد علاج الدهون)":"Gallbladder (Post-Lipid Therapy)",
+            "تعافي الكاحل (نهائي)":"Final Ankle Recovery","السيستين للنباتيين (متقدم)":"Vegan Cystine (Advanced)",
+            "تعافي الورك (المرحلة النهائية)":"Hip Recovery (Final Stage)",
+            "المرارة (بعد أدوية الغدة)":"Gallbladder (Post-Thyroid Meds)",
+            "تعافي الكوع (النهائي)":"Final Elbow Recovery",
+            "الأوكسالات للنباتيين (النهائي)":"Vegan Oxalate (Final Protocol)",
+            "بعد كاحل الروبوت (المتقدم)":"Post Robotic Ankle (Advanced)",
+            "المرارة (بعد الاستيرويدات)":"Gallbladder (Post-Steroids)",
+            "تعافي الورك (الدمج الوظيفي)":"Hip Recovery (Functional Integration)",
+            "الأوكسالات النباتي (النهائي)":"Vegan Oxalate (Final)","تعافي الركبة (نهائي)":"Final Knee Recovery",
+            "المرارة (بعد الإستروجين)":"Gallbladder (Post-Estrogen)","تعافي المعصم (نهائي)":"Final Wrist Recovery",
+            "الأوكسالات النباتي (المتقدم)":"Vegan Oxalate (Advanced)","تعافي الكوع (نهائي)":"Final Elbow Recovery (II)",
+            "السيستين للأطفال (المتقدم)":"Pediatric Cystine (Advanced)",
+            "تعافي الكتف (المرحلة النهائية)":"Shoulder Recovery (Final Stage)",
+            "المرارة (بعد الكيماوي المتقدم)":"Gallbladder (Post-Chemo Advanced)",
+            "تعافي الكاحل (المرحلة النهائية)":"Ankle Recovery (Final Stage)",
+            "السيستين المتكرر (المتقدم)":"Recurrent Cystine (Advanced)",
+            "تعافي الورك (النهائي المتقدم)":"Hip Recovery (Advanced Final)",
+            "المرارة (بعد أدوية الغدة المتقدمة)":"Gallbladder (Advanced Thyroid Meds)",
+            "تعافي الكاحل (النهائي)":"Final Ankle Recovery (84)","السيستين للأطفال (المتكرر)":"Recurrent Pediatric Cystine",
+            // Special cases
+            "صحة الحامل والجنين":"Pregnancy & Fetal Health","صحة كبار السن (65+)":"Elderly Health (65+)",
+            "الرياضيون والأداء البدني":"Athletes & Physical Performance",
+            "الصحة الجنسية للرجال":"Men's Sexual Health","تحسين الخصوبة (للجنسين)":"Fertility Enhancement (Both Sexes)",
+            "تكيس المبايض (PCOS)":"Polycystic Ovary Syndrome (PCOS)",
+            "التوازن الهرموني العام":"General Hormonal Balance","خصوبة المرأة فوق الـ 35":"Female Fertility Over 35",
+            "دعم الغدة النخامية":"Pituitary Gland Support","دعم التوحد (مكملات)":"Autism Support (Supplements)",
+            "تكيس المبايض (الشعرانية)":"PCOS (Hirsutism)","جفاف الأغشية (شوغرن)":"Sjögren's Syndrome (Dryness)",
+            "بطانة الرحم المهاجرة (Endo)":"Endometriosis","ارتفاع هرمون الحليب":"Hyperprolactinemia",
+            "الخصوبة المتقدمة (للرجال)":"Advanced Male Fertility","دعم النخامية المتقدم":"Advanced Pituitary Support",
+            "إرهاق الكظرية (الاحتراق)":"Adrenal Burnout Syndrome","باركنسون (التعب المزمن)":"Parkinson's (Chronic Fatigue)",
+            // Skin
+            "حب الشباب (Acne)":"Acne Vulgaris","التجاعيد وشيخوخة الجلد":"Skin Aging & Wrinkles",
+            "هشاشة وتكسر الأظافر":"Brittle Nails","الإكزيما والتهاب الجلد":"Eczema & Dermatitis",
+            "التئام قرح الفراش":"Pressure Ulcer Healing","دعم مرضى الصدفية":"Psoriasis Support",
+            "التئام الحروق وتجديد الجلد":"Burns Healing & Skin Regeneration",
+            "بعد جراحات التجميل والشفط":"Post Cosmetic Surgery",
+            // Hair
+            "تساقط الشعر الوراثي (رجال)":"Androgenetic Alopecia (Male)","تساقط الشعر عند النساء":"Female Hair Loss",
+            "القشرة والحكة المزمنة":"Chronic Dandruff & Scalp Itch",
+            // General Health
+            "تعزيز المناعة (Immunity)":"Immune System Support","الخمول وضعف الطاقة":"Fatigue & Low Energy",
+            "التركيز وصحة الدماغ":"Focus & Brain Health","ضعف الذاكرة والنسيان":"Memory Loss & Forgetfulness",
+            "الإجهاد البدني والذهني":"Physical & Mental Stress","العدوى المتكررة (ضعف المناعة)":"Recurrent Infections",
+            "القلق والتوتر المزمن":"Chronic Anxiety & Tension","الوقاية من ألزهايمر والخرف":"Alzheimer's Prevention & Dementia",
+            "صحة اللثة والأسنان":"Gum & Dental Health","تحسين جودة النوم العميق":"Deep Sleep Quality",
+            "دعم الغدة الكظرية":"Adrenal Gland Support","طنين الأذن وصحة السمع":"Tinnitus & Hearing Health",
+            "الدوار وفقدان التوازن":"Vertigo & Balance Disorders",
+            "حصوات اللعاب والتهاب الغدد":"Salivary Stones & Gland Inflammation",
+            "صحة الجهاز اللمفاوي":"Lymphatic System Health","صحة النخاع العظمي والدم":"Bone Marrow & Blood Health",
+            "تدهور الإدراك البسيط (MCI)":"Mild Cognitive Impairment (MCI)",
+            "حصوات البروستاتا (وقاية)":"Prostate Stones (Prevention)","جفاف الفم المزمن":"Chronic Dry Mouth",
+            "دعم الغدد التناسلية":"Gonadal Health Support","الوذمة اللمفية (Lymphedema)":"Lymphedema",
+            "صحة الغدد تحت الفكية":"Submandibular Gland Health","صحة الغدد تحت اللسان":"Sublingual Gland Health",
+            "وذمة الوجه والرقبة":"Facial & Cervical Edema","باركنسون (اضطرابات النوم)":"Parkinson's (Sleep Disorders)",
+            "باركنسون (الإمساك المزمن)":"Parkinson's (Chronic Constipation)",
+            "تورم اليدين (اللمفاوي)":"Hand Lymphedema","تورم القدمين (اللمفاوي)":"Foot Lymphedema",
+            "وذمة الرقبة والفك":"Neck & Jaw Edema","وذمة الظهر والجذع":"Back & Trunk Edema",
+            "باركنسون (القلق والذعر)":"Parkinson's (Anxiety & Panic)",
+            "وذمة الفخذين (اللمفاوي)":"Thigh Lymphedema","وذمة الصدر والجذع":"Chest & Trunk Edema",
+            "باركنسون (تحكم اللعاب)":"Parkinson's (Salivary Control)",
+            "وذمة ما بعد الحوادث":"Post-Trauma Edema","الزهايمر (التوهان المنزلي)":"Alzheimer's (Indoor Disorientation)",
+            "الزهايمر (تمييز الوجوه)":"Alzheimer's (Prosopagnosia)","الزهايمر (فقدان الشهية)":"Alzheimer's (Anorexia)",
+            "الزهايمر (التوازن والحركة)":"Alzheimer's (Balance & Motor)","الزهايمر (وظائف التنفيذ)":"Alzheimer's (Executive Function)",
+            "الزهايمر (السلوك العدواني)":"Alzheimer's (Aggressive Behavior)",
+            "وذمة الوجه المتقدمة":"Advanced Facial Edema","الزهايمر (التوجه الزماني)":"Alzheimer's (Temporal Orientation)",
+            "وذمة جراحات الحوض":"Post-Pelvic Surgery Edema","الزهايمر (التشنجات الخفيفة)":"Alzheimer's (Minor Tremors)",
+            "باركنسون (الذاكرة البصرية)":"Parkinson's (Visual Memory)",
+            "الزهايمر (التنسيق الدقيق)":"Alzheimer's (Fine Motor)","الزهايمر (التدهور اللغوي)":"Alzheimer's (Language Decline)",
+            "الزهايمر (الحكم والمنطق)":"Alzheimer's (Judgment & Logic)",
+            "الزهايمر (فقدان المبادرة)":"Alzheimer's (Apathy & Akinesia)",
+            "الزهايمر (التوجه المعقد)":"Alzheimer's (Complex Orientation)",
+            "الزهايمر (الإدراك الاجتماعي)":"Alzheimer's (Social Cognition)",
+            "الزهايمر (الإدراك المكاني)":"Alzheimer's (Visuospatial)",
+            "الزهايمر (الذاكرة الإجرائية)":"Alzheimer's (Procedural Memory)",
+            "الزهايمر (الذاكرة الدلالية)":"Alzheimer's (Semantic Memory)",
+            "الزهايمر (الإدراك الزماني)":"Alzheimer's (Temporal Cognition)",
+            "الزهايمر (تغير الشخصية)":"Alzheimer's (Personality Changes)",
+            "الزهايمر (الذاكرة العاطفية)":"Alzheimer's (Emotional Memory)",
+            "الزهايمر (الذاكرة القصيرة)":"Alzheimer's (Short-Term Memory)",
+            "الزهايمر (التوجه المكاني)":"Alzheimer's (Spatial Memory)",
+            "الزهايمر (التعاطف الاجتماعي)":"Alzheimer's (Social Empathy)",
+            "باركنسون (التوجه المكاني)":"Parkinson's (Spatial Orientation)",
+            "باركنسون (السلوك والاندفاع)":"Parkinson's (Behavior & Impulsivity)",
+            "الزهايمر (الذاكرة المكانية)":"Alzheimer's (Spatial Memory II)",
+            "باركنسون (التدهور اللغوي)":"Parkinson's (Language Decline)",
+            "باركنسون (التدهور المعرفي)":"Parkinson's (Cognitive Decline)",
+            "باركنسون (التنسيق الدقيق)":"Parkinson's (Fine Motor Coordination)",
+            "باركنسون (الذاكرة الإجرائية)":"Parkinson's (Procedural Memory)",
+            "صحة النخاع العظمي والدم":"Bone Marrow & Blood Health",
+            "الزهايمر (دعم التواصل)":"Alzheimer's (Communication Support)",
+            "الزهايمر (التوهان الليلي)":"Alzheimer's (Sundowning)",
+            "الزهايمر (الهياج والغضب)":"Alzheimer's (Agitation & Anger)",
+            "الزهايمر (الإدراك الاجتماعي) II":"Alzheimer's (Social Cognition II)"
+        };
+
+        // Arabic text detection
+        const hasArabic = s => /[\u0600-\u06FF]/.test(s||'');
+
+        // Translate a single supplement entry (n, t fields)
+        function trSupp(s){
+            if(!s) return s;
+            return {
+                n: TR_SUPP[s.n]||s.n,
+                d: s.d,
+                t: TR_TIMING[s.t]||s.t,
+                f: s.f,   // benefit text — keep as-is (already English in explicit blocks)
+                b: s.b
+            };
+        }
+
+        // Translate a full condition object for EN display
+        function trCond(c){
+            if(!c) return c;
+            const name = TR_COND[c.name]||c.name;
+            const supps = (c.supps||[]).map(trSupp);
+            return {...c, name, supps};
+        }
+
+        // Apply translations to all EN conditions that contain Arabic
+        function applyENTranslations(){
+            const secs = ['c','o','s','sk','h','g'];
+            secs.forEach(sec => {
+                DB.en.conditions[sec] = DB.en.conditions[sec].map(c => {
+                    if(hasArabic(c.name) || (c.supps||[]).some(s=>hasArabic(s.n)||hasArabic(s.t))){
+                        return trCond(c);
+                    }
+                    return c;
+                });
+            });
         }
 
         window.onload = () => {
@@ -618,7 +1143,7 @@
                 { id: "s", icon: "👶", name: "Special Cases" }, { id: "sk", icon: "🧴", name: "Skin Care" }, 
                 { id: "h", icon: "💆", name: "Hair Care" }, { id: "g", icon: "🌿", name: "General Health" } 
             ];
-            processENConditions(); setL('ar');
+            setL('ar');
         };
         DB.ar.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
         DB.en.conditions = { c: [], o: [], s: [], sk: [], h: [], g: [] };
@@ -6008,107 +6533,8 @@ DB.ar.conditions.g.push(
         DB.en.conditions.c.push(...JSON.parse(JSON.stringify(DB.ar.conditions.c.slice(-1))));
         DB.en.conditions.o.push(...JSON.parse(JSON.stringify(DB.ar.conditions.o.slice(-2))));
 
-
-        
-
-        // ===== AUTO-TRANSLATE EN CONDITIONS =====
-        // Translates any remaining Arabic text in EN database
-        const SUPP_MAP = {
-            "بروبيوتيك": "Probiotics", "زيت النعناع المعوي": "Peppermint Oil (Enteric-coated)",
-            "ألياف السيليوم": "Psyllium Husk", "ماغنيسيوم سيترات": "Magnesium Citrate",
-            "ماغنيسيوم جليسينات": "Magnesium Glycinate", "ماغنيسيوم": "Magnesium",
-            "الكركمين": "Curcumin (BCM-95)", "كيرسيتين": "Quercetin",
-            "فيتامين D3": "Vitamin D3", "فيتامين D3+K2": "Vitamin D3+K2",
-            "فيتامين C": "Vitamin C", "فيتامين E": "Vitamin E",
-            "فيتامين B12": "Vitamin B12", "فيتامين K2": "Vitamin K2 (MK-7)",
-            "زنك": "Zinc", "سيلينيوم": "Selenium",
-            "NAC": "NAC (N-Acetyl Cysteine)", "أوميغا 3": "Omega-3",
-            "بربرين": "Berberine", "أشواجاندا": "Ashwagandha",
-            "ميلاتونين": "Melatonin", "L-ثيانين": "L-Theanine",
-            "حديد": "Iron", "كالسيوم": "Calcium",
-            "بيوتين": "Biotin", "كولاجين": "Collagen",
-            "هيالورونيك أسيد": "Hyaluronic Acid", "سيليوم": "Psyllium Husk",
-            "تودكا": "TUDCA", "سيليمارين": "Milk Thistle (Silymarin)",
-            "بوسويليا": "Boswellia", "غلوكوزامين": "Glucosamine",
-            "L-كارنيتين": "L-Carnitine", "جنكة بيلوبا": "Ginkgo Biloba",
-            "أستاكزانثين": "Astaxanthin", "خميرة الأرز الأحمر": "Red Yeast Rice",
-            "ستيرول نباتي": "Plant Sterols", "بيتا جلوكان": "Beta-Glucan",
-            "ثوم معمّر": "Aged Garlic Extract", "DGL ليكوريس": "DGL Licorice",
-            "إنزيمات هاضمة": "Digestive Enzymes", "زنجبيل": "Ginger Root",
-            "ناتوكيناز": "Nattokinase", "سيرابيبتاز": "Serrapeptase",
-            "بروميلين": "Bromelain", "ليثيوم أوروتات": "Lithium Orotate",
-            "مستخلص الزعفران": "Saffron Extract", "كولين": "Choline",
-            "مستخلص الخرشوف": "Artichoke Extract", "زنك كارنوزين": "Zinc Carnosine",
-            "بوتاسيوم سيترات": "Potassium Citrate", "5-HTP": "5-HTP",
-            "حمض الفوليك": "Folic Acid / Folate", "ساو بالميتو": "Saw Palmetto",
-            "رودويلا": "Rhodiola Rosea", "كرياتين": "Creatine Monohydrate",
-            "كركم": "Turmeric / Curcumin", "حمض الألفا ليبويك": "Alpha Lipoic Acid (ALA)",
-            "فيتامين B6": "Vitamin B6 (P5P)", "CoQ10": "CoQ10 (Ubiquinol)",
-        };
-        const COND_NAME_MAP = {
-            "القولون العصبي (IBS)": "IBS (Irritable Bowel Syndrome)",
-            "القولون العصبي": "IBS (Irritable Bowel Syndrome)",
-            "الروماتويد": "Rheumatoid Arthritis (RA)",
-            "الذئبة الحمراء": "Lupus (SLE)",
-            "التصلب المتعدد": "Multiple Sclerosis (MS)",
-            "السكري النوع الثاني": "Type 2 Diabetes",
-            "الاكتئاب المزمن": "Chronic Depression",
-            "القلق والتوتر المزمن": "Chronic Anxiety & Stress",
-            "هشاشة العظام": "Osteoporosis",
-            "النقرس": "Gout (Hyperuricemia)",
-            "الصداع النصفي": "Chronic Migraine",
-            "الكبد الدهني": "Non-Alcoholic Fatty Liver (NAFLD)",
-            "الفشل الكلوي المزمن": "Chronic Kidney Disease (CKD)",
-            "قصور القلب المزمن": "Chronic Heart Failure (CHF)",
-            "فقر الدم": "Anemia (Iron Deficiency)",
-            "تعزيز المناعة": "Immune Support",
-            "التعب المزمن": "Chronic Fatigue Syndrome",
-            "اضطرابات النوم": "Sleep Disorders / Insomnia",
-        };
-        function isArabic(str){ return /[\u0600-\u06FF]/.test(str); }
-        function translateSuppName(n){
-            for(const [ar,en] of Object.entries(SUPP_MAP)){
-                if(n.includes(ar)) return n.replace(ar,en);
-            }
-            return n;
-        }
-        function translateCondName(n){
-            return COND_NAME_MAP[n] || n;
-        }
-        function translateTip(t){
-            // If tip is Arabic, return a generic clinical tip indicator
-            if(isArabic(t)) return t; // keep as-is for now, data quality issue
-            return t;
-        }
-        function processENConditions(){
-            const ENconds = DB.en.conditions;
-            Object.values(ENconds).forEach(arr=>{
-                arr.forEach(cond=>{
-                    if(isArabic(cond.name)) cond.name = translateCondName(cond.name);
-                    cond.supps.forEach(s=>{
-                        if(isArabic(s.n)) s.n = translateSuppName(s.n);
-                        if(isArabic(s.d)) s.d = s.d; // doses often mixed
-                        if(isArabic(s.t)){
-                            // translate common timings
-                            s.t = s.t
-                                .replace("صباحاً","Morning").replace("مساءً","Evening")
-                                .replace("على الريق","Empty stomach").replace("مع الأكل","With food")
-                                .replace("قبل النوم","Before bed").replace("مع الغداء","With lunch")
-                                .replace("بعد الإفطار","After breakfast").replace("يومياً","Daily")
-                                .replace("مرتين","Twice daily").replace("ثلاث مرات","Three times daily")
-                                .replace("قبل الأكل","Before meals").replace("بعد الأكل","After meals")
-                                .replace("مع ماء وفير","With plenty of water");
-                        }
-                        if(isArabic(s.f)){
-                            // mark as needing translation but show English note
-                            s.f = "[EN] " + s.f;
-                        }
-                    });
-                    if(cond.phrase && isArabic(cond.phrase)) cond.phrase = null;
-                    if(cond.smart && isArabic(cond.smart)) cond.smart = "[See Arabic version for full details]";
-                });
-            });
-        }
+        // ── Apply bilingual translation to all EN conditions ──
+        applyENTranslations();
         
         // قفلة المحل النهائية 
         window.onload();
