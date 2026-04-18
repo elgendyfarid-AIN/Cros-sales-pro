@@ -39,7 +39,7 @@
         body.ar{direction:rtl} body.en{direction:ltr}
 
         /* ===== TOP BAR ===== */
-        .tb{background:var(--bg2);border-bottom:1px solid var(--bg4);padding:0 20px;height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 1px 0 var(--bg4),0 4px 20px rgba(26,31,54,.07)}
+        .tb{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg2) 100%);border-bottom:2px solid var(--gr);padding:0 20px;height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 16px rgba(0,133,77,.1)}
         .tbi{width:38px;height:38px;background:linear-gradient(135deg,var(--gr),var(--tl));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,133,77,.3)}
         .tbn{font-size:15px;font-weight:900;color:var(--tx);letter-spacing:-.3px}
         .tbs{font-size:10px;color:var(--tx3);font-weight:600;margin-top:1px}
@@ -55,7 +55,7 @@
         /* ===== 3-COLUMN LAYOUT ===== */
         .page-layout{display:grid;grid-template-columns:230px 1fr 230px;min-height:calc(100vh - var(--topbar-h));align-items:start}
         .main-col{min-width:0;border-inline:1px solid var(--bg4)}
-        .sidebar{padding:16px 14px;position:sticky;top:var(--topbar-h);max-height:calc(100vh - var(--topbar-h));overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--bg4) transparent;background:var(--bg2)}
+        .sidebar{padding:16px 14px;position:sticky;top:var(--topbar-h);max-height:calc(100vh - var(--topbar-h));overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--grb) transparent;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%);border-top:3px solid var(--gr)}
         .sidebar::-webkit-scrollbar{width:3px}
         .sidebar::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
 
@@ -65,8 +65,9 @@
         .sb-hd-txt{font-size:12px;font-weight:900;color:var(--tx2)}
 
         /* ===== RIGHT SIDEBAR — Popular Diseases ===== */
-        .pop-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;cursor:pointer;transition:all .15s;margin-bottom:2px;border:1px solid transparent;text-decoration:none}
-        .pop-item:hover{background:var(--grl);border-color:var(--grb)}
+        .pop-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;cursor:pointer;transition:all .18s;margin-bottom:3px;border:1.5px solid transparent;text-decoration:none}
+        .pop-item:hover{background:var(--grl);border-color:var(--gr);transform:translateX(-2px)}
+        body.en .pop-item:hover{transform:translateX(2px)}
         .pop-item.ac{background:var(--gr);border-color:var(--gr)}
         .pop-item.ac .pop-item-name{color:#fff}
         .pop-item-icon{font-size:17px;flex-shrink:0;width:22px;text-align:center}
@@ -84,12 +85,16 @@
         .supp-count{font-size:10px;background:var(--bg3);color:var(--tx3);padding:1px 5px;border-radius:5px;font-weight:700;flex-shrink:0}
         .supp-item:hover .supp-count,.supp-item.ac .supp-count{background:var(--grb);color:#fff}
         /* Flyout panel */
-        .supp-flyout{position:fixed;background:var(--bg2);border:1.5px solid var(--bg4);border-radius:var(--r);box-shadow:var(--sh2);padding:14px;width:220px;z-index:400;display:none;animation:flyIn .18s ease}
+        .supp-flyout{position:fixed;background:var(--bg2);border:1.5px solid var(--grb);border-radius:var(--r);box-shadow:0 8px 32px rgba(0,133,77,.15),0 2px 8px rgba(0,0,0,.12);padding:14px;width:240px;z-index:400;display:none;animation:flyIn .18s ease;max-height:400px;overflow-y:auto}
         .supp-flyout.on{display:block}
         @keyframes flyIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
         body.ar .supp-flyout{animation-name:flyInAr}
         @keyframes flyInAr{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
         .flyout-title{font-size:12px;font-weight:900;color:var(--gr);margin-bottom:8px;padding-bottom:7px;border-bottom:1.5px solid var(--grl);display:flex;align-items:center;gap:5px}
+        .flyout-close{margin-right:auto;margin-left:0;cursor:pointer;font-size:13px;color:var(--tx3);padding:1px 5px;border-radius:4px;transition:all .15s}
+        body.ar .flyout-close{margin-right:auto;margin-left:0}
+        body.en .flyout-close{margin-left:auto;margin-right:0}
+        .flyout-close:hover{background:var(--bg4);color:var(--tx)}
         .flyout-sub{font-size:10px;color:var(--tx3);margin-bottom:8px;font-weight:600}
         .flyout-cond{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:8px;cursor:pointer;transition:all .15s;border:1px solid transparent;margin-bottom:2px}
         .flyout-cond:hover{background:var(--bll);border-color:var(--blb)}
@@ -112,18 +117,18 @@
         /* ===== SECTION TABS ===== */
         .stw{padding:12px 16px 0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--bg4)}
         .stw::-webkit-scrollbar{display:none}
-        .st{padding:9px 16px 10px;border-radius:0;border:none;border-bottom:2.5px solid transparent;background:transparent;color:var(--tx3);font-weight:700;font-size:12.5px;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0;transition:all .15s}
-        .st:hover{color:var(--tx2)}
-        .st.ac{color:var(--gr);border-bottom-color:var(--gr)}
+        .st{padding:9px 16px 10px;border-radius:0;border:none;border-bottom:3px solid transparent;background:transparent;color:var(--tx3);font-weight:700;font-size:12.5px;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0;transition:all .2s}
+        .st:hover{color:var(--tx2);background:var(--grl)}
+        .st.ac{color:var(--gr);border-bottom-color:var(--gr);background:var(--grl)}
 
         /* ===== CONDITION GRID ===== */
         .cw{padding:14px 16px}
         .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-        .cc{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:14px 10px;cursor:pointer;text-align:center;box-shadow:var(--sh);transition:all .2s;position:relative;overflow:hidden}
+        .cc{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--r);padding:16px 10px 14px;cursor:pointer;text-align:center;box-shadow:var(--sh);transition:all .2s;position:relative;overflow:hidden}
         .cc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--grl),transparent);opacity:0;transition:opacity .2s}
-        .cc:hover{border-color:var(--grb);transform:translateY(-2px);box-shadow:var(--sh2)}
+        .cc:hover{border-color:var(--gr);transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,133,77,.18)}
         .cc:hover::before{opacity:1}
-        .cc-icon{font-size:26px;margin-bottom:7px;display:block}
+        .cc-icon{font-size:28px;margin-bottom:8px;display:block}
         .cc-name{font-size:12px;font-weight:700;color:var(--tx2);line-height:1.4;position:relative}
 
         /* ===== DETAIL VIEW ===== */
@@ -347,7 +352,7 @@
             const L=getL(); const supps=buildSuppIndex();
             document.getElementById('sidebar-l').innerHTML=
                 `<div class="sb-hd"><div class="sb-hd-icon">💊</div><div class="sb-hd-txt">${L.supp_index||'فهرس المكملات'}</div></div>`+
-                supps.map(s=>`<div class="supp-item${activeSuppName===s.name?' ac':''}" onmouseenter="showFlyout(event,'${encodeURIComponent(s.name)}')" onclick="showFlyout(event,'${encodeURIComponent(s.name)}')"><span class="supp-dot"></span><span class="supp-name">${s.name}</span><span class="supp-count">${s.uses.length}</span></div>`).join('');
+                supps.map(s=>`<div class="supp-item${activeSuppName===s.name?' ac':''}" onclick="showFlyout(event,'${encodeURIComponent(s.name)}')"><span class="supp-dot"></span><span class="supp-name">${s.name}</span><span class="supp-count">${s.uses.length}</span></div>`).join('');
         }
         function showFlyout(e, nameEnc){
             const name=decodeURIComponent(nameEnc);
@@ -358,21 +363,15 @@
             const supp=supps.find(s=>s.name===name); if(!supp) return;
             const L=getL();
             const flyout=document.getElementById('supp-flyout');
-            flyout.innerHTML=`<div class="flyout-title">💊 ${supp.name}</div><div class="flyout-sub">${L.used_in||'يُستخدم في'} ${supp.uses.length} ${L.search_used||'حالة'}:</div>`+
+            flyout.innerHTML=`<div class="flyout-title">💊 ${supp.name}<span class="flyout-close" onclick="hideFlyout()">✕</span></div><div class="flyout-sub">${L.used_in||'يُستخدم في'} ${supp.uses.length} ${L.search_used||'حالة'}:</div>`+
                 supp.uses.map(u=>`<div class="flyout-cond" onclick="goToDisease('${u.secId}','${u.condId}')"><span class="flyout-cond-icon">${u.condIcon}</span><span class="flyout-cond-name">${u.condName}</span></div>`).join('');
-            // Position flyout toward center column
-            const rect=e.currentTarget.getBoundingClientRect();
-            const isAr=document.body.classList.contains('ar');
-            flyout.style.top=Math.min(rect.top, window.innerHeight-300)+'px';
-            if(isAr){
-                // In AR (RTL): sidebar-l is physically on LEFT side → flyout goes RIGHT
-                flyout.style.left=(rect.right+6)+'px';
-                flyout.style.right='auto';
-            } else {
-                // In EN (LTR): sidebar-l is physically on RIGHT side → flyout goes LEFT
-                flyout.style.right=(window.innerWidth-rect.left+6)+'px';
-                flyout.style.left='auto';
-            }
+            // Position flyout to the RIGHT of the entire sidebar-l panel
+            const sidebarEl=document.getElementById('sidebar-l');
+            const sidebarRect=sidebarEl.getBoundingClientRect();
+            const itemRect=e.currentTarget.getBoundingClientRect();
+            flyout.style.top=Math.max(60,Math.min(itemRect.top, window.innerHeight-340))+'px';
+            flyout.style.left=(sidebarRect.right+8)+'px';
+            flyout.style.right='auto';
             flyout.classList.add('on');
         }
         function hideFlyout(){ activeSuppName=null; document.getElementById('supp-flyout').classList.remove('on'); renderLeftSidebar(); }
